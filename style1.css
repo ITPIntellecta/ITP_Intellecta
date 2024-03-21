@@ -214,6 +214,9 @@ input[type="radio"] {
     transform: scale(1.3);
   }
 }
+.h3 {
+  cursor: default;
+}
 .h3:hover {
   animation: scaling 0.5s ease forwards;
 }
