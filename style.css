@@ -79,6 +79,7 @@ p.name {
   margin-top: 5%;
   text-align: center;
   position: relative;
+  width: 100%;
 }
 
 .dropdown-header {
@@ -90,11 +91,13 @@ p.name {
   position: relative;
   z-index: 2;
   background-color: rgb(99, 19, 45);
-  border: transparent;
+  height: 100%;
+  border: 1px solid rgb(99, 19, 45);
   color: rgb(224, 202, 195);
   width: 28%;
   border-radius: 23px;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .dropdown-list {
@@ -143,12 +146,13 @@ p.name {
   border: 1px solid rgb(99, 19, 45);
 }
 
-.hide-arrow {
-  display: none;
+.span-arrow-down {
+  transition: transform 0.4s ease-in-out; /* Tranzicija transformacije */
+  display: inline-block;
 }
 
-.show-arrow {
-  display: inline;
+.rotate-up {
+  transform: rotate(-180deg); /* Ugao rotacije za strelicu prema gore */
 }
 
 .custom-dropdown {
@@ -183,11 +187,13 @@ p.name {
   padding: 0.9% 0;
   margin: 0;
   font-size: 16px;
+  height: 100%;
 }
 
 .input-search {
   width: 62.5%;
   margin-left: 30%;
+  outline: none;
 }
 
 .btn-search:hover {
@@ -199,21 +205,17 @@ p.name {
   padding-right: 2.5%;
   padding-left: 1.1%;
   margin-left: 3px;
+  height: 100%;
 }
 
 .btn-search {
   transition: all 500ms;
 }
 
-.input-search:active,
-.input-search:focus {
-  appearance: none;
-  border: none;
-}
-
 /*------------MOST POPULAR---------------*/
 
 .most-popular {
+  flex: 1;
   margin-top: 4%;
   text-align: center;
   padding-top: 2%;
@@ -224,7 +226,6 @@ p.name {
   border-top: 1px solid #904159;
   border-bottom: 1px solid #904159;
   margin-bottom: 5%;
-  width: 100%;
 }
 
 .most-popular h2 {

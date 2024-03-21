@@ -3,10 +3,7 @@ function showList() {
   dropdown.classList.toggle("show-list");
 
   const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
-  arrowDown.classList.toggle("hide-arrow");
-
-  const arrowUp = document.getElementsByClassName("span-arrow-up")[0];
-  arrowUp.classList.toggle("hide-arrow");
+  arrowDown.classList.toggle("rotate-up");
 }
 
 function goToProfile() {
