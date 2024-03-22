@@ -18,3 +18,7 @@ function changeLabelColor(val) {
     }
   });
 }
+
+function redirectToPage(url) {
+  window.location.href = url;
+}

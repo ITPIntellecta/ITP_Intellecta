@@ -232,6 +232,7 @@ input[type="radio"] {
   backdrop-filter: blur(10px);
   z-index: 99;
   border-bottom: 1px solid #904159;
+  background-image: linear-gradient(to top, #904159, 3%, transparent);
 }
 .logo2 {
   display: inline;

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intellecta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@1,200&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ojuju:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" href="profileStyle.css" />
+    <script src="script.js"></script>
+    <script src="script1.js"></script>
+  </head>
+  <body>
+    <div class="contain">
+      <div class="menu">
+        <nav class="nav">
+          <div class="logoClass" onclick="redirectToPage('index.html')">
+            <img class="logo2" src="logo.png" alt="intellecta-logo" />
+            <p class="app-name">intellecta</p>
+          </div>
+
+          <div class="right">
+            <div class="user" onclick="goToProfile()">Ime</div>
+            <button class="nav-menu" id="nav-menu">&#9776;</button>
+          </div>
+        </nav>
+      </div>
+      <div class="user-content">
+        <aside class="left">
+          <img src="user.png" alt="user" class="user-photo" />
+        </aside>
+        <aside class="rright">
+          <p class="info">User - type</p>
+          <p class="info">First Name</p>
+          <p class="info">Last Name</p>
+          <p class="info">Date of birth</p>
+          <p class="info">Title</p>
+          <p class="info">Email</p>
+          <p class="info">Password</p>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>

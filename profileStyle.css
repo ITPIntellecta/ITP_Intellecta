@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  color: #944e63;
+}
+.contain {
+  background: url("back.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  width: 100%;
+  /* height: 100vh; */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  left: 0;
+  top: 0;
+  backdrop-filter: blur(10px);
+  z-index: 99;
+  border-bottom: 1px solid #904159;
+  background-image: linear-gradient(to top, #904159, 3%, transparent);
+}
+.logo2 {
+  display: inline;
+  width: 3.4em;
+  height: fit-content;
+  margin-bottom: -8px;
+}
+
+.app-name {
+  display: inline;
+  margin: 0;
+  font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 500;
+  font-size: 18pt;
+  font-style: normal;
+  letter-spacing: 0.1em;
+  padding-left: 0.5em;
+  color: rgb(224, 202, 195);
+}
+.right {
+  position: absolute;
+  right: 1%;
+  color: rgb(224, 202, 195);
+}
+
+.user {
+  display: inline-block;
+}
+.user:hover {
+  cursor: pointer;
+}
+
+.nav-menu {
+  background-color: transparent;
+  border-color: transparent;
+  color: rgb(224, 202, 195);
+  font-size: larger;
+}
+
+/* USER  */
+.user-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+
+  width: 100%;
+  height: 60vh;
+  padding: 10px;
+}
+/*FIXME
+POPRAVITI MARGINE I PADDING, NESTO NE VALJA
+*/
+
+aside.left {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* align-content: flex-start; */
+  background-color: #ecced751;
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  border: 1px solid rgb(86, 2, 49);
+  margin-left: 10px;
+  box-sizing: border-box;
+}
+.user-photo {
+  width: 250px;
+  height: 250px;
+}
+aside.rright {
+  width: 90%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ecced751;
+  backdrop-filter: blur(5px);
+  border-radius: 16px;
+  border: 1px solid rgb(86, 2, 49);
+  /* margin-left: 10px; */
+  box-sizing: border-box;
+  color: rgb(53, 1, 35);
+}
