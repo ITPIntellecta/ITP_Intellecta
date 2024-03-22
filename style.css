@@ -177,6 +177,8 @@ p.name {
   left: 0;
   top: 0;
   vertical-align: middle;
+  box-sizing: border-box;
+  height: 100%;
 }
 
 .input-search,
@@ -188,6 +190,7 @@ p.name {
   margin: 0;
   font-size: 16px;
   height: 100%;
+  box-sizing: border-box;
 }
 
 .input-search {
@@ -432,4 +435,50 @@ footer {
   height: 30px;
   line-height: 30px;
   vertical-align: middle;
+}
+
+.hidden {
+  display: none;
+}
+
+#scrollBtn {
+  position: fixed;
+  bottom: 5%;
+  right: 3%;
+  z-index: 999;
+  font-size: 22pt;
+  border-radius: 50%;
+  width: 3.5%;
+  border: 1px solid rgb(143, 56, 79);
+  background-color: rgba(171, 81, 120, 0.5);
+  color: #b98292;
+}
+
+#scrollBtn:hover {
+  color: wheat;
+  cursor: pointer;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: rgba(87, 6, 33, 0.845);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #56122c;
+  border: 1px solid rgb(71, 11, 36);
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #782847;
+  cursor: pointer;
+  border: 1px solid rgb(192, 75, 106);
 }

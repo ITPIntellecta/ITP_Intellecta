@@ -20,14 +20,14 @@
 
         <div class="right">
           <div class="user" onclick="goToProfile()">Ime</div>
-          <button class="nav-menu" onclick="showRightMenu()">&#9776;</button>
+          <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>
     </div>
 
     <div class="content">
       <div class="custom-dropdown">
-        <div class="dropdown-header" onclick="showList()">
+        <div class="dropdown-header" id="dropdown-header">
           Everything &nbsp;
           <div class="span-arrow-down" style="font-size: large">&#8675;</div>
         </div>
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div class="right-menu show-menu">
+      <div class="right-menu show-menu" id="right-menu">
         <p>&#9733; My learning</p>
         <br />
         <p>&#9733; My courses</p>
@@ -112,8 +112,9 @@
         </div>
       </div>
     </div>
+    <button id="scrollBtn" class="hidden">&#129121;</button>
 
-    <footer>Intellecta &copy;</footer>
+    <footer>intellecta &copy;</footer>
     <script src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
