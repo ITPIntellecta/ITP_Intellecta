@@ -6,15 +6,15 @@ function changeLabelColor(val) {
       let radio = document.getElementById(val);
 
       if (radio.checked) {
-        label.style.backgroundColor = "lightpink";
-        label.style.color = "#904159";
+        label.style.backgroundColor = "#ead7bb";
+        label.style.color = "#113946";
       } else {
-        label.style.backgroundColor = "#904159";
-        label.style.color = "lightpink";
+        label.style.backgroundColor = "#113946";
+        label.style.color = "#ead7bb";
       }
     } else {
-      label.style.backgroundColor = "#904159";
-      label.style.color = "lightpink";
+      label.style.backgroundColor = "#113946";
+      label.style.color = "#ead7bb";
     }
   });
 }

@@ -3,10 +3,10 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
-  color: #944e63;
+  color: #113946;
 }
 .contain {
-  background: url("back.jpg");
+  background: url("back3.jpg");
   /* filter: brightness(1.3); */
   background-size: cover;
   background-position: center;
@@ -32,14 +32,15 @@ body {
   top: 0;
   backdrop-filter: blur(10px);
   z-index: 99;
-  border-bottom: 1px solid #904159;
-  background-image: linear-gradient(to top, #904159, 3%, transparent);
+  border-bottom: 1px solid #113946;
+  background-image: linear-gradient(to top, #113946, 3%, transparent);
 }
 .logo2 {
   display: inline;
   width: 3.4em;
   height: fit-content;
   margin-bottom: -8px;
+  filter: hue-rotate(180deg);
 }
 
 .app-name {
@@ -51,12 +52,12 @@ body {
   font-style: normal;
   letter-spacing: 0.1em;
   padding-left: 0.5em;
-  color: rgb(224, 202, 195);
+  color: #113946;
 }
 .right {
   position: absolute;
   right: 1%;
-  color: rgb(224, 202, 195);
+  color: #bca37f;
 }
 
 .user {
@@ -69,7 +70,7 @@ body {
 .nav-menu {
   background-color: transparent;
   border-color: transparent;
-  color: rgb(224, 202, 195);
+  color: #bca37f;
   font-size: larger;
 }
 
@@ -82,34 +83,41 @@ body {
   margin: 40px;
   position: relative;
   top: 35px;
+  filter: hue-rotate(180deg);
 }
 
 /* KURS POJEDINACAN */
 .card {
-  background-color: #e6b9c68e;
-  border: 2px solid #b24e6c;
+  background-color: #fff2d8;
+  border: 2px solid #ead7bb;
   border-radius: 0.25rem;
 }
 .card-title {
-  color: #61093b;
+  color: #113946;
 }
 .card-text {
-  color: rgb(16, 14, 15);
+  color: #bca37f;
 }
 .btn {
-  background-color: #61093b;
-  border: 1px solid #560332;
+  background-color: #113946;
+  border: 1px solid #bca37f;
   color: white;
   transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 .btn:hover {
   cursor: pointer;
-  color: #61093b;
-  border: 1px solid #560332;
-  background-color: lightcoral;
+  color: #113946;
+  border: 1px solid #bca37f;
+  background-color: #ead7bb;
 }
 .row {
   margin-bottom: 30px;
 }
 
 /*BTN IN COURSE CARD - changed bootstrap css */
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: none !important;
+  background-color: #bca37f;
+  color: #113946;
+}
