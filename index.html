@@ -15,9 +15,15 @@
   <body>
     <div class="menu">
       <nav class="nav">
-        <img class="logo" src="intellecta1.png" alt="intellecta-logo" />
-        <p class="name">intellecta</p>
-
+        <img
+          class="logo logo-hover"
+          src="intellecta1.png"
+          alt="intellecta-logo"
+          onclick="redirectToPage('index.html')"
+        />
+        <p class="name logo-hover" onclick="redirectToPage('index.html')">
+          intellecta
+        </p>
         <div class="right">
           <div class="user" onclick="goToProfile()">Ime</div>
           <button class="nav-menu" id="nav-menu">&#9776;</button>

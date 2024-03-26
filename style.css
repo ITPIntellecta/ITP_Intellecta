@@ -1,7 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 
+/*
+od tamnije ka svjetlijim
+font: #113946   
+BCA37F
+EAD7BB
+FFF2D8
+
+
+*/
+
 body {
-  background-image: url(proba5.jpg);
+  background-image: url(back3.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -16,7 +26,7 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
-  color: #944e63;
+  color: #113946;
   width: 100%;
 }
 
@@ -35,8 +45,8 @@ body {
   top: 0;
   backdrop-filter: blur(10px);
   z-index: 99;
-  border-bottom: 1px solid #904159;
-  background-image: linear-gradient(to top, #904159, 3%, transparent);
+  border-bottom: 1px solid #113946;
+  background-image: linear-gradient(to top, #113946, 3%, transparent);
 }
 
 .logo {
@@ -44,6 +54,7 @@ body {
   width: 3.4em;
   height: fit-content;
   margin-bottom: -8px;
+  filter: hue-rotate(-180deg);
 }
 
 p.name {
@@ -55,13 +66,17 @@ p.name {
   font-style: normal;
   letter-spacing: 0.1em;
   padding-left: 0.5em;
-  color: rgb(224, 202, 195);
+  color: #113946;
+}
+
+.logo-hover:hover {
+  cursor: pointer;
 }
 
 .right {
   position: absolute;
   right: 1%;
-  color: rgb(224, 202, 195);
+  color: #bca37f;
 }
 
 .user {
@@ -71,7 +86,7 @@ p.name {
 .nav-menu {
   background-color: transparent;
   border-color: transparent;
-  color: rgb(224, 202, 195);
+  color: #bca37f;
   font-size: larger;
 }
 
@@ -90,10 +105,10 @@ p.name {
   transition: all 500ms;
   position: relative;
   z-index: 2;
-  background-color: rgb(99, 19, 45);
+  background-color: #113946;
   height: 100%;
-  border: 1px solid rgb(99, 19, 45);
-  color: rgb(224, 202, 195);
+  border: 1px solid #bca37f;
+  color: #ead7bb;
   width: 28%;
   border-radius: 23px;
   text-align: center;
@@ -121,10 +136,10 @@ p.name {
 
 .dropdown-list li:hover {
   cursor: pointer;
-  background-color: rgb(99, 19, 45);
+  background-color: #113946;
   border: transparent;
   border-radius: 23px;
-  color: rgb(224, 202, 195);
+  color: #ead7bb;
 }
 
 .show-list {
@@ -133,17 +148,17 @@ p.name {
 
 .dropdown-list,
 .search-bar {
-  background-color: rgb(224, 202, 195);
+  background-color: #ead7bb;
 
   border-radius: 23px;
   text-align: center;
-  color: rgb(99, 19, 45);
+  color: #113946;
 }
 
 .dropdown-header:hover {
-  background-color: rgb(224, 202, 195);
-  color: rgb(99, 19, 45);
-  border: 1px solid rgb(99, 19, 45);
+  background-color: #ead7bb;
+  color: #113946;
+  border: 1px solid #113946;
 }
 
 .span-arrow-down {
@@ -185,7 +200,7 @@ p.name {
 .btn-search {
   background-color: transparent;
   border: transparent;
-  color: rgb(99, 19, 45);
+  color: #113946;
   padding: 0.9% 0;
   margin: 0;
   font-size: 16px;
@@ -201,7 +216,7 @@ p.name {
 
 .btn-search:hover {
   cursor: pointer;
-  background-color: rgb(99, 19, 45);
+  background-color: #113946;
   border: transparent;
   color: rgb(224, 202, 195);
   border-radius: 23px;
@@ -222,17 +237,17 @@ p.name {
   margin-top: 4%;
   text-align: center;
   padding-top: 2%;
-  background-color: rgba(75, 67, 65, 0.1);
+  background-color: #fff2d837;
   backdrop-filter: blur(2px);
   position: relative;
   z-index: 20;
-  border-top: 1px solid #904159;
-  border-bottom: 1px solid #904159;
+  border-top: 1px solid #ead7bb;
+  border-bottom: 1px solid #ead7bb;
   margin-bottom: 5%;
 }
 
 .most-popular h2 {
-  color: #b98292;
+  color: #113946;
   width: 35%;
   margin: auto;
   border-radius: 23px;
@@ -257,7 +272,7 @@ p.name {
   padding: 0;
   margin-top: 3%;
   text-align: left;
-  color: rgb(224, 202, 195);
+  color: #ead7bb;
   position: absolute;
   width: 100%;
   z-index: 2;
@@ -265,8 +280,8 @@ p.name {
 }
 
 .btn {
-  background-color: rgba(171, 81, 120, 0.5);
-  color: white;
+  background-color: #113946a3;
+  color: #ead7bb;
   padding: 20px;
   border-radius: 23px;
   display: inline;
@@ -281,15 +296,16 @@ p.name {
 .btn:hover {
   cursor: pointer;
   padding: 22px;
-  border: 1px solid rgb(99, 19, 45);
-  color: rgb(99, 19, 45);
+  border: 1px solid #113946;
+  color: #113946;
   margin-top: -1%;
   font-size: large;
+  background-color: #11394636;
 }
 
 .item {
   display: inline-block;
-  background-color: lightpink;
+  background-color: #ead7bb;
   height: 150px;
   width: 150px;
   margin-right: 5%;
@@ -302,14 +318,14 @@ p.name {
 .student-reviews {
   text-align: center;
   padding-top: 2%;
-  background-color: rgba(75, 67, 65, 0.1);
+  background-color: #fff2d837;
   backdrop-filter: blur(2px);
   position: relative;
   z-index: 20;
-  border-top: 1px solid #904159;
-  border-bottom: 1px solid #904159;
+  border-top: 1px solid #ead7bb;
+  border-bottom: 1px solid #ead7bb;
   width: 100%;
-  color: #b98292;
+  color: #113946;
   margin-bottom: 10%;
   text-align: center;
   position: relative;
@@ -320,19 +336,19 @@ p.name {
 }
 
 .card {
-  border: 1px solid white;
+  border: 1px solid #ead7bb;
   width: 25%;
   margin-left: 3%;
   margin-bottom: 3%;
   display: inline-block;
   margin-right: 3%;
-  box-shadow: 2px 2px 10px 2px rgb(143, 56, 79);
+  box-shadow: 2px 2px 10px 2px #113946;
 }
 
 .card-body {
   position: relative;
-  background-color: rgb(224, 202, 195);
-  border: 2px solid rgba(171, 81, 120);
+  background-color: #ead7bb;
+  border: 2px solid #113946;
 }
 
 .card-title {
@@ -340,7 +356,7 @@ p.name {
 }
 
 .card-header {
-  background-color: #904159;
+  background-color: #113946;
   color: rgb(224, 202, 195);
   height: 40px;
   line-height: 40px;
@@ -365,7 +381,7 @@ p.name {
 }
 
 .card-title {
-  border-bottom: 2px solid rgba(171, 81, 120);
+  border-bottom: 2px solid #113946;
   padding: 10px 0;
   color: gray;
   font-size: larger;
@@ -387,7 +403,7 @@ p.name {
 .user:hover,
 .nav-menu:hover {
   cursor: pointer;
-  color: brown;
+  color: #fff2d8;
 }
 
 .show-menu {
@@ -398,13 +414,13 @@ p.name {
   position: fixed;
   right: 0;
   z-index: 21;
-  background-color: rgb(99, 19, 45, 0.3);
+  background-color: #11394695;
   backdrop-filter: blur(7px);
   height: 100vh;
   width: 12%;
   top: 0%;
   padding-top: 5%;
-  color: rgb(224, 202, 195);
+  color: #ead7bb;
   text-align: left;
   padding-left: 3%;
 }
@@ -418,7 +434,7 @@ p.name {
   text-decoration: underline;
   text-shadow: 10vh;
   cursor: pointer;
-  color: white;
+  color: #fff2d8;
 }
 
 /*------------------------FOOTER------------------------*/
@@ -426,12 +442,11 @@ p.name {
 footer {
   position: absolute;
   bottom: 0;
-  background-color: rgb(99, 19, 45, 0.7);
-  color: white;
+  background-color: #113946dc;
   text-align: center;
   width: 100%;
   font-size: small;
-  color: #b98292;
+  color: #bca37f;
   height: 30px;
   line-height: 30px;
   vertical-align: middle;
@@ -449,13 +464,13 @@ footer {
   font-size: 22pt;
   border-radius: 50%;
   width: 3.5%;
-  border: 1px solid rgb(143, 56, 79);
-  background-color: rgba(171, 81, 120, 0.5);
-  color: #b98292;
+  border: 1px solid #ead7bb;
+  background-color: #113946a6;
+  color: #ead7bb;
 }
 
 #scrollBtn:hover {
-  color: wheat;
+  color: #fff2d8;
   cursor: pointer;
 }
 
@@ -466,19 +481,19 @@ footer {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background-color: rgba(87, 6, 33, 0.845);
+  background-color: #ead7bb;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #56122c;
-  border: 1px solid rgb(71, 11, 36);
+  background-color: #bca37f;
+  border: 1px solid #ead7bb;
   border-radius: 20px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #782847;
+  background: #fff2d8;
   cursor: pointer;
-  border: 1px solid rgb(192, 75, 106);
+  border: 1px solid #113946;
 }
