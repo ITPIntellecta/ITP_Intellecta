@@ -53,3 +53,7 @@ window.addEventListener("scroll", function () {
 scrollBtn.addEventListener("click", function () {
   window.scrollTo({ top: 0, behavior: "smooth" }); // Skrolujte na vrh stranice glatko
 });
+
+function redirectToPage(url) {
+  window.location.href = url;
+}
