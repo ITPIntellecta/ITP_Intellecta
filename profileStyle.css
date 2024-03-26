@@ -3,10 +3,10 @@ body {
   margin: 0;
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
-  color: #944e63;
+  color: #113946;
 }
 .contain {
-  background: url("back.jpg");
+  background: url("back3.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -31,14 +31,15 @@ body {
   top: 0;
   backdrop-filter: blur(10px);
   z-index: 99;
-  border-bottom: 1px solid #904159;
-  background-image: linear-gradient(to top, #904159, 3%, transparent);
+  border-bottom: 1px solid #113946;
+  background-image: linear-gradient(to top, #113946, 3%, transparent);
 }
 .logo2 {
   display: inline;
   width: 3.4em;
   height: fit-content;
   margin-bottom: -8px;
+  filter: hue-rotate(-180deg);
 }
 
 .app-name {
@@ -50,12 +51,12 @@ body {
   font-style: normal;
   letter-spacing: 0.1em;
   padding-left: 0.5em;
-  color: rgb(224, 202, 195);
+  color: #113946;
 }
 .right {
   position: absolute;
   right: 1%;
-  color: rgb(224, 202, 195);
+  color: #bca37f;
 }
 
 .user {
@@ -68,7 +69,7 @@ body {
 .nav-menu {
   background-color: transparent;
   border-color: transparent;
-  color: rgb(224, 202, 195);
+  color: #bca37f;
   font-size: larger;
 }
 
@@ -76,11 +77,9 @@ body {
 .user-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
-
   width: 100%;
   height: 60vh;
-  padding: 10px;
+  padding-left: 4%;
 }
 /*FIXME
 POPRAVITI MARGINE I PADDING, NESTO NE VALJA
@@ -94,10 +93,10 @@ aside.left {
   align-items: center;
   justify-content: center;
   /* align-content: flex-start; */
-  background-color: #ecced751;
+  background-color: #fff2d837;
   backdrop-filter: blur(5px);
   border-radius: 16px;
-  border: 1px solid rgb(86, 2, 49);
+  border: 1px solid #113946;
   margin-left: 10px;
   box-sizing: border-box;
 }
@@ -112,11 +111,52 @@ aside.rright {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ecced751;
+  background-color: #fff2d837;
   backdrop-filter: blur(5px);
   border-radius: 16px;
-  border: 1px solid rgb(86, 2, 49);
+  border: 1px solid #113946;
   /* margin-left: 10px; */
   box-sizing: border-box;
-  color: rgb(53, 1, 35);
+  color: #113946;
+}
+
+.user:hover,
+.nav-menu:hover {
+  cursor: pointer;
+  color: #fff2d8;
+}
+
+.show-menu {
+  display: none;
+}
+
+.right-menu {
+  position: fixed;
+  right: 0;
+  z-index: 21;
+  background-color: #11394695;
+  backdrop-filter: blur(7px);
+  height: 100vh;
+  width: 12%;
+  top: 0%;
+  padding-top: 5%;
+  color: #ead7bb;
+  text-align: left;
+  padding-left: 3%;
+}
+
+.right-menu p {
+  transition: all 400ms;
+}
+
+.right-menu p:hover {
+  font-size: large;
+  text-decoration: underline;
+  text-shadow: 10vh;
+  cursor: pointer;
+  color: #fff2d8;
+}
+
+.profileMenu {
+  width: 15%;
 }

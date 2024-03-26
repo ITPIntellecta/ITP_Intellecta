@@ -16,17 +16,25 @@
     />
 
     <link rel="stylesheet" href="profileStyle.css" />
-    <script src="script.js"></script>
-    <script src="script1.js"></script>
   </head>
   <body>
     <div class="contain">
+      <div class="right-menu show-menu profileMenu" id="right-menu">
+        <p>&#9733; My learning</p>
+        <br />
+        <p>&#9733; My courses</p>
+      </div>
       <div class="menu">
         <nav class="nav">
-          <div class="logoClass" onclick="redirectToPage('index.html')">
-            <img class="logo2" src="logo.png" alt="intellecta-logo" />
-            <p class="app-name">intellecta</p>
-          </div>
+          <img
+            class="logo2 logoClass"
+            src="logo.png"
+            alt="intellecta-logo"
+            onclick="redirectToPage('index.html')"
+          />
+          <p class="app-name logoClass" onclick="redirectToPage('index.html')">
+            intellecta
+          </p>
 
           <div class="right">
             <div class="user" onclick="goToProfile()">Ime</div>
@@ -49,5 +57,6 @@
         </aside>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
