@@ -13,12 +13,13 @@ body {
   background-attachment: fixed;
   position: relative;
   width: 100%;
-  /* height: 100vh; */
+  height: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .nav {
@@ -87,6 +88,9 @@ body {
 }
 
 /* KURS POJEDINACAN */
+.courses-list {
+  margin-bottom: 10%;
+}
 .card {
   background-color: #fff2d8;
   border: 2px solid #ead7bb;
@@ -120,4 +124,108 @@ body {
   box-shadow: none !important;
   background-color: #bca37f;
   color: #113946;
+}
+
+/*SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: #ead7bb;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: #bca37f;
+  border: 1px solid #ead7bb;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fff2d8;
+  cursor: pointer;
+  border: 1px solid #113946;
+}
+
+/*FOOTER*/
+footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #113946dc;
+  text-align: center;
+  width: 100%;
+  font-size: small;
+  color: #bca37f;
+  height: 30px;
+  line-height: 30px;
+  vertical-align: middle;
+}
+
+/*SCROLL BUTTON*/
+.hidden {
+  display: none;
+}
+
+#scrollBtn {
+  position: fixed;
+  bottom: 5%;
+  right: 3%;
+  z-index: 999;
+  font-size: 22pt;
+  border-radius: 50%;
+  width: 3.5%;
+  border: 1px solid #ead7bb;
+  background-color: #113946a6;
+  color: #ead7bb;
+}
+
+#scrollBtn:hover {
+  color: #fff2d8;
+  cursor: pointer;
+}
+
+/*MENI SA STRANE*/
+.user,
+.nav-menu {
+  transition: all 300ms;
+}
+
+.user:hover,
+.nav-menu:hover {
+  cursor: pointer;
+  color: #fff2d8;
+}
+
+.show-menu {
+  display: none;
+}
+
+.right-menu {
+  position: fixed;
+  right: 0;
+  z-index: 21;
+  background-color: #11394695;
+  backdrop-filter: blur(7px);
+  height: 100%;
+  width: auto;
+  top: 0;
+  color: #ead7bb;
+  text-align: left;
+  padding: 5%;
+}
+
+.right-menu p {
+  transition: all 400ms;
+}
+
+.right-menu p:hover {
+  font-size: large;
+  text-decoration: underline;
+  text-shadow: 10vh;
+  cursor: pointer;
+  color: #fff2d8;
 }

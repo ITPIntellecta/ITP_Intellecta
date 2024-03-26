@@ -410,7 +410,7 @@ p.name {
   display: none;
 }
 
-.right-menu {
+/* .right-menu {
   position: fixed;
   right: 0;
   z-index: 21;
@@ -423,6 +423,20 @@ p.name {
   color: #ead7bb;
   text-align: left;
   padding-left: 3%;
+} */
+.right-menu {
+  position: fixed;
+  right: 0;
+  z-index: 21;
+  background-color: #11394695;
+  backdrop-filter: blur(7px);
+  height: 100%;
+  width: auto;
+  top: 0;
+  color: #ead7bb;
+  text-align: left;
+  padding: 5%;
+  bottom: 0;
 }
 
 .right-menu p {
