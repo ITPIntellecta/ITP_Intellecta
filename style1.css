@@ -268,6 +268,10 @@ input[type="radio"] {
   color: #113946;
 }
 
+.app-name:hover {
+  cursor: default;
+}
+
 /*dio za ime i prezime*/
 .part1 input::placeholder,
 .part2 input::placeholder {
