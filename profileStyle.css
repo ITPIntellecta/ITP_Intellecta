@@ -176,3 +176,57 @@ aside.rright {
   cursor: pointer;
   color: #fff2d8;
 }
+
+/* Dodati media query za veličinu ekrana manju od 768px (za telefone) */
+@media only screen and (max-width: 767px) {
+  /* Postavke CSS-a za telefone */
+  .contain {
+    margin-top: 10%; /* Povećati margin na vrhu za telefone */
+  }
+  .logo {
+    width: 80px; /* Smanjiti veličinu loga za telefone */
+    height: 80px;
+    margin: 20px; /* Smanjiti margin za telefone */
+  }
+  .app-name {
+    font-size: 14pt; /* Smanjiti veličinu fonta za naziv aplikacije za telefone */
+  }
+  .user-photo {
+    width: 150px; /* Smanjiti veličinu korisničke slike za telefone */
+    height: 150px;
+  }
+  aside.left,
+  aside.rright {
+    width: 90%; /* Povećati širinu bočnih sekcija za telefone */
+    margin: 20px auto; /* Postaviti margin na auto za centriranje bočnih sekcija na telefone */
+  }
+  .right-menu {
+    width: 100%; /* Promeniti širinu bočnog menija za telefone */
+    padding: 10% 5%; /* Povećati padding bočnog menija za telefone */
+  }
+}
+
+/* Dodati media query za veličinu ekrana između 768px i 1200px (za laptop) */
+@media only screen and (min-width: 768px) and (max-width: 1200px) {
+  /* Postavke CSS-a za laptop */
+  .contain {
+    margin-top: 8%; /* Prilagoditi margin na vrhu za laptop */
+  }
+  .logo {
+    width: 100px; /* Prilagoditi veličinu loga za laptop */
+    height: 100px;
+    margin: 30px; /* Prilagoditi margin za laptop */
+  }
+  .app-name {
+    font-size: 16pt; /* Prilagoditi veličinu fonta za naziv aplikacije za laptop */
+  }
+  aside.left,
+  aside.rright {
+    width: 45%; /* Prilagoditi širinu bočnih sekcija za laptop */
+    margin: 20px; /* Postaviti margin za bočne sekcije za laptop */
+  }
+  .right-menu {
+    width: 15%; /* Vratiti širinu bočnog menija za laptop */
+    padding: 5% 3%; /* Vratiti padding bočnog menija za laptop */
+  }
+}
