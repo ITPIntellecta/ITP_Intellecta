@@ -238,3 +238,58 @@ footer {
   cursor: pointer;
   color: #fff2d8;
 }
+
+/*dio za responsive website*/
+/* Stilovi za mobilne uređaje */
+/* Stilovi za mobilne uređaje */
+@media (max-width: 768px) {
+  /* .right {
+    position: static;
+    margin-top: 10px;
+  } */
+
+  .nav-menu {
+    font-size: initial;
+    padding: 5px 10px;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .app-name {
+    font-size: 16pt;
+  }
+
+  .logo {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+  }
+
+  .right-menu {
+    width: 100%;
+    padding: 5%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .right-menu p {
+    font-size: 16px;
+  }
+
+  .courses-list {
+    padding: 2%;
+    margin-bottom: 7%;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+}
