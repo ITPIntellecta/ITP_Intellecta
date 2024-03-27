@@ -89,7 +89,7 @@ p.name {
 }
 
 .content {
-  margin-top: 5%;
+  /* margin-top: 5%; */
   text-align: center;
   position: relative;
   width: 100%;
@@ -178,6 +178,7 @@ p.name {
   position: relative;
   height: 20%;
   z-index: 40;
+  margin-top: 5rem;
 }
 
 .search-bar {
@@ -217,14 +218,14 @@ p.name {
   background-color: #113946;
   border: transparent;
   color: rgb(224, 202, 195);
-  border-radius: 23px;
-  padding-right: 2.5%;
-  padding-left: 1.1%;
-  margin-left: 3px;
+  border-radius: 24px;
   height: 100%;
 }
 
 .btn-search {
+  position: absolute;
+  right: 0;
+  padding: 0 1%;
   transition: all 500ms;
 }
 
@@ -268,27 +269,30 @@ p.name {
 
 .buttons {
   padding: 0;
-  margin-top: 3%;
-  text-align: left;
+  /* margin-top: 3%;
+  text-align: left; */
   color: #ead7bb;
   position: absolute;
   width: 100%;
   z-index: 2;
-  top: 30%;
+  top: 55%;
 }
 
 .btn {
   background-color: #113946a3;
-  color: #ead7bb;
   padding: 20px;
   border-radius: 23px;
   display: inline;
   transition: all 300ms;
+  position: absolute;
 }
 
 .left {
-  margin-right: 90%;
-  margin-left: 1%;
+  left: 1%;
+}
+
+.rightt {
+  right: 1%;
 }
 
 .btn:hover {
@@ -465,7 +469,7 @@ footer {
   z-index: 999;
   font-size: 22pt;
   border-radius: 50%;
-  width: 3.5%;
+  width: 3rem;
   border: 1px solid #ead7bb;
   background-color: #113946a6;
   color: #ead7bb;
