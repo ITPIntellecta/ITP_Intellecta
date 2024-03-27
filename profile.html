@@ -18,30 +18,33 @@
     <link rel="stylesheet" href="profileStyle.css" />
   </head>
   <body>
+    <div class="menu">
+      <nav class="nav">
+        <img
+          class="logo2 logoClass"
+          src="logo.png"
+          alt="intellecta-logo"
+          onclick="redirectToPage('index.html')"
+        />
+        <p class="app-name logoClass" onclick="redirectToPage('index.html')">
+          intellecta
+        </p>
+
+        <div class="right">
+          <div class="user" onclick="goToProfile()">Ime</div>
+          <button class="nav-menu" id="nav-menu">&#9776;</button>
+        </div>
+      </nav>
+    </div>
     <div class="contain">
+      <img src="logo.png" alt="Logo" class="logo" />
+
       <div class="right-menu show-menu profileMenu" id="right-menu">
         <p>&#9733; My learning</p>
         <br />
         <p>&#9733; My courses</p>
       </div>
-      <div class="menu">
-        <nav class="nav">
-          <img
-            class="logo2 logoClass"
-            src="logo.png"
-            alt="intellecta-logo"
-            onclick="redirectToPage('index.html')"
-          />
-          <p class="app-name logoClass" onclick="redirectToPage('index.html')">
-            intellecta
-          </p>
 
-          <div class="right">
-            <div class="user" onclick="goToProfile()">Ime</div>
-            <button class="nav-menu" id="nav-menu">&#9776;</button>
-          </div>
-        </nav>
-      </div>
       <div class="user-content">
         <aside class="left">
           <img src="user.png" alt="user" class="user-photo" />

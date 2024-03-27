@@ -4,20 +4,25 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   color: #113946;
-}
-.contain {
+
   background: url("back3.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   position: relative;
-  width: 100%;
-  /* height: 100vh; */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+.contain {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  /* margin-top: 5%; */
 }
 
 .nav {
@@ -40,6 +45,18 @@ body {
   height: fit-content;
   margin-bottom: -8px;
   filter: hue-rotate(-180deg);
+}
+
+.logoClass:hover {
+  cursor: pointer;
+}
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 40px;
+  position: relative;
+  top: 35px;
+  filter: hue-rotate(180deg);
 }
 
 .app-name {
@@ -75,18 +92,19 @@ body {
 
 /* USER  */
 .user-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  /* grid-template-columns: 1fr 1fr; */
   width: 100%;
   height: 60vh;
-  padding-left: 4%;
+  justify-content: space-around;
+  /* padding-left: 4%; */
 }
 /*FIXME
 POPRAVITI MARGINE I PADDING, NESTO NE VALJA
 */
 
 aside.left {
-  width: 90%;
+  width: 45%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -97,7 +115,7 @@ aside.left {
   backdrop-filter: blur(5px);
   border-radius: 16px;
   border: 1px solid #113946;
-  margin-left: 10px;
+  /* margin-left: 10px; */
   box-sizing: border-box;
 }
 .user-photo {
@@ -105,7 +123,7 @@ aside.left {
   height: 250px;
 }
 aside.rright {
-  width: 90%;
+  width: 45%;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -137,26 +155,24 @@ aside.rright {
   background-color: #11394695;
   backdrop-filter: blur(7px);
   height: 100vh;
-  width: 12%;
+  width: 15%;
   top: 0%;
-  padding-top: 5%;
+  padding: 5% 3%;
   color: #ead7bb;
   text-align: left;
-  padding-left: 3%;
+  bottom: 0;
+  box-sizing: border-box;
 }
 
 .right-menu p {
   transition: all 400ms;
+  margin: 16px 0;
 }
 
 .right-menu p:hover {
   font-size: large;
-  text-decoration: underline;
+  text-decoration: none;
   text-shadow: 10vh;
   cursor: pointer;
   color: #fff2d8;
-}
-
-.profileMenu {
-  width: 15%;
 }

@@ -4,22 +4,25 @@ body {
   font-family: "Poppins", sans-serif;
   line-height: 1.5;
   color: #113946;
-}
-.contain {
+
   background: url("back3.jpg");
-  /* filter: brightness(1.3); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   position: relative;
-  width: 100%;
-  height: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+}
+.contain {
   text-align: center;
+  position: relative;
+  width: 100%;
+  margin-top: 5%;
 }
 
 .nav {
@@ -89,7 +92,8 @@ body {
 
 /* KURS POJEDINACAN */
 .courses-list {
-  margin-bottom: 10%;
+  padding: 5%;
+  margin-bottom: 7%;
 }
 .card {
   background-color: #fff2d8;
@@ -210,21 +214,26 @@ footer {
   z-index: 21;
   background-color: #11394695;
   backdrop-filter: blur(7px);
-  height: 100%;
-  width: auto;
-  top: 0;
+  height: 100vh;
+  width: 15%;
+  top: 0%;
   color: #ead7bb;
   text-align: left;
-  padding: 5%;
+  /* padding-left: 3%;
+  padding-top: 5%; */
+  padding: 5% 3%;
+  bottom: 0;
+  box-sizing: border-box;
 }
 
 .right-menu p {
   transition: all 400ms;
+  margin: 16px 0;
 }
 
 .right-menu p:hover {
   font-size: large;
-  text-decoration: underline;
+  text-decoration: none;
   text-shadow: 10vh;
   cursor: pointer;
   color: #fff2d8;
