@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course</title>
+    <link href="style.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@1,200&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ojuju:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="logo-icon.png" type="image/jpeg" />
+
+  </head>
+  <body>
+    <div class="menu">
+      <nav class="nav">
+        <img
+          class="logo logo-hover"
+          src="intellecta1.png"
+          alt="intellecta-logo"
+          onclick="redirectToPage('index.html')"
+        />
+        <p class="name logo-hover" onclick="redirectToPage('index.html')">
+          intellecta
+        </p>
+        <div class="right">
+          <div class="user" onclick="goToProfile()">Ime</div>
+          <button class="nav-menu" id="nav-menu">&#9776;</button>
+        </div>
+      </nav>
+    </div>
+       <div class="right-menu show-menu" id="right-menu">
+        <p>&#9733; My learning</p>
+        <br />
+        <p>&#9733; My courses</p>
+      </div>
+    </div>
+
+    <div class="course">
+        <div class="course-content"></div>
+        <div class="course-weeks">
+            <div class="week">
+            <button class="button-week">Week 1</button>
+            <div class="week-lessons show-lesson">
+                <button class="lesson">Lesson 1</button>
+                <button class="lesson">Lesson 2</button>
+            </div></div>
+            <div class="week">
+            <button class="button-week">Week 2</button>
+            <div class="week-lessons show-lesson">
+                <button class="lesson">Lesson 1</button>
+                <button class="lesson">Lesson 2</button>                
+                <button class="lesson">Lesson 3</button>
+                <button class="lesson">Lesson 4</button>
+                <button class="lesson">Lesson 5</button>
+                <button class="lesson">Lesson 6</button>
+            </div>
+            </div>
+             <div class="week">
+            <button class="button-week">Week 3</button>
+            <div class="week-lessons show-lesson">
+                <button class="lesson">Lesson 1</button>
+                <button class="lesson">Lesson 2</button>                
+                <button class="lesson">Lesson 3</button>
+                <button class="lesson">Lesson 4</button>
+                <button class="lesson">Lesson 5</button>
+                <button class="lesson">Lesson 6</button>
+            </div>
+            </div>
+        </div>        
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

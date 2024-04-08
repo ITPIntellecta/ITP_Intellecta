@@ -503,3 +503,68 @@ footer {
   cursor: pointer;
   border: 1px solid #113946;
 }
+
+/*----------------PRIKAZ KURSA ------------------*/
+.course {
+  background-color: #fff2d837;
+  backdrop-filter: blur(2px);
+  border-top: 1px solid #ead7bb;
+  border-bottom: 1px solid #ead7bb;
+  width: 100%;
+  margin: 0;
+  height: 550px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+}
+
+.course-content {
+  display: inline-block;
+  width: 70%;
+  background-color: #113946;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.course-weeks {
+  display: inline-block;
+  width: 27%;
+  top: 0;
+  padding: 0;
+  background-color: transparent;
+  height: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.week {
+  margin-bottom: 1%;
+}
+
+.week button {
+  display: block;
+  width: 100%;
+  background-color: #bca37f96;
+  color: #113946;
+  margin-top: 1%;
+  border: 1px solid transparent;
+  border-radius: 10pt;
+}
+
+.week button:hover {
+  background-color: #ead7bb;
+  color: #113946;
+  border: 1px solid #113946;
+  cursor: pointer;
+}
+
+.button-week {
+  font-size: large;
+  font-weight: bold;
+  padding: 2%;
+}
+
+.lesson {
+  padding: 2%;
+}
