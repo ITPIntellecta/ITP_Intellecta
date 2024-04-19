@@ -1,0 +1,102 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|c:\\users\\pcx\\desktop\\itp_intellecta\\back\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|solutionrelative:back\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|c:\\users\\pcx\\desktop\\itp_intellecta\\back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|solutionrelative:back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|c:\\users\\pcx\\desktop\\itp_intellecta\\back\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|solutionrelative:back\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|c:\\users\\pcx\\desktop\\itp_intellecta\\back\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F80487E9-25CE-46CD-BC33-E758F9FB4550}|back\\back.csproj|solutionrelative:back\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "back\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\Properties\\launchSettings.json",
+              "RelativeToolTip": "back\\Properties\\launchSettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-18T14:12:24.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\Program.cs",
+              "RelativeDocumentMoniker": "back\\Program.cs",
+              "ToolTip": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\Program.cs",
+              "RelativeToolTip": "back\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T14:12:01.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\appsettings.json",
+              "RelativeDocumentMoniker": "back\\appsettings.json",
+              "ToolTip": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\appsettings.json",
+              "RelativeToolTip": "back\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-18T14:11:55.975Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "back\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "back\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-18T14:10:14.268Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 101,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
