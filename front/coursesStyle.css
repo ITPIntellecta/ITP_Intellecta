@@ -90,6 +90,10 @@ body {
   filter: hue-rotate(180deg);
 }
 
+.showbtn {
+  display: none;
+}
+
 /* KURS POJEDINACAN */
 .courses-list {
   padding: 5%;

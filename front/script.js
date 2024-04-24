@@ -59,3 +59,12 @@ if (scrollBtn != null) {
 function redirectToPage(url) {
   window.location.href = url;
 }
+
+function changeToCourses(element) {
+  if (element == "myLearning") {
+    location.href = "courses.html?parametar=" + element;
+    document.getElementsByClassName("addcourse")[0].classList.add("showbtn");
+  } else {
+    location = "courses.html";
+  }
+}

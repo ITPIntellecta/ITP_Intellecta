@@ -41,11 +41,23 @@
     <div class="contain">
       <img src="logo.png" alt="Logo" class="logo" />
 
+      <button
+        class="btn btn-primary addcourse"
+        style="position: absolute; left: 7%; top: 10%"
+      >
+        &#xFF0B; Add new course
+      </button>
       <!-- MENI -->
       <div class="right-menu show-menu" id="right-menu">
-        <p>&#9733; My learning</p>
+        <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
         <br />
-        <p>&#9733; My courses</p>
+        <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
+        <div class="admin-menu">
+          <br />
+          <p>&#9733; Courses authorization</p>
+          <br />
+          <p>&#9733; Admin authorization</p>
+        </div>
       </div>
 
       <!-- KURSEVI -->
@@ -196,6 +208,14 @@
       </div>
       <button id="scrollBtn" class="hidden">&#129121;</button>
       <footer>intellecta &copy;</footer>
+      <script>
+        const params = new URLSearchParams(location.search);
+        const parametar = params.get("parametar");
+        if (parametar == "myLearning")
+          document
+            .getElementsByClassName("addcourse")[0]
+            .classList.add("showbtn");
+      </script>
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
