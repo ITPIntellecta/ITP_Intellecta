@@ -1,3 +1,5 @@
+﻿const uri = "api/login";
+
 function changeLabelColor(val) {
   let labels = document.querySelectorAll(".labela");
 
@@ -21,4 +23,25 @@ function changeLabelColor(val) {
 
 function redirectToPage(url) {
   window.location.href = url;
+}
+
+function logUser() {
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  const user = {
+    email: email.value.trim(),
+    password: password.value.trim(),
+  };
+
+  fetch(uri, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => response.json())
+    .catch((error) => console.error("Unable to log user.", error));
 }

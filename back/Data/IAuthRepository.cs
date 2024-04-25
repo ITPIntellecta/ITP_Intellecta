@@ -13,6 +13,5 @@ namespace back.Data
 
         Task<bool> UserExists(string email);
 
-
     }
 }
