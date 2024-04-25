@@ -22,12 +22,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "../front")),
-    RequestPath = "/front"
-});
+// app.UseStaticFiles(new StaticFileOptions
+// {
+//     FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+//         Path.Combine(Directory.GetCurrentDirectory(), "../front")),
+//     RequestPath = "/front"
+// });
 
 
 app.UseHttpsRedirection();
