@@ -14,5 +14,7 @@ namespace back.Data
         }
         // ime DbSet ce biti ime tabele u bazi
         public DbSet<User> Users { get; set; }
+        public DbSet<Course> Courses { get; set; }
+
     }
 }
