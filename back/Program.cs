@@ -2,6 +2,7 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Authentication;
 //global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
+global using System.IdentityModel.Tokens.Jwt;
 using back.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,12 +23,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// app.UseStaticFiles(new StaticFileOptions
-// {
-//     FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
-//         Path.Combine(Directory.GetCurrentDirectory(), "../front")),
-//     RequestPath = "/front"
-// });
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "../front")),
+    RequestPath = "/front"
+});
 
 
 app.UseHttpsRedirection();

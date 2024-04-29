@@ -1,4 +1,4 @@
-﻿const uri = "api/login";
+﻿const uri = "api/Login";
 
 function changeLabelColor(val) {
   let labels = document.querySelectorAll(".labela");
@@ -43,5 +43,9 @@ function logUser() {
     body: JSON.stringify(user),
   })
     .then((response) => response.json())
+    .then((data) => {
+      // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
+      localStorage.setItem("jwtToken", data.token);
+    })
     .catch((error) => console.error("Unable to log user.", error));
 }
