@@ -72,3 +72,39 @@ function changeToCourses(element) {
 function goToNewCourse() {
   window.location = "newCourse.html";
 }
+
+let weekNumber = 0;
+function showNextWeek(event) {
+  event.preventDefault();
+  weekNumber++;
+  const week = document.getElementById("weekCourse");
+  week.innerHTML += `<div class="weekCourse1"> <br><h2>Week ${weekNumber}</h2> 
+    <div onchange="checkInput()" class="fileDiv">
+     <input onchange="checkInput()" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"  multiple/>
+  </div> 
+  <div class="form-group">
+      <textarea class="" cols="150" id="highlights" placeholder="Highlights" wrap="soft"></textarea>
+  </div>
+
+  <button disabled class="form-group-btn week-material-btn" id='sacuvaj' onclick='saveChanges(event)'>Save changes</button>
+
+  <br>
+  </div>
+  `;
+}
+
+function saveChanges(event) {
+  event.preventDefault();
+  const week = document.getElementById("weekCourse");
+  week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>`;
+}
+
+function checkInput() {
+  const file = document.getElementById("contentFile");
+  console.log(file.value);
+
+  if (file.value != null) {
+    const btn = document.getElementById("sacuvaj");
+    btn.disabled = false;
+  }
+}

@@ -17,7 +17,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style1.css" />
-        <link href="style.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -57,10 +57,11 @@
       </div>
     </div>
 
-        <h3>Add a new course: </h3>
 
-    <div class="new-course">
-        <form>
+    <div class="new-course" style="width: 35%;">
+      
+        <h2>Add a new course: </h2>
+        <form >
         <div class=" form-group">
             <input class="form-style" type="text" placeholder="Course title"> 
         </div>
@@ -76,20 +77,20 @@
                 <option>Health & Fitness</option>
             </select>
         </div>
-        <div class=" form-group">
-            <input class="form-style" type="number" placeholder="Duration in weeks"> 
-        </div>
-        <div class=" form-group">
-            <input class="form-style" type="number" placeholder="Hours per week"> 
-        </div>
-        <div class=" form-group">
-            <textarea class="form-style" placeholder="Highlights" cols="50" wrap="soft" style="resize: none; vertical-align: middle; height: 100%;"></textarea>
-        </div>
+
+      <div class="form-group" style="display: block;">
+        <button class="form-group-btn week-material-btn" id="prva" onclick="showNextWeek(event)" >
+          Add course content
+        </button>
+        <div id="weekCourse" style="display: block;"></div>
+      </div>
+
+
         </form>
     </div>
 
     
-    <footer>intellecta &copy;</footer>
+ <!--   <footer>intellecta &copy;</footer>-->
     <script src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

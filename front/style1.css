@@ -328,7 +328,77 @@ input[type="radio"] {
   color: #ead7bb;
 }
 
-select option :hover {
+/* dodavanje kursa */
+
+.new-course {
+  text-align: center;
+  position: absolute;
+  top: 5em;
+}
+
+select option:hover {
   color: #113946;
   background-color: #ead7bb;
+}
+
+.week-material-btn:hover {
+  background-color: #ead7bb;
+  color: #113946;
+  cursor: copy;
+}
+
+.week-material-btn {
+  display: block;
+  color: #ead7bb;
+  width: 100%;
+  margin: 0;
+  height: 40px;
+  text-align: left;
+  padding-left: 55px;
+}
+
+#highlights ::placeholder {
+  padding-left: 55px;
+  vertical-align: middle;
+}
+
+#highlights {
+  display: block;
+  margin: 0;
+  padding: 0;
+  resize: none;
+  height: 100%;
+  padding-left: 0.3em;
+  margin-left: 1em;
+}
+
+.fileDiv {
+  background-color: transparent;
+  color: #113946;
+  width: 100%;
+  text-align: center;
+  padding-left: 2em;
+}
+
+.fileDiv:hover {
+  background-color: transparent;
+  color: #113946;
+}
+
+.weekCourse1 {
+  margin: 2em;
+  padding: 2em;
+  border: 1px dashed #113946;
+  backdrop-filter: blur(15px);
+}
+
+.material-added-notification {
+  border: 1px solid #113946;
+  color: #113946;
+  background-color: #ead7bb;
+  margin: 3% 0;
+  border-radius: 4px;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
 }
