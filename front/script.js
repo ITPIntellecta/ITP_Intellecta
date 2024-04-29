@@ -68,3 +68,7 @@ function changeToCourses(element) {
     location = "courses.html";
   }
 }
+
+function goToNewCourse() {
+  window.location = "newCourse.html";
+}

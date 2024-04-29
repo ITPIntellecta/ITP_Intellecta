@@ -327,3 +327,8 @@ input[type="radio"] {
 .form-style::placeholder {
   color: #ead7bb;
 }
+
+select option :hover {
+  color: #113946;
+  background-color: #ead7bb;
+}
