@@ -43,7 +43,7 @@ namespace back.Controllers
             //ova metoda kao rez vraca id korisnika
  
             //koristimo kao objekat da bi mogli kasnije dodati jos neke podatke useru
-            var response=await _authRepo.Register(new User {Email=request.Email},request.Password);
+            var response=await _authRepo.Register(new User {Email=request.Email, DateOfBirth=request.DateOfBirth, FirstName=request.FirstName, LastName=request.LastName, UserType=request.UserType, Title=request.Title},request.Password);
             
             //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
             if(!response.Success)

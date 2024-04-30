@@ -8,8 +8,8 @@ namespace back.Models
     public class Course
     {
         public int CourseId { get; set; }
-        public User? Creator {get;set;}
-        public User[]? Students {get;set;}
+       public User? Creator {get;set;}
+       public User[]? Students {get;set;}
         public string Title { get; set; }=string.Empty;
         public string Subtitle { get; set; }=string.Empty;
         public int DurationInWeeks { get; set; }
