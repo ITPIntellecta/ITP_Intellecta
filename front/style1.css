@@ -402,3 +402,12 @@ select option:hover {
   height: 100%;
   line-height: 40px;
 }
+
+.sendAuth {
+  width: fit-content;
+  padding: 1% 2%;
+  margin: 0;
+  display: block;
+
+  text-align: center;
+}

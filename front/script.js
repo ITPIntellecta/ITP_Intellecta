@@ -76,11 +76,36 @@ function goToNewCourse() {
 let weekNumber = 0;
 function showNextWeek(event) {
   event.preventDefault();
+  const btnAdd = document.getElementById("prva");
+  btnAdd.style.display = "none";
   weekNumber++;
+  showInput();
+  const btnNew = document.getElementById("addNew");
+  btnNew.disabled.toggle;
+  const btnAddMore = document.getElementById("addMore");
+  btnAddMore.style.display = "none";
+}
+
+function saveChanges(event) {
+  event.preventDefault();
+  const input = document.getElementById("contentFile");
+  input.style.display = "none";
+  const week = document.getElementById("weekCourse");
+  week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
+  <button onclick="showInput()" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
+  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
+
+  `;
+
+  const btnAddMore = document.getElementById("addMore");
+  btnAddMore.disabled = false;
+}
+
+function showInput() {
   const week = document.getElementById("weekCourse");
   week.innerHTML += `<div class="weekCourse1"> <br><h2>Week ${weekNumber}</h2> 
     <div onchange="checkInput()" class="fileDiv">
-     <input onchange="checkInput()" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"  multiple/>
+     <input onchange="checkInput()" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"/>
   </div> 
   <div class="form-group">
       <textarea class="" cols="150" id="highlights" placeholder="Highlights" wrap="soft"></textarea>
@@ -91,12 +116,12 @@ function showNextWeek(event) {
   <br>
   </div>
   `;
-}
 
-function saveChanges(event) {
-  event.preventDefault();
-  const week = document.getElementById("weekCourse");
-  week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>`;
+  const btnNew = document.getElementById("addNew");
+  btnNew.disabled = true;
+
+  const btnAddMore = document.getElementById("addMore");
+  btnAddMore.disabled = true;
 }
 
 function checkInput() {

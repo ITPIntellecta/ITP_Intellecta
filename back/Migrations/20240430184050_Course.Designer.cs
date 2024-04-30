@@ -12,7 +12,7 @@ using back.Data;
 namespace back.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240427141936_Course")]
+    [Migration("20240430184050_Course")]
     partial class Course
     {
         /// <inheritdoc />
@@ -33,9 +33,15 @@ namespace back.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CourseId"));
 
+                    b.Property<bool>("Approved")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("CourseMark")
+                        .HasColumnType("real");
 
                     b.Property<int?>("CreatorId")
                         .HasColumnType("int");
@@ -47,22 +53,11 @@ namespace back.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Review")
-                        .HasColumnType("real");
-
                     b.Property<string>("Subtitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TxtFile")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoFile")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

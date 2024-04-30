@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj": {}
+    "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\back.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj": {
+    "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
+        "projectUniqueName": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\back.csproj",
         "projectName": "back",
-        "projectPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
-        "packagesPath": "C:\\Users\\PCX\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\obj\\",
+        "projectPath": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\back.csproj",
+        "packagesPath": "C:\\Users\\AB\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\PCX\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\AB\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -91,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
