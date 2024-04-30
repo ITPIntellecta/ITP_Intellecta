@@ -33,57 +33,89 @@
       <div class="content">
         <h3 class="h3">Sign Up</h3>
         <div class="card">
-          <div class="user-type">
-            <i class="bi bi-person input-icon"></i>
-            <label for="usertype">User type</label
-            ><label for="user" class="labela">
-              <input
-                type="radio"
-                value="0"
-                name="type"
-                id="user"
-                onchange="changeLabelColor('user')"
-              />User</label
-            ><label for="admin" class="labela">
-              <input
-                type="radio"
-                value="1"
-                name="type"
-                id="admin"
-                onchange="changeLabelColor('admin')"
-              />Admin</label
-            >
-          </div>
-          <div class="name">
-            <div class="part1">
-              <input type="text" class="form-style" placeholder="First Name" />
-              <i class="bi bi-person-vcard input-icon"></i>
+          <form action="javascript:void(0);" method="post" onsubmit="regUser()">
+            <div class="user-type">
+              <i class="bi bi-person input-icon"></i>
+              <label for="usertype">User type</label
+              ><label for="user" class="labela">
+                <input
+                  type="radio"
+                  value="0"
+                  name="type"
+                  id="user"
+                  onchange="changeLabelColor('user')"
+                />User</label
+              ><label for="admin" class="labela">
+                <input
+                  type="radio"
+                  value="1"
+                  name="type"
+                  id="admin"
+                  onchange="changeLabelColor('admin')"
+                />Admin</label
+              >
             </div>
-            <div class="part2">
-              <input type="text" class="form-style" placeholder="Last Name" />
-              <i class="bi bi-person-vcard input-icon last-name-icon"></i>
+            <div class="name">
+              <div class="part1">
+                <input
+                  type="text"
+                  class="form-style"
+                  placeholder="First Name"
+                  id="firstname"
+                />
+                <i class="bi bi-person-vcard input-icon"></i>
+              </div>
+              <div class="part2">
+                <input
+                  type="text"
+                  class="form-style"
+                  placeholder="Last Name"
+                  id="lastname"
+                />
+                <i class="bi bi-person-vcard input-icon last-name-icon"></i>
+              </div>
             </div>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-style" placeholder="Title" />
-            <i class="bi bi-mortarboard input-icon"></i>
-          </div>
-          <div class="form-group">
-            <input type="date" class="form-style" placeholder="Date of Birth" />
-            <i class="bi bi-calendar-check input-icon"></i>
-          </div>
-          <div class="form-group">
-            <input type="email" class="form-style" placeholder="Email" />
-            <i class="bi bi-envelope input-icon"></i>
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-style" placeholder="Password" />
-            <i class="bi bi-eye-slash input-icon"></i>
-          </div>
-          <div class="form-group-btn">
-            <input type="submit" class="btn" value="Sign Up" />
-            <i class="bi bi-box-arrow-in-left input-icon"></i>
-          </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-style"
+                placeholder="Title"
+                id="title"
+              />
+              <i class="bi bi-mortarboard input-icon"></i>
+            </div>
+            <div class="form-group">
+              <input
+                type="date"
+                class="form-style"
+                placeholder="Date of Birth"
+                id="dateofbirth"
+              />
+              <i class="bi bi-calendar-check input-icon"></i>
+            </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-style"
+                placeholder="Email"
+                id="email"
+              />
+              <i class="bi bi-envelope input-icon"></i>
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-style"
+                placeholder="Password"
+                id="password"
+              />
+              <i class="bi bi-eye-slash input-icon"></i>
+            </div>
+            <div class="form-group-btn">
+              <input type="submit" class="btn" value="Sign Up" />
+              <i class="bi bi-box-arrow-in-left input-icon"></i>
+            </div>
+          </form>
         </div>
       </div>
     </div>

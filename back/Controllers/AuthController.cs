@@ -36,6 +36,22 @@ namespace back.Controllers
 
         }
 
+
+         [HttpPost("Register")]
+        public async Task<ActionResult<ServiceResponse<int>>> Reg(UserRegisterDto request)
+        {
+            //ova metoda kao rez vraca id korisnika
+ 
+            //koristimo kao objekat da bi mogli kasnije dodati jos neke podatke useru
+            var response=await _authRepo.Register(new User {Email=request.Email},request.Password);
+            
+            //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
+            if(!response.Success)
+                return BadRequest(response);
+            return Ok(response);
+        }
+
+
     }
 }
 

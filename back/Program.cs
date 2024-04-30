@@ -1,6 +1,6 @@
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Authentication;
-//global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 using back.Data;
@@ -13,6 +13,21 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>
+{
+    options.TokenValidationParameters=new TokenValidationParameters{
+        ValidateIssuerSigningKey=true,
+        IssuerSigningKey=new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!)), //null forgiving operator
+        ValidateIssuer=false,
+        ValidateAudience=false
+    };
+});
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 
@@ -29,6 +44,9 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(Directory.GetCurrentDirectory(), "../front")),
     RequestPath = "/front"
 });
+
+//dodamo ovo !!!!!!
+app.UseAuthentication();
 
 
 app.UseHttpsRedirection();
