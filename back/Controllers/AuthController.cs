@@ -51,6 +51,18 @@ namespace back.Controllers
             return Ok(response);
         }
 
+                // 
+        [HttpPost("reg")]
+        [Route("/reg")]
+        public async Task<ActionResult<ServiceResponse<int>>> imeFje(string email, string password, string firstname, string lastname, string title, DateTime dateofbirth)
+        {
+             var response=await _authRepo.Register(new User {Email=email, DateOfBirth=dateofbirth, FirstName=firstname, LastName=lastname, Title=title},password);
+            
+            //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
+            if(!response.Success)
+                return BadRequest(response);
+            return Ok(response);
+        }
 
     }
 }

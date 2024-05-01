@@ -59,14 +59,14 @@ function regUser() {
   const usertypes = document.getElementsByName("type");
   const date = document.getElementById("dateofbirth");
 
-  forEach(el in usertypes);
-  {
-    if (el.checked) var type = el.value;
+  for (let i = 0; i < usertypes.length; i++) {
+    if (usertypes[i].checked) var type = usertypes[i].value;
   }
+
   const user = {
     email: email.value.trim(),
     password: password.value.trim(),
-    type: type.value.trim(),
+    type: type.trim(),
     firstname: firstname.value.trim(),
     lastname: lastname.value.trim(),
     dateofbirth: date.value.trim(),
