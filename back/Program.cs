@@ -28,6 +28,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 var app = builder.Build();
 
@@ -45,7 +46,6 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/front"
 });
 
-builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 
 //dodamo ovo !!!!!!

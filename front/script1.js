@@ -63,6 +63,8 @@ function regUser() {
     if (usertypes[i].checked) var type = usertypes[i].value;
   }
 
+  console(email, password, firstname, lastname, title, type, date);
+
   const user = {
     email: email.value.trim(),
     password: password.value.trim(),
@@ -73,18 +75,18 @@ function regUser() {
     title: title.value.trim(),
   };
 
-  fetch(uri, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(user),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
-      localStorage.setItem("jwtToken", data.token);
-    })
-    .catch((error) => console.error("Unable to log user.", error));
+  // fetch(uri, {
+  //   method: "POST",
+  //   headers: {
+  //     Accept: "application/json",
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify(user),
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
+  //     localStorage.setItem("jwtToken", data.token);
+  //   })
+  //   .catch((error) => console.error("Unable to log user.", error));
 }

@@ -154,3 +154,4 @@ C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\back\bin\Debug\net7.0\runtime
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\back\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\PCX\Desktop\ITP_Intellecta\back\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\back\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\back\bin\Debug\net7.0\AutoMapper.dll
