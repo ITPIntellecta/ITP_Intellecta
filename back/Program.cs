@@ -45,6 +45,9 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = "/front"
 });
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+
 //dodamo ovo !!!!!!
 app.UseAuthentication();
 

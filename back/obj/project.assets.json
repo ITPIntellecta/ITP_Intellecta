@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Azure.Core/1.24.0": {
         "type": "package",
         "dependencies": {
@@ -1249,6 +1265,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "Azure.Core/1.24.0": {
       "sha512": "+/qI1j2oU1S4/nvxb2k/wDsol00iGf1AyJX5g3epV7eOpQEP/2xcgh/cxgKMeFgn3U2fmgSiBnQZdkV+l5y0Uw==",
       "type": "package",
@@ -3909,6 +3940,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "AutoMapper >= 13.0.1",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.0",
       "Microsoft.AspNetCore.OpenApi >= 7.0.17",
       "Microsoft.EntityFrameworkCore >= 7.0.0",
@@ -3918,19 +3950,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\PCX\\.nuget\\packages\\": {}
+    "C:\\Users\\AB\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
+      "projectUniqueName": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\back.csproj",
       "projectName": "back",
-      "projectPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
-      "packagesPath": "C:\\Users\\PCX\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\obj\\",
+      "projectPath": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\back.csproj",
+      "packagesPath": "C:\\Users\\AB\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\back\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\PCX\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\AB\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3961,6 +3993,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[7.0.0, )"
@@ -4007,7 +4043,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
