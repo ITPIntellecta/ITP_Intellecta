@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using ITP_Intellecta.Data;
-using ITP_Intellecta.Dtos.Course;
-using ITP_Intellecta.Models;
 
-
-namespace ITP_Intellecta.Services
+namespace Services
 {
-    public class CourseService:ICourseService
+    public class CourseService : ICourseService
     {
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly DataContext _context;
 
         public CourseService(IMapper mapper, DataContext context)
@@ -21,9 +17,20 @@ namespace ITP_Intellecta.Services
             _mapper = mapper;
         }
 
-        public Task<ServiceResponse<List<GetCourseDto>>> AddCharacter(AddCourseDto newCharacter)
+        public async Task<ServiceResponse<List<GetCourseDto>>> AddCourse(AddCourseDto newCourse)
         {
-            throw new NotImplementedException();
+            var serviceResponse = new ServiceResponse<List<GetCourseDto>>();
+            var course=_mapper.Map<Course>(newCourse);
+
+            _context.Courses.Add(course);
+            await _context.SaveChangesAsync();
+
+            serviceResponse.Data =
+                await _context.Courses
+                    .Where(c => c.CourseId! == 0)
+                    .Select(c => _mapper.Map<GetCourseDto>(c))
+                    .ToListAsync();
+            return serviceResponse;
         }
     }
 }

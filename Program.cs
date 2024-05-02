@@ -3,8 +3,11 @@ global using Microsoft.AspNetCore.Authentication;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
-using ITP_Intellecta.Data;
-
+global using ITP_Intellecta.Dtos.Course;
+global using ITP_Intellecta.Models;
+global using ITP_Intellecta.Data;
+global using Services;
+ 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,8 +18,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+builder.Services.AddScoped<ICourseService, CourseService>();
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>
 {
@@ -29,7 +36,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins", 
+    origin =>
+    {
+        origin.WithOrigins("http://localhost:5136")
+              .AllowAnyHeader()
+              .AllowCredentials()
+              .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -48,11 +65,16 @@ app.UseStaticFiles(new StaticFileOptions
 
 
 
-//dodamo ovo !!!!!!
-app.UseAuthentication();
+
+    app.UseCors("AllowAllOrigins");
+
 
 
 app.UseHttpsRedirection();
+
+//dodamo ovo !!!!!!
+app.UseAuthentication();
+
 
 app.UseAuthorization();
 

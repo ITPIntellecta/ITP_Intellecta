@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITPIntellecta.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240502003637_newMigration")]
-    partial class newMigration
+    [Migration("20240502083553_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

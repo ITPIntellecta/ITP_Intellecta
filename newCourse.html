@@ -61,15 +61,15 @@
     <div class="new-course" style="width: 35%;">
       
         <h2>Add a new course: </h2>
-        <form >
+        <form onsubmit="submitCourse(event)">
         <div class=" form-group">
-            <input class="form-style" type="text" placeholder="Course title"> 
+            <input class="form-style" id="courseTitle" type="text" placeholder="Course title"> 
         </div>
         <div class=" form-group">
-            <input class="form-style" type="text" placeholder="Subtitle"> 
+            <input class="form-style" id="courseSubtitle" type="text" placeholder="Subtitle"> 
         </div>
         <div class=" form-group">
-            <select class="form-style">
+            <select class="form-style" id="courseCategory"> 
                 <option selected>- Choose category -</option>
                 <option>Design</option>
                 <option>Business</option>

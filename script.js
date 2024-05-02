@@ -133,3 +133,39 @@ function checkInput() {
     btn.disabled = false;
   }
 }
+
+function submitCourse(event) {
+  event.preventDefault();
+  const courseTitle = document.getElementById("courseTitle").textContent;
+  const courseSubtitle = document.getElementById("courseSubtitle").textContent;
+  const courseCategory = document.getElementById("courseCategory");
+  const selectedOption = courseCategory.options[courseCategory.selectedIndex];
+  const selectedText = selectedOption.textValue;
+
+  const formData = {
+    title: courseTitle,
+    subtitle: courseSubtitle,
+    category: selectedText,
+    DurationInWeeks: 0,
+    WeeklyHours: 0,
+    Highlights: "aa",
+    courseMark: 5,
+  };
+
+  fetch("/api/course", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Success:", data);
+      // Dodajte ovdje logiku za obradu odgovora ako je potrebno
+    });
+  // .catch((error) => {
+  //   console.error("Error:", error);
+  //   // Dodajte ovdje logiku za obradu greške ako je potrebno
+  // })
+}
