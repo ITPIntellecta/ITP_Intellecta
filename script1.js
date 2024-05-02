@@ -50,6 +50,7 @@ function logUser() {
     .catch((error) => console.error("Unable to log user.", error));
 }
 
+/*
 function regUser() {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
@@ -75,18 +76,42 @@ function regUser() {
     title: title.value.trim(),
   };
 
-  // fetch(uri, {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(user),
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
-  //     localStorage.setItem("jwtToken", data.token);
-  //   })
-  //   .catch((error) => console.error("Unable to log user.", error));
+  fetch(uri, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
+      localStorage.setItem("jwtToken", data.token);
+    })
+    .catch((error) => console.error("Unable to log user.", error));
+}
+*/
+function regUser() {
+  // Prikupi podatke iz formulara
+  var formData = new FormData(document.querySelector("form"));
+
+  // Napravi Fetch POST zahtev ka serveru
+  fetch("/Account/Register", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => {
+      // Obradi odgovor sa servera
+      if (response.ok) {
+        // Uspesno obradjen zahtev
+        // Mozes izvrsiti neku akciju kao sto je redirekcija
+      } else {
+        // U slucaju greske
+        console.error("Error:", response);
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }

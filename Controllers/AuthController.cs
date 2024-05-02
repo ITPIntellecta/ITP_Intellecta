@@ -36,7 +36,7 @@ namespace ITP_Intellecta.Controllers
 
         }
 
-
+/*
          [HttpPost("Register")]
         public async Task<ActionResult<ServiceResponse<int>>> Reg(UserRegisterDto request)
         {
@@ -49,7 +49,19 @@ namespace ITP_Intellecta.Controllers
             if(!response.Success)
                 return BadRequest(response);
             return Ok(response);
-        }
+        }*/
+
+         // POST: /Account/Register
+    [HttpPost]
+    public async Task<ActionResult<ServiceResponse<int>>> Register(UserViewModel model)
+    {
+        var response=await _authRepo.Register(new User {Email=model.Email, DateOfBirth=model.DateOfBirth, FirstName=model.FirstName, LastName=model.LastName, Title=model.Title},model.Password);
+            
+            //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
+            if(!response.Success)
+                return BadRequest(response);
+            return Ok(response);
+    }
 
         
 
