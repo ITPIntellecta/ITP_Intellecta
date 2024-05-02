@@ -1,4 +1,4 @@
-﻿const uri = "api/Auth";
+﻿const uri = "/api/auth";
 
 function changeLabelColor(val) {
   let labels = document.querySelectorAll(".labela");
@@ -50,8 +50,9 @@ function logUser() {
     .catch((error) => console.error("Unable to log user.", error));
 }
 
-/*
-function regUser() {
+function regUser(event) {
+  event.preventDefault();
+
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const firstname = document.getElementById("firstname");
@@ -67,13 +68,13 @@ function regUser() {
   console(email, password, firstname, lastname, title, type, date);
 
   const user = {
-    email: email.value.trim(),
-    password: password.value.trim(),
-    type: type.trim(),
-    firstname: firstname.value.trim(),
-    lastname: lastname.value.trim(),
-    dateofbirth: date.value.trim(),
-    title: title.value.trim(),
+    email: email.value,
+    password: password.value,
+    type: type,
+    firstname: firstname.value,
+    lastname: lastname.value,
+    dateofbirth: date.value,
+    title: title.value,
   };
 
   fetch(uri, {
@@ -86,12 +87,15 @@ function regUser() {
   })
     .then((response) => response.json())
     .then((data) => {
+      console.log("Success:", data);
+
       // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
-      localStorage.setItem("jwtToken", data.token);
+      //localStorage.setItem("jwtToken", data.token);
     })
     .catch((error) => console.error("Unable to log user.", error));
 }
-*/
+
+/*
 function regUser() {
   // Prikupi podatke iz formulara
   var formData = new FormData(document.querySelector("form"));
@@ -114,4 +118,5 @@ function regUser() {
     .catch((error) => {
       console.error("Error:", error);
     });
-}
+    
+}*/

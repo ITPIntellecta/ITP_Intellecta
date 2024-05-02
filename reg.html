@@ -18,8 +18,6 @@
     />
     <link rel="stylesheet" href="style1.css" />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
-
-    <script src="script1.js"></script>
   </head>
   <body>
     <div class="contain">
@@ -33,7 +31,7 @@
       <div class="content">
         <h3 class="h3">Sign Up</h3>
         <div class="card">
-          <form method="post" onsubmit="regUser()">
+          <form onsubmit="regUser(event)">
             <div class="user-type">
               <i class="bi bi-person input-icon"></i>
               <label for="usertype">User type</label
@@ -119,5 +117,6 @@
         </div>
       </div>
     </div>
+    <script src="script1.js"></script>
   </body>
 </html>
