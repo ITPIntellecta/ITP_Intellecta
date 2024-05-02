@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj": {}
+    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj": {
+    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
-        "projectName": "back",
-        "projectPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
+        "projectUniqueName": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj",
+        "projectName": "ITP_Intellecta",
+        "projectPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj",
         "packagesPath": "C:\\Users\\PCX\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\obj\\",
+        "outputPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\PCX\\AppData\\Roaming\\NuGet\\NuGet.Config",

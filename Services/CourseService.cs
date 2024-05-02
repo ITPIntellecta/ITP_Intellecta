@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using back.Data;
-using back.Dtos.Course;
-using back.Models;
+using ITP_Intellecta.Data;
+using ITP_Intellecta.Dtos.Course;
+using ITP_Intellecta.Models;
 
-namespace back.Services
+
+namespace ITP_Intellecta.Services
 {
-    public class CourseService : ICourseService
+    public class CourseService:ICourseService
     {
-        private readonly IMapper _mapper;
+         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
         public CourseService(IMapper mapper, DataContext context)

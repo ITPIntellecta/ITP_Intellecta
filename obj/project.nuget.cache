@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AgXrF7u1K9x4UQ+OlM1HRx9lM7uQ7C6FDvSVFMa3EofCbp0+pcy7Q8wbj2tL0grrOr31+xJoyLIrrTIHRIvR7A==",
+  "dgSpecHash": "4Zul3AjBsxW42zOUBjLTXIQVJA3nlXBRvMh1y7vDgxf7Z1zAzp61KDiopIj4Y77Vm8oHwkKYwwyAEZt+OcXJvw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\back\\back.csproj",
+  "projectFilePath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PCX\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\PCX\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",

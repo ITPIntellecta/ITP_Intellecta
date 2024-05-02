@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "back/1.0.0": {
+      "ITP_Intellecta/1.0.0": {
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.0",
@@ -17,7 +17,7 @@
           "Swashbuckle.AspNetCore": "6.5.0"
         },
         "runtime": {
-          "back.dll": {}
+          "ITP_Intellecta.dll": {}
         }
       },
       "AutoMapper/13.0.1": {
@@ -695,7 +695,7 @@
     }
   },
   "libraries": {
-    "back/1.0.0": {
+    "ITP_Intellecta/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

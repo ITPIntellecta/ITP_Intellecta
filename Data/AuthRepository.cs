@@ -1,15 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using back.Models;
+using System.Security.Claims;
+using ITP_Intellecta.Models;
 
-namespace back.Data
+
+namespace ITP_Intellecta.Data
 {
-    public class AuthRepository : IAuthRepository
+    public class AuthRepository:IAuthRepository
     {
-         private readonly DataContext _context;
+        private readonly DataContext _context;
         
         private readonly IConfiguration _configuration;
 

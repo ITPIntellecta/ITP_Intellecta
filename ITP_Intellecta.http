@@ -1,0 +1,6 @@
+@ITP_Intellecta_HostAddress = http://localhost:5136
+
+GET {{ITP_Intellecta_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using back.Models;
+using ITP_Intellecta.Models;
 
-namespace back.Data
+namespace ITP_Intellecta.Data
 {
     public class DataContext:DbContext
     {

@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using back.Models;
 
-namespace back.Dtos.Course
+namespace ITP_Intellecta.Dtos.Course
 {
     public class AddCourseDto
     {
-        public back.Models.User? Creator {get;set;}
+         public Models.User? Creator {get;set;}
          public string Title { get; set; }=string.Empty;
         public string Subtitle { get; set; }=string.Empty;
         public int DurationInWeeks { get; set; }

@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using back.Data;
-using back.Dtos.User;
-using back.Models;
+using ITP_Intellecta.Data;
+using ITP_Intellecta.Dtos.User;
+using ITP_Intellecta.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace back.Controllers
+namespace ITP_Intellecta.Controllers
 
 {
     [ApiController]

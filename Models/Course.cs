@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace back.Models
+namespace ITP_Intellecta.Models
 {
     public class Course
     {
@@ -20,7 +20,5 @@ namespace back.Models
 
         public bool Approved {get; set;}
 
-
-        
     }
 }
