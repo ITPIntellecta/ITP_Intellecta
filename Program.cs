@@ -7,6 +7,8 @@ global using ITP_Intellecta.Dtos.Course;
 global using ITP_Intellecta.Models;
 global using ITP_Intellecta.Data;
 global using Services;
+global using AutoMapper;
+
  
 var builder = WebApplication.CreateBuilder(args);
 

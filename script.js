@@ -76,23 +76,40 @@ function goToNewCourse() {
 let weekNumber = 0;
 function showNextWeek(event) {
   event.preventDefault();
+  fileOrder = 0;
   const btnAdd = document.getElementById("prva");
   btnAdd.style.display = "none";
   weekNumber++;
-  showInput();
+  showInput(event);
   const btnNew = document.getElementById("addNew");
   btnNew.disabled.toggle;
   const btnAddMore = document.getElementById("addMore");
   btnAddMore.style.display = "none";
 }
 
+let filesArray = [];
+let fileOrder = 0;
+
 function saveChanges(event) {
   event.preventDefault();
   const input = document.getElementById("contentFile");
+
+  //ne radi!
+  const fileInputs = document.querySelectorAll(".fileDiv");
+  console.log(fileInputs);
+  fileInputs.forEach(function (input) {
+    if (input.files.length > 0) {
+      // Provjeravamo da li je odabrana datoteka
+      filesArray.push(input.files[0]); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
+    }
+  });
+
+  console.log(filesArray);
+
   input.style.display = "none";
   const week = document.getElementById("weekCourse");
   week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
-  <button onclick="showInput()" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
+  <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
   <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
 
   `;
@@ -101,15 +118,14 @@ function saveChanges(event) {
   btnAddMore.disabled = false;
 }
 
-function showInput() {
+function showInput(event) {
+  event.preventDefault();
+  fileOrder++;
   const week = document.getElementById("weekCourse");
-  week.innerHTML += `<div class="weekCourse1"> <br><h2>Week ${weekNumber}</h2> 
-    <div onchange="checkInput()" class="fileDiv">
-     <input onchange="checkInput()" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"/>
+  week.innerHTML += `<div class="weekCourse1" > <br><h2>Week ${weekNumber}</h2> 
+    <div onchange="checkInput(event)" class="fileDiv1">
+     <input onchange="checkInput(event)" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"/>
   </div> 
-  <div class="form-group">
-      <textarea class="" cols="150" id="highlights" placeholder="Highlights" wrap="soft"></textarea>
-  </div>
 
   <button disabled class="form-group-btn week-material-btn" id='sacuvaj' onclick='saveChanges(event)'>Save changes</button>
 
@@ -124,7 +140,8 @@ function showInput() {
   btnAddMore.disabled = true;
 }
 
-function checkInput() {
+function checkInput(event) {
+  event.preventDefault();
   const file = document.getElementById("contentFile");
   console.log(file.value);
 
@@ -138,6 +155,8 @@ function submitCourse(event) {
   event.preventDefault();
   const courseTitle = document.getElementById("courseTitle").textContent;
   const courseSubtitle = document.getElementById("courseSubtitle").textContent;
+  const courseHighlights = document.getElementById("highlights").textContent;
+
   const courseCategory = document.getElementById("courseCategory");
   const selectedOption = courseCategory.options[courseCategory.selectedIndex];
   const selectedText = selectedOption.textValue;
@@ -148,7 +167,7 @@ function submitCourse(event) {
     category: selectedText,
     DurationInWeeks: 0,
     WeeklyHours: 0,
-    Highlights: "aa",
+    Highlights: courseHighlights,
     courseMark: 5,
   };
 
