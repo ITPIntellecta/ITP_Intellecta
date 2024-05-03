@@ -70,10 +70,14 @@ function goToNewCourse() {
   window.location = "newCourse.html";
 }
 
+let filesMap = new Map();
+let weekMap = new Map();
+
+let fileOrder = 0;
 let weekNumber = 0;
+
 function showNextWeek(event) {
   event.preventDefault();
-  fileOrder = 0;
   const btnAdd = document.getElementById("prva");
   btnAdd.style.display = "none";
   weekNumber++;
@@ -84,9 +88,6 @@ function showNextWeek(event) {
   btnAddMore.style.display = "none";
 }
 
-let filesMap = new Map();
-let fileOrder = 0;
-
 function saveChanges(event) {
   event.preventDefault();
   const input = document.getElementById("contentFile");
@@ -96,7 +97,8 @@ function saveChanges(event) {
   fileInputs.forEach(function (input) {
     if (input.files.length > 0) {
       // Provjeravamo da li je odabrana datoteka
-      filesMap.set(fileOrder, input.files[0]); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
+      filesMap.set(fileOrder, input.files[0].name); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
+      weekMap.set(fileOrder, weekNumber);
     }
   });
 
@@ -156,33 +158,64 @@ function submitCourse(event) {
   const selectedText = selectedOption.value;
 
   console.log(courseTitle, courseSubtitle, courseHighlights, selectedText);
+  if (
+    courseTitle.trim() != "" &&
+    courseSubtitle.trim() != "" &&
+    courseHighlights.trim() != "" &&
+    selectedText != "- Choose category -"
+  ) {
+    const formData = {
+      title: courseTitle,
+      subtitle: courseSubtitle,
+      category: selectedText,
+      DurationInWeeks: 0,
+      WeeklyHours: 0,
+      Highlights: courseHighlights,
+      courseMark: 5,
+    };
 
-  const formData = {
-    title: courseTitle,
-    subtitle: courseSubtitle,
-    category: selectedText,
-    DurationInWeeks: 0,
-    WeeklyHours: 0,
-    Highlights: courseHighlights,
-    courseMark: 5,
-  };
+    console.log(formData);
 
-  console.log(formData);
+    fetch("/api/course", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+        // Dodajte ovdje logiku za obradu odgovora ako je potrebno
+      });
+    // .catch((error) => {
+    //   console.error("Error:", error);
+    //   // Dodajte ovdje logiku za obradu greške ako je potrebno
+    // })
 
-  fetch("/api/course", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-      // Dodajte ovdje logiku za obradu odgovora ako je potrebno
-    });
-  // .catch((error) => {
-  //   console.error("Error:", error);
-  //   // Dodajte ovdje logiku za obradu greške ako je potrebno
-  // })
+    for (let i = 1; i <= fileOrder; i++) {
+      const materialData = {
+        videoFile: filesMap.get(i),
+        txtFile: filesMap.get(i),
+        weekNumber: weekMap.get(i),
+        fileOrder: i,
+      };
+
+      console.log(materialData);
+      fetch("/api/material", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(materialData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Success:", data);
+          // Dodajte ovdje logiku za obradu odgovora ako je potrebno
+        });
+    }
+  } else {
+    alert("Please ensure all fields are filled in.");
+  }
 }

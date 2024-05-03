@@ -13,15 +13,16 @@ namespace Controllers
     {
         private readonly ICourseService _courseService;
 
-        public CourseController(ICourseService characterService)
+        public CourseController(ICourseService courseService)
         {
-            _courseService = characterService;
+            _courseService = courseService;
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> AddCharacter(AddCourseDto newCourse)
+        public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> AddCourse(AddCourseDto newCourse)
         {
             return Ok(await _courseService.AddCourse(newCourse));
         }
+                
     }
 }

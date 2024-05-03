@@ -8,8 +8,9 @@ global using ITP_Intellecta.Models;
 global using ITP_Intellecta.Data;
 global using Services;
 global using AutoMapper;
+global using ITP_Intellecta.Services;
 
- 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -25,6 +26,8 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ICourseService, CourseService>();
+builder.Services.AddScoped<ICourseMaterialService, CourseMaterialService>();
+
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>

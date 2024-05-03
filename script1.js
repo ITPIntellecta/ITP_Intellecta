@@ -65,7 +65,7 @@ function regUser(event) {
     if (usertypes[i].checked) var type = usertypes[i].value;
   }
 
-  console(email, password, firstname, lastname, title, type, date);
+  console.log(email, password, firstname, lastname, title, type, date);
 
   const user = {
     email: email.value,

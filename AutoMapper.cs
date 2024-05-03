@@ -12,6 +12,8 @@ namespace back
         {
             CreateMap<Course, GetCourseDto>();
             CreateMap<AddCourseDto, Course>();
+            CreateMap<AddCourseMaterialDto, CourseContent>();
+
             // CreateMap<Weapon, GetWeaponDto>();
             // CreateMap<Skill, GetSkillDto>();
             // CreateMap<Character, HighscoreDto>();

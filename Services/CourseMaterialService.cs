@@ -18,9 +18,9 @@ namespace ITP_Intellecta.Services
         public async Task<ServiceResponse<List<GetCourseMaterialDto>>> AddCourseMaterial(AddCourseMaterialDto newCourseMaterial)
         {
             var serviceResponse = new ServiceResponse<List<GetCourseMaterialDto>>();
-            var courseMaterial=_mapper.Map<Course>(newCourseMaterial);
+            var courseMaterial=_mapper.Map<CourseContent>(newCourseMaterial);
 
-            _context.Courses.Add(courseMaterial);
+            _context.Materials.Add(courseMaterial);
             await _context.SaveChangesAsync();
 
             serviceResponse.Data =
