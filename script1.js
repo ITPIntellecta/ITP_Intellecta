@@ -53,16 +53,16 @@ function logUser() {
 function regUser(event) {
   event.preventDefault();
 
-  const email = document.getElementById("email");
-  const password = document.getElementById("password");
-  const firstname = document.getElementById("firstname");
-  const lastname = document.getElementById("lastname");
-  const title = document.getElementById("title");
-  const usertypes = document.getElementsByName("type");
-  const date = document.getElementById("dateofbirth");
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const firstname = document.getElementById("firstname").value;
+  const lastname = document.getElementById("lastname").value;
+  const title = document.getElementById("title").value;
+  const usertypes = document.getElementsByName("type").value;
+  const date = document.getElementById("dateofbirth").value;
 
   for (let i = 0; i < usertypes.length; i++) {
-    if (usertypes[i].checked) var type = usertypes[i].value;
+    if (usertypes[i].checked) var type = usertypes[i];
   }
 
   console.log(email, password, firstname, lastname, title, type, date);
@@ -94,29 +94,3 @@ function regUser(event) {
     })
     .catch((error) => console.error("Unable to log user.", error));
 }
-
-/*
-function regUser() {
-  // Prikupi podatke iz formulara
-  var formData = new FormData(document.querySelector("form"));
-
-  // Napravi Fetch POST zahtev ka serveru
-  fetch("/Account/Register", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      // Obradi odgovor sa servera
-      if (response.ok) {
-        // Uspesno obradjen zahtev
-        // Mozes izvrsiti neku akciju kao sto je redirekcija
-      } else {
-        // U slucaju greske
-        console.error("Error:", response);
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
-    
-}*/
