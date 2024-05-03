@@ -13,5 +13,6 @@ namespace ITP_Intellecta.Models
     public DateTime DateOfBirth { get; set; }
     public string Email { get; set; }=string.Empty;
     public string Password { get; set; }=string.Empty;
+    public string Type {get; set;}=string.Empty;
 }
 }

@@ -36,35 +36,18 @@ namespace ITP_Intellecta.Controllers
 
         }
 
-/*
-         [HttpPost("Register")]
-        public async Task<ActionResult<ServiceResponse<int>>> Reg(UserRegisterDto request)
+
+        // POST: /Account/Register
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<int>>> Register(UserViewModel model)
         {
-            //ova metoda kao rez vraca id korisnika
- 
-            //koristimo kao objekat da bi mogli kasnije dodati jos neke podatke useru
-            var response=await _authRepo.Register(new User {Email=request.Email, DateOfBirth=request.DateOfBirth, FirstName=request.FirstName, LastName=request.LastName, UserType=request.UserType, Title=request.Title},request.Password);
-            
-            //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
-            if(!response.Success)
-                return BadRequest(response);
-            return Ok(response);
-        }*/
-
-         // POST: /Account/Register
-    [HttpPost]
-    public async Task<ActionResult<ServiceResponse<int>>> Register(UserViewModel model)
-    {
-        var response=await _authRepo.Register(new User {Email=model.Email, DateOfBirth=model.DateOfBirth, FirstName=model.FirstName, LastName=model.LastName, Title=model.Title},model.Password);
-            
-            //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
-            if(!response.Success)
-                return BadRequest(response);
-            return Ok(response);
-    }
-
-        
-
+            var response=await _authRepo.Register(new User {Email=model.Email, DateOfBirth=model.DateOfBirth, FirstName=model.FirstName, LastName=model.LastName, Title=model.Title, UserType=model.Type},model.Password);
+                
+                //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
+                if(!response.Success)
+                    return BadRequest(response);
+                return Ok(response);
+        }
     }
 }
 
