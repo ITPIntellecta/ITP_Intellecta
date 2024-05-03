@@ -16,9 +16,6 @@ document.addEventListener("click", function (event) {
   const targetElement = document.getElementById("right-menu");
   const tag = document.getElementById("nav-menu");
 
-  console.log(targetElement);
-  console.log(event.target);
-
   // Provera da li je kliknuti element različit od ciljnog elementa
   if (event.target == targetElement) {
     targetElement.classList.remove("show-menu");
@@ -87,25 +84,23 @@ function showNextWeek(event) {
   btnAddMore.style.display = "none";
 }
 
-let filesArray = [];
+let filesMap = new Map();
 let fileOrder = 0;
 
 function saveChanges(event) {
   event.preventDefault();
   const input = document.getElementById("contentFile");
 
-  //ne radi!
   const fileInputs = document.querySelectorAll(".fileDiv");
-  console.log(fileInputs);
+
   fileInputs.forEach(function (input) {
     if (input.files.length > 0) {
       // Provjeravamo da li je odabrana datoteka
-      filesArray.push(input.files[0]); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
+      filesMap.set(fileOrder, input.files[0]); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
     }
   });
 
-  console.log(filesArray);
-
+  console.log(filesMap);
   input.style.display = "none";
   const week = document.getElementById("weekCourse");
   week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
@@ -143,7 +138,6 @@ function showInput(event) {
 function checkInput(event) {
   event.preventDefault();
   const file = document.getElementById("contentFile");
-  console.log(file.value);
 
   if (file.value != null) {
     const btn = document.getElementById("sacuvaj");
@@ -153,13 +147,15 @@ function checkInput(event) {
 
 function submitCourse(event) {
   event.preventDefault();
-  const courseTitle = document.getElementById("courseTitle").textContent;
-  const courseSubtitle = document.getElementById("courseSubtitle").textContent;
-  const courseHighlights = document.getElementById("highlights").textContent;
+  const courseTitle = document.getElementById("courseTitle").value;
+  const courseSubtitle = document.getElementById("courseSubtitle").value;
+  const courseHighlights = document.getElementById("highlights").value;
 
   const courseCategory = document.getElementById("courseCategory");
   const selectedOption = courseCategory.options[courseCategory.selectedIndex];
-  const selectedText = selectedOption.textValue;
+  const selectedText = selectedOption.value;
+
+  console.log(courseTitle, courseSubtitle, courseHighlights, selectedText);
 
   const formData = {
     title: courseTitle,
@@ -170,6 +166,8 @@ function submitCourse(event) {
     Highlights: courseHighlights,
     courseMark: 5,
   };
+
+  console.log(formData);
 
   fetch("/api/course", {
     method: "POST",
