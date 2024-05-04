@@ -188,7 +188,7 @@ function submitCourse(event) {
       })
       .then((data) => {
         courseId = data.data.courseId;
-        console.log(data);
+
         console.log(courseId);
         sendMaterial(courseId);
         console.log("Success:", data);

@@ -15,19 +15,20 @@ namespace ITP_Intellecta.Services
             _context = context;
             _mapper = mapper;
         }
-        public async Task<ServiceResponse<List<GetCourseMaterialDto>>> AddCourseMaterial(AddCourseMaterialDto newCourseMaterial)
+        public async Task<ServiceResponse<GetCourseMaterialDto>> AddCourseMaterial(AddCourseMaterialDto newCourseMaterial)
         {
-            var serviceResponse = new ServiceResponse<List<GetCourseMaterialDto>>();
+            var serviceResponse = new ServiceResponse<GetCourseMaterialDto>();
             var courseMaterial=_mapper.Map<CourseContent>(newCourseMaterial);
 
             _context.Materials.Add(courseMaterial);
             await _context.SaveChangesAsync();
 
-            serviceResponse.Data =
+            serviceResponse.Data =(
                 await _context.Materials
                     .Where(c => c.ContentId==courseMaterial.ContentId)
                     .Select(c => _mapper.Map<GetCourseMaterialDto>(c))
-                    .ToListAsync();
+                    .ToListAsync()).FirstOrDefault();
+
             return serviceResponse;
         }
     }

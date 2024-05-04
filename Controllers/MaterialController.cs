@@ -19,7 +19,7 @@ namespace ITP_Intellecta.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetCourseMaterialDto>>>> AddCourseMaterial(AddCourseMaterialDto newMaterial)
+        public async Task<ActionResult<ServiceResponse<GetCourseMaterialDto>>> AddCourseMaterial(AddCourseMaterialDto newMaterial)
         {
             return Ok(await _materialService.AddCourseMaterial(newMaterial));
         }
