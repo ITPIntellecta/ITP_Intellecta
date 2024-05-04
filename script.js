@@ -175,7 +175,7 @@ function submitCourse(event) {
     };
 
     console.log(formData);
-
+    let courseId;
     fetch("/api/course", {
       method: "POST",
       headers: {
@@ -183,39 +183,50 @@ function submitCourse(event) {
       },
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        courseId = data.data.courseId;
+        console.log(data);
+        console.log(courseId);
+        sendMaterial(courseId);
+        console.log("Success:", data);
+        // Dodajte ovdje logiku za obradu odgovora ako je potrebno
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Dodajte ovdje logiku za obradu greške ako je potrebno
+      });
+  } else {
+    alert("Please ensure all fields are filled in.");
+  }
+}
+
+function sendMaterial(courseIdd) {
+  for (let i = 1; i <= fileOrder; i++) {
+    const materialData = {
+      courseId: courseIdd,
+      videoFile: filesMap.get(i),
+      txtFile: filesMap.get(i),
+      weekNumber: weekMap.get(i),
+      fileOrder: i,
+    };
+
+    console.log(materialData);
+    fetch("/api/material", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(materialData),
+    })
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
         console.log("Success:", data);
         // Dodajte ovdje logiku za obradu odgovora ako je potrebno
       });
-    // .catch((error) => {
-    //   console.error("Error:", error);
-    //   // Dodajte ovdje logiku za obradu greške ako je potrebno
-    // })
-
-    for (let i = 1; i <= fileOrder; i++) {
-      const materialData = {
-        videoFile: filesMap.get(i),
-        txtFile: filesMap.get(i),
-        weekNumber: weekMap.get(i),
-        fileOrder: i,
-      };
-
-      console.log(materialData);
-      fetch("/api/material", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(materialData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Success:", data);
-          // Dodajte ovdje logiku za obradu odgovora ako je potrebno
-        });
-    }
-  } else {
-    alert("Please ensure all fields are filled in.");
   }
 }

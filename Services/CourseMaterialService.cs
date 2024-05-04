@@ -25,7 +25,7 @@ namespace ITP_Intellecta.Services
 
             serviceResponse.Data =
                 await _context.Materials
-                    .Where(c => c.ContentId! == 0)
+                    .Where(c => c.ContentId==courseMaterial.ContentId)
                     .Select(c => _mapper.Map<GetCourseMaterialDto>(c))
                     .ToListAsync();
             return serviceResponse;

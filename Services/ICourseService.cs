@@ -8,7 +8,7 @@ namespace Services
 {
     public interface ICourseService
     {
-        Task<ServiceResponse<List<GetCourseDto>>> AddCourse(AddCourseDto newCourse);
+        Task<ServiceResponse<GetCourseDto>> AddCourse(AddCourseDto newCourse);
         
     }
 }

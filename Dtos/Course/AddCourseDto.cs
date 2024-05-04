@@ -15,5 +15,6 @@ namespace ITP_Intellecta.Dtos.Course
         public string Highlights { get; set; }=string.Empty;
         public string Category { get; set; }=string.Empty;
         public float CourseMark {get; set;}
+        public int CourseId;
     }
 }

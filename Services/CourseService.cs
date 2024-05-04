@@ -17,19 +17,19 @@ namespace Services
             _mapper = mapper;
         }
 
-        public async Task<ServiceResponse<List<GetCourseDto>>> AddCourse(AddCourseDto newCourse)
+        public async Task<ServiceResponse<GetCourseDto>> AddCourse(AddCourseDto newCourse)
         {
-            var serviceResponse = new ServiceResponse<List<GetCourseDto>>();
+            var serviceResponse = new ServiceResponse<GetCourseDto>();
             var course=_mapper.Map<Course>(newCourse);
 
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
 
-            serviceResponse.Data =
-                await _context.Courses
-                    .Where(c => c.CourseId! == 0)
+            var kurs=await _context.Courses
+                    .Where(c => c.CourseId==course.CourseId)
                     .Select(c => _mapper.Map<GetCourseDto>(c))
                     .ToListAsync();
+            serviceResponse.Data=kurs.FirstOrDefault(); 
             return serviceResponse;
         }
     }

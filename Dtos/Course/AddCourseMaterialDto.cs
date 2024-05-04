@@ -11,6 +11,7 @@ namespace ITP_Intellecta.Dtos.Course
         public string TxtFile { get; set; }=string.Empty;
         public int WeekNumber {get;set;}
         public int FileOrder {get;set;}
+        public int CourseId {get;set;}
         
     }
 }

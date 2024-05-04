@@ -19,9 +19,10 @@ namespace Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> AddCourse(AddCourseDto newCourse)
+        public async Task<ActionResult<ServiceResponse<GetCourseDto>>> AddCourse(AddCourseDto newCourse)
         {
-            return Ok(await _courseService.AddCourse(newCourse));
+            ObjectResult a=Ok(await _courseService.AddCourse(newCourse));
+            return a;
         }
                 
     }
