@@ -125,3 +125,29 @@ function regUser(event) {
     event.preventDefault();
   }
 }
+
+function displayName() {
+  fetch("/api/course", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Uzmite ime korisnika iz podataka koje ste dobili
+      const userName = data.firstname;
+
+      // Prikazivanje imena korisnika u HTML elementu
+      const usernameElement = document.getElementById("logUserName");
+      usernameElement.textContent = "Welcome, " + userName + "!";
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+}

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using System.Security.Claims;
+
 
 namespace Services
 {
@@ -11,11 +13,28 @@ namespace Services
         private readonly IMapper _mapper;
         private readonly DataContext _context;
 
-        public CourseService(IMapper mapper, DataContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public CourseService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _mapper = mapper;
+            _httpContextAccessor = httpContextAccessor;
         }
+        public async Task<string> GetUser()
+        {
+            int id = int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+            var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            if(user != null)
+            {
+                return user.FirstName;
+            }
+            else
+            {
+                return "Name";
+            }
+        }
+
 
         public async Task<ServiceResponse<GetCourseDto>> AddCourse(AddCourseDto newCourse)
         {

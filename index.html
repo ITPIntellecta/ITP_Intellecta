@@ -12,8 +12,9 @@
       rel="stylesheet"
     />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
+    <script src="script1.js"></script>
   </head>
-  <body>
+  <body onload="displayName()">
     <div class="menu">
       <nav class="nav">
         <img
@@ -26,7 +27,7 @@
           intellecta
         </p>
         <div class="right">
-          <div class="user" onclick="goToProfile()">Ime</div>
+          <div class="user" onclick="goToProfile()" id="logUserName">Ime</div>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>
@@ -129,6 +130,8 @@
 
     <footer>intellecta &copy;</footer>
     <script src="script.js"></script>
+    <script src="script1.js"></script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

@@ -24,6 +24,13 @@ namespace Controllers
             ObjectResult a=Ok(await _courseService.AddCourse(newCourse));
             return a;
         }
+        [HttpGet]
+        public async Task<ActionResult<string>> GetUserInfo()
+        {
+            
+                var userName = await _courseService.GetUser();
+                return Ok(userName);
+        }
                 
     }
 }

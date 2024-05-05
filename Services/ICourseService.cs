@@ -9,6 +9,6 @@ namespace Services
     public interface ICourseService
     {
         Task<ServiceResponse<GetCourseDto>> AddCourse(AddCourseDto newCourse);
-        
+        Task<string> GetUser();
     }
 }
