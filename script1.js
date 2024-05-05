@@ -138,6 +138,7 @@ function displayName() {
     })
     .then((data) => {
       // Uzmite ime korisnika iz podataka koje ste dobili
+      console.log(data);
       const userName = data.firstname;
 
       // Prikazivanje imena korisnika u HTML elementu
