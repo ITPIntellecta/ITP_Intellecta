@@ -24,10 +24,9 @@ namespace Controllers
             ObjectResult a=Ok(await _courseService.AddCourse(newCourse));
             return a;
         }
-        [HttpGet]
+        [HttpGet("User")]
         public async Task<ActionResult<ServiceResponse<string>>> GetUserInfo()
         {
-            
                 var userName = await _courseService.GetUser();
                 return Ok(userName);
         }

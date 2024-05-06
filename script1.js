@@ -33,7 +33,7 @@ function logUser(event) {
     password: password,
   };
 
-  fetch("/api/auth", {
+  fetch("/api/auth/Login", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -42,16 +42,18 @@ function logUser(event) {
     body: JSON.stringify(user),
   })
     .then((response) => {
-      response.json();
-      localStorage.setItem("jwtToken", response.data);
-      //localStorage.setItem("jwtttToken", "ivana");
-
-      console.log(response);
+      if (!response.ok) {
+        throw new Error("Login failed");
+      }
+      return response.json();
     })
     .then((data) => {
       // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
       //localStorage.setItem("jwtToken", data.data);
       //alert("Uspjesno");
+      localStorage.setItem("jwtToken", data.data); //ISPRAVNO JE OVO
+      //localStorage.setItem("jwtttToken", "ivana");
+      // console.log(data);
       window.location = "index.html";
     })
     .catch((error) => console.error("Unable to log user.", error));
@@ -107,7 +109,7 @@ function regUser(event) {
     dateofbirth !== "" &&
     title !== ""
   ) {
-    fetch(uri, {
+    fetch("/api/auth/register", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -115,9 +117,15 @@ function regUser(event) {
       },
       body: JSON.stringify(user),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
         console.log("Success:", data);
+        // Pređi na log.html samo ako je registracija uspješna
         window.location = "log.html";
       })
       .catch((error) => console.error("Unable to register user.", error));
@@ -128,11 +136,12 @@ function regUser(event) {
 }
 
 function displayName() {
-  fetch("/api/course", {
+  fetch("/api/course/user", {
     method: "GET",
   })
     .then((response) => {
       if (!response.ok) {
+        console.log(response);
         throw new Error("Network response was not ok");
       }
       return response.json();
@@ -140,8 +149,7 @@ function displayName() {
     .then((data) => {
       // Uzmite ime korisnika iz podataka koje ste dobili
       console.log(data);
-      const userName = data.firstname;
-
+      const userName = data.data;
       // Prikazivanje imena korisnika u HTML elementu
       const usernameElement = document.getElementById("logUserName");
       usernameElement.textContent = "Welcome, " + userName + "!";

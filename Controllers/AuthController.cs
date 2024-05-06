@@ -37,8 +37,7 @@ namespace ITP_Intellecta.Controllers
         }
 
 
-        // POST: /Account/Register
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(UserViewModel model)
         {
             var response=await _authRepo.Register(new User {Email=model.Email, DateOfBirth=model.DateOfBirth, FirstName=model.FirstName, LastName=model.LastName, Title=model.Title, UserType=model.Type},model.Password);
