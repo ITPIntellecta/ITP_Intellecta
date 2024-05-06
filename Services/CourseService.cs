@@ -21,18 +21,21 @@ namespace Services
             _mapper = mapper;
             _httpContextAccessor = httpContextAccessor;
         }
-        public async Task<string> GetUser()
+        public async Task<ServiceResponse<string>> GetUser()
         {
+            var servresp=new ServiceResponse<string>();
             int id = int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+
+            //servresp.Data=id.ToString();
+            
             var user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
             if(user != null)
             {
-                return user.FirstName;
+                servresp.Data=user.FirstName;
             }
-            else
-            {
-                return "Name";
-            }
+
+            
+            return servresp;
         }
 
 

@@ -1,6 +1,4 @@
-﻿const uri = "/api/auth";
-
-function changeLabelColor(val) {
+﻿function changeLabelColor(val) {
   let labels = document.querySelectorAll(".labela");
 
   labels.forEach(function (label) {
@@ -35,7 +33,7 @@ function logUser(event) {
     password: password,
   };
 
-  fetch(uri, {
+  fetch("/api/auth", {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -45,11 +43,14 @@ function logUser(event) {
   })
     .then((response) => {
       response.json();
+      localStorage.setItem("jwtToken", response.data);
+      //localStorage.setItem("jwtttToken", "ivana");
+
       console.log(response);
     })
     .then((data) => {
       // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
-      //localStorage.setItem("jwtToken", data.token);
+      //localStorage.setItem("jwtToken", data.data);
       //alert("Uspjesno");
       window.location = "index.html";
     })
