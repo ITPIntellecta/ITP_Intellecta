@@ -25,8 +25,8 @@ function redirectToPage(url) {
 
 function logUser(event) {
   event.preventDefault();
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
 
   const user = {
     email: email,
