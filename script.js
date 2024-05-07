@@ -30,6 +30,7 @@ document.addEventListener("click", function (event) {
     if (event.target != header) {
       targetEvr.classList.remove("show-list");
       arrowDown.classList.remove("rotate-up");
+      loadCategories();
     } else {
       targetEvr.classList.toggle("show-list");
       const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
@@ -108,11 +109,23 @@ function saveChanges(event) {
   week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
   <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
   <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
-
   `;
 
   const btnAddMore = document.getElementById("addMore");
   btnAddMore.disabled = false;
+}
+
+function closeWeek(event) {
+  event.preventDefault();
+  console.log(event.srcElement.value);
+  fileOrder--;
+  //popraviti weekNumber
+  weekNumber--;
+  const week = document.getElementsByClassName("weekCourse1")[0];
+  week.style.display = "none";
+  const week1 = document.getElementById("weekCourse");
+  week1.innerHTML = ` 
+  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>`;
 }
 
 function showInput(event) {
@@ -122,6 +135,8 @@ function showInput(event) {
   week.innerHTML += `<div class="weekCourse1" > <br><h2>Week ${weekNumber}</h2> 
     <div onchange="checkInput(event)" class="fileDiv1">
      <input onchange="checkInput(event)" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"/>
+     <br><br>
+     <button class="btnX" onclick="closeWeek(event)" value="x"> ✖ </button>
   </div> 
 
   <button disabled class="form-group-btn week-material-btn" id='sacuvaj' onclick='saveChanges(event)'>Save changes</button>
@@ -149,58 +164,90 @@ function checkInput(event) {
 
 function submitCourse(event) {
   event.preventDefault();
-  const courseTitle = document.getElementById("courseTitle").value;
-  const courseSubtitle = document.getElementById("courseSubtitle").value;
-  const courseHighlights = document.getElementById("highlights").value;
-
-  const courseCategory = document.getElementById("courseCategory");
-  const selectedOption = courseCategory.options[courseCategory.selectedIndex];
-  const selectedText = selectedOption.value;
-
-  console.log(courseTitle, courseSubtitle, courseHighlights, selectedText);
-  if (
-    courseTitle.trim() != "" &&
-    courseSubtitle.trim() != "" &&
-    courseHighlights.trim() != "" &&
-    selectedText != "- Choose category -"
-  ) {
-    const formData = {
-      title: courseTitle,
-      subtitle: courseSubtitle,
-      category: selectedText,
-      DurationInWeeks: 0,
-      WeeklyHours: 0,
-      Highlights: courseHighlights,
-      courseMark: 5,
-    };
-
-    console.log(formData);
-    let courseId;
-    fetch("/api/course", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+  let userId;
+  fetch("/api/course/user", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.log(response);
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
     })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        courseId = data.data.courseId;
+    .then((data) => {
+      // Uzmite ime korisnika iz podataka koje ste dobili
+      //console.log(data);
+      userId = data.data.id;
+      // Prikazivanje imena korisnika u HTML elementu
+      console.log(userId);
 
-        console.log(courseId);
-        sendMaterial(courseId);
-        console.log("Success:", data);
-        // Dodajte ovdje logiku za obradu odgovora ako je potrebno
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        // Dodajte ovdje logiku za obradu greške ako je potrebno
-      });
-  } else {
-    alert("Please ensure all fields are filled in.");
-  }
+      const courseTitle = document.getElementById("courseTitle").value;
+      const courseSubtitle = document.getElementById("courseSubtitle").value;
+      const courseHighlights = document.getElementById("highlights").value;
+
+      const courseCategory = document.getElementById("courseCategory");
+      const selectedOption =
+        courseCategory.options[courseCategory.selectedIndex];
+      const selectedText = selectedOption.value;
+      const weeklyWorkload = document.getElementById("weeklyWorkload").value;
+
+      // console.log(courseTitle, courseSubtitle, courseHighlights, selectedText);
+      if (
+        courseTitle.trim() != "" &&
+        courseSubtitle.trim() != "" &&
+        courseHighlights.trim() != "" &&
+        selectedText != "- Choose category -" &&
+        weeklyWorkload != 0
+      ) {
+        const formData = {
+          CreatorId: userId,
+          title: courseTitle,
+          subtitle: courseSubtitle,
+          category: selectedText,
+          DurationInWeeks: weekNumber,
+          WeeklyHours: weeklyWorkload,
+          Highlights: courseHighlights,
+          courseMark: 5,
+        };
+
+        //  console.log(formData);
+        let courseId;
+        fetch("/api/course", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            courseId = data.data.courseId;
+
+            //  console.log(courseId);
+            sendMaterial(courseId);
+            console.log("Success:", data);
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+
+        // location.reload();
+
+        const div = document.getElementsByClassName("new-course")[0];
+        div.innerHTML += `<div>Course sent for authorization!</div>`;
+      } else {
+        alert("Please ensure all fields are filled in.");
+      }
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
 }
 
 function sendMaterial(courseIdd) {
@@ -213,7 +260,7 @@ function sendMaterial(courseIdd) {
       fileOrder: i,
     };
 
-    console.log(materialData);
+    // console.log(materialData);
     fetch("/api/material", {
       method: "POST",
       headers: {
@@ -227,6 +274,40 @@ function sendMaterial(courseIdd) {
       .then((data) => {
         console.log("Success:", data);
         // Dodajte ovdje logiku za obradu odgovora ako je potrebno
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
       });
   }
+}
+
+function loadCourses() {
+  fetch("/api/course/getall")
+    .then((response) => response.json())
+    .then((data) => {
+      data.data.forEach((course) => {
+        console.log(course);
+        let title = course.title;
+        let highlights = course.highlights;
+
+        const div = document.getElementsByClassName("row")[0];
+        div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="card" style="margin-bottom:2rem";>
+                <div class="card-body">
+                  <h5 class="card-title">${title}</h5>
+                  <p class="card-text">
+                  ${highlights}
+                  </p>
+                  <a href="#" class="btn btn-primary">Enroll</a>
+                </div>
+              </div>
+            </div>`;
+      });
+    })
+    .catch((error) => {
+      console.error("There was an error:", error);
+    });
 }

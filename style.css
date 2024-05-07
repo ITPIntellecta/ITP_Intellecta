@@ -568,3 +568,27 @@ footer {
 .lesson {
   padding: 2%;
 }
+
+.btnX {
+  color: #113946;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  background-color: transparent;
+  border: 1px solid transparent;
+  transition: all 300ms;
+  padding: 2px 8px;
+  font-size: larger;
+}
+
+.btnX:hover {
+  background-color: #ead7bb;
+  color: #113946;
+  border: 1px solid #113946;
+  border-radius: 15pt;
+  cursor: pointer;
+}
+
+.weekCourse1 {
+  position: relative;
+}

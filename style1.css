@@ -64,7 +64,7 @@ body {
   justify-content: center;
   text-align: center;
   margin: 10px;
-  width: 90%;
+  width: 95%;
   box-sizing: border-box;
   border-radius: 4px;
 }
@@ -74,13 +74,13 @@ body {
 .name {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 19px;
+  column-gap: 5%;
   position: relative;
   align-items: center;
   justify-content: center;
   text-align: center;
   margin: 10px;
-  width: 90%;
+  width: 95%;
   box-sizing: border-box;
   border-radius: 4px;
 }
@@ -122,14 +122,15 @@ body {
   height: 100px;
   filter: hue-rotate(180deg);
 }
+
 .form-group-btn {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: 10px;
-  width: 40%;
+  margin: auto;
+  width: 8rem;
   border-radius: 4px;
   background-color: #113946;
   transition: background-color 0.8s ease-out;
@@ -141,7 +142,7 @@ body {
   height: 40px;
   width: 100%;
   line-height: 22px;
-  text-align: center;
+  text-align: right;
   border-radius: 4px;
   font-weight: 600;
   text-transform: uppercase;
@@ -171,7 +172,7 @@ body {
   position: relative;
   text-align: center;
   margin: 10px;
-  width: 90%;
+  width: 95%;
   box-sizing: border-box;
   border-radius: 4px;
 }

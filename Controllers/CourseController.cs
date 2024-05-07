@@ -30,6 +30,12 @@ namespace Controllers
                 var user = await _courseService.GetUser();
                 return Ok(user);
         }
+
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> Get()
+        {
+            return Ok(await _courseService.GetAllCourses());
+        }
                 
     }
 }

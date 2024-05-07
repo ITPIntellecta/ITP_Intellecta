@@ -47,7 +47,7 @@ namespace Services
             servresp.Data=user;
             return servresp;
         }
-
+ 
 
         public async Task<ServiceResponse<GetCourseDto>> AddCourse(AddCourseDto newCourse)
         {
@@ -64,5 +64,16 @@ namespace Services
             serviceResponse.Data=kurs.FirstOrDefault(); 
             return serviceResponse;
         }
+
+
+        public async Task<ServiceResponse<List<GetCourseDto>>> GetAllCourses()
+        {
+            var serviceResponse = new ServiceResponse<List<GetCourseDto>>();
+            var courses = await _context.Courses
+                .ToListAsync();
+            serviceResponse.Data = courses.Select(c => _mapper.Map<GetCourseDto>(c)).ToList();
+            return serviceResponse;
+        }
+
     }
 }

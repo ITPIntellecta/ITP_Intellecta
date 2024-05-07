@@ -8,8 +8,7 @@ namespace ITP_Intellecta.Dtos.Course
     public class GetCourseDto
     {
          public int CourseId { get; set; }
-       public Models.User? Creator {get;set;}
-       public Models.User[]? Students {get;set;}
+       public int? CreatorId {get;set;}
         public string Title { get; set; }=string.Empty;
         public string Subtitle { get; set; }=string.Empty;
         public int DurationInWeeks { get; set; }

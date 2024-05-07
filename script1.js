@@ -138,7 +138,42 @@ function regUser(event) {
   }
 }
 
+function checkUserRole() {
+  let userRole;
+  fetch("/api/course/user", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.log(response);
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      // Uzmite ime korisnika iz podataka koje ste dobili
+      //console.log(data);
+      userRole = data.data.userType;
+      // Prikazivanje imena korisnika u HTML elementu
+      console.log(userRole);
+      if (userRole != "Admin") {
+        const el1 = document.getElementById("adminEl1");
+        const el2 = document.getElementById("adminEl2");
+
+        el1.style.display = "none";
+        el2.style.display = "none";
+      }
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+}
+
 function displayName() {
+  checkUserRole();
   fetch("/api/course/user", {
     method: "GET",
   })

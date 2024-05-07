@@ -51,9 +51,9 @@
         <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
         <div class="admin-menu">
           <br />
-          <p>&#9733; Courses authorization</p>
+          <p id="adminEl1">&#9733; Courses authorization</p>
           <br />
-          <p>&#9733; Admin authorization</p>
+          <p id="adminEl2">&#9733; Admin authorization</p>
         </div>
       </div>
     </div>
@@ -72,14 +72,26 @@
         <div class=" form-group">
             <select class="form-style" id="courseCategory"> 
                 <option selected>- Choose category -</option>
-                <option>Design</option>
-                <option>Business</option>
-                <option>Marketing</option>
-                <option>Health & Fitness</option>
+                 <option>Engineering</option>
+          <option>Business Development</option>
+          <option>IT and Technology</option>
+          <option>Health & Fitness</option>
+          <option>Languages</option>
+          <option>Science</option>
+          <option>Personal Development</option>
+          <option>Data Science</option>
+          <option>Education and Teaching</option>
+          <option>Legal Studies and Law</option>
+          <option>Psychology and Counseling</option>
+          <option>Healthcare and Medicine</option>
+          <option>Other</option>
             </select>
         </div>
+          <div class=" form-group">
+            <input class="form-style" id="weeklyWorkload" type="number" min="0" placeholder="Weekly workload"> 
+        </div>
         <div class="form-group">
-              <textarea class="" cols="150" id="highlights" placeholder="Highlights" wrap="soft"></textarea>
+              <textarea class="form-style cols="150" id="highlights" placeholder="Highlights" wrap="soft" style="margin: 0;padding: 10px 0; padding-left: 55px; "></textarea>
         </div>
 
       <div class="form-group" style="display: block;">
@@ -88,7 +100,7 @@
         </button>
         <div id="weekCourse" style="display: block;"></div>
       </div>
-      <br><br>
+      <br>
         <div class=" form-group">
             <input class="form-style sendAuth" type="submit" value="Send for authorization"> 
         </div>

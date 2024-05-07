@@ -7,7 +7,7 @@ namespace ITP_Intellecta.Dtos.Course
 {
     public class AddCourseDto
     {
-         public Models.User? Creator {get;set;}
+         public int? CreatorId {get;set;}
          public string Title { get; set; }=string.Empty;
         public string Subtitle { get; set; }=string.Empty;
         public int DurationInWeeks { get; set; }
