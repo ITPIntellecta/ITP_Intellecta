@@ -13,11 +13,14 @@ namespace ITP_Intellecta.Data
         private readonly DataContext _context;
         
         private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthRepository(DataContext context, IConfiguration configuration)
+
+        public AuthRepository(DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
         {
             _context=context;
             _configuration=configuration;
+            _httpContextAccessor=httpContextAccessor;
         }
 
         public async Task<ServiceResponse<string>> Login(string email, string password)
@@ -122,18 +125,32 @@ namespace ITP_Intellecta.Data
             //security token descriptor - ovaj objekat dobija informaciju koja se koristi za kreiranje krajnjeg tokena
 
             //ovom objektu dodajemo claims i npr datum isteka
-            var tokenDescriptor=new SecurityTokenDescriptor
-            {
-                Subject=new ClaimsIdentity(claims),
-                Expires=DateTime.Now.AddDays(1),
-                SigningCredentials=creds
+            // var tokenDescriptor=new SecurityTokenDescriptor
+            // {
+            //     Subject=new ClaimsIdentity(claims),
+            //     Expires=DateTime.Now.AddDays(1),
+            //     SigningCredentials=creds
 
-            };
+            // };
+             var token=new JwtSecurityToken(
+                issuer:null,
+                audience:null,
+                claims:claims,
+                expires: DateTime.UtcNow.AddHours(24),
+                signingCredentials: creds
+             );
+
+
 
             JwtSecurityTokenHandler tokenHandler=new JwtSecurityTokenHandler();
-            SecurityToken token=tokenHandler.CreateToken(tokenDescriptor); //ovo je fja za hendler, nije rekurzivni poziv
+            // SecurityToken token=tokenHandler.CreateToken(tokenDescriptor); //ovo je fja za hendler, nije rekurzivni poziv
 
-            return tokenHandler.WriteToken(token); //serijalizujemo security token u JSON web token
+            var a=tokenHandler.WriteToken(token); //serijalizujemo security token u JSON web token
+
+            _httpContextAccessor.HttpContext!.Response.Cookies.Append("Token", a);
+            return a; 
         }
+
+        
     }
 }

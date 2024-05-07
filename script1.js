@@ -52,6 +52,9 @@ function logUser(event) {
       //localStorage.setItem("jwtToken", data.data);
       //alert("Uspjesno");
       localStorage.setItem("jwtToken", data.data); //ISPRAVNO JE OVO
+      console.log(data);
+      console.log(data.data);
+
       //localStorage.setItem("jwtttToken", "ivana");
       // console.log(data);
       window.location = "index.html";
@@ -148,11 +151,60 @@ function displayName() {
     })
     .then((data) => {
       // Uzmite ime korisnika iz podataka koje ste dobili
-      console.log(data);
-      const userName = data.data;
+      //console.log(data);
+      const userName = data.data.firstName;
       // Prikazivanje imena korisnika u HTML elementu
-      const usernameElement = document.getElementById("logUserName");
-      usernameElement.textContent = "Welcome, " + userName + "!";
+      let usernameElement = document.getElementById("logUserName");
+      usernameElement.innerHTML = "Welcome, " + userName + "!";
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+}
+
+function inputInfo() {
+  fetch("/api/course/user", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.log(response);
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      const fname = data.data.firstName;
+      const lname = data.data.lastName;
+      const type = data.data.userType;
+      const email = data.data.email;
+      const title = data.data.title;
+      const datepre = data.data.dateOfBirth;
+
+      let fnameElement = document.getElementById("firstname");
+      let emailElement = document.getElementById("email");
+      let lnameElement = document.getElementById("lastname");
+      let usertypeElement = document.getElementById("usertype");
+      let titleElement = document.getElementById("title");
+      let dateElement = document.getElementById("birth");
+
+      let date = new Date(datepre);
+
+      let year = date.getFullYear();
+      let month = date.getMonth() + 1;
+      let day = date.getDate();
+      let formattedDate = `${day}-${month}-${year}`;
+
+      fnameElement.innerHTML = fname;
+      lnameElement.innerHTML = lname;
+      emailElement.innerHTML = email;
+      usertypeElement.innerHTML = type;
+      titleElement.innerHTML = title;
+      dateElement.innerHTML = formattedDate;
     })
     .catch((error) => {
       console.error(

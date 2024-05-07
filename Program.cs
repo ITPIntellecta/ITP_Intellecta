@@ -9,6 +9,12 @@ global using ITP_Intellecta.Data;
 global using Services;
 global using AutoMapper;
 global using ITP_Intellecta.Services;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Filters;
+
+using Microsoft.OpenApi.Models;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +23,43 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DataContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+
+//   builder.Services.AddIdentity<User, IdentityRole>()
+//         .AddEntityFrameworkStores<DataContext>()
+//         .AddDefaultTokenProviders();
+
+// builder.Services.AddSwaggerGen(c=>{
+
+//     //dodajemo security definition
+//     c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme{
+//         Description="""Standard Authorization header using the Bearer scheme. Example: "bearer {token}" """,
+//         In=ParameterLocation.Header,
+//         Name="Authorization",
+//         Type=SecuritySchemeType.ApiKey,
+//     });
+//     c.OperationFilter<SecurityRequirementsOperationFilter>();
+// });
+builder.Services.AddSwaggerGen(c=>{
+    var jwtSecurityScheme=new OpenApiSecurityScheme{
+        BearerFormat="JWT",
+        Name="Authorization",
+        In=ParameterLocation.Header,
+        Type=SecuritySchemeType.ApiKey,
+        Scheme=JwtBearerDefaults.AuthenticationScheme,
+        Reference=new OpenApiReference{
+            Id=JwtBearerDefaults.AuthenticationScheme,
+            Type=ReferenceType.SecurityScheme
+        }
+    };
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id,jwtSecurityScheme);
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement{
+        {
+            jwtSecurityScheme,Array.Empty<string>()
+        }
+    });
+});
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

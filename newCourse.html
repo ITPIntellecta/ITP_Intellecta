@@ -25,8 +25,9 @@
       rel="stylesheet"
     />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
+    <script src="script1.js"></script>
 </head>
-<body>
+<body onload="displayName()">
         <div class="menu">
       <nav class="nav">
         <img
@@ -39,7 +40,7 @@
           intellecta
         </p>
         <div class="right">
-          <div class="user" onclick="goToProfile()">Ime</div>
+          <div class="user" onclick="goToProfile()" id="logUserName"></div>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>

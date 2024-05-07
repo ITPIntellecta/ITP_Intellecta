@@ -156,3 +156,7 @@ C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\obj\Debug\net7.0\refint\ITP_I
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\obj\Debug\net7.0\ITP_Intellecta.pdb
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\obj\Debug\net7.0\ITP_Intellecta.genruntimeconfig.cache
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\obj\Debug\net7.0\ref\ITP_Intellecta.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Scrutor.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll

@@ -27,8 +27,8 @@ namespace Controllers
         [HttpGet("User")]
         public async Task<ActionResult<ServiceResponse<string>>> GetUserInfo()
         {
-                var userName = await _courseService.GetUser();
-                return Ok(userName);
+                var user = await _courseService.GetUser();
+                return Ok(user);
         }
                 
     }

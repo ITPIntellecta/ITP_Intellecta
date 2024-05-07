@@ -16,21 +16,35 @@ namespace Services
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public CourseService(IMapper mapper, DataContext context, IHttpContextAccessor httpContextAccessor)
-        {
+        {            
+            _httpContextAccessor = httpContextAccessor;
             _context = context;
             _mapper = mapper;
-            _httpContextAccessor = httpContextAccessor;
         }
-        private int GetUserId()=>int.Parse(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
-        public async Task<ServiceResponse<string>> GetUser()
+        private int GetUserId()
         {
-            var servresp=new ServiceResponse<string>();
+        
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var token = tokenHandler.ReadJwtToken(_httpContextAccessor.HttpContext!.Request.Cookies["Token"]);
+
+                var userIdClaim = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var userId=-1;
+                if (userIdClaim != null)
+                {
+                    userId = int.Parse(userIdClaim.Value);
+                }
+                return userId;
+        
+        }
+
+        public async Task<ServiceResponse<User>> GetUser()
+        {
+            var servresp=new ServiceResponse<User>();
 
             var user=await _context.Users.FirstOrDefaultAsync(u=>u.Id==GetUserId());
 
-            
-            servresp.Data=user!.FirstName;
+
+            servresp.Data=user;
             return servresp;
         }
 

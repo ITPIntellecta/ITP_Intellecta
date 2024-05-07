@@ -17,8 +17,9 @@
 
     <link rel="stylesheet" href="profileStyle.css" />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
+    <script src="script1.js"></script>
   </head>
-  <body>
+  <body onload="displayName(); inputInfo()">
     <div class="menu">
       <nav class="nav">
         <img
@@ -32,7 +33,7 @@
         </p>
 
         <div class="right">
-          <div class="user" onclick="goToProfile()">Ime</div>
+          <div class="user" onclick="goToProfile()" id="logUserName"></div>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>
@@ -57,13 +58,12 @@
           <img src="user.png" alt="user" class="user-photo" />
         </aside>
         <aside class="rright">
-          <p class="info">User - type</p>
-          <p class="info">First Name</p>
-          <p class="info">Last Name</p>
-          <p class="info">Date of birth</p>
-          <p class="info">Title</p>
-          <p class="info">Email</p>
-          <p class="info">Password</p>
+          <p class="info" id="usertype">User - type</p>
+          <p class="info" id="firstname">First Name</p>
+          <p class="info" id="lastname">Last Name</p>
+          <p class="info" id="birth">Date of birth</p>
+          <p class="info" id="title">Title</p>
+          <p class="info" id="email">Email</p>
         </aside>
       </div>
     </div>
