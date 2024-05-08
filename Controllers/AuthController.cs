@@ -47,6 +47,26 @@ namespace ITP_Intellecta.Controllers
                     return BadRequest(response);
                 return Ok(response);
         }
+
+        [HttpGet("Check")]
+        public IActionResult CheckAmind()
+        {
+            // Implementacija provjere admina
+            return Ok(); // Povratna vrijednost ovisi o implementaciji
+        }
+
+        [HttpPost("Approve")]
+        public IActionResult ApproveAdmin()
+        {
+            // Implementacija odobravanja admina
+            return Ok(); // Povratna vrijednost ovisi o implementaciji
+        }
+
+        [HttpGet("GetAll")]
+        public async Task<ActionResult<ServiceResponse<List<UserRegisterDto>>>> GetAllUsers()
+        {
+            return Ok(await _authRepo.GetAllUsers());
+        }
     }
 }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using ITP_Intellecta.Models;
+using ITP_Intellecta.Dtos.User;
 
 
 namespace ITP_Intellecta.Data
@@ -14,13 +15,16 @@ namespace ITP_Intellecta.Data
         
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IMapper _mapper;
 
 
-        public AuthRepository(DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor)
+
+        public AuthRepository(DataContext context, IConfiguration configuration, IHttpContextAccessor httpContextAccessor, IMapper mapper)
         {
             _context=context;
             _configuration=configuration;
             _httpContextAccessor=httpContextAccessor;
+            _mapper=mapper;
         }
 
         public async Task<ServiceResponse<string>> Login(string email, string password)
@@ -81,6 +85,21 @@ namespace ITP_Intellecta.Data
             }
             return false;
         }
+
+        //FIXTHIS
+        // public async Task<ServiceResponse<int>> CheckAdmin()
+        // {
+        //     var response = new ServiceResponse<int>();
+        //     // Implementacija provjere admina
+        //     return response; // Povratna vrijednost ovisi o implementaciji
+        // }
+
+        // public async Task<ServiceResponse<int>> ApproveAdmin()
+        // {
+        //     var response = new ServiceResponse<int>();
+        //     // Implementacija odobravanja admina
+        //     return response; // Povratna vrijednost ovisi o implementaciji
+        // }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -149,6 +168,17 @@ namespace ITP_Intellecta.Data
 
             _httpContextAccessor.HttpContext!.Response.Cookies.Append("Token", a);
             return a; 
+        }
+
+
+        
+        public async Task<ServiceResponse<List<UserRegisterDto>>> GetAllUsers()
+        {
+            var serviceResponse = new ServiceResponse<List<UserRegisterDto>>();
+            var users = await _context.Users
+                .ToListAsync();
+            serviceResponse.Data = users.Select(c => _mapper.Map<UserRegisterDto>(c)).ToList();
+            return serviceResponse;
         }
 
         

@@ -136,7 +136,7 @@ function regUser(event) {
       .then((data) => {
         console.log("Success:", data);
         // Pređi na log.html samo ako je registracija uspješna
-        //window.location = "log.html";
+        window.location = "log.html";
       })
       .catch((error) => console.error("Unable to register user.", error));
   } else {
@@ -254,4 +254,67 @@ function inputInfo() {
         error
       );
     });
+}
+
+function sendRequest() {
+  fetch("/Admin/OdobravanjeAdmina", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId: "@Model.UserId", // Zamijenite s ID-jem trenutnog korisnika
+    }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        // Uspješno odobrenje, možete prikazati odgovarajuću poruku ili ažurirati UI
+        console.log("Zahtjev za odobrenje uspješno poslan.");
+      } else {
+        // Neuspješno odobrenje, prikazati odgovarajuću poruku ili ažurirati UI
+        console.error(
+          "Došlo je do greške prilikom slanja zahtjeva za odobrenje."
+        );
+      }
+    })
+    .catch((error) => {
+      console.error(
+        "Došlo je do greške prilikom slanja zahtjeva za odobrenje:",
+        error
+      );
+    });
+}
+
+function loadUsers() {
+  fetch("/api/auth/getall")
+    .then((response) => response.json())
+    .then((data) => {
+      data.data.forEach((user) => {
+        if (!user.approved) {
+          console.log(user);
+          let name = user.firstName;
+          let email = user.email;
+
+          const div = document.getElementsByClassName("row")[0];
+          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="card" style="margin-bottom:2rem";>
+                <div class="card-body">
+                  <h5 class="card-title">${name}</h5>
+                  <p class="card-text">
+                  ${email}
+                  </p>
+                  <a href="#" class="btn btn-primary">Authorize</a>
+                </div>
+              </div>
+            </div>`;
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("There was an error:", error);
+    });
+}
+
+function showUsersForAuthorization() {
+  window.location = "authorizeAdmin.html";
 }
