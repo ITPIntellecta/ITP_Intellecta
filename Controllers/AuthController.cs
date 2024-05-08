@@ -40,7 +40,7 @@ namespace ITP_Intellecta.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegisterDto model)
         {
-            var response=await _authRepo.Register(new User {Email=model.Email, DateOfBirth=model.DateOfBirth, FirstName=model.FirstName, LastName=model.LastName, Title=model.Title, UserType=model.UserType},model.Password);
+            var response=await _authRepo.Register(new User {Email=model.Email, DateOfBirth=model.DateOfBirth, FirstName=model.FirstName, LastName=model.LastName, Title=model.Title, UserType=model.UserType, Approved=model.Approved},model.Password);
                 
                 //ako je uspjesan odgovor, vracamo 200, u suprotnom 400
                 if(!response.Success)

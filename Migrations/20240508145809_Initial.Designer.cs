@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITPIntellecta.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240507161859_Initial")]
+    [Migration("20240508145809_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

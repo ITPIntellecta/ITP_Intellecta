@@ -78,6 +78,7 @@ function regUser(event) {
   );
 
   let selectedType = null;
+  let approved = false;
 
   radioButtons.forEach((radioButton) => {
     if (radioButton.checked) {
@@ -85,22 +86,28 @@ function regUser(event) {
     }
   });
   let type = "";
+  console.log(selectedType);
+  console.log(type);
 
   if (selectedType == 1) {
     type = "Admin";
-  } else if (selectedType == 0) type = "User";
+    approved = false;
+  } else if (selectedType == 0) {
+    type = "User";
+    approved = true;
+  }
 
   console.log(type);
-  //console.log(email, password, firstname, lastname, title, selectedType, date);
 
   const user = {
     email: email,
     password: password,
-    type: type,
+    usertype: type,
     firstname: firstname,
     lastname: lastname,
     dateofbirth: date,
     title: title,
+    approved: approved,
   };
 
   if (
@@ -129,7 +136,7 @@ function regUser(event) {
       .then((data) => {
         console.log("Success:", data);
         // Pređi na log.html samo ako je registracija uspješna
-        window.location = "log.html";
+        //window.location = "log.html";
       })
       .catch((error) => console.error("Unable to register user.", error));
   } else {
