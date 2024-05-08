@@ -75,5 +75,52 @@ namespace Services
             return serviceResponse;
         }
 
+        public async Task<ServiceResponse<GetCourseDto>> UpdateCourse(UpdateCourseDto updatedCourse)
+        {
+
+            var serviceResponse = new ServiceResponse<GetCourseDto>();
+
+            try
+            {
+                var course =
+                    await _context.Courses
+                        .FirstOrDefaultAsync(c => c.CourseId == updatedCourse.CourseId);
+                if (course is null )
+                    throw new Exception($"Course with Id '{updatedCourse.CourseId}' not found.");
+
+                course.Title=updatedCourse.Title;
+                course.Subtitle=updatedCourse.Subtitle;
+                course.Highlights=updatedCourse.Highlights;
+                course.WeeklyHours=updatedCourse.WeeklyHours;
+                course.Approved=updatedCourse.Approved;
+                course.Category=updatedCourse.Category;
+                course.CreatorId=updatedCourse.CreatorId;
+                course.DurationInWeeks=updatedCourse.DurationInWeeks;
+                course.CourseMark=updatedCourse.CourseMark;
+                course.CourseId=updatedCourse.CourseId;
+
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<GetCourseDto>(course);
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetCourseDto>> GetCourseById(int id)
+        {
+            var serviceResponse = new ServiceResponse<GetCourseDto>();
+            var course = await _context.Courses
+                .FirstOrDefaultAsync(c => c.CourseId == id);
+                
+                if (course is null )
+                    throw new Exception($"Course with Id '{id}' not found.");
+            serviceResponse.Data = _mapper.Map<GetCourseDto>(course);
+            return serviceResponse;
+        }
     }
-}
+    }

@@ -30,7 +30,6 @@ document.addEventListener("click", function (event) {
     if (event.target != header) {
       targetEvr.classList.remove("show-list");
       arrowDown.classList.remove("rotate-up");
-      loadCategories();
     } else {
       targetEvr.classList.toggle("show-list");
       const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
@@ -289,12 +288,13 @@ function loadCourses() {
     .then((response) => response.json())
     .then((data) => {
       data.data.forEach((course) => {
-        console.log(course);
-        let title = course.title;
-        let highlights = course.highlights;
+        if (course.approved == 1) {
+          //  console.log(course);
+          let title = course.title;
+          let highlights = course.highlights;
 
-        const div = document.getElementsByClassName("row")[0];
-        div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+          const div = document.getElementsByClassName("row")[0];
+          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="card" style="margin-bottom:2rem";>
                 <div class="card-body">
                   <h5 class="card-title">${title}</h5>
@@ -305,9 +305,86 @@ function loadCourses() {
                 </div>
               </div>
             </div>`;
+        }
       });
     })
     .catch((error) => {
       console.error("There was an error:", error);
+    });
+}
+
+function showCoursesForAuthorization() {
+  window.location = "authorizeCourse.html";
+}
+function loadCoursesForAuth() {
+  fetch("/api/course/getall")
+    .then((response) => response.json())
+    .then((data) => {
+      data.data.forEach((course) => {
+        if (course.approved == 0) {
+          // console.log(course);
+          let title = course.title;
+          let highlights = course.highlights;
+          let id = course.courseId;
+          const div = document.getElementsByClassName("row")[0];
+          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="card" style="margin-bottom:2rem";>
+                <div class="card-body">
+                  <h5 class="card-title">${title}</h5>
+                  <p class="card-text">
+                  ${highlights}
+                  </p>
+                  <a href="#" class="btn btn-primary" onclick="confirmCourse(${id})">Authorize</a>
+                </div>
+              </div>
+            </div>`;
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("There was an error:", error);
+    });
+}
+
+function confirmCourse(courseId) {
+  // console.log(courseId);
+
+  fetch(`/api/course/GetCourseById/${courseId}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      // console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      // console.log(data);
+      const formData = {
+        CreatorId: data.data.creatorId,
+        Title: data.data.title,
+        subtitle: data.data.subtitle,
+        DurationInWeeks: data.data.durationInWeeks,
+        WeeklyHours: data.data.weeklyHours,
+        highlights: data.data.highlights,
+        category: data.data.category,
+        courseMark: data.data.courseMark,
+        courseId: data.data.courseId,
+        approved: true,
+      };
+      //   console.log(formData);
+
+      fetch("api/course", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Course updated successfully:", data); // Ovde možete raditi sa odgovorom ako je ažuriranje uspelo
+        })
+        .catch((error) => {
+          console.error("Error updating course:", error);
+        });
     });
 }

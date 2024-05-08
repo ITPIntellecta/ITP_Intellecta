@@ -36,6 +36,17 @@ namespace Controllers
         {
             return Ok(await _courseService.GetAllCourses());
         }
-                
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<GetCourseDto>>> UpdateCourse(UpdateCourseDto updatedCourse)
+        {
+            return Ok(await _courseService.UpdateCourse(updatedCourse));
+        }  
+
+        [HttpGet("GetCourseById/{id}")]
+        public async Task<ActionResult<ServiceResponse<GetCourseDto>>> GetCourseById(int id)
+        {
+            return Ok(await _courseService.GetCourseById(id));
+        }
     }
 }
