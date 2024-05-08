@@ -61,6 +61,15 @@ namespace ITP_Intellecta.Data
                 return response;
             }
 
+            if(user.UserType=="Admin"){
+                int adminUserCount = _context.Users.Count(u => u.UserType == "Admin");
+                if(adminUserCount==0)
+                {
+                    user.Approved=true;
+                }
+
+            }
+
             //pozivamo privatnu metodu sa out parametrima koje mozemo da koristimo
             CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -86,20 +95,7 @@ namespace ITP_Intellecta.Data
             return false;
         }
 
-        //FIXTHIS
-        // public async Task<ServiceResponse<int>> CheckAdmin()
-        // {
-        //     var response = new ServiceResponse<int>();
-        //     // Implementacija provjere admina
-        //     return response; // Povratna vrijednost ovisi o implementaciji
-        // }
-
-        // public async Task<ServiceResponse<int>> ApproveAdmin()
-        // {
-        //     var response = new ServiceResponse<int>();
-        //     // Implementacija odobravanja admina
-        //     return response; // Povratna vrijednost ovisi o implementaciji
-        // }
+       
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
@@ -172,15 +168,60 @@ namespace ITP_Intellecta.Data
 
 
         
-        public async Task<ServiceResponse<List<UserRegisterDto>>> GetAllUsers()
+        public async Task<ServiceResponse<List<GetUserDto>>> GetAllUsers()
         {
-            var serviceResponse = new ServiceResponse<List<UserRegisterDto>>();
+            var serviceResponse = new ServiceResponse<List<GetUserDto>>();
             var users = await _context.Users
                 .ToListAsync();
-            serviceResponse.Data = users.Select(c => _mapper.Map<UserRegisterDto>(c)).ToList();
+            serviceResponse.Data = users.Select(c => _mapper.Map<GetUserDto>(c)).ToList();
             return serviceResponse;
         }
 
+        public async Task<ServiceResponse<GetUserDto>> GetUserById(int id)
+        {
+            var serviceResponse = new ServiceResponse<GetUserDto>();
+            var user = await _context.Users
+                .FirstOrDefaultAsync(c => c.Id == id);
+                
+                if (user is null )
+                    throw new Exception($"User with Id '{id}' not found.");
+            serviceResponse.Data = _mapper.Map<GetUserDto>(user);
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetUserDto>> UpdateUser(UpdateUserDto updatedUser)
+        {
+
+            var serviceResponse = new ServiceResponse<GetUserDto>();
+
+            try
+            {
+                var user =
+                    await _context.Users
+                        .FirstOrDefaultAsync(c => c.Id == updatedUser.Id);
+                if (user is null )
+                    throw new Exception($"User with Id '{updatedUser.Id}' not found.");
+
+                user.Id=updatedUser.Id;
+                user.Email=updatedUser.Email;
+                user.FirstName=updatedUser.FirstName;
+                user.LastName=updatedUser.LastName;
+                user.DateOfBirth=updatedUser.DateOfBirth;
+                user.UserType=updatedUser.UserType;
+                user.Title=updatedUser.Title;
+                user.Approved=updatedUser.Approved;
+
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<GetUserDto>(user);
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }
         
     }
 }

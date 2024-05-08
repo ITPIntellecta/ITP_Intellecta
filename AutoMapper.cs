@@ -15,12 +15,10 @@ namespace back
             CreateMap<AddCourseDto, Course>();
             CreateMap<AddCourseMaterialDto, CourseContent>();
             CreateMap<CourseContent, GetCourseMaterialDto>();
-            CreateMap<User, UserRegisterDto>();
+            CreateMap<User, GetUserDto>();
+            CreateMap<User, UpdateUserDto>();
 
-            // CreateMap<Weapon, GetWeaponDto>();
-            // CreateMap<Skill, GetSkillDto>();
-            // CreateMap<Character, HighscoreDto>();
-
+        
         }
     }
 }

@@ -48,25 +48,26 @@ namespace ITP_Intellecta.Controllers
                 return Ok(response);
         }
 
-        [HttpGet("Check")]
-        public IActionResult CheckAmind()
-        {
-            // Implementacija provjere admina
-            return Ok(); // Povratna vrijednost ovisi o implementaciji
-        }
-
-        [HttpPost("Approve")]
-        public IActionResult ApproveAdmin()
-        {
-            // Implementacija odobravanja admina
-            return Ok(); // Povratna vrijednost ovisi o implementaciji
-        }
+        
 
         [HttpGet("GetAll")]
-        public async Task<ActionResult<ServiceResponse<List<UserRegisterDto>>>> GetAllUsers()
+        public async Task<ActionResult<ServiceResponse<List<GetUserDto>>>> GetAllUsers()
         {
             return Ok(await _authRepo.GetAllUsers());
         }
+
+        [HttpGet("GetUserById/{id}")]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> GetUserById(int id)
+        {
+            return Ok(await _authRepo.GetUserById(id));
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> UpdateUser(UpdateUserDto updatedUser)
+        {
+            return Ok(await _authRepo.UpdateUser(updatedUser));
+        }  
+
     }
 }
 

@@ -193,7 +193,7 @@ function displayName() {
     })
     .then((data) => {
       // Uzmite ime korisnika iz podataka koje ste dobili
-      //console.log(data);
+      console.log(data);
       const userName = data.data.firstName;
       // Prikazivanje imena korisnika u HTML elementu
       let usernameElement = document.getElementById("logUserName");
@@ -256,35 +256,6 @@ function inputInfo() {
     });
 }
 
-function sendRequest() {
-  fetch("/Admin/OdobravanjeAdmina", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      userId: "@Model.UserId", // Zamijenite s ID-jem trenutnog korisnika
-    }),
-  })
-    .then((response) => {
-      if (response.ok) {
-        // Uspješno odobrenje, možete prikazati odgovarajuću poruku ili ažurirati UI
-        console.log("Zahtjev za odobrenje uspješno poslan.");
-      } else {
-        // Neuspješno odobrenje, prikazati odgovarajuću poruku ili ažurirati UI
-        console.error(
-          "Došlo je do greške prilikom slanja zahtjeva za odobrenje."
-        );
-      }
-    })
-    .catch((error) => {
-      console.error(
-        "Došlo je do greške prilikom slanja zahtjeva za odobrenje:",
-        error
-      );
-    });
-}
-
 function loadUsers() {
   fetch("/api/auth/getall")
     .then((response) => response.json())
@@ -294,6 +265,7 @@ function loadUsers() {
           console.log(user);
           let name = user.firstName;
           let email = user.email;
+          let userId = user.id;
 
           const div = document.getElementsByClassName("row")[0];
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
@@ -303,7 +275,7 @@ function loadUsers() {
                   <p class="card-text">
                   ${email}
                   </p>
-                  <a href="#" class="btn btn-primary">Authorize</a>
+                  <a href="#" class="btn btn-primary" onclick="authorizeAdmin(${userId})">Authorize</a>
                 </div>
               </div>
             </div>`;
@@ -317,4 +289,48 @@ function loadUsers() {
 
 function showUsersForAuthorization() {
   window.location = "authorizeAdmin.html";
+}
+
+function authorizeAdmin(userid) {
+  console.log(userid);
+
+  fetch(`/api/auth/GetUserById/${userid}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      const formData = {
+        email: data.data.email,
+        usertype: data.data.usertype,
+        firstname: data.data.firstname,
+        lastname: data.data.lastname,
+        dateofbirth: data.data.dateofbirth,
+        title: data.data.title,
+        approved: true,
+        id: data.data.id,
+      };
+      console.log(formData);
+
+      fetch("api/auth", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("User updated successfully:", data);
+        })
+        .catch((error) => {
+          console.error("Error updating course:", error);
+        });
+    })
+    .catch((error) => {
+      console.error("Error updating user:", error);
+    });
 }

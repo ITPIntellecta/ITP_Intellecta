@@ -14,6 +14,8 @@ namespace ITP_Intellecta.Data
         Task<bool> UserExists(string email);
         // Task<ServiceResponse<int>> CheckAdmin();
         // Task<ServiceResponse<int>> ApproveAdmin();
-        Task<ServiceResponse<List<UserRegisterDto>>> GetAllUsers();
+        Task<ServiceResponse<List<GetUserDto>>> GetAllUsers();
+        Task<ServiceResponse<GetUserDto>> GetUserById(int id);
+        Task<ServiceResponse<GetUserDto>> UpdateUser(UpdateUserDto updatedUser);
     }
 }
