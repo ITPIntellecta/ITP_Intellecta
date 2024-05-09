@@ -18,11 +18,37 @@ namespace ITP_Intellecta.Controllers
             _materialService = materialService;
         }
 
-        [HttpPost]
+        [HttpPost("uploadMaterial")]
         public async Task<ActionResult<ServiceResponse<GetCourseMaterialDto>>> AddCourseMaterial(AddCourseMaterialDto newMaterial)
         {
             return Ok(await _materialService.AddCourseMaterial(newMaterial));
         }
+
+        [HttpPost("allFiles")]
+        public async Task<IActionResult> UploadAllFiles(IFormCollection form)
+        {
+            var files = form.Files;
+            if (files == null || files.Count == 0)
+                return BadRequest("No files uploaded.");
                 
+                foreach (var file in files)
+                {
+                    if (file.Length > 0)
+                    {
+                        var fileName = file.FileName;
+
+                        var filePath = Path.Combine("folder", fileName);
+
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(stream);
+                        }
+                    }
+                }
+
+                return Ok(new { message = "All files uploaded successfully." });
+
+            }
+                    
+        }
     }
-}

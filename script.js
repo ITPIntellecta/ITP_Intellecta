@@ -106,7 +106,7 @@ function saveChanges(event) {
   console.log(filesMap);
   input.style.display = "none";
   const week = document.getElementById("weekCourse");
-  console.log(week);
+
   week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
   <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
   <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
@@ -114,24 +114,14 @@ function saveChanges(event) {
 
   const btnAddMore = document.getElementById("addMore");
   btnAddMore.disabled = false;
+  saveFile();
 }
 
 function closeWeek(event) {
   event.preventDefault();
-  // console.log(event.srcElement.value);
-  // fileOrder--;
-  // //popraviti weekNumber
-  // weekNumber--;
-  // const week = document.getElementsByClassName("weekCourse1")[0];
-  // week.style.display = "none";
-  // const week1 = document.getElementById("weekCourse");
-  // week1.innerHTML = `
-  // <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>`;
 
-  //fileOrder--;
   let posljednjiKljuc = Array.from(weekMap.keys()).pop();
 
-  // Pristupite vrijednosti posljednjeg elementa
   let posljednjaVrijednost = weekMap.get(posljednjiKljuc);
   console.log(posljednjaVrijednost);
 
@@ -188,11 +178,43 @@ function showInput(event) {
 function checkInput(event) {
   event.preventDefault();
   const file = document.getElementById("contentFile");
-  console.log(file);
+
   if (file.value != null) {
     const btn = document.getElementById("sacuvaj");
     btn.disabled = false;
   }
+  handleFileInputChange(event);
+}
+var files;
+let filesToUpload = [];
+function handleFileInputChange(event) {
+  files = event.target.files;
+  //filesToUpload.push(...files); // Dodajemo izabrane fajlove u niz
+}
+const formData = new FormData();
+function saveFile() {
+  filesToUpload = [];
+  filesToUpload.push(...files);
+
+  filesToUpload.forEach((file) => {
+    console.log(file);
+
+    formData.append("files[]", file); // Dodajemo sve fajlove iz niza u FormData objekat
+  });
+  console.log([...formData.entries()]);
+  // fetch("/material/uploadAll", {
+  //   // Endpoint za čuvanje svih fajlova
+  //   method: "POST",
+  //   body: formData,
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     console.log(data); // Možete prikazati poruku o uspešnom čuvanju fajlova ili drugu povratnu informaciju
+  //     filesToUpload = []; // Resetujemo niz nakon što su fajlovi sačuvani
+  //   })
+  //   .catch((error) => {
+  //     console.error("Error:", error);
+  //   });
 }
 
 function submitCourse(event) {
@@ -290,7 +312,7 @@ function sendMaterial(courseIdd) {
     };
 
     // console.log(materialData);
-    fetch("/api/material", {
+    fetch("/api/material/uploadMaterial", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -302,11 +324,7 @@ function sendMaterial(courseIdd) {
       })
       .then((data) => {
         console.log("Success:", data);
-        if (brojac == 0) {
-          brojac++;
-          var odgovor = confirm("Course sent for authorization!");
-          if (odgovor) window.location = "newCourse.html";
-        }
+        sendM();
       })
       .catch((error) => {
         console.error(
@@ -315,6 +333,28 @@ function sendMaterial(courseIdd) {
         );
       });
   }
+}
+
+function sendM() {
+  fetch("/api/material/allFiles", {
+    // Endpoint za čuvanje svih fajlova
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data); // Možete prikazati poruku o uspešnom čuvanju fajlova ili drugu povratnu informaciju
+      filesToUpload = []; // Resetujemo niz nakon što su fajlovi sačuvani
+
+      if (brojac == 0) {
+        brojac++;
+        var odgovor = confirm("Course sent for authorization!");
+        if (odgovor) window.location = "newCourse.html";
+      }
+    });
+  // .catch((error) => {
+  //   console.error("Error:", error);
+  // })
 }
 
 function loadCourses() {
