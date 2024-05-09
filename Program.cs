@@ -9,15 +9,24 @@ global using ITP_Intellecta.Data;
 global using Services;
 global using AutoMapper;
 global using ITP_Intellecta.Services;
+global using ITP_Intellecta.Models;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+global using System.Net.Mail;
+global using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
 
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Configuration;
 
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+    // var emailConfig = builder.Configuration.GetSection("EmailConfiguration")
+    //     .Get<EmailConfig>();
+    // builder.Services.AddSingleton(emailConfig);
 
 // Add services to the container.
 builder.Services.AddDbContext<DataContext>(options=>options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -71,10 +80,13 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
-
+builder.Configuration.GetSection("EmailConfiguration")
+        .Get<EmailConfig>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<ICourseMaterialService, CourseMaterialService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 
 
@@ -87,6 +99,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience=false
     };
 });
+
+
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddCors(options =>

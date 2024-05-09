@@ -42,22 +42,27 @@ function logUser(event) {
     body: JSON.stringify(user),
   })
     .then((response) => {
+      console.log(response);
       if (!response.ok) {
         throw new Error("Login failed");
       }
+
       return response.json();
     })
     .then((data) => {
-      // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
-      //localStorage.setItem("jwtToken", data.data);
-      //alert("Uspjesno");
-      localStorage.setItem("jwtToken", data.data); //ISPRAVNO JE OVO
-      console.log(data);
-      console.log(data.data);
+      if (data.message == "User not approved") alert("Admin not approved!");
+      else {
+        // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
+        //localStorage.setItem("jwtToken", data.data);
+        //alert("Uspjesno");
+        localStorage.setItem("jwtToken", data.data); //ISPRAVNO JE OVO
+        console.log(data);
+        console.log(data.data);
 
-      //localStorage.setItem("jwtttToken", "ivana");
-      // console.log(data);
-      window.location = "index.html";
+        //localStorage.setItem("jwtttToken", "ivana");
+        // console.log(data);
+        window.location = "index.html";
+      }
     })
     .catch((error) => console.error("Unable to log user.", error));
 }

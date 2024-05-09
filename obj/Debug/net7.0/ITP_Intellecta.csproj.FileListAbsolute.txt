@@ -164,3 +164,9 @@ C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\Microsoft.As
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\Scrutor.dll
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.dll
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\BouncyCastle.Cryptography.dll
+C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\MailKit.dll
+C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\MimeKit.dll
+C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\System.Formats.Asn1.dll
+C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\runtimes\win\lib\net7.0\System.Security.Cryptography.Pkcs.dll

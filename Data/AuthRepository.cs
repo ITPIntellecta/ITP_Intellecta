@@ -44,7 +44,14 @@ namespace ITP_Intellecta.Data
            }
            else
            {
+            if(user.Approved==false)
+            {
+                response.Data=null;
+                response.Success=true;
+                response.Message="User not approved";
+            }else
             response.Data=CreateToken(user);
+            
            }
 
             return response;
