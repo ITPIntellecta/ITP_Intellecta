@@ -11,21 +11,20 @@ namespace ITP_Intellecta.Controllers
 
 [ApiController]
 [Route("api/[controller]")]
-public class EmailController : ControllerBase
-{
-    private readonly IEmailService _service;
-    
-
-    public EmailController(IEmailService service)
+    public class EmailController : ControllerBase
     {
-        _service=service;
-    }
-
-    [HttpPost("send-email/{userId}/{message}")]
-    public async void Index(int userId, string message)
-    {
-         _service.SendEmail(userId, message);
-
+        private readonly IEmailService _service;
         
+
+        public EmailController(IEmailService service)
+        {
+            _service=service;
+        }
+
+        [HttpPost("send-email/{userId}/{message}")]
+        public async void Index(int userId, string message)
+        {
+            _service.SendEmail(userId, message);        
+        }
     }
-}}        
+}        
