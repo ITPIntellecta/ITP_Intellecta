@@ -305,10 +305,10 @@ function authorizeAdmin(userid) {
       console.log(data);
       const formData = {
         email: data.data.email,
-        usertype: data.data.usertype,
-        firstname: data.data.firstname,
-        lastname: data.data.lastname,
-        dateofbirth: data.data.dateofbirth,
+        userType: data.data.userType,
+        firstName: data.data.firstName,
+        lastName: data.data.lastName,
+        dateOfBirth: data.data.dateOfBirth,
         title: data.data.title,
         approved: true,
         id: data.data.id,
