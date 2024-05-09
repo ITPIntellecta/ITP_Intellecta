@@ -325,6 +325,7 @@ function authorizeAdmin(userid) {
         .then((response) => response.json())
         .then((data) => {
           console.log("User updated successfully:", data);
+          showUsersForAuthorization();
         })
         .catch((error) => {
           console.error("Error updating course:", error);

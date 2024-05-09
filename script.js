@@ -79,17 +79,18 @@ let weekNumber = 0;
 function showNextWeek(event) {
   event.preventDefault();
   const btnAdd = document.getElementById("prva");
-  btnAdd.style.display = "none";
+  if (btnAdd != null) btnAdd.style.display = "none";
   weekNumber++;
   showInput(event);
   const btnNew = document.getElementById("addNew");
-  btnNew.disabled.toggle;
+  if (btnNew != null) btnNew.disabled.toggle;
   const btnAddMore = document.getElementById("addMore");
-  btnAddMore.style.display = "none";
+  if (btnAddMore != null) btnAddMore.style.display = "none";
 }
 
 function saveChanges(event) {
   event.preventDefault();
+  fileOrder++;
   const input = document.getElementById("contentFile");
 
   const fileInputs = document.querySelectorAll(".fileDiv");
@@ -105,6 +106,7 @@ function saveChanges(event) {
   console.log(filesMap);
   input.style.display = "none";
   const week = document.getElementById("weekCourse");
+  console.log(week);
   week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
   <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
   <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
@@ -116,23 +118,55 @@ function saveChanges(event) {
 
 function closeWeek(event) {
   event.preventDefault();
-  console.log(event.srcElement.value);
-  fileOrder--;
-  //popraviti weekNumber
-  weekNumber--;
-  const week = document.getElementsByClassName("weekCourse1")[0];
-  week.style.display = "none";
-  const week1 = document.getElementById("weekCourse");
-  week1.innerHTML = ` 
-  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>`;
+  // console.log(event.srcElement.value);
+  // fileOrder--;
+  // //popraviti weekNumber
+  // weekNumber--;
+  // const week = document.getElementsByClassName("weekCourse1")[0];
+  // week.style.display = "none";
+  // const week1 = document.getElementById("weekCourse");
+  // week1.innerHTML = `
+  // <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>`;
+
+  //fileOrder--;
+  let posljednjiKljuc = Array.from(weekMap.keys()).pop();
+
+  // Pristupite vrijednosti posljednjeg elementa
+  let posljednjaVrijednost = weekMap.get(posljednjiKljuc);
+  console.log(posljednjaVrijednost);
+
+  if (posljednjaVrijednost != weekNumber) weekNumber--;
+  console.log(weekNumber, fileOrder);
+  if (weekNumber == 0 && fileOrder == 0) {
+    const btnAdd = document.getElementById("prva");
+    btnAdd.style.display = "block";
+  }
+
+  const week = document.querySelectorAll(".weekCourse1");
+  console.log(week);
+  week.forEach((div) => (div.style.display = "none"));
+
+  const btnNew = document.getElementById("addNew");
+  if (btnNew != null) btnNew.disabled = false;
+  const btnAddMore = document.getElementById("addMore");
+  if (btnAddMore != null) btnAddMore.disabled = false;
+
+  const weekAll = document.getElementById("weekCourse");
+  console.log(weekAll);
+  if (weekNumber >= 1)
+    weekAll.innerHTML = `<div class="material-added-notification"> Week ${weekNumber} materials saved!</div>
+  <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
+  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
+  `;
 }
 
 function showInput(event) {
   event.preventDefault();
-  fileOrder++;
+  //  fileOrder++;
   const week = document.getElementById("weekCourse");
-  week.innerHTML += `<div class="weekCourse1" > <br><h2>Week ${weekNumber}</h2> 
-    <div onchange="checkInput(event)" class="fileDiv1">
+  week.style.display = "block";
+  week.innerHTML = `<div class="weekCourse1" id="weekCourse1"> <br><h2>Week ${weekNumber}</h2> 
+    <div class="fileDiv1">
      <input onchange="checkInput(event)" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"/>
      <br><br>
      <button class="btnX" onclick="closeWeek(event)" value="x"> ✖ </button>
@@ -145,16 +179,16 @@ function showInput(event) {
   `;
 
   const btnNew = document.getElementById("addNew");
-  btnNew.disabled = true;
+  if (btnNew != null) btnNew.disabled = true;
 
   const btnAddMore = document.getElementById("addMore");
-  btnAddMore.disabled = true;
+  if (btnAddMore != null) btnAddMore.disabled = true;
 }
 
 function checkInput(event) {
   event.preventDefault();
   const file = document.getElementById("contentFile");
-
+  console.log(file);
   if (file.value != null) {
     const btn = document.getElementById("sacuvaj");
     btn.disabled = false;
@@ -232,11 +266,6 @@ function submitCourse(event) {
           .catch((error) => {
             console.error("Error:", error);
           });
-
-        // location.reload();
-
-        const div = document.getElementsByClassName("new-course")[0];
-        div.innerHTML += `<div>Course sent for authorization!</div>`;
       } else {
         alert("Please ensure all fields are filled in.");
       }
@@ -248,6 +277,7 @@ function submitCourse(event) {
       );
     });
 }
+var brojac = 0;
 
 function sendMaterial(courseIdd) {
   for (let i = 1; i <= fileOrder; i++) {
@@ -272,7 +302,11 @@ function sendMaterial(courseIdd) {
       })
       .then((data) => {
         console.log("Success:", data);
-        // Dodajte ovdje logiku za obradu odgovora ako je potrebno
+        if (brojac == 0) {
+          brojac++;
+          var odgovor = confirm("Course sent for authorization!");
+          if (odgovor) window.location = "newCourse.html";
+        }
       })
       .catch((error) => {
         console.error(
@@ -379,9 +413,11 @@ function confirmCourse(courseId) {
         },
         body: JSON.stringify(formData),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          return response.json();
+        })
         .then((data) => {
-          console.log("Course updated successfully:", data); // Ovde možete raditi sa odgovorom ako je ažuriranje uspelo
+          console.log("Course updated successfully:", data);
         })
         .catch((error) => {
           console.error("Error updating course:", error);
