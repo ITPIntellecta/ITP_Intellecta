@@ -8,6 +8,6 @@ namespace ITP_Intellecta.Services
     public interface ICourseMaterialService
     {
         Task<ServiceResponse<GetCourseMaterialDto>> AddCourseMaterial(AddCourseMaterialDto newCourseMaterial);
-        
+        Task<ServiceResponse<List<GetCourseMaterialDto>>> GetMaterialById(int id);
     }
 }

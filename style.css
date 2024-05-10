@@ -512,6 +512,7 @@ footer {
   border-bottom: 1px solid #ead7bb;
   width: 100%;
   margin: 0;
+  margin-top: 5rem;
   height: 550px;
   padding: 1.5rem;
   box-sizing: border-box;
@@ -522,7 +523,7 @@ footer {
 .course-content {
   display: inline-block;
   width: 70%;
-  background-color: #113946;
+  background-color: transparent;
   height: 100%;
   box-sizing: border-box;
 }
@@ -567,6 +568,12 @@ footer {
 
 .lesson {
   padding: 2%;
+  width: 100%;
+  background-color: #bca37f96;
+  color: #113946;
+  margin-top: 1%;
+  border: 1px solid transparent;
+  border-radius: 10pt;
 }
 
 .btnX {
@@ -591,4 +598,31 @@ footer {
 
 .weekCourse1 {
   position: relative;
+}
+
+.card-title:hover {
+  cursor: pointer;
+  color: #ead7bb;
+}
+
+.course-description {
+  text-align: left;
+  width: 100%;
+  padding-left: 5rem;
+}
+
+#myVideo {
+  width: 100%; /* Puno zauzimanje širine div-a */
+  height: 100%; /* Automatsko prilagođavanje visine proporcionalno širini */
+}
+
+.materialText {
+  display: flex;
+  color: #113946;
+  text-align: center;
+  font-size: 25pt;
+  height: 100%;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
 }

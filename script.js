@@ -103,7 +103,7 @@ function saveChanges(event) {
     }
   });
 
-  console.log(filesMap);
+  //console.log(filesMap);
   input.style.display = "none";
   const week = document.getElementById("weekCourse");
 
@@ -123,17 +123,17 @@ function closeWeek(event) {
   let posljednjiKljuc = Array.from(weekMap.keys()).pop();
 
   let posljednjaVrijednost = weekMap.get(posljednjiKljuc);
-  console.log(posljednjaVrijednost);
+  // console.log(posljednjaVrijednost);
 
   if (posljednjaVrijednost != weekNumber) weekNumber--;
-  console.log(weekNumber, fileOrder);
+  // console.log(weekNumber, fileOrder);
   if (weekNumber == 0 && fileOrder == 0) {
     const btnAdd = document.getElementById("prva");
     btnAdd.style.display = "block";
   }
 
   const week = document.querySelectorAll(".weekCourse1");
-  console.log(week);
+  // console.log(week);
   week.forEach((div) => (div.style.display = "none"));
 
   const btnNew = document.getElementById("addNew");
@@ -142,7 +142,7 @@ function closeWeek(event) {
   if (btnAddMore != null) btnAddMore.disabled = false;
 
   const weekAll = document.getElementById("weekCourse");
-  console.log(weekAll);
+  // console.log(weekAll);
   if (weekNumber >= 1)
     weekAll.innerHTML = `<div class="material-added-notification"> Week ${weekNumber} materials saved!</div>
   <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
@@ -157,7 +157,7 @@ function showInput(event) {
   week.style.display = "block";
   week.innerHTML = `<div class="weekCourse1" id="weekCourse1"> <br><h2>Week ${weekNumber}</h2> 
     <div class="fileDiv1">
-     <input onchange="checkInput(event)" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*"/>
+     <input onchange="checkInput(event)" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*,.doc,.docx,.pdf"/>
      <br><br>
      <button class="btnX" onclick="closeWeek(event)" value="x"> ✖ </button>
   </div> 
@@ -197,11 +197,11 @@ function saveFile() {
   filesToUpload.push(...files);
 
   filesToUpload.forEach((file) => {
-    console.log(file);
+    // console.log(file);
 
     formData.append("files[]", file); // Dodajemo sve fajlove iz niza u FormData objekat
   });
-  console.log([...formData.entries()]);
+  //console.log([...formData.entries()]);
   // fetch("/material/uploadAll", {
   //   // Endpoint za čuvanje svih fajlova
   //   method: "POST",
@@ -225,7 +225,7 @@ function submitCourse(event) {
   })
     .then((response) => {
       if (!response.ok) {
-        console.log(response);
+        //  console.log(response);
         throw new Error("Network response was not ok");
       }
       return response.json();
@@ -235,7 +235,7 @@ function submitCourse(event) {
       //console.log(data);
       userId = data.data.id;
       // Prikazivanje imena korisnika u HTML elementu
-      console.log(userId);
+      // console.log(userId);
 
       const courseTitle = document.getElementById("courseTitle").value;
       const courseSubtitle = document.getElementById("courseSubtitle").value;
@@ -343,7 +343,7 @@ function sendM() {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data); // Možete prikazati poruku o uspešnom čuvanju fajlova ili drugu povratnu informaciju
+      // console.log(data); // Možete prikazati poruku o uspešnom čuvanju fajlova ili drugu povratnu informaciju
       filesToUpload = []; // Resetujemo niz nakon što su fajlovi sačuvani
 
       if (brojac == 0) {
@@ -357,6 +357,7 @@ function sendM() {
   // })
 }
 
+let courseId;
 function loadCourses() {
   fetch("/api/course/getall")
     .then((response) => response.json())
@@ -366,12 +367,12 @@ function loadCourses() {
           //  console.log(course);
           let title = course.title;
           let highlights = course.highlights;
-
+          let id = course.courseId;
           const div = document.getElementsByClassName("row")[0];
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="card" style="margin-bottom:2rem";>
                 <div class="card-body">
-                  <h5 class="card-title">${title}</h5>
+                  <h5 class="card-title loadVideo" onclick="loadVideo(${id})">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
@@ -404,7 +405,7 @@ function loadCoursesForAuth() {
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="card" style="margin-bottom:2rem";>
                 <div class="card-body">
-                  <h5 class="card-title">${title}</h5>
+                  <h5 class="card-title" onclick="loadVideo(${id})">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
@@ -422,17 +423,17 @@ function loadCoursesForAuth() {
 
 let creatorId;
 function confirmCourse(courseId) {
-  console.log(courseId);
+  // console.log(courseId);
 
   fetch(`/api/course/GetCourseById/${courseId}`, {
     method: "GET",
   })
     .then((response) => {
-      console.log(response);
+      //  console.log(response);
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      //  console.log(data);
       creatorId = data.data.creatorId;
       const formData = {
         CreatorId: data.data.creatorId,
@@ -446,7 +447,7 @@ function confirmCourse(courseId) {
         courseId: data.data.courseId,
         approved: true,
       };
-      console.log(formData);
+      //  console.log(formData);
 
       fetch("api/course", {
         method: "PUT",
@@ -474,8 +475,7 @@ function approveCourseMail() {
     method: "POST",
   })
     .then((response) => {
-      console.log(response);
-
+      //  console.log(response);
       //return response.json;
     })
     .then((data) => {
@@ -484,4 +484,120 @@ function approveCourseMail() {
     .catch((error) => {
       console.error("Error updating course:", error);
     });
+}
+
+function loadVideoPage() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const id = urlParams.get("parametar");
+
+  let creatorId;
+  let title;
+  let subtitle;
+  let durationInWeeks;
+  let weeklyHours;
+  let highlights;
+  let category;
+  let courseMark;
+  let approved;
+  // console.log(id);
+  fetch(`/api/course/GetCourseById/${id}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      //  console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      //  console.log(data);
+      creatorId = data.data.creatorId;
+      title = data.data.title;
+      subtitle = data.data.subtitle;
+      durationInWeeks = data.data.durationInWeeks;
+      weeklyHours = data.data.weeklyHours;
+      highlights = data.data.highlights;
+      category = data.data.category;
+      courseMark = data.data.courseMark;
+      approved = data.data.approved;
+      const titleH = document.getElementById("title-course");
+      titleH.innerHTML = title;
+      const subtitleH = document.getElementById("subtitle-course");
+      subtitleH.innerHTML = subtitle;
+
+      const highlightsH = document.getElementById("highlights-course");
+      highlightsH.innerHTML = highlights;
+
+      fetch(`/api/material/GetMaterialById/${id}`, {
+        method: "GET",
+      })
+        .then((response) => {
+          // console.log(response);
+          return response.json();
+        })
+        .then((data) => {
+          //  console.log(data);
+          const divWeeks = document.getElementById("course-weeks");
+          for (var i = 1; i <= durationInWeeks; i++) {
+            divWeeks.innerHTML += `  <div class="week" id="week-course">
+            <button class="button-week" >Week ${i}</button>
+             <div class="week-lessons show-lesson">`;
+            // console.log(i);
+            data.data.forEach((material) => {
+              //   console.log(material);
+              const video = material.videoFile;
+              if (material.weekNumber == i) {
+                divWeeks.innerHTML += `<button class="lesson" onclick="showFile('${video}')"> 
+                Lesson ${material.fileOrder}</button><br>`;
+              }
+
+              divWeeks.innerHTML += `</div></div>`;
+            });
+          }
+        });
+    });
+}
+
+function loadVideo(id) {
+  location.href = "course.html?parametar=" + id;
+}
+
+function showFile(name) {
+  var fileExtension = name.split(".").pop().toLowerCase();
+  var divFile = document.getElementsByClassName("course-content")[0];
+  console.log(fileExtension);
+
+  switch (fileExtension) {
+    case "txt":
+      console.log("Tip fajla je tekstualni (.txt) fajl.");
+      divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="100%"></iframe>
+`;
+      break;
+    case "pdf":
+      console.log("Tip fajla je tekstualni (.pdf) fajl.");
+      divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="100%"></iframe>
+`;
+      break;
+    case "doc":
+      console.log("Tip fajla je tekstualni (.doc) fajl.");
+      divFile.innerHTML = `<iframe src="folder/${name}" width="0" height="0"></iframe>
+`;
+      // divFile.innerHTML = `<p class="materialText">File downloaded</p>`;
+      break;
+    case "docx":
+      console.log("Tip fajla je tekstualni (.docx) fajl.");
+      divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="10%"> <p class="materialText">File downloaded</p></iframe>
+`;
+      divFile.innerHTML += `<p class="materialText">File downloaded</p>`;
+      break;
+    case "mp4":
+      console.log("Tip fajla je video fajl (.mp4).");
+      divFile.innerHTML = `<video id="myVideo" controls>
+  <source src="folder/${name}" type="video/mp4">
+  Vaš pregledač ne podržava video sadržaj.
+</video>`;
+      break;
+    default:
+      console.log("Tip fajla nije podrzan.");
+      break;
+  }
 }

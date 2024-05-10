@@ -31,5 +31,17 @@ namespace ITP_Intellecta.Services
 
             return serviceResponse;
         }
+
+        public async Task<ServiceResponse<List<GetCourseMaterialDto>>> GetMaterialById(int id)
+        {
+            var serviceResponse = new ServiceResponse<List<GetCourseMaterialDto>>();
+            var materials = await _context.Materials
+                .Where(c => c.CourseId == id).ToListAsync();
+                
+                if (materials is null )
+                    throw new Exception($"Course with Id '{id}' not found.");
+            serviceResponse.Data = materials.Select(c => _mapper.Map<GetCourseMaterialDto>(c)).ToList();;
+            return serviceResponse;
+        }
     }
 }

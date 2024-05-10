@@ -23,7 +23,7 @@ namespace ITP_Intellecta.Controllers
         {
             return Ok(await _materialService.AddCourseMaterial(newMaterial));
         }
-
+ 
         [HttpPost("allFiles")]
         public async Task<IActionResult> UploadAllFiles(IFormCollection form)
         {
@@ -49,6 +49,12 @@ namespace ITP_Intellecta.Controllers
                 return Ok(new { message = "All files uploaded successfully." });
 
             }
+
+        [HttpGet("GetMaterialById/{id}")]
+        public async Task<ActionResult<ServiceResponse<GetCourseDto>>> GetMaterialById(int id)
+        {
+            return Ok(await _materialService.GetMaterialById(id));
+        }
                     
         }
     }

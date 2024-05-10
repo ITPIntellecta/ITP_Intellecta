@@ -14,7 +14,7 @@
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-<body onload="displayName()">
+<body onload="displayName(); loadVideoPage()">
     <div class="menu">
       <nav class="nav">
         <img
@@ -42,18 +42,18 @@
           <br />
           <p id="adminEl2" onclick="showUsersForAuthorization()">
             &#9733; Admin authorization
-          </p>>
+          </p>
         </div>
       </div>
     </div>
 
     <div class="course">
-        <div class="course-content"></div>
-        <div class="course-weeks">
-            <div class="week">
-            <button class="button-week">Week 1</button>
+        <div class="course-content"> <p class="materialText">Your material will be shown here!</p></div>
+        <div class="course-weeks" id="course-weeks">
+            <!-- <div class="week" id="week-course">
+            <button class="button-week" >Week 1</button>
             <div class="week-lessons show-lesson">
-                <button class="lesson">Lesson 1</button>
+                <button class="lesson" id="course-lesson">Lesson 1</button>
                 <button class="lesson">Lesson 2</button>
             </div></div>
             <div class="week">
@@ -76,9 +76,15 @@
                 <button class="lesson">Lesson 4</button>
                 <button class="lesson">Lesson 5</button>
                 <button class="lesson">Lesson 6</button>
-            </div>
-            </div>
-        </div>        
+            </div> -->
+            <!-- </div> -->
+        </div>  
+  
+    </div>
+    <div class="course-description">
+        <h2 style="display: block;" id="title-course">Naslov kursa</h2>  
+        <h3 id="subtitle-course">Podnaslov kursa</h3> 
+        <p id="highlights-course">Highlights</p> 
     </div>
     <script src="script.js"></script>
   </body>
