@@ -38,10 +38,11 @@ namespace ITP_Intellecta.Services
         //         return response;
         //     }
 
-        public async void SendEmail(int userId, string message)
+        public async Task<ServiceResponse<string>> SendEmail(int userId, string message)
         {
+            var response=new ServiceResponse<string>();
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.Credentials = new NetworkCredential("intellecta18@gmail.com", "jgyh ydlo fukt wvpk");
+            smtpClient.Credentials = new NetworkCredential("intellecta18@gmail.com", "gwrs uliy lync pwxw");
             var user= await _context.Users.FirstOrDefaultAsync(c => c.Id == userId);
                 // Potrebno je omogućiti SSL
             smtpClient.EnableSsl = true;
@@ -58,14 +59,20 @@ namespace ITP_Intellecta.Services
                 try
                 {
                     // Slanje emaila
-                    smtpClient.Send(mailMessage);
+                  //  smtpClient.Send(mailMessage);
+                    await smtpClient.SendMailAsync(mailMessage);
+
                     Console.WriteLine("Email je uspješno poslan.");
+                    response.Success=true;
+                    response.Message="Success";
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Greška prilikom slanja emaila: " + ex.Message);
                 }
             }
+                 return response;
         }
+   
     }
 }

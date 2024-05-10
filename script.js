@@ -470,7 +470,7 @@ function confirmCourse(courseId) {
 }
 
 function approveCourseMail() {
-  fetch(`/api/email/send-email/${creatorId}/"Your course has been approved!"`, {
+  fetch(`/api/email/send-email/${creatorId}/Your course has been approved!`, {
     method: "POST",
   })
     .then((response) => {
