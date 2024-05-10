@@ -9,7 +9,7 @@ global using ITP_Intellecta.Data;
 global using Services;
 global using AutoMapper;
 global using ITP_Intellecta.Services;
-global using ITP_Intellecta.Models;
+// global using ITP_Intellecta.Models;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using System.Net.Mail;
@@ -134,7 +134,7 @@ app.UseStaticFiles(new StaticFileOptions
 
 
 
-    app.UseCors("AllowAllOrigins");
+app.UseCors("AllowAllOrigins");
 
 
 

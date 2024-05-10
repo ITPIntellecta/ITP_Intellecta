@@ -7,10 +7,8 @@ using System.Net.Mail;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace ITP_Intellecta.Controllers
 {
-
-
-[ApiController]
-[Route("api/[controller]")]
+    [ApiController]
+    [Route("api/[controller]")]
     public class EmailController : ControllerBase
     {
         private readonly IEmailService _service;

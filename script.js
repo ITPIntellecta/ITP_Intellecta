@@ -422,17 +422,17 @@ function loadCoursesForAuth() {
 
 let creatorId;
 function confirmCourse(courseId) {
-  // console.log(courseId);
+  console.log(courseId);
 
   fetch(`/api/course/GetCourseById/${courseId}`, {
     method: "GET",
   })
     .then((response) => {
-      // console.log(response);
+      console.log(response);
       return response.json();
     })
     .then((data) => {
-      // console.log(data);
+      console.log(data);
       creatorId = data.data.creatorId;
       const formData = {
         CreatorId: data.data.creatorId,
@@ -446,7 +446,7 @@ function confirmCourse(courseId) {
         courseId: data.data.courseId,
         approved: true,
       };
-      //   console.log(formData);
+      console.log(formData);
 
       fetch("api/course", {
         method: "PUT",
@@ -470,16 +470,16 @@ function confirmCourse(courseId) {
 }
 
 function approveCourseMail() {
-  fetch(`/api/Email/send-email/${creatorId}/"Your course has been approved!"`, {
+  fetch(`/api/email/send-email/${creatorId}/"Your course has been approved!"`, {
     method: "POST",
   })
     .then((response) => {
       console.log(response);
 
-      return response.json;
+      //return response.json;
     })
     .then((data) => {
-      console.log(data);
+      //console.log(data);
     })
     .catch((error) => {
       console.error("Error updating course:", error);

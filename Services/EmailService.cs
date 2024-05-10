@@ -11,14 +11,10 @@ namespace ITP_Intellecta.Services
     public class EmailService:IEmailService
     {      
         private readonly DataContext _context;
-
-
         public EmailService(DataContext context)
         {            
             _context = context;
         }
-
-
         //     public async Task<ServiceResponse<string>> SendEmailAsync(int userId, string message)
         //     {
         //         var response=new ServiceResponse<string>();
@@ -45,7 +41,7 @@ namespace ITP_Intellecta.Services
         public async void SendEmail(int userId, string message)
         {
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-            smtpClient.Credentials = new NetworkCredential("intellecta18@gmail.com", "szch ymhh fsoh agqv");
+            smtpClient.Credentials = new NetworkCredential("intellecta18@gmail.com", "jgyh ydlo fukt wvpk");
             var user= await _context.Users.FirstOrDefaultAsync(c => c.Id == userId);
                 // Potrebno je omogućiti SSL
             smtpClient.EnableSsl = true;
