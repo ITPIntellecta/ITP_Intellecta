@@ -19,6 +19,7 @@ using Swashbuckle.AspNetCore.Filters;
 
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 
 
@@ -100,6 +101,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     };
 });
 
+// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//     .AddCookie(options =>
+//     {
+//         options.AccessDeniedPath = "index.html";
+//         options.LoginPath = "login.html"; // Postavite putanju za prijavu na početnu stranicu
+//     });
 
 
 builder.Services.AddHttpContextAccessor();

@@ -421,7 +421,7 @@ function loadCoursesForAuth() {
     });
 }
 
-let creatorId;
+// let creatorId;
 function confirmCourse(courseId) {
   // console.log(courseId);
 
@@ -461,8 +461,8 @@ function confirmCourse(courseId) {
         })
         .then((data) => {
           console.log("Course updated successfully:", data);
-          approveCourseMail();
-          //   showCoursesForAuthorization();
+          approveCourseMail(formData.CreatorId);
+          showCoursesForAuthorization();
         })
         .catch((error) => {
           console.error("Error updating course:", error);
@@ -470,8 +470,8 @@ function confirmCourse(courseId) {
     });
 }
 
-function approveCourseMail() {
-  fetch(`/api/email/send-email/${creatorId}/Your course has been approved!`, {
+function approveCourseMail(id) {
+  fetch(`/api/email/send-email/${id}/Your course has been approved!`, {
     method: "POST",
   })
     .then((response) => {

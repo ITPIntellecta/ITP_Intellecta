@@ -138,8 +138,15 @@ aside.rright {
   color: #113946;
 }
 
+.user,
+.nav-menu,
+.logout {
+  transition: all 300ms;
+}
+
 .user:hover,
-.nav-menu:hover {
+.nav-menu:hover,
+.logout:hover {
   cursor: pointer;
   color: #fff2d8;
 }

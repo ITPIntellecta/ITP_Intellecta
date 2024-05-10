@@ -59,12 +59,15 @@ function logUser(event) {
         console.log(data);
         console.log(data.data);
 
-        //localStorage.setItem("jwtttToken", "ivana");
-        // console.log(data);
-        window.location = "index.html";
+        if (localStorage.getItem("jwtToken") != null)
+          window.location = "index.html";
       }
     })
-    .catch((error) => console.error("Unable to log user.", error));
+    .catch((error) => {
+      var btn = document.getElementById("signup");
+      btn.style.display = "block";
+      console.error("Unable to log user.", error);
+    });
 }
 
 function regUser(event) {
@@ -186,30 +189,44 @@ function checkUserRole() {
 
 function displayName() {
   checkUserRole();
-  fetch("/api/course/user", {
-    method: "GET",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        console.log(response);
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
     })
-    .then((data) => {
-      // Uzmite ime korisnika iz podataka koje ste dobili
-      console.log(data);
-      const userName = data.data.firstName;
-      // Prikazivanje imena korisnika u HTML elementu
-      let usernameElement = document.getElementById("logUserName");
-      usernameElement.innerHTML = "Welcome, " + userName + "!";
-    })
-    .catch((error) => {
-      console.error(
-        "There has been a problem with your fetch operation:",
-        error
-      );
-    });
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        console.log(data);
+        const userName = data.data.firstName;
+        // Prikazivanje imena korisnika u HTML elementu
+        let usernameElement = document.getElementById("logUserName");
+        usernameElement.innerHTML = "Welcome, " + userName + "!";
+
+        let logoutElement = document.getElementById("logout");
+        logoutElement.innerHTML = "Logout";
+        console.log(logoutElement.innerHTML);
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
+}
+
+function logout() {
+  localStorage.removeItem("jwtToken");
+  // window.location.href = "index.html";
+  let el = document.getElementById("navright");
+  el.style.display = "none";
+  location.reload();
 }
 
 function inputInfo() {
@@ -273,7 +290,7 @@ function loadUsers() {
           let userId = user.id;
 
           const div = document.getElementsByClassName("row")[0];
-          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+          div.innerHTML += `<div class="col-sm-6 mb-4">
               <div class="card" style="margin-bottom:2rem";>
                 <div class="card-body">
                   <h5 class="card-title">${name}</h5>
@@ -330,6 +347,8 @@ function authorizeAdmin(userid) {
         .then((response) => response.json())
         .then((data) => {
           console.log("User updated successfully:", data);
+          approveAdminMail(formData.id);
+
           showUsersForAuthorization();
         })
         .catch((error) => {
@@ -338,5 +357,27 @@ function authorizeAdmin(userid) {
     })
     .catch((error) => {
       console.error("Error updating user:", error);
+    });
+}
+function checkLocalStorage() {
+  if (localStorage.getItem("jwtToken") == null) {
+    // Ako postoji token, preusmeri na index.html
+    window.location.href = "log.html";
+  }
+}
+
+function approveAdminMail(id) {
+  fetch(`/api/email/send-email/${id}/Your account has been approved!`, {
+    method: "POST",
+  })
+    .then((response) => {
+      //  console.log(response);
+      //return response.json;
+    })
+    .then((data) => {
+      //console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error updating admin:", error);
     });
 }

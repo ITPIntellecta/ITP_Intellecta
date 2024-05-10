@@ -126,11 +126,13 @@ body {
 .form-group-btn {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin: auto;
-  width: 8rem;
+  margin: 10px;
+  /* width: 8rem; */
+  width: 95%;
   border-radius: 4px;
   background-color: #113946;
   transition: background-color 0.8s ease-out;
@@ -142,7 +144,7 @@ body {
   height: 40px;
   width: 100%;
   line-height: 22px;
-  text-align: right;
+  text-align: center;
   border-radius: 4px;
   font-weight: 600;
   text-transform: uppercase;

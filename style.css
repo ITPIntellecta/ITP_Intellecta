@@ -76,6 +76,9 @@ p.name {
   right: 1%;
   color: #bca37f;
 }
+.right > div {
+  display: inline;
+}
 
 .user {
   display: inline-block;
@@ -398,12 +401,14 @@ p.name {
 /*---------------PROFILE-----------------*/
 
 .user,
-.nav-menu {
+.nav-menu,
+.logout {
   transition: all 300ms;
 }
 
 .user:hover,
-.nav-menu:hover {
+.nav-menu:hover,
+.logout:hover {
   cursor: pointer;
   color: #fff2d8;
 }
@@ -625,4 +630,9 @@ footer {
   font-weight: bold;
   justify-content: center;
   align-items: center;
+}
+
+::selection {
+  background-color: #bca37f;
+  color: #113946;
 }

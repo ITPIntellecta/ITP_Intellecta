@@ -20,7 +20,7 @@
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-  <body onload="displayName(); loadCourses();">
+  <body onload="displayName(); loadCourses(); checkLocalStorage();">
     <div class="menu">
       <nav class="nav">
         <img
@@ -33,22 +33,24 @@
           intellecta
         </p>
 
-        <div class="right">
+        <div class="right" id="navright">
           <div class="user" onclick="goToProfile()" id="logUserName"></div>
+          <span> | </span>
+          <div class="logout" onclick="logout()" id="logout"></div>
+          <span> | </span>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>
     </div>
     <div class="contain">
-      <img src="logo.png" alt="Logo" class="logo" />
+      <div class="topdiv">
+        <img src="logo.png" alt="Logo" class="logo" />
 
-      <button
-        class="btn btn-primary addcourse"
-        style="position: absolute; left: 7%; top: 10%"
-        onclick="goToNewCourse()"
-      >
-        &#xFF0B; Add new course
-      </button>
+        <button class="btn btn-primary addcourse" onclick="goToNewCourse()">
+          &#xFF0B; Add new course
+        </button>
+      </div>
+
       <!-- MENI -->
       <div class="right-menu show-menu" id="right-menu">
         <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
@@ -213,7 +215,6 @@
         <div class="card-course"></div> -->
       </div>
       <button id="scrollBtn" class="hidden">&#129121;</button>
-      <footer>intellecta &copy;</footer>
       <script>
         const params = new URLSearchParams(location.search);
         const parametar = params.get("parametar");
@@ -230,5 +231,6 @@
       <script src="script1.js"></script>
       <script src="script.js"></script>
     </div>
+    <footer>intellecta &copy;</footer>
   </body>
 </html>

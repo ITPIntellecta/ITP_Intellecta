@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Intellecta</title>
     <link href="style.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="style1.css" /> -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,7 +16,7 @@
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-  <body onload="displayName()">
+  <body onload="displayName(); checkLocalStorage();">
     <div class="menu">
       <nav class="nav">
         <img
@@ -26,9 +28,11 @@
         <p class="name logo-hover" onclick="redirectToPage('index.html')">
           intellecta
         </p>
-        <div class="right">
+        <div class="right" id="navright">
           <div class="user" onclick="goToProfile()" id="logUserName"></div>
-
+          <span> | </span>
+          <div class="logout" onclick="logout()" id="logout"></div>
+          <span> | </span>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>

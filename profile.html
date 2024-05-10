@@ -14,12 +14,13 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="style.css" />
 
     <link rel="stylesheet" href="profileStyle.css" />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-  <body onload="displayName(); inputInfo()">
+  <body onload="displayName(); inputInfo(); checkLocalStorage();">
     <div class="menu">
       <nav class="nav">
         <img
@@ -31,9 +32,11 @@
         <p class="app-name logoClass" onclick="redirectToPage('index.html')">
           intellecta
         </p>
-
-        <div class="right">
+        <div class="right" id="navright">
           <div class="user" onclick="goToProfile()" id="logUserName"></div>
+          <span> | </span>
+          <div class="logout" onclick="logout()" id="logout"></div>
+          <span> | </span>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>

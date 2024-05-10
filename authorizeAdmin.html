@@ -15,12 +15,13 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
 
     <link rel="stylesheet" href="coursesStyle.css" />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-  <body onload="displayName(); loadUsers();">
+  <body onload="displayName(); loadUsers(); checkLocalStorage();">
     <div class="menu">
       <nav class="nav">
         <img
@@ -32,9 +33,11 @@
         <p class="app-name logoClass" onclick="redirectToPage('index.html')">
           intellecta
         </p>
-
-        <div class="right">
+        <div class="right" id="navright">
           <div class="user" onclick="goToProfile()" id="logUserName"></div>
+          <span> | </span>
+          <div class="logout" onclick="logout()" id="logout"></div>
+          <span> | </span>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>
@@ -60,13 +63,12 @@
       </div>
 
       <!-- KORISNICI -->
-      <div class="users-list">
-        <div class="card-user">
+      <div class="courses-list">
+        <div class="card-course">
           <div class="row"></div>
         </div>
       </div>
       <button id="scrollBtn" class="hidden">&#129121;</button>
-      <footer>intellecta &copy;</footer>
       <script>
         const params = new URLSearchParams(location.search);
         const parametar = params.get("parametar");
@@ -83,5 +85,6 @@
       <script src="script1.js"></script>
       <script src="script.js"></script>
     </div>
+    <footer>intellecta &copy;</footer>
   </body>
 </html>

@@ -17,8 +17,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style1.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js" asp-append-version="true"></script>
+    <script>
+      if (localStorage.getItem("jwtToken")) {
+        // Ako postoji token, preusmeri na index.html
+        window.location.href = "index.html";
+      }
+    </script>
   </head>
   <body>
     <div class="contain">
@@ -52,7 +60,16 @@
               <i class="bi bi-eye-slash input-icon"></i>
             </div>
             <div class="form-group-btn">
-              <input type="submit" class="btn" value="Log In" />
+              <input type="submit" class="btn" value="Log In" id="login" />
+              <i class="bi bi-box-arrow-in-left input-icon"></i>
+            </div>
+            <div class="form-group-btn" style="display: none" id="signup">
+              <input
+                type="button"
+                class="btn"
+                value="Go to Registration"
+                onclick="redirectToPage('reg.html')"
+              />
               <i class="bi bi-box-arrow-in-left input-icon"></i>
             </div>
           </form>

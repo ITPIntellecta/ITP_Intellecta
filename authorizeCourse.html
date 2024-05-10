@@ -17,11 +17,13 @@
     />
 
     <link rel="stylesheet" href="coursesStyle.css" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
     <script src="script.js"></script>
   </head>
-  <body onload="displayName(); loadCoursesForAuth();">
+  <body onload="displayName(); loadCoursesForAuth(); checkLocalStorage();">
     <div class="menu">
       <nav class="nav">
         <img
@@ -33,9 +35,11 @@
         <p class="app-name logoClass" onclick="redirectToPage('index.html')">
           intellecta
         </p>
-
-        <div class="right">
+        <div class="right" id="navright">
           <div class="user" onclick="goToProfile()" id="logUserName"></div>
+          <span> | </span>
+          <div class="logout" onclick="logout()" id="logout"></div>
+          <span> | </span>
           <button class="nav-menu" id="nav-menu">&#9776;</button>
         </div>
       </nav>
@@ -68,7 +72,6 @@
         </div>
       </div>
       <button id="scrollBtn" class="hidden">&#129121;</button>
-      <footer>intellecta &copy;</footer>
       <script>
         const params = new URLSearchParams(location.search);
         const parametar = params.get("parametar");
@@ -85,5 +88,6 @@
       <script src="script1.js"></script>
       <script src="script.js"></script>
     </div>
+    <footer>intellecta &copy;</footer>
   </body>
 </html>

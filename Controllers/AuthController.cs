@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using ITP_Intellecta.Data;
 using ITP_Intellecta.Dtos.User;
 using ITP_Intellecta.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITP_Intellecta.Controllers
 
 {
+    // [AllowAnonymous]
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController:ControllerBase
@@ -23,7 +25,13 @@ namespace ITP_Intellecta.Controllers
 
          [HttpPost("Login")]
         public async Task<ActionResult<ServiceResponse<int>>> Login(UserLoginDto request)
-        {     
+        {    
+                //         // Provera da li je korisnik već ulogovan
+                // if(User.Identity.IsAuthenticated)
+                // {
+                //     // Ako je korisnik već ulogovan, vraćamo status 400 Bad Request sa odgovarajućom porukom
+                //     return BadRequest(new ServiceResponse<int> { Message = "Već ste ulogovani.", Success = false });
+                // }
 
             var response=await _authRepo.Login(request.Email, request.Password);
 
