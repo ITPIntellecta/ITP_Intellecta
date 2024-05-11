@@ -32,6 +32,7 @@ document.addEventListener("click", function (event) {
       arrowDown.classList.remove("rotate-up");
     } else {
       targetEvr.classList.toggle("show-list");
+
       const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
       arrowDown.classList.toggle("rotate-up");
     }
@@ -359,17 +360,24 @@ function sendM() {
 
 let courseId;
 function loadCourses() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const param = urlParams.get("parametar");
+  console.log(param);
+
   fetch("/api/course/getall")
     .then((response) => response.json())
     .then((data) => {
       data.data.forEach((course) => {
         if (course.approved == 1) {
           //  console.log(course);
-          let title = course.title;
-          let highlights = course.highlights;
-          let id = course.courseId;
-          const div = document.getElementsByClassName("row")[0];
-          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+
+          if (param == "myLearning" || param == `Everything &nbsp;`) {
+            let title = course.title;
+            let highlights = course.highlights;
+            let id = course.courseId;
+            const div = document.getElementsByClassName("row")[0];
+            div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="card" style="margin-bottom:2rem";>
                 <div class="card-body">
                   <h5 class="card-title loadVideo" onclick="loadVideo(${id})">${title}</h5>
@@ -380,6 +388,7 @@ function loadCourses() {
                 </div>
               </div>
             </div>`;
+          }
         }
       });
     })
@@ -600,4 +609,41 @@ function showFile(name) {
       console.log("Tip fajla nije podrzan.");
       break;
   }
+}
+
+function loadPopularCourses() {
+  const container = document.getElementById("scroll");
+  fetch("/api/course/getall")
+    .then((response) => response.json())
+    .then((data) => {
+      data.data.forEach((course) => {
+        if (course.approved == 1) {
+          //  console.log(course);
+          let title = course.title;
+          let highlights = course.highlights;
+          let subtitle = course.subtitle;
+          let mark = course.courseMark;
+          let id = course.courseId;
+          container.innerHTML += `<div class="item">
+          <h4>${title}</h4><p class="mark">${mark}</p><h5>${subtitle}</h5> <button class="popularCourse" onclick="loadVideo(${id})">View course</button>
+          </div>`;
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("There was an error:", error);
+    });
+}
+
+function displayCategory(category) {
+  const categoryList = document.getElementById("categoryName");
+  categoryList.innerHTML = category;
+}
+
+function searchCourses() {
+  const category = document.getElementById("categoryName").innerHTML;
+
+  console.log(category);
+  window.location = "courses.html?parameter=" + category;
+  loadCourses();
 }
