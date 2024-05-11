@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ITP_Intellecta")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7baa572154b666a4dcb73e864b52c711c11beb1")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e9b8a1c0a4dfe7486c58f81ccb785ad71897725")]
 [assembly: System.Reflection.AssemblyProductAttribute("ITP_Intellecta")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ITP_Intellecta")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

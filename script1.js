@@ -170,7 +170,7 @@ function checkUserRole() {
       //console.log(data);
       userRole = data.data.userType;
       // Prikazivanje imena korisnika u HTML elementu
-      console.log(userRole);
+      // console.log(userRole);
       if (userRole != "Admin") {
         const el1 = document.getElementById("adminEl1");
         const el2 = document.getElementById("adminEl2");
@@ -202,7 +202,7 @@ function displayName() {
       })
       .then((data) => {
         // Uzmite ime korisnika iz podataka koje ste dobili
-        console.log(data);
+        // console.log(data);
         const userName = data.data.firstName;
         // Prikazivanje imena korisnika u HTML elementu
         let usernameElement = document.getElementById("logUserName");
@@ -210,7 +210,7 @@ function displayName() {
 
         let logoutElement = document.getElementById("logout");
         logoutElement.innerHTML = "Logout";
-        console.log(logoutElement.innerHTML);
+        //  console.log(logoutElement.innerHTML);
       })
       .catch((error) => {
         console.error(

@@ -26,12 +26,18 @@ document.addEventListener("click", function (event) {
   const targetEvr = document.getElementById("dropdown-list");
   const header = document.getElementById("dropdown-header");
   const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
+  const categoryList = document.getElementById("categoryName");
+
   if (targetEvr != null) {
-    if (event.target != header) {
+    if (event.target != header && event.target != categoryList) {
       targetEvr.classList.remove("show-list");
       arrowDown.classList.remove("rotate-up");
+      console.log("Van menija");
+      console.log(event.target);
     } else {
       targetEvr.classList.toggle("show-list");
+      console.log("U meniju");
+      console.log(event.target);
 
       const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
       arrowDown.classList.toggle("rotate-up");
@@ -358,26 +364,57 @@ function sendM() {
   // })
 }
 
+function filteredCategory(courses, category) {
+  return courses.filter((course) => {
+    console.log(category);
+
+    if (category != "Everything") {
+      return course.category === category;
+    } else {
+      return true;
+    }
+  });
+}
+
+function filteredSubTitle(courses, subTitle) {
+  return courses.filter((course) => {
+    if (subTitle != "") {
+      console.log(course.title);
+      return course.title === subTitle || course.subTitle === subTitle;
+    } else {
+      return true;
+    }
+  });
+}
+
 let courseId;
 function loadCourses() {
   const urlParams = new URLSearchParams(window.location.search);
 
-  const param = urlParams.get("parametar");
-  console.log(param);
+  const category = urlParams.get("parametar");
+  const text = urlParams.get("text");
+
+  console.log(category);
 
   fetch("/api/course/getall")
     .then((response) => response.json())
     .then((data) => {
-      data.data.forEach((course) => {
+      let filteredCourses = filteredCategory(data.data, category);
+      console.log(filteredCourses);
+
+      if (text != null) {
+        filteredCourses = filteredSubTitle(filteredCourses, text);
+        console.log(filteredCourses);
+      }
+
+      filteredCourses.forEach((course) => {
         if (course.approved == 1) {
           //  console.log(course);
-
-          if (param == "myLearning" || param == `Everything &nbsp;`) {
-            let title = course.title;
-            let highlights = course.highlights;
-            let id = course.courseId;
-            const div = document.getElementsByClassName("row")[0];
-            div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+          let title = course.title;
+          let highlights = course.highlights;
+          let id = course.courseId;
+          const div = document.getElementsByClassName("row")[0];
+          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="card" style="margin-bottom:2rem";>
                 <div class="card-body">
                   <h5 class="card-title loadVideo" onclick="loadVideo(${id})">${title}</h5>
@@ -388,10 +425,10 @@ function loadCourses() {
                 </div>
               </div>
             </div>`;
-          }
         }
       });
     })
+
     .catch((error) => {
       console.error("There was an error:", error);
     });
@@ -642,8 +679,10 @@ function displayCategory(category) {
 
 function searchCourses() {
   const category = document.getElementById("categoryName").innerHTML;
-
+  const searchWord = document.getElementById("input-search").value;
+  console.log(searchWord);
   console.log(category);
-  window.location = "courses.html?parameter=" + category;
+  window.location =
+    "courses.html?parametar=" + category + "&text=" + searchWord;
   loadCourses();
 }

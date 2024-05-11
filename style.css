@@ -657,3 +657,19 @@ footer {
   cursor: pointer;
   background-color: #fff2d8;
 }
+
+.moreFilter {
+  background-color: #ead7bb;
+  border: 1px solid transparent;
+  border-radius: 15pt;
+  padding: 0.2rem;
+  font-size: 15pt;
+  font-weight: bold;
+  position: relative;
+}
+
+.moreFilter:hover {
+  border: 1px solid transparent;
+  border-radius: 15pt;
+  padding: 0.2rem;
+}
