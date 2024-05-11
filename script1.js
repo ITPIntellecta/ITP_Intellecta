@@ -206,10 +206,10 @@ function displayName() {
         const userName = data.data.firstName;
         // Prikazivanje imena korisnika u HTML elementu
         let usernameElement = document.getElementById("logUserName");
-        usernameElement.innerHTML = "Welcome, " + userName + "!";
+        usernameElement.innerHTML = "Welcome, " + userName + "!  |";
 
         let logoutElement = document.getElementById("logout");
-        logoutElement.innerHTML = "Logout";
+        logoutElement.innerHTML = "Logout  |";
         //  console.log(logoutElement.innerHTML);
       })
       .catch((error) => {

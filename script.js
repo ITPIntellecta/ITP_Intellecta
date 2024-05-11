@@ -380,7 +380,7 @@ function filteredSubTitle(courses, subTitle) {
   return courses.filter((course) => {
     if (subTitle != "") {
       console.log(course.title);
-      return course.title === subTitle || course.subTitle === subTitle;
+      return course.title === subTitle || course.subtitle === subTitle;
     } else {
       return true;
     }
