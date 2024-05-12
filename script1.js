@@ -23,6 +23,25 @@ function redirectToPage(url) {
   window.location.href = url;
 }
 
+//MODALI
+
+// Prikazivanje moda
+function showModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+// Sakrivanje moda
+function hideModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+// Dodeljivanje funkcija prikazivanja i sakrivanja modala dugmadima
+// document.getElementById("mmmm").addEventListener("click", showModal);
+
+setTimeout(function () {
+  localStorage.removeItem("jwtToken");
+}, 86400000);
+
 function logUser(event) {
   event.preventDefault();
   let email = document.getElementById("email").value;

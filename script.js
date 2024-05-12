@@ -368,7 +368,12 @@ function filteredCategory(courses, category) {
   return courses.filter((course) => {
     console.log(category);
 
-    if (category != "Everything") {
+    if (
+      category != "Everything" &&
+      category != "myLearning" &&
+      category != null
+    ) {
+      // console.log(category);
       return course.category === category;
     } else {
       return true;
@@ -661,10 +666,23 @@ function loadPopularCourses() {
           let subtitle = course.subtitle;
           let mark = course.courseMark;
           let id = course.courseId;
-          container.innerHTML += `<div class="item">
-          <h4>${title}</h4><p class="mark">${mark}</p><h5>${subtitle}</h5> <button class="popularCourse" onclick="loadVideo(${id})">View course</button>
+          container.innerHTML += `<div class="item mmmm">
+          <h4>${title}</h4><p class="mark">${mark}</p><h5>${subtitle}</h5> <button class="popularCourse">View course</button>
           </div>`;
         }
+
+        const elements = document.getElementsByClassName("popularCourse");
+        Array.from(elements).forEach((element) => {
+          element.addEventListener("click", showModal);
+        });
+
+        document
+          .getElementsByClassName("btn-close")[0]
+          .addEventListener("click", hideModal);
+
+        document
+          .getElementsByClassName("btn-savee")[0]
+          .addEventListener("click", hideModal);
       });
     })
     .catch((error) => {
