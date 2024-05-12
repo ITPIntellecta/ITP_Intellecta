@@ -330,6 +330,11 @@ input[type="radio"] {
 .form-style::placeholder {
   color: #ead7bb;
 }
+.formAddCourse {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
 /* dodavanje kursa */
 
@@ -337,6 +342,9 @@ input[type="radio"] {
   text-align: center;
   position: absolute;
   top: 5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 select option:hover {
@@ -353,11 +361,13 @@ select option:hover {
 .week-material-btn {
   display: block;
   color: #ead7bb;
-  width: 100%;
+  width: 70%;
   margin: 0;
   height: 40px;
-  text-align: left;
-  padding-left: 55px;
+  line-height: 40px;
+  text-align: center;
+
+  /* padding-left: 55px; */
 }
 
 #highlights ::placeholder {

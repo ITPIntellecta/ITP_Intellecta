@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@1,200&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ojuju:wght@200..800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style1.css" />
+    <link href="style1.css" rel="stylesheet"  />
     <link href="style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,7 +28,7 @@
     <script src="script1.js"></script>
 </head>
 <body onload="displayName(); checkLocalStorage();">
-        <div class="menu">
+  <div class="menu">
       <nav class="nav">
         <img
           class="logo logo-hover"
@@ -63,7 +63,7 @@
     <div class="new-course" style="width: 35%;">
       
         <h2>Add a new course: </h2>
-        <form onsubmit="submitCourse(event)">
+        <form onsubmit="submitCourse(event)" class="formAddCourse">
         <div class=" form-group">
             <input class="form-style" id="courseTitle" type="text" placeholder="Course title"> 
         </div>
@@ -74,18 +74,18 @@
             <select class="form-style" id="courseCategory"> 
                 <option selected>- Choose category -</option>
                  <option>Engineering</option>
-          <option>Business Development</option>
-          <option>IT and Technology</option>
-          <option>Health & Fitness</option>
-          <option>Languages</option>
-          <option>Science</option>
-          <option>Personal Development</option>
-          <option>Data Science</option>
-          <option>Education and Teaching</option>
-          <option>Legal Studies and Law</option>
-          <option>Psychology and Counseling</option>
-          <option>Healthcare and Medicine</option>
-          <option>Other</option>
+                  <option>Business Development</option>
+                  <option>IT and Technology</option>
+                  <option>Health & Fitness</option>
+                  <option>Languages</option>
+                  <option>Science</option>
+                  <option>Personal Development</option>
+                  <option>Data Science</option>
+                  <option>Education and Teaching</option>
+                  <option>Legal Studies and Law</option>
+                  <option>Psychology and Counseling</option>
+                  <option>Healthcare and Medicine</option>
+                  <option>Other</option>
             </select>
         </div>
           <div class=" form-group">
