@@ -667,7 +667,7 @@ function loadPopularCourses() {
           let mark = course.courseMark;
           let id = course.courseId;
           container.innerHTML += `<div class="item mmmm">
-          <h4>${title}</h4><p class="mark">${mark}</p><h5>${subtitle}</h5> <button class="popularCourse">View course</button>
+          <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button class="popularCourse">View course</button>
           </div>`;
         }
 

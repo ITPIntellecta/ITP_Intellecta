@@ -100,6 +100,7 @@ body {
 .courses-list {
   padding: 5%;
   margin-bottom: 7%;
+  box-sizing: border-box;
 }
 .card {
   width: 100%;
