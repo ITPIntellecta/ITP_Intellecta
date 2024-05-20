@@ -92,9 +92,48 @@
           </button>
         </div>
       </div>
-      <button class="btn-search moreFilter" title="Advanced search options">
+      <button
+        class="btn-search moreFilter"
+        title="Advanced search options"
+        onclick="addMoreFilter()"
+      >
         &nbsp; + &nbsp;
       </button>
+      <br /><br />
+      <div id="more-filter">
+        <label>Duration in weeks</label>
+        <input type="number" class="input-search more-inp" />
+        <div class="range_container">
+          <div class="sliders_control">
+            <input id="fromSlider" type="range" value="0" min="0" max="250" />
+            <input id="toSlider" type="range" value="30" min="0" max="500" />
+          </div>
+          <div class="form_control">
+            <div class="form_control_container">
+              <div class="form_control_container__time">Min</div>
+              <input
+                class="form_control_container__time__input"
+                type="number"
+                id="fromInput"
+                value="10"
+                min="0"
+                max="100"
+              />
+            </div>
+            <div class="form_control_container">
+              <div class="form_control_container__time">Max</div>
+              <input
+                class="form_control_container__time__input"
+                type="number"
+                id="toInput"
+                value="30"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="most-popular">
         <h2>Most popular courses:</h2>

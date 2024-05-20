@@ -16,5 +16,7 @@ namespace ITP_Intellecta.Dtos.Course
         public string Category { get; set; }=string.Empty;
         public float CourseMark {get; set;}
         public int CourseId;
+        public float Price { get; set; }
+
     }
 }
