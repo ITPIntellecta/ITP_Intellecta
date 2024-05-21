@@ -102,23 +102,34 @@
       <br /><br />
       <div
         id="more-filter"
-        class="modal-dialog modal-dialog-centered modal modal-filter"
+        class="modal-dialog modal-dialog-centered modal"
         style="display: none"
       >
-        <div class="modal-content modal-filter" style="height: 50%">
-          <label>Duration in weeks</label>
-          <input type="number" class="input-search more-inp" />
+        <div class="modal-filter" style="height: 50%">
+          <div class="durationInWeaks">
+            <label>Duration in weeks</label>
+            <input type="number" class="input-search more-inp" min="0" />
+          </div>
 
           <div class="range_container">
+            <label for="priceLabel">Price</label>
             <div class="sliders_control">
               <input
                 id="fromSlider"
                 type="range"
-                value="10"
-                min="0"
-                max="100"
+                value="0.00"
+                min="0.00"
+                max="300.00"
+                step="0.01"
               />
-              <input id="toSlider" type="range" value="40" min="0" max="100" />
+              <input
+                id="toSlider"
+                type="range"
+                value="300.00"
+                min="0.00"
+                max="300.00"
+                step="0.01"
+              />
             </div>
             <div class="form_control">
               <div class="form_control_container">
@@ -127,9 +138,11 @@
                   class="form_control_container__time__input"
                   type="number"
                   id="fromInput"
-                  value="10"
+                  value="0"
                   min="0"
-                  max="100"
+                  step="0.01"
+                  max="300"
+                  style="width: 60%"
                 />
               </div>
               <div class="form_control_container">
@@ -138,12 +151,18 @@
                   class="form_control_container__time__input"
                   type="number"
                   id="toInput"
-                  value="40"
+                  value="300"
                   min="0"
-                  max="100"
+                  step="0.01"
+                  max="300"
+                  style="width: 60%"
                 />
               </div>
             </div>
+          </div>
+          <div class="buttonsFilters">
+            <button type="submit" onclick="hideFilter()">Save</button>
+            <button type="reset" onclick="hideFilter()">Cancel</button>
           </div>
         </div>
       </div>

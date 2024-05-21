@@ -422,14 +422,12 @@ function loadCourses() {
           let id = course.courseId;
           const div = document.getElementsByClassName("row")[0];
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="card" style="margin-bottom:2rem";>
-                <div class="card-body">
-                  <h5 class="card-title loadVideo" onclick="loadVideo(${id})">${title}</h5>
+              <div class="item mmm" style="margin-bottom:2rem";>
+                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
-                  <a href="#" class="btn btn-primary">Enroll</a>
-                </div>
+                  <button  class="popularCourse">Enroll</button>
               </div>
             </div>`;
         }
@@ -712,10 +710,9 @@ function searchCourses() {
 }
 
 //INPUT
-
 function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
   const [from, to] = getParsed(fromInput, toInput);
-  fillSlider(fromInput, toInput, "#C6C6C6", "#25daa5", controlSlider);
+  fillSlider(fromInput, toInput, "#C6C6C6", "#113946", controlSlider);
   if (from > to) {
     fromSlider.value = to;
     fromInput.value = to;
@@ -726,7 +723,7 @@ function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
 
 function controlToInput(toSlider, fromInput, toInput, controlSlider) {
   const [from, to] = getParsed(fromInput, toInput);
-  fillSlider(fromInput, toInput, "#C6C6C6", "#25daa5", controlSlider);
+  fillSlider(fromInput, toInput, "#C6C6C6", "#113946", controlSlider);
   setToggleAccessible(toInput);
   if (from <= to) {
     toSlider.value = to;
@@ -738,7 +735,7 @@ function controlToInput(toSlider, fromInput, toInput, controlSlider) {
 
 function controlFromSlider(fromSlider, toSlider, fromInput) {
   const [from, to] = getParsed(fromSlider, toSlider);
-  fillSlider(fromSlider, toSlider, "#C6C6C6", "#25daa5", toSlider);
+  fillSlider(fromSlider, toSlider, "#C6C6C6", "#113946", toSlider);
   if (from > to) {
     fromSlider.value = to;
     fromInput.value = to;
@@ -749,7 +746,7 @@ function controlFromSlider(fromSlider, toSlider, fromInput) {
 
 function controlToSlider(fromSlider, toSlider, toInput) {
   const [from, to] = getParsed(fromSlider, toSlider);
-  fillSlider(fromSlider, toSlider, "#C6C6C6", "#25daa5", toSlider);
+  fillSlider(fromSlider, toSlider, "#C6C6C6", "#113946", toSlider);
   setToggleAccessible(toSlider);
   if (from <= to) {
     toSlider.value = to;
@@ -761,8 +758,8 @@ function controlToSlider(fromSlider, toSlider, toInput) {
 }
 
 function getParsed(currentFrom, currentTo) {
-  const from = parseInt(currentFrom.value, 10);
-  const to = parseInt(currentTo.value, 10);
+  const from = parseFloat(currentFrom.value);
+  const to = parseFloat(currentTo.value);
   return [from, to];
 }
 
@@ -793,7 +790,7 @@ const fromSlider = document.querySelector("#fromSlider");
 const toSlider = document.querySelector("#toSlider");
 const fromInput = document.querySelector("#fromInput");
 const toInput = document.querySelector("#toInput");
-fillSlider(fromSlider, toSlider, "#C6C6C6", "#25daa5", toSlider);
+fillSlider(fromSlider, toSlider, "#C6C6C6", "#113946", toSlider);
 setToggleAccessible(toSlider);
 
 fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput);
@@ -804,10 +801,13 @@ toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
 
 // Prikazivanje moda
 function showFilter() {
-  document.getElementById("more-filter").style.display = "block";
+  document.getElementById("more-filter").style.display = "flex";
 }
 
 // Sakrivanje moda
 function hideFilter() {
   document.getElementById("more-filter").style.display = "none";
+  console.log("BROJEVI: " + fromInput.value + " " + toInput.value);
+
+  searchCourses();
 }

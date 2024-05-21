@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\ITP_Intellecta.csproj": {}
+    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj": {}
   },
   "projects": {
-    "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\ITP_Intellecta.csproj": {
+    "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\ITP_Intellecta.csproj",
+        "projectUniqueName": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj",
         "projectName": "ITP_Intellecta",
-        "projectPath": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\ITP_Intellecta.csproj",
-        "packagesPath": "C:\\Users\\AB\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\AB\\Desktop\\intellecta NOVO\\ITP_Intellecta\\obj\\",
+        "projectPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\ITP_Intellecta.csproj",
+        "packagesPath": "C:\\Users\\PCX\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PCX\\Desktop\\ITP_Intellecta\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\AB\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\PCX\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -111,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
