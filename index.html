@@ -95,41 +95,54 @@
       <button
         class="btn-search moreFilter"
         title="Advanced search options"
-        onclick="addMoreFilter()"
+        onclick="showFilter()"
       >
         &nbsp; + &nbsp;
       </button>
       <br /><br />
-      <div id="more-filter">
-        <label>Duration in weeks</label>
-        <input type="number" class="input-search more-inp" />
-        <div class="range_container">
-          <div class="sliders_control">
-            <input id="fromSlider" type="range" value="0" min="0" max="250" />
-            <input id="toSlider" type="range" value="30" min="0" max="500" />
-          </div>
-          <div class="form_control">
-            <div class="form_control_container">
-              <div class="form_control_container__time">Min</div>
+      <div
+        id="more-filter"
+        class="modal-dialog modal-dialog-centered modal modal-filter"
+        style="display: none"
+      >
+        <div class="modal-content modal-filter" style="height: 50%">
+          <label>Duration in weeks</label>
+          <input type="number" class="input-search more-inp" />
+
+          <div class="range_container">
+            <div class="sliders_control">
               <input
-                class="form_control_container__time__input"
-                type="number"
-                id="fromInput"
+                id="fromSlider"
+                type="range"
                 value="10"
                 min="0"
                 max="100"
               />
+              <input id="toSlider" type="range" value="40" min="0" max="100" />
             </div>
-            <div class="form_control_container">
-              <div class="form_control_container__time">Max</div>
-              <input
-                class="form_control_container__time__input"
-                type="number"
-                id="toInput"
-                value="30"
-                min="0"
-                max="100"
-              />
+            <div class="form_control">
+              <div class="form_control_container">
+                <div class="form_control_container__time">Min</div>
+                <input
+                  class="form_control_container__time__input"
+                  type="number"
+                  id="fromInput"
+                  value="10"
+                  min="0"
+                  max="100"
+                />
+              </div>
+              <div class="form_control_container">
+                <div class="form_control_container__time">Max</div>
+                <input
+                  class="form_control_container__time__input"
+                  type="number"
+                  id="toInput"
+                  value="40"
+                  min="0"
+                  max="100"
+                />
+              </div>
             </div>
           </div>
         </div>

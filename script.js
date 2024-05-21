@@ -711,11 +711,8 @@ function searchCourses() {
   loadCourses();
 }
 
-function addMoreFilter() {
-  const container = document.getElementsByClassName("custom-dropdown")[0];
-}
-
 //INPUT
+
 function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
   const [from, to] = getParsed(fromInput, toInput);
   fillSlider(fromInput, toInput, "#C6C6C6", "#25daa5", controlSlider);
@@ -804,3 +801,13 @@ toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
 fromInput.oninput = () =>
   controlFromInput(fromSlider, fromInput, toInput, toSlider);
 toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
+
+// Prikazivanje moda
+function showFilter() {
+  document.getElementById("more-filter").style.display = "block";
+}
+
+// Sakrivanje moda
+function hideFilter() {
+  document.getElementById("more-filter").style.display = "none";
+}
