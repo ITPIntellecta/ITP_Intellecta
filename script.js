@@ -383,6 +383,32 @@ function filteredCategory(courses, category) {
   });
 }
 
+function filteredDuration(courses, duration) {
+  return courses.filter((course) => {
+    //  console.log(duration);
+
+    if (duration != undefined && duration != null && duration != 0) {
+      // console.log(course.durationInWeeks + " " + duration);
+      return course.durationInWeeks == duration;
+    } else {
+      return true;
+    }
+  });
+}
+
+function filteredPrice(courses, min, max) {
+  return courses.filter((course) => {
+    //   console.log(duration);
+
+    if (min != undefined && min != null && max != undefined && max != null) {
+      console.log(course.price + " " + min + " " + max);
+      return course.price >= min && course.price <= max;
+    } else {
+      return true;
+    }
+  });
+}
+
 function filteredSubTitle(courses, subTitle) {
   return courses.filter((course) => {
     if (subTitle != "") {
@@ -400,6 +426,9 @@ function loadCourses() {
 
   const category = urlParams.get("parametar");
   const text = urlParams.get("text");
+  const min = urlParams.get("min");
+  const max = urlParams.get("max");
+  const duration = urlParams.get("duration");
 
   console.log(category);
 
@@ -413,7 +442,14 @@ function loadCourses() {
         filteredCourses = filteredSubTitle(filteredCourses, text);
         console.log(filteredCourses);
       }
-
+      if (duration != null) {
+        filteredCourses = filteredDuration(filteredCourses, duration);
+        console.log(filteredCourses);
+      }
+      if (min != null && max != null) {
+        filteredCourses = filteredPrice(filteredCourses, min, max);
+        console.log(filteredCourses);
+      }
       filteredCourses.forEach((course) => {
         if (course.approved == 1) {
           //  console.log(course);
@@ -702,11 +738,26 @@ function displayCategory(category) {
 function searchCourses() {
   const category = document.getElementById("categoryName").innerHTML;
   const searchWord = document.getElementById("input-search").value;
+  const priceMin = fromInput.value;
+  const priceMax = toInput.value;
+  const durationInWeeks = durationWeek.value;
   console.log(searchWord);
   console.log(category);
   window.location =
-    "courses.html?parametar=" + category + "&text=" + searchWord;
+    "courses.html?parametar=" +
+    category +
+    "&text=" +
+    searchWord +
+    "&duration=" +
+    durationInWeeks +
+    "&min=" +
+    priceMin +
+    "&max=" +
+    priceMax;
   loadCourses();
+  durationInWeeks = null;
+  priceMin = 0;
+  priceMax = 300;
 }
 
 //INPUT
@@ -788,8 +839,9 @@ function setToggleAccessible(currentTarget) {
 
 const fromSlider = document.querySelector("#fromSlider");
 const toSlider = document.querySelector("#toSlider");
-const fromInput = document.querySelector("#fromInput");
-const toInput = document.querySelector("#toInput");
+let fromInput = document.querySelector("#fromInput");
+let toInput = document.querySelector("#toInput");
+let durationWeek = document.getElementById("durationWeek");
 fillSlider(fromSlider, toSlider, "#C6C6C6", "#113946", toSlider);
 setToggleAccessible(toSlider);
 
@@ -807,7 +859,32 @@ function showFilter() {
 // Sakrivanje moda
 function hideFilter() {
   document.getElementById("more-filter").style.display = "none";
-  console.log("BROJEVI: " + fromInput.value + " " + toInput.value);
+  fromInput = document.querySelector("#fromInput");
+  toInput = document.querySelector("#toInput");
+  durationWeek = document.getElementById("durationWeek");
+  console.log(
+    "BROJEVI: " +
+      fromInput.value +
+      " " +
+      toInput.value +
+      " " +
+      durationWeek.value
+  );
 
-  searchCourses();
+  // searchCourses();
+}
+
+function cancelFilter() {
+  document.getElementById("more-filter").style.display = "none";
+
+  fromInput = "";
+  toInput = "";
+  console.log(
+    "BROJEVI: " +
+      fromInput.value +
+      " " +
+      toInput.value +
+      " " +
+      durationWeek.value
+  );
 }

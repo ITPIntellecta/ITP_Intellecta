@@ -108,7 +108,12 @@
         <div class="modal-filter" style="height: 50%">
           <div class="durationInWeaks">
             <label>Duration in weeks</label>
-            <input type="number" class="input-search more-inp" min="0" />
+            <input
+              id="durationWeek"
+              type="number"
+              class="input-search more-inp"
+              min="0"
+            />
           </div>
 
           <div class="range_container">
@@ -162,7 +167,7 @@
           </div>
           <div class="buttonsFilters">
             <button type="submit" onclick="hideFilter()">Save</button>
-            <button type="reset" onclick="hideFilter()">Cancel</button>
+            <button type="reset" onclick="cancelFilter()">Cancel</button>
           </div>
         </div>
       </div>
