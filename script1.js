@@ -311,14 +311,14 @@ function loadUsers() {
 
           const div = document.getElementsByClassName("row")[0];
           div.innerHTML += `<div class="col-sm-6 mb-4">
-              <div class="card" style="margin-bottom:2rem";>
-                <div class="card-body">
-                  <h5 class="card-title">${name}</h5>
+              <div class="item mmm" style="margin-bottom:2rem";>
+                
+                  <h5 class="courseCardTitle loadVideo">${name}</h5>
                   <p class="card-text">
                   ${email}
                   </p>
-                  <a href="#" class="btn btn-primary" onclick="authorizeAdmin(${userId})">Authorize</a>
-                </div>
+                  <button class="popularCourse" onclick="authorizeAdmin(${userId})">Authorize</button>
+                
               </div>
             </div>`;
         }
@@ -425,9 +425,17 @@ function courseInfo(courseId) {
       titleEl.innerHTML = title;
       subtitleEl.innerHTML = subtitle;
       bodyEl.innerHTML = `<div class="modalbodytop">
-              <div class="category">${data.data.category}</div>
-              <div class="price">Price: ${data.data.price} $</div>
-              <div class="mark">Mark: ${data.data.mark}</div>
+                <div class="category">Category: ${data.data.category}</div>
+                <div class="price">Price: ${data.data.price} $</div>
+                <div class="markk">Mark: ${data.data.courseMark}
+                <div class="rating">
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                  <span class="star">&#9733;</span>
+                </div>
+                </div>
               </div>
               <div class="modalbodybody">
                 <div class="duration">Duration in weeks:  ${data.data.durationInWeeks}</div>
@@ -436,6 +444,14 @@ function courseInfo(courseId) {
               <div class="modalbodybottom">
                 <div class="highlights">Highlights: ${data.data.highlights}</div>
               </div>`;
+
+      console.log(data.data.courseMark);
+
+      let stars = document.querySelectorAll(".star");
+      for (let i = 0; i < data.data.courseMark; i++) {
+        // Pretpostavimo da je ocjena 4
+        stars[i].classList.add("filled");
+      }
     })
     .catch((error) => {
       console.error(

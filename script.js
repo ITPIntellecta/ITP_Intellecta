@@ -489,15 +489,14 @@ function loadCoursesForAuth() {
           let highlights = course.highlights;
           let id = course.courseId;
           const div = document.getElementsByClassName("row")[0];
+
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="card" style="margin-bottom:2rem";>
-                <div class="card-body">
-                  <h5 class="card-title" onclick="loadVideo(${id})">${title}</h5>
+              <div class="item mmm" style="margin-bottom:2rem";>
+                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
-                  <a href="#" class="btn btn-primary" onclick="confirmCourse(${id})">Authorize</a>
-                </div>
+                  <button  class="popularCourse" onclick="confirmCourse(${id})">Authorize</button>
               </div>
             </div>`;
         }

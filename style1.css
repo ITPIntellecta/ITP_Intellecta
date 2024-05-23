@@ -86,7 +86,8 @@ body {
 }
 
 .form-style {
-  padding-left: 55px;
+  /* padding-left: 55px; */
+  /* padding: 10px; */
   height: 40px;
   width: 100%;
   box-sizing: border-box;
@@ -96,9 +97,11 @@ body {
   letter-spacing: 0.5px;
   outline: none;
   color: #ead7bb;
-  background-color: #113946;
+  background-color: #113946d3;
   border: none;
   transition: color 0.4s ease-in-out, background-color 0.4s ease-in-out;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .input-icon {
@@ -134,7 +137,7 @@ body {
   /* width: 8rem; */
   width: 95%;
   border-radius: 4px;
-  background-color: #113946;
+  background-color: #113946d3;
   transition: background-color 0.8s ease-out;
   margin-top: 25px;
 }
@@ -164,7 +167,7 @@ body {
   letter-spacing: 0.5px;
   outline: none;
   color: #ead7bb;
-  background-color: #113946;
+  background-color: #113946d3;
   border: none;
   vertical-align: middle;
   display: flex;
@@ -189,7 +192,7 @@ body {
 }
 
 .form-group-btn:hover .btn {
-  background-color: #ead7bb;
+  background-color: #ead7bbd0;
   color: #113946;
 }
 
@@ -295,7 +298,7 @@ input[type="radio"] {
 .part1:hover,
 .part2:hover {
   color: #113946;
-  background-color: #ead7bb;
+  background-color: #ead7bbd0;
 }
 
 .part1 .input-icon,
@@ -311,7 +314,7 @@ input[type="radio"] {
 }
 .part1:hover input,
 .part2:hover input {
-  background-color: #ead7bb;
+  background-color: #ead7bbd0;
   color: #113946;
 }
 
@@ -322,7 +325,7 @@ input[type="radio"] {
 }
 .form-group:hover .form-style {
   color: #113946;
-  background-color: #ead7bb;
+  background-color: #ead7bbd0;
 }
 .form-group:hover .form-style::placeholder {
   color: #113946;
@@ -349,7 +352,7 @@ input[type="radio"] {
 
 select option:hover {
   color: #113946;
-  background-color: #ead7bb;
+  background-color: #ead7bbd0;
 }
 
 .week-material-btn:hover {
@@ -361,7 +364,7 @@ select option:hover {
 .week-material-btn {
   display: block;
   color: #ead7bb;
-  width: 70%;
+  width: 100%;
   margin: 0;
   height: 40px;
   line-height: 40px;
@@ -369,9 +372,16 @@ select option:hover {
 
   /* padding-left: 55px; */
 }
+#weekCourse {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
 
 #highlights ::placeholder {
-  padding-left: 55px;
+  /* padding-left: 55px; */
   vertical-align: middle;
 }
 
@@ -381,8 +391,8 @@ select option:hover {
   padding: 0;
   resize: none;
   height: 100%;
-  padding-left: 0.3em;
-  margin-left: 1em;
+  /* padding-left: 0.3em; */
+  /* margin-left: 1em; */
 }
 
 .fileDiv {
@@ -417,10 +427,11 @@ select option:hover {
 }
 
 .sendAuth {
-  width: fit-content;
+  /* width: fit-content; */
+  width: 100%;
   padding: 1% 2%;
   margin: 0;
   display: block;
-
+  box-sizing: border-box;
   text-align: center;
 }

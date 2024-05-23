@@ -973,3 +973,59 @@ input[type="range"] {
   z-index: 1;
 }
 /*-----------------------------*/
+
+/* ELEMENTI U MODALU */
+.rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.star {
+  font-size: 2em;
+  color: #ccc;
+}
+
+.star.filled {
+  color: #f39c12;
+}
+
+.category {
+  color: #113946;
+}
+.price {
+  color: #1139468a;
+}
+.markk {
+  color: #f39c12;
+}
+.modalbodytop {
+  border-bottom: 1px dotted #113946;
+}
+.modalbodybottom {
+  margin-top: 5pt;
+  border-radius: 15pt;
+  padding: 7px;
+  border: 1px solid #113946;
+}
+.modalbodybody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  margin: 7pt;
+}
+
+/*DODAVANJE KURSA*/
+.fileDiv {
+  vertical-align: middle;
+  padding: 0;
+}
+#weekCourse1 {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
