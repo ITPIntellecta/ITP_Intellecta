@@ -26,8 +26,9 @@ function redirectToPage(url) {
 //MODALI
 
 // Prikazivanje moda
-function showModal() {
+function showModal(event, id) {
   document.getElementById("myModal").style.display = "block";
+  courseInfo(id);
 }
 
 // Sakrivanje moda
@@ -401,7 +402,7 @@ function approveAdminMail(id) {
     });
 }
 
-function courseInfo() {
+function courseInfo(courseId) {
   fetch(`/api/course/GetCourseById/${courseId}`, {
     method: "GET",
   })
@@ -423,7 +424,18 @@ function courseInfo() {
 
       titleEl.innerHTML = title;
       subtitleEl.innerHTML = subtitle;
-      // bodyEl.innerHTML = email;
+      bodyEl.innerHTML = `<div class="modalbodytop">
+              <div class="category">${data.data.category}</div>
+              <div class="price">Price: ${data.data.price} $</div>
+              <div class="mark">Mark: ${data.data.mark}</div>
+              </div>
+              <div class="modalbodybody">
+                <div class="duration">Duration in weeks:  ${data.data.durationInWeeks}</div>
+                <div class="weekly"> Weekly hours:  ${data.data.weeklyHours}</div>
+              </div>
+              <div class="modalbodybottom">
+                <div class="highlights">Highlights: ${data.data.highlights}</div>
+              </div>`;
     })
     .catch((error) => {
       console.error(

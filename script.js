@@ -709,20 +709,30 @@ function loadPopularCourses() {
           container.innerHTML += `<div class="item mmmm">
           <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button class="popularCourse">View course</button>
           </div>`;
+
+          // let elements = document.getElementsByClassName("popularCourse");
+          // Array.from(elements).forEach((element) => {
+          //   element.addEventListener("click", (event) => {
+          //     showModal(event, id); // Pass event and element (or any other parameter)
+          //   });
+          // });
+
+          let elements = document.getElementsByClassName("popularCourse");
+          Array.from(elements).forEach((element, index) => {
+            element.addEventListener("click", (event) => {
+              let courseId = data.data[index].courseId;
+              showModal(event, courseId); // Proslediti event i tačan id
+            });
+          });
+
+          document
+            .getElementsByClassName("btn-close")[0]
+            .addEventListener("click", hideModal);
+
+          document
+            .getElementsByClassName("btn-savee")[0]
+            .addEventListener("click", hideModal);
         }
-
-        const elements = document.getElementsByClassName("popularCourse");
-        Array.from(elements).forEach((element) => {
-          element.addEventListener("click", showModal);
-        });
-
-        document
-          .getElementsByClassName("btn-close")[0]
-          .addEventListener("click", hideModal);
-
-        document
-          .getElementsByClassName("btn-savee")[0]
-          .addEventListener("click", hideModal);
       });
     })
     .catch((error) => {
