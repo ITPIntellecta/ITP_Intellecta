@@ -32,6 +32,7 @@ namespace Controllers
                 return Ok(user);
         }
 
+
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> Get()
         {

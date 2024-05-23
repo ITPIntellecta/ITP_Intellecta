@@ -335,11 +335,14 @@ footer {
   align-items: center;
   background-image: url("brightbl.jpg");
   background-size: cover;
-  height: 200pt;
-  width: 300pt;
+  /* height: 200pt; */
+  /* width: 300pt; */
+  width: 100%;
+  height: 100%;
   /* margin-right: 5%; */
-  margin-top: 3%;
-  margin-bottom: 3%;
+  /* margin-top: 3%; */
+  /* margin-bottom: 3%; */
+  margin: 0;
   position: relative;
   /* display: flex;
   flex-direction: column;
@@ -347,6 +350,9 @@ footer {
   grid-row: 1;
   border-radius: 15pt;
   /* z-index: 500; */
+  box-sizing: border-box;
+
+  padding: 10px;
 }
 .item:hover {
   animation: scaling 0.8s ease-in-out both;
@@ -385,4 +391,14 @@ footer {
 .addcourse1:hover {
   cursor: pointer;
   background-color: #19495973;
+}
+
+.col-sm-6 {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-content: center;
 }

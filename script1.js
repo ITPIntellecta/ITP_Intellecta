@@ -400,3 +400,35 @@ function approveAdminMail(id) {
       console.error("Error updating admin:", error);
     });
 }
+
+function courseInfo() {
+  fetch(`/api/course/GetCourseById/${courseId}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.log(response);
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      const title = data.data.title;
+      const subtitle = data.data.subtitle;
+
+      let titleEl = document.getElementById("modalTitle");
+      let subtitleEl = document.getElementById("modalSubtitle");
+      let bodyEl = document.getElementById("modalBody");
+
+      titleEl.innerHTML = title;
+      subtitleEl.innerHTML = subtitle;
+      // bodyEl.innerHTML = email;
+    })
+    .catch((error) => {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error
+      );
+    });
+}
