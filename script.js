@@ -413,7 +413,10 @@ function filteredSubTitle(courses, subTitle) {
   return courses.filter((course) => {
     if (subTitle != "") {
       console.log(course.title);
-      return course.title === subTitle || course.subtitle === subTitle;
+      return (
+        course.title.toLowerCase() === subTitle.toLowerCase() ||
+        course.subtitle.toLowerCase() === subTitle.toLowerCase()
+      );
     } else {
       return true;
     }
