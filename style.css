@@ -814,6 +814,10 @@ footer {
   background-color: #bca37f;
   color: #113946;
 }
+.btn-close:hover,
+.btn-savee:hover {
+  cursor: pointer;
+}
 
 #more-filter {
   width: 100%;
