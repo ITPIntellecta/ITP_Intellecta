@@ -16,5 +16,7 @@ namespace ITP_Intellecta.Dtos.User
          public DateTime DateOfBirth { get; set; }
         public string Title { get; set; }=string.Empty;
         public bool Approved {get; set;}
+
+        public List<GetCourseDto>? Courses {get;set;}
     }
 }

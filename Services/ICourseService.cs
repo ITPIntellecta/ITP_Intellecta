@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITP_Intellecta.Dtos.User;
 
 
 namespace Services
@@ -13,6 +14,8 @@ namespace Services
         Task<ServiceResponse<List<GetCourseDto>>> GetAllCourses();
         Task<ServiceResponse<GetCourseDto>> UpdateCourse(UpdateCourseDto updatedCourse);
         Task<ServiceResponse<GetCourseDto>> GetCourseById(int id);
+        Task<ServiceResponse<GetUserDto>> AddUserCourse (AddUserCourseDto newUserCourse);
+
 
 
     } 

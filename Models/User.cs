@@ -19,5 +19,7 @@ namespace ITP_Intellecta.Models
         public string Title { get; set; }=string.Empty;
         public bool Approved {get; set;}
 
+        public List<Course>? Courses{get;set;}
+
     }
 }

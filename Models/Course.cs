@@ -18,6 +18,6 @@ namespace ITP_Intellecta.Models
         public float CourseMark {get; set;}
         public bool Approved {get; set;}
         public float Price { get; set; }
-
+        public List<User>? Users{get; set;}
     }
 }

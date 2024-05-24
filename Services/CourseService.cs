@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using System.Security.Claims;
+using ITP_Intellecta.Dtos.User;
 
 
 namespace Services
@@ -121,6 +122,41 @@ namespace Services
                     throw new Exception($"Course with Id '{id}' not found.");
             serviceResponse.Data = _mapper.Map<GetCourseDto>(course);
             return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetUserDto>> AddUserCourse (AddUserCourseDto newUserCourse)
+        {
+            var response=new ServiceResponse<GetUserDto>();
+            try{
+                var user=await _context.Users.Include(c=>c.Courses).FirstOrDefaultAsync(c=>c.Id==newUserCourse.UserId);
+ 
+                if(user is null)
+                {
+                    response.Success=false;
+                    response.Message="User not found!";
+                    return response;
+                }
+ 
+                var course=await _context.Courses.FirstOrDefaultAsync(s=>s.CourseId==newUserCourse.CourseId);
+ 
+                if(course is null)
+                {
+                    response.Success=false;
+                    response.Message="Course not found!";
+                    return response;
+                }
+ 
+                user.Courses!.Add(course);
+                await _context.SaveChangesAsync();
+                response.Data=_mapper.Map<GetUserDto>(user);
+ 
+ 
+            }
+            catch(Exception ex){
+                response.Success=false;
+                response.Message=ex.Message;
+            }
+            return response;
         }
     }
     }

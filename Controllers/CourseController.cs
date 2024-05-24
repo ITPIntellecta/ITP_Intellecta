@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITP_Intellecta.Dtos.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace Controllers
             _courseService = courseService;
         }
 
-        [HttpPost]
+        [HttpPost("AddCourse")]
         public async Task<ActionResult<ServiceResponse<GetCourseDto>>> AddCourse(AddCourseDto newCourse)
         {
             ObjectResult a=Ok(await _courseService.AddCourse(newCourse));
@@ -49,6 +50,12 @@ namespace Controllers
         public async Task<ActionResult<ServiceResponse<GetCourseDto>>> GetCourseById(int id)
         {
             return Ok(await _courseService.GetCourseById(id));
+        }
+
+         [HttpPost("Course")]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> AddUserCourse(AddUserCourseDto newUserCourse)
+        {
+            return Ok(await _courseService.AddUserCourse(newUserCourse));
         }
     }
 }

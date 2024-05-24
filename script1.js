@@ -222,7 +222,7 @@ function displayName() {
       })
       .then((data) => {
         // Uzmite ime korisnika iz podataka koje ste dobili
-        // console.log(data);
+        //  console.log(data);
         const userName = data.data.firstName;
         // Prikazivanje imena korisnika u HTML elementu
         let usernameElement = document.getElementById("logUserName");

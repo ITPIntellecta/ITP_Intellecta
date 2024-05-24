@@ -224,6 +224,35 @@ function saveFile() {
   //   });
 }
 
+let userCurrentId;
+function getCurrentUserId() {
+  // checkUserRole();
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        console.log(userCurrentId);
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
+}
+
 function submitCourse(event) {
   event.preventDefault();
   let userId;
@@ -277,7 +306,7 @@ function submitCourse(event) {
 
         //  console.log(formData);
         let courseId;
-        fetch("/api/course", {
+        fetch("/api/course/AddCourse", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -466,7 +495,7 @@ function loadCourses() {
                   <p class="card-text">
                   ${highlights}
                   </p>
-                  <button  class="popularCourse">Enroll</button>
+                  <button  class="popularCourse" onclick="joinCourse(${id})">Enroll</button>
               </div>
             </div>`;
         }
@@ -899,4 +928,60 @@ function cancelFilter() {
       " " +
       durationWeek.value
   );
+}
+
+function joinCourse(id) {
+  // getCurrentUserId();
+  // console.log(userCurrentId);
+
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        const enroll = {
+          UserId: userCurrentId,
+          CourseId: id,
+        };
+        console.log(userCurrentId);
+
+        fetch("/api/course/Course", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(enroll),
+        })
+          .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+              throw new Error("Nash Fail");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error("Nash Error", error);
+          });
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
 }
