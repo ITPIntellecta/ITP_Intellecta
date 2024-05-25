@@ -463,7 +463,10 @@ function loadCourses() {
   const duration = urlParams.get("duration");
 
   console.log(category);
-
+  //console.log(window.location);
+  if (window.location.href.includes("myLearning")) {
+    console.log("String sadrži 'myLearning'");
+  }
   fetch("/api/course/getall")
     .then((response) => response.json())
     .then((data) => {
