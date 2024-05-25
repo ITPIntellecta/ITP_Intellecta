@@ -402,3 +402,57 @@ footer {
   justify-content: center;
   align-content: center;
 }
+
+/*MODAL ZA POTVRDU UPISA*/
+.modal1 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content1 {
+  background-color: #f9dbaecb;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 24px;
+  border: 1px solid #bca37f;
+  width: 60%; /* Could be more or less, depending on screen size */
+  height: 200px;
+  border-radius: 15pt;
+}
+
+/* The Close Button */
+.close1 {
+  color: #113946;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close1:hover,
+.close1:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.popularCourse1 {
+  border-radius: 15pt;
+  width: 25%;
+  background-color: #113946a2;
+  border: 1px solid #113946a2;
+  color: #fff2d8;
+  padding: 5px 0;
+  bottom: 10pt;
+}
+.popularCourse1:hover {
+  cursor: pointer;
+  background-color: #19495973;
+}

@@ -75,6 +75,23 @@
         </div>
       </div>
       <button id="scrollBtn" class="hidden">&#129121;</button>
+
+      <div id="myModal1" class="modal1">
+        <!-- Modal content -->
+        <div class="modal-content1">
+          <span class="close1">&times;</span><br />
+          <p>Are you sure you want to enroll in the course?</p>
+          <br />
+          <button
+            id="enrollBtn"
+            class="popularCourse1"
+            onclick="confirmEnroll()"
+          >
+            Enroll
+          </button>
+        </div>
+      </div>
+      <div id="myModal1" class="modal1 modal2"></div>
       <script>
         const params = new URLSearchParams(location.search);
         const parametar = params.get("parametar");

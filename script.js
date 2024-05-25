@@ -495,7 +495,7 @@ function loadCourses() {
                   <p class="card-text">
                   ${highlights}
                   </p>
-                  <button  class="popularCourse" onclick="joinCourse(${id})">Enroll</button>
+                  <button id="enrollBtn" class="popularCourse" onclick="joinCourse(${id})">Enroll</button>
               </div>
             </div>`;
         }
@@ -930,10 +930,11 @@ function cancelFilter() {
   );
 }
 
-function joinCourse(id) {
-  // getCurrentUserId();
-  // console.log(userCurrentId);
-
+var enrollCourseId = -1;
+function confirmEnroll() {
+  answer = true;
+  let id = enrollCourseId;
+  console.log(id);
   if (localStorage.getItem("jwtToken") != null) {
     fetch("/api/course/user", {
       method: "GET",
@@ -972,6 +973,7 @@ function joinCourse(id) {
           })
           .then((data) => {
             console.log(data);
+            enrollCourseMail(userCurrentId);
           })
           .catch((error) => {
             console.error("Nash Error", error);
@@ -984,4 +986,60 @@ function joinCourse(id) {
         );
       });
   }
+
+  var modal1 = document.getElementById("myModal1");
+  modal1.style.display = "none";
+  var modal2 = document.getElementsByClassName("modal2")[0];
+  modal2.style.display = "block";
+  modal2.innerHTML = `
+        <!-- Modal content -->
+        <div onclick="closeModal()" class="modal-content1" style="height:150px">
+          <span class="close1" onclick="closeModal()">&times;</span><br />
+          <p style="font-size:15pt; font-weight:bold; margin:auto;">You are enrolled in the course!</p>
+          
+        </div>
+      `;
+}
+function closeModal() {
+  console.log("k");
+  var modal1 = document.getElementById("myModal1");
+  var modal2 = document.getElementsByClassName("modal2")[0];
+  if (modal2 != null) modal2.style.display = "none";
+  modal1.style.display = "none";
+}
+function joinCourse(id) {
+  // getCurrentUserId();
+  // console.log(userCurrentId);
+  var modal1 = document.getElementById("myModal1");
+
+  // Get the <span> element that closes the modal
+  var span1 = document.getElementsByClassName("close1")[0];
+
+  // When the user clicks on <span> (x), close the modal
+  span1.onclick = function () {
+    modal1.style.display = "none";
+  };
+  console.log(modal1);
+  modal1.style.display = "block";
+  enrollCourseId = id;
+  console.log(enrollCourseId);
+}
+
+function enrollCourseMail(id) {
+  fetch(
+    `/api/email/send-email/${id}/You have been successfully enrolled in the course!`,
+    {
+      method: "POST",
+    }
+  )
+    .then((response) => {
+      // console.log(response);
+      // return response.json;
+    })
+    .then((data) => {
+      // console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error (enroll):", error);
+    });
 }
