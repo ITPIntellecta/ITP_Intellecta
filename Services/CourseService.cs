@@ -158,5 +158,18 @@ namespace Services
             }
             return response;
         }
+
+        public async Task<ServiceResponse<List<GetCourseDto>>> GetMyLearning(int userId)
+        {
+            var serviceResponse = new ServiceResponse<List<GetCourseDto>>();
+            var user1=await _context.Users.FirstOrDefaultAsync(u=>u.Id==userId);
+            // var c1=await _context.Courses.FirstOrDefaultAsync(c=>c.CourseId==4);
+            // user1!.Courses!.Add(c1!);
+
+            var user=await _context.Users.Include(c=>c.Courses).FirstOrDefaultAsync(c=> c.Id==userId);
+           
+            serviceResponse.Data = user!.Courses!.Select(c => _mapper.Map<GetCourseDto>(c)).ToList();
+            return serviceResponse;
+        }
     }
     }

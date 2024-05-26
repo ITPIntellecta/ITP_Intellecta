@@ -445,7 +445,12 @@ function courseInfo(courseId) {
                 <div class="highlights">Highlights: ${data.data.highlights}</div>
               </div>`;
 
-      console.log(data.data.courseMark);
+      // console.log(data.data.courseMark);
+      // console.log(data.data.courseId);
+      // document
+      //   .getElementById("enroll")
+      //   .addEventListener("click", joinCourse(`${data.data.courseId}`));
+      // console.log(document.getElementById("enroll"));
 
       let stars = document.querySelectorAll(".star");
       for (let i = 0; i < data.data.courseMark; i++) {
@@ -460,3 +465,24 @@ function courseInfo(courseId) {
       );
     });
 }
+
+// function joinCourse(id) {
+//   // console.log("AAAAAAAAAAAAAAAAAAA");
+//   // console.log(id);
+
+//   // getCurrentUserId();
+//   // console.log(userCurrentId);
+//   var modal1 = document.getElementById("myModal1");
+
+//   // Get the <span> element that closes the modal
+//   var span1 = document.getElementsByClassName("close1")[0];
+
+//   // When the user clicks on <span> (x), close the modal
+//   span1.onclick = function () {
+//     modal1.style.display = "none";
+//   };
+//   console.log(modal1);
+//   modal1.style.display = "block";
+//   enrollCourseId = id;
+//   console.log(enrollCourseId);
+// }

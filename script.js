@@ -69,7 +69,7 @@ function changeToCourses(element) {
     location.href = "courses.html?parametar=" + element;
     document.getElementsByClassName("addcourse")[0].classList.add("showbtn");
   } else {
-    location = "courses.html";
+    location.href = "courses.html?parametar=" + element;
   }
 }
 
@@ -466,33 +466,37 @@ function loadCourses() {
   //console.log(window.location);
   if (window.location.href.includes("myLearning")) {
     console.log("String sadrži 'myLearning'");
-  }
-  fetch("/api/course/getall")
-    .then((response) => response.json())
-    .then((data) => {
-      let filteredCourses = filteredCategory(data.data, category);
-      console.log(filteredCourses);
+    loadMyLearning();
+  } else if (window.location.href.includes("myCourses")) {
+    console.log("MY COURSES");
+    loadMyCourses();
+  } else {
+    fetch("/api/course/getall")
+      .then((response) => response.json())
+      .then((data) => {
+        let filteredCourses = filteredCategory(data.data, category);
+        console.log(filteredCourses);
 
-      if (text != null) {
-        filteredCourses = filteredSubTitle(filteredCourses, text);
-        console.log(filteredCourses);
-      }
-      if (duration != null) {
-        filteredCourses = filteredDuration(filteredCourses, duration);
-        console.log(filteredCourses);
-      }
-      if (min != null && max != null) {
-        filteredCourses = filteredPrice(filteredCourses, min, max);
-        console.log(filteredCourses);
-      }
-      filteredCourses.forEach((course) => {
-        if (course.approved == 1) {
-          //  console.log(course);
-          let title = course.title;
-          let highlights = course.highlights;
-          let id = course.courseId;
-          const div = document.getElementsByClassName("row")[0];
-          div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+        if (text != null) {
+          filteredCourses = filteredSubTitle(filteredCourses, text);
+          console.log(filteredCourses);
+        }
+        if (duration != null) {
+          filteredCourses = filteredDuration(filteredCourses, duration);
+          console.log(filteredCourses);
+        }
+        if (min != null && max != null) {
+          filteredCourses = filteredPrice(filteredCourses, min, max);
+          console.log(filteredCourses);
+        }
+        filteredCourses.forEach((course) => {
+          if (course.approved == 1) {
+            //  console.log(course);
+            let title = course.title;
+            let highlights = course.highlights;
+            let id = course.courseId;
+            const div = document.getElementsByClassName("row")[0];
+            div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" style="margin-bottom:2rem";>
                   <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
                   <p class="card-text">
@@ -501,13 +505,148 @@ function loadCourses() {
                   <button id="enrollBtn" class="popularCourse" onclick="joinCourse(${id})">Enroll</button>
               </div>
             </div>`;
-        }
-      });
-    })
+          }
+        });
+      })
 
-    .catch((error) => {
-      console.error("There was an error:", error);
-    });
+      .catch((error) => {
+        console.error("There was an error:", error);
+      });
+  }
+}
+
+function loadMyLearning() {
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        console.log(userCurrentId);
+
+        fetch(`/api/course/getmylearning/${userCurrentId}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // let filteredCourses = filteredCategory(data.data, category);
+            // console.log(filteredCourses);
+            console.log(data);
+            data.data.forEach((course) => {
+              console.log(course);
+              let title = course.title;
+              let highlights = course.highlights;
+              let id = course.courseId;
+              const div = document.getElementsByClassName("row")[0];
+              div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="item mmm" style="margin-bottom:2rem";>
+                
+                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
+                  <p class="card-text">
+                  ${highlights}
+                  </p>
+                  <button class="popularCourse" onclick="loadVideo(${id})">View Course</button>
+               
+              </div>
+            </div>`;
+            });
+          })
+
+          .catch((error) => {
+            console.error("There was an error:", error);
+          });
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
+}
+
+function loadMyCourses() {
+  if (localStorage.getItem("jwtToken") != null) {
+    console.log("ISPIS ISPIS");
+
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        console.log(userCurrentId);
+
+        fetch("/api/course/getall")
+          .then((response) => response.json())
+          .then((data) => {
+            data.data.forEach((course) => {
+              console.log(course.creatorId);
+              // console.log(course.creatorId);
+              console.log(course.approved);
+              console.log(course);
+              if (course.creatorId == userCurrentId) {
+                console.log("USAO U IF");
+                let title = course.title;
+                let highlights = course.highlights;
+                let id = course.courseId;
+                const div = document.getElementsByClassName("row")[0];
+                div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="item mmm" style="margin-bottom:2rem" id="cccourse${id}">
+              
+
+                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
+                  <p class="card-text" id="pId${id}">
+                  ${highlights}
+                  </p>
+                  <button class="popularCourse" onclick="loadVideo(${id})">View Course</button>
+                 
+              </div>
+            </div>`;
+                if (course.approved == false) {
+                  console.log("USAO U IF ZA APPROVED");
+                  document
+                    .getElementById(`cccourse${id}`)
+                    .classList.add("notapproved");
+
+                  document.getElementById(`pId${id}`).innerHTML =
+                    "COURSE NOT YET APPROVED";
+                  document.getElementById(`pId${id}`).style.color = "black";
+                } else {
+                  document
+                    .getElementById(`cccourse${id}`)
+                    .classList.remove("notapproved");
+                }
+              }
+            });
+          })
+
+          .catch((error) => {
+            console.error("There was an error:", error);
+          });
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
 }
 
 function showCoursesForAuthorization() {
@@ -531,7 +670,10 @@ function loadCoursesForAuth() {
                   <p class="card-text">
                   ${highlights}
                   </p>
+                  <div class="authButtons">
                   <button  class="popularCourse" onclick="confirmCourse(${id})">Authorize</button>
+                  <button  class="popularCourse" oncliske="deleteCourse(${id})">Delete</button>
+                  </div>
               </div>
             </div>`;
         }
@@ -743,13 +885,6 @@ function loadPopularCourses() {
           container.innerHTML += `<div class="item mmmm">
           <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button class="popularCourse">View course</button>
           </div>`;
-
-          // let elements = document.getElementsByClassName("popularCourse");
-          // Array.from(elements).forEach((element) => {
-          //   element.addEventListener("click", (event) => {
-          //     showModal(event, id); // Pass event and element (or any other parameter)
-          //   });
-          // });
 
           let elements = document.getElementsByClassName("popularCourse");
           Array.from(elements).forEach((element, index) => {

@@ -357,6 +357,13 @@ footer {
 .item:hover {
   animation: scaling 0.8s ease-in-out both;
 }
+
+.notapproved {
+  background-image: url(brightblgrayscale.png);
+  /* background-color: #638c8f89; */
+  border: 2px solid black;
+}
+
 .item h5 {
   background-color: #ead7bb44;
   backdrop-filter: blur(10px);
@@ -455,4 +462,9 @@ footer {
 .popularCourse1:hover {
   cursor: pointer;
   background-color: #19495973;
+}
+
+::selection {
+  background-color: #bca37f;
+  color: #113946;
 }

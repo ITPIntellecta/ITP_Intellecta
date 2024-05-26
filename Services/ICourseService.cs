@@ -16,7 +16,6 @@ namespace Services
         Task<ServiceResponse<GetCourseDto>> GetCourseById(int id);
         Task<ServiceResponse<GetUserDto>> AddUserCourse (AddUserCourseDto newUserCourse);
 
-
-
+        Task<ServiceResponse<List<GetCourseDto>>> GetMyLearning(int userId);
     } 
 }

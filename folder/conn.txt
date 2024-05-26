@@ -1,0 +1,8 @@
+Shic:
+    "DefaultConnection": "Server=.\\SqlExpress04; Database=intellecta; Trusted_Connection=true; TrustServerCertificate=true;"
+Lena:
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS; Database=intellecta; Trusted_Connection=true; TrustServerCertificate=true;"
+
+
+
+jgyh ydlo fukt wvpk

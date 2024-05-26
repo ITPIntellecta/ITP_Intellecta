@@ -40,6 +40,11 @@ namespace Controllers
             return Ok(await _courseService.GetAllCourses());
         }
 
+        [HttpGet("GetMyLearning/{userId}")]
+        public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> GetMyLearning(int userId)
+        {
+            return Ok(await _courseService.GetMyLearning(userId));
+        }
         [HttpPut]
         public async Task<ActionResult<ServiceResponse<GetCourseDto>>> UpdateCourse(UpdateCourseDto updatedCourse)
         {
