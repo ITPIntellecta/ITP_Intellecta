@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using System.Security.Claims;
 using ITP_Intellecta.Dtos.User;
+using ITP_Intellecta.Dtos.Review;
 
 
 namespace Services
@@ -44,6 +45,15 @@ namespace Services
 
             var user=await _context.Users.FirstOrDefaultAsync(u=>u.Id==GetUserId());
 
+
+            servresp.Data=user;
+            return servresp;
+        }
+
+        public async Task<ServiceResponse<User>> GetCreator(int creatorId)
+        {
+            var servresp=new ServiceResponse<User>();
+            var user =await _context.Users.FirstOrDefaultAsync(u=>u.Id==creatorId);
 
             servresp.Data=user;
             return servresp;
@@ -170,6 +180,23 @@ namespace Services
            
             serviceResponse.Data = user!.Courses!.Select(c => _mapper.Map<GetCourseDto>(c)).ToList();
             return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetReviewDto>> AddReview(AddReviewDto newReview)
+        {
+            var response=new ServiceResponse<GetReviewDto>();
+            var review=_mapper.Map<Review>(newReview);
+
+            _context.Reviews.Add(review);
+            await _context.SaveChangesAsync();
+
+            //kao rez vraca id korisnika
+            
+            var reviewresp=await _context.Reviews
+                    .Where(c => c.Id==review.Id)
+                    .Select(c => _mapper.Map<GetReviewDto>(c)).ToListAsync();
+            response.Data=reviewresp.FirstOrDefault();
+            return response;        
         }
     }
     }

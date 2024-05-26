@@ -670,11 +670,17 @@ footer {
 
 .course-description {
   text-align: left;
-  width: 100%;
-  padding-left: 5rem;
+  width: 80%;
+  /* padding-left: 5rem; */
   box-sizing: border-box;
 }
-
+.grid-course {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+}
 #myVideo {
   width: 100%; /* Puno zauzimanje širine div-a */
   height: 100%; /* Automatsko prilagođavanje visine proporcionalno širini */
@@ -1052,6 +1058,12 @@ input[type="range"] {
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
+.innerbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 /* Modal Content/Box */
 .modal-content1 {
@@ -1096,4 +1108,138 @@ input[type="range"] {
 ::selection {
   background-color: #bca37f;
   color: #113946;
+}
+
+.descLinks {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 50%;
+}
+.overviewButton,
+.reviewButton {
+  text-decoration: none;
+  color: #113946;
+  font-size: 20pt;
+  margin-right: 10pt;
+  /* margin: 10pt; */
+}
+
+/* COURSE DETAILS */
+#title-course {
+  /* display: block; */
+  font-size: 30pt;
+  font-weight: bold;
+}
+#subtitle-course {
+  font-size: 21pt;
+}
+
+#category-course {
+  font-size: 15pt;
+  color: #1e6f8a;
+}
+.header-course {
+  border: 1px solid #fff2d8af;
+  border-radius: 15pt;
+  padding: 0 5pt;
+  width: 100%;
+  text-align: center;
+  background-color: #113946a2;
+}
+.markdiv-course {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.second-course,
+.third-course,
+.fourth-course {
+  text-align: center;
+}
+.third-course {
+  padding-top: 5pt;
+  border-left: 1px solid #105027;
+  border-right: 1px solid #105027;
+}
+/* 
+#price-course {
+  color: #235837;
+  font-weight: 500;
+} */
+
+.addReview {
+  border-radius: 15pt;
+  width: 25%;
+  background-color: #113946a2;
+  border: 1px solid #113946a2;
+  color: #fff2d8;
+  padding: 5px 0;
+  bottom: 10pt;
+}
+.addReview:hover {
+  cursor: pointer;
+  background-color: #19495973;
+}
+
+.course-reviews {
+  margin-top: 10pt;
+  margin-bottom: 10pt;
+}
+.gridreviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20pt;
+}
+.leftreview,
+.rightreview {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.rightreview {
+  justify-content: space-evenly;
+}
+/* RATING */
+.rating-container {
+  direction: rtl; /* Postavljanje zvezdica s desna na levo */
+  font-size: 2rem; /* Veličina zvezdica */
+  cursor: pointer; /* Promena kursora na pointer */
+}
+
+.starR {
+  color: gray; /* Boja za neaktivne zvezdice */
+}
+
+.starR:hover,
+.starR:hover ~ .starR {
+  color: gold; /* Boja zvezdica pri hoveru */
+}
+
+.starR.active,
+.starR.active ~ .starR {
+  color: gold; /* Boja aktivnih zvezdica */
+}
+
+#textareaid {
+  width: 100%; /* Podesite širinu po potrebi, npr. 100%, 50%, ili konkretna vrednost kao 300px */
+  height: 150px; /* Podesite visinu po potrebi */
+  padding: 10px; /* Unutrašnji razmak */
+  border: 1px solid #ccc; /* Granica */
+  border-radius: 4px; /* Zaobljeni uglovi */
+  box-sizing: border-box; /* Uključi padding i border u ukupnu veličinu */
+  font-size: 16px; /* Veličina fonta */
+  resize: vertical; /* Omogućava samo vertikalno menjanje veličine */
+}
+.inputReview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#submitreview {
+  margin-top: 5%;
+  width: 90%;
 }

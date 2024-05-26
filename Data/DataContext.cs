@@ -16,6 +16,7 @@ namespace ITP_Intellecta.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseContent> Materials { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
     }
 }

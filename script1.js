@@ -421,6 +421,7 @@ function courseInfo(courseId) {
       let titleEl = document.getElementById("modalTitle");
       let subtitleEl = document.getElementById("modalSubtitle");
       let bodyEl = document.getElementById("modalBody");
+      let footEl = document.getElementById("modalFooterButtons");
 
       titleEl.innerHTML = title;
       subtitleEl.innerHTML = subtitle;
@@ -445,8 +446,21 @@ function courseInfo(courseId) {
                 <div class="highlights">Highlights: ${data.data.highlights}</div>
               </div>`;
 
+      footEl.innerHTML = `<button
+            type="button"
+            class="btnn-secondary btn-close"
+            data-bs-dismiss="modal"
+            id="modalhide"
+            onclick="hideModal()"
+          >
+            Close
+          </button>
+          <button type="button" class="btnn-primary btn-savee" id="enroll" onclick="joinCourse(${data.data.courseId})">
+            Enroll
+          </button>`;
+
       // console.log(data.data.courseMark);
-      // console.log(data.data.courseId);
+      console.log(data.data.courseId);
       // document
       //   .getElementById("enroll")
       //   .addEventListener("click", joinCourse(`${data.data.courseId}`));
@@ -466,23 +480,150 @@ function courseInfo(courseId) {
     });
 }
 
-// function joinCourse(id) {
-//   // console.log("AAAAAAAAAAAAAAAAAAA");
-//   // console.log(id);
+function openReview() {
+  var element = document.getElementById("idReview");
+  var elementToHide = document.getElementById("idOverview");
+  elementToHide.style.display = "none";
+  element.style.display = "block";
+  element.innerHTML = `<div class="gridreviews"><div class="leftreview"><h2 id="title-course">Naslov kursa</h2>  
+        <h3 id="subtitle-course">Podnaslov kursa</h3> 
+        <p id="highlights-course">Highlights</p> 
+        <p id="courseCreator">Creator33333</p>
+        <p id=""></p> 
+        </div>
+        <div class="rightreview">
+        <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
+        <div id="typereview"></div>
+        </div>
+        </div>
+        `;
+}
+function showReviewInput() {
+  let element = document.getElementById("typereview");
+  let buttonToHide = document.getElementById("addreviewbutton");
+  buttonToHide.style.display = "none";
+  element.innerHTML = `<div class="inputReview"><textarea id="textareaid"></textarea>
+                        <div class="rating-container">
+        <span class="starR" data-value="5">&#9733;</span>
+        <span class="starR" data-value="4">&#9733;</span>
+        <span class="starR" data-value="3">&#9733;</span>
+        <span class="starR" data-value="2">&#9733;</span>
+        <span class="starR" data-value="1">&#9733;</span>
+    </div>
+    <div id="rating-value" value="">Ocena: 0</div>
+    <button class="addReview" onclick="submitReview()" id="submitreview">Submit Review</button>
+    </div>`;
 
-//   // getCurrentUserId();
-//   // console.log(userCurrentId);
-//   var modal1 = document.getElementById("myModal1");
+  // const stars = document.querySelectorAll(".starR");
+  // const ratingValue = document.getElementById("rating-value");
 
-//   // Get the <span> element that closes the modal
-//   var span1 = document.getElementsByClassName("close1")[0];
+  // stars.forEach((star) => {
+  //   star.addEventListener("click", () => {
+  //     const value = star.getAttribute("data-value");
+  //     stars.forEach((s) => s.classList.remove("active"));
+  //     star.classList.add("active");
+  //     let nextStar = star.previousElementSibling; // Postavi na prethodni element
+  //     while (nextStar) {
+  //       nextStar.classList.add("active");
+  //       nextStar = nextStar.previousElementSibling; // Pomeri se na sledeći prethodni element
+  //     }
+  //     ratingValue.innerText = `Ocena: ${value}`;
+  //   });
+  // });
 
-//   // When the user clicks on <span> (x), close the modal
-//   span1.onclick = function () {
-//     modal1.style.display = "none";
-//   };
-//   console.log(modal1);
-//   modal1.style.display = "block";
-//   enrollCourseId = id;
-//   console.log(enrollCourseId);
-// }
+  const stars = document.querySelectorAll(".starR");
+  const ratingValue = document.getElementById("rating-value");
+
+  stars.forEach((star) => {
+    star.addEventListener("click", () => {
+      const value = star.getAttribute("data-value");
+      stars.forEach((s) => s.classList.remove("active"));
+      star.classList.add("active");
+      let previousStar = star.previousElementSibling; // Postavi na prethodni element
+
+      while (previousStar) {
+        console.log(previousStar);
+        previousStar.classList.remove("active");
+        previousStar = previousStar.previousElementSibling; // Pomeri se na sledeći prethodni element
+      }
+      ratingValue.innerText = `${value}`;
+    });
+  });
+}
+function openOverview() {
+  var element = document.getElementById("idOverview");
+  element.style.display = "block";
+
+  var elementToHide = document.getElementById("idReview");
+  elementToHide.style.display = "none";
+}
+
+function submitReview() {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const courseId = urlParams.get("parametar");
+  console.log(courseId);
+  console.log(window.location.href);
+  let oldLoc = window.location.href;
+
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        console.log(userCurrentId);
+
+        // NOVI FETCH
+        let reviewText = document.getElementById("textareaid").value;
+        // let markel = document.getElementById("textareaid").value;
+        let ratingValue = document.getElementById("rating-value").innerHTML;
+
+        // console.log(ratingValue);
+        const review = {
+          UserId: userCurrentId,
+          CourseId: courseId,
+          ReviewText: reviewText,
+          Mark: ratingValue,
+        };
+        fetch("/api/course/AddReview", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(review),
+        })
+          .then((response) => {
+            console.log(response);
+            if (!response.ok) {
+              throw new Error("Adding review failed");
+            }
+
+            return response.json();
+          })
+          .then((data) => {
+            console.log(data);
+            // window.location.href = oldLoc; //NE VALJA
+          })
+          .catch((error) => {
+            console.error("Unable to add review.", error);
+          });
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
+}

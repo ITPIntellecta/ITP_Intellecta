@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITP_Intellecta.Dtos.Review;
 using ITP_Intellecta.Dtos.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -33,6 +34,12 @@ namespace Controllers
                 return Ok(user);
         }
 
+        [HttpGet("Creator/{id}")]
+        public async Task<ActionResult<ServiceResponse<string>>> GetCreator(int id)
+        {
+                var user = await _courseService.GetCreator(id);
+                return Ok(user);
+        }
 
         [HttpGet("GetAll")]
         public async Task<ActionResult<ServiceResponse<List<GetCourseDto>>>> Get()
@@ -61,6 +68,12 @@ namespace Controllers
         public async Task<ActionResult<ServiceResponse<GetUserDto>>> AddUserCourse(AddUserCourseDto newUserCourse)
         {
             return Ok(await _courseService.AddUserCourse(newUserCourse));
+        }
+
+        [HttpPost("AddReview")]
+        public async Task<ActionResult<ServiceResponse<GetReviewDto>>> AddReview(AddReviewDto newReviewDto)
+        {
+            return Ok(await _courseService.AddReview(newReviewDto));
         }
     }
 }

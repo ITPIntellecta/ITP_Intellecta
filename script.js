@@ -774,7 +774,7 @@ function loadVideoPage() {
       return response.json();
     })
     .then((data) => {
-      //  console.log(data);
+      console.log(data);
       creatorId = data.data.creatorId;
       title = data.data.title;
       subtitle = data.data.subtitle;
@@ -784,7 +784,7 @@ function loadVideoPage() {
       category = data.data.category;
       courseMark = data.data.courseMark;
       approved = data.data.approved;
-      price = data.data.Price;
+      price = data.data.price;
       const titleH = document.getElementById("title-course");
       titleH.innerHTML = title;
       const subtitleH = document.getElementById("subtitle-course");
@@ -792,6 +792,44 @@ function loadVideoPage() {
 
       const highlightsH = document.getElementById("highlights-course");
       highlightsH.innerHTML = highlights;
+
+      const priceEl = document.getElementById("price-course");
+      const categoryEl = document.getElementById("category-course");
+      categoryEl.innerHTML = "Category: " + category;
+      priceEl.style.display = "none";
+
+      markEl = document.getElementById("mark-course");
+      markEl.innerHTML = "Mark";
+      let stars = document.querySelectorAll(".star");
+      for (let i = 0; i < courseMark; i++) {
+        stars[i].classList.add("filled");
+      }
+
+      fetch(`/api/course/Creator/${creatorId}`, {
+        method: "GET",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response);
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          const fname = data.data.firstName;
+          const lname = data.data.lastName;
+
+          const creator = document.getElementById("creator-course");
+          console.log(creator);
+          creator.innerHTML = "Creator: " + fname + " " + lname;
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
 
       fetch(`/api/material/GetMaterialById/${id}`, {
         method: "GET",
@@ -893,20 +931,31 @@ function loadPopularCourses() {
               showModal(event, courseId); // Proslediti event i tačan id
             });
           });
-
-          document
-            .getElementsByClassName("btn-close")[0]
-            .addEventListener("click", hideModal);
-
-          document
-            .getElementsByClassName("btn-savee")[0]
-            .addEventListener("click", hideModal);
         }
       });
     })
     .catch((error) => {
       console.error("There was an error:", error);
     });
+
+  // let elements1 = document.getElementsByClassName("btn-close");
+  // Array.from(elements1).forEach((element, index) => {
+  //   element.addEventListener("click", hideModal);
+  // });
+
+  // console.log(elements1);
+
+  // let elements2 = document.getElementsByClassName("btn-savee");
+  // Array.from(elements2).forEach((element, index) => {
+  //   element.addEventListener("click", alert("ivana"));
+  // });
+  // document
+  //   .getElementsByClassName("btn-close")
+  //   .addEventListener("click", hideModal);
+
+  // document
+  //   .getElementsByClassName("btn-savee")
+  //   .addEventListener("click", hideModal);
 }
 
 function displayCategory(category) {
@@ -1131,10 +1180,15 @@ function confirmEnroll() {
   modal2.style.display = "block";
   modal2.innerHTML = `
         <!-- Modal content -->
-        <div onclick="closeModal()" class="modal-content1" style="height:150px">
-          <span class="close1" onclick="closeModal()">&times;</span><br />
+        <div class="modal-content1">
+        <span class="close1" onclick="closeModal()">&times;</span><br />
+        <div class="innerbox">
+        <div onclick="closeModal()">
+          
           <p style="font-size:15pt; font-weight:bold; margin:auto;">You are enrolled in the course!</p>
           
+        </div>
+        </div>
         </div>
       `;
 }
@@ -1144,6 +1198,8 @@ function closeModal() {
   var modal2 = document.getElementsByClassName("modal2")[0];
   if (modal2 != null) modal2.style.display = "none";
   modal1.style.display = "none";
+  let mainmodal = document.getElementById("myModal");
+  mainmodal.style.display = "none";
 }
 function joinCourse(id) {
   // getCurrentUserId();

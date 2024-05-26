@@ -52,41 +52,58 @@
     <div class="course">
         <div class="course-content"> <p class="materialText">Your material will be shown here!</p></div>
         <div class="course-weeks" id="course-weeks">
-            <!-- <div class="week" id="week-course">
-            <button class="button-week" >Week 1</button>
-            <div class="week-lessons show-lesson">
-                <button class="lesson" id="course-lesson">Lesson 1</button>
-                <button class="lesson">Lesson 2</button>
-            </div></div>
-            <div class="week">
-            <button class="button-week">Week 2</button>
-            <div class="week-lessons show-lesson">
-                <button class="lesson">Lesson 1</button>
-                <button class="lesson">Lesson 2</button>                
-                <button class="lesson">Lesson 3</button>
-                <button class="lesson">Lesson 4</button>
-                <button class="lesson">Lesson 5</button>
-                <button class="lesson">Lesson 6</button>
-            </div>
-            </div>
-             <div class="week">
-            <button class="button-week">Week 3</button>
-            <div class="week-lessons show-lesson">
-                <button class="lesson">Lesson 1</button>
-                <button class="lesson">Lesson 2</button>                
-                <button class="lesson">Lesson 3</button>
-                <button class="lesson">Lesson 4</button>
-                <button class="lesson">Lesson 5</button>
-                <button class="lesson">Lesson 6</button>
-            </div> -->
-            <!-- </div> -->
+            
         </div>  
   
     </div>
     <div class="course-description">
-        <h2 style="display: block;" id="title-course">Naslov kursa</h2>  
-        <h3 id="subtitle-course">Podnaslov kursa</h3> 
-        <p id="highlights-course">Highlights</p> 
+      <div class="descLinks">
+        <a href="#" class="overviewButton" onclick="openOverview()">Overview</a>
+        <a href="#" class="reviewButton" onclick="openReview()">Review</a>
+      </div>
+      
+      <div class="course-overview" id="idOverview">
+        <div class="header-course">
+          <p id="title-course">Title</p>  
+          <p id="subtitle-course">Subtitle</p> 
+        </div>
+        
+        <div class="grid-course">
+           <div class="second-course">
+          <p id="category-course">Category</p>
+        <p id="creator-course">Creator</p>
+        </div>
+
+        <div class="third-course">
+          <p> Highlights:</p>
+         
+          <p id="highlights-course"></p> 
+        </div>
+
+        
+        
+        <div class="fourth-course">
+          <p id="price-course">Price</p>
+          <div class="markdiv-course"> 
+            <p id="mark-course">Mark</p>
+              <div class="rating">
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+                      <span class="star">&#9733;</span>
+              </div>
+          </div>
+         
+        </div>
+        
+        </div>
+       
+      </div>
+      <div class="course-reviews" id="idReview" style="display: none;">
+        <!-- REVIEW INPUT -->
+      </div>
+        
     </div>
     <script src="script.js"></script>
   </body>

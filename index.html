@@ -252,20 +252,28 @@
           <p id="modalSubtitle">SUBTITLE</p>
         </div>
         <div class="modal-body" id="modalBody">TIJELO MODALA</div>
-        <div class="modal-footer">
+        <div class="modal-footer" id="modalFooterButtons">FOOTER DUGMAD</div>
+      </div>
+    </div>
+
+    <div id="myModal1" class="modal1">
+      <!-- Modal content -->
+      <div class="modal-content1">
+        <span class="close1">&times;</span><br />
+        <div class="innerbox">
+          <p>Are you sure you want to enroll in the course?</p>
+          <br />
           <button
-            type="button"
-            class="btnn-secondary btn-close"
-            data-bs-dismiss="modal"
+            id="enrollBtn"
+            class="popularCourse1"
+            onclick="confirmEnroll()"
           >
-            Close
-          </button>
-          <button type="button" class="btnn-primary btn-savee" id="enroll">
             Enroll
           </button>
         </div>
       </div>
     </div>
+    <div id="myModal1" class="modal1 modal2"></div>
 
     <footer>intellecta &copy;</footer>
     <script src="script.js"></script>
