@@ -702,11 +702,6 @@ footer {
   color: #113946;
 }
 
-.authButtons {
-  display: flex;
-  flex-direction: row;
-}
-
 .popularCourse {
   border-radius: 15pt;
   width: 35%;

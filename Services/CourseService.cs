@@ -198,5 +198,33 @@ namespace Services
             response.Data=reviewresp.FirstOrDefault();
             return response;        
         }
+
+        public async Task<ServiceResponse<List<GetCourseDto>>> DeleteCourse(int id)
+        {
+           var serviceResponse = new ServiceResponse<List<GetCourseDto>>();
+
+            try
+            {
+                var course = await _context.Courses
+                    .FirstOrDefaultAsync(c => c.CourseId == id);
+                if (course is null)
+                    throw new Exception($"Course with Id '{id}' not found.");
+
+                _context.Courses.Remove(course);
+
+                await _context.SaveChangesAsync();
+
+                serviceResponse.Data =
+                    await _context.Courses
+                        .Select(c => _mapper.Map<GetCourseDto>(c)).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }
     }
     }

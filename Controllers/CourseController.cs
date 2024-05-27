@@ -75,5 +75,16 @@ namespace Controllers
         {
             return Ok(await _courseService.AddReview(newReviewDto));
         }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult<ServiceResponse<GetCourseDto>>> DeleteCourse(int id)
+        {
+            var response = await _courseService.DeleteCourse(id);
+            if (response.Data is null)
+            {
+                return NotFound(response);
+            } 
+            return Ok(response);
+        }
     }
 }

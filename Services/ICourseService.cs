@@ -21,5 +21,8 @@ namespace Services
 
         Task<ServiceResponse<List<GetCourseDto>>> GetMyLearning(int userId);
         Task<ServiceResponse<User>> GetCreator(int creatorId);
+
+        Task<ServiceResponse<List<GetCourseDto>>> DeleteCourse(int id);
+
     } 
 }

@@ -468,3 +468,14 @@ footer {
   background-color: #bca37f;
   color: #113946;
 }
+
+.authButton {
+  position: static;
+  width: 200px;
+}
+.authButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+}

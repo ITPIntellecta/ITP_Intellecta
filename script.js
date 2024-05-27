@@ -671,8 +671,8 @@ function loadCoursesForAuth() {
                   ${highlights}
                   </p>
                   <div class="authButtons">
-                  <button  class="popularCourse" onclick="confirmCourse(${id})">Authorize</button>
-                  <button  class="popularCourse" oncliske="deleteCourse(${id})">Delete</button>
+                  <button  class="popularCourse authButton"  onclick="confirmCourse(${id})">Authorize</button>
+                 <button  class="popularCourse authButton" onclick="deleteCourse(${id})">Delete</button>
                   </div>
               </div>
             </div>`;
@@ -1232,6 +1232,27 @@ function enrollCourseMail(id) {
     })
     .then((data) => {
       // console.log(data);
+    })
+    .catch((error) => {
+      console.error("Error (enroll):", error);
+    });
+}
+
+function deleteCourse(id) {
+  fetch(`/api/course/delete/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      // console.log(response);
+      // return response.json;
+    })
+    .then((data) => {
+      // console.log(data);
+      alert("Course has been successfully deleted!");
+      location.reload();
     })
     .catch((error) => {
       console.error("Error (enroll):", error);
