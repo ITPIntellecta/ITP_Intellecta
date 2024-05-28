@@ -525,16 +525,23 @@ function loadCourses() {
                   const div = document.getElementsByClassName("row")[0];
                   div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" style="margin-bottom:2rem";>
-                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
+                  <h5 class="courseCardTitle loadVideo" >${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
                   <div class="authButtons" id="authBtns${id}">
-                  <button id="enrollBtn" class="popularCourse authButton" onclick="joinCourse(${id})">Enroll</button> 
-
+                  <button id="enrollBtn" class="popularCourse authButton" onclick="showModal('${id}')">View</button> 
                  </div>
               </div>
             </div>`;
+
+                  //  <button
+                  //    id="enrollBtn"
+                  //    class="popularCourse authButton"
+                  //    onclick="joinCourse(${id})"
+                  //  >
+                  //    Enroll
+                  //  </button>;
 
                   if (isAdmin) {
                     document.getElementById(
@@ -598,7 +605,7 @@ function loadMyLearning() {
               div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" style="margin-bottom:2rem";>
                 
-                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
+                  <h5 class="courseCardTitle loadVideo">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
@@ -660,7 +667,7 @@ function loadMyCourses() {
               <div class="item mmm" style="margin-bottom:2rem" id="cccourse${id}">
               
 
-                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
+                  <h5 class="courseCardTitle loadVideo">${title}</h5>
                   <p class="card-text" id="pId${id}">
                   ${highlights}
                   </p>
@@ -981,7 +988,7 @@ function loadPopularCourses() {
           Array.from(elements).forEach((element, index) => {
             element.addEventListener("click", (event) => {
               let courseId = data.data[index].courseId;
-              showModal(event, courseId); // Proslediti event i tačan id
+              showModal(courseId); // Proslediti event i tačan id
             });
           });
         }

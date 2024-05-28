@@ -26,8 +26,9 @@ function redirectToPage(url) {
 //MODALI
 
 // Prikazivanje moda
-function showModal(event, id) {
+function showModal(id) {
   document.getElementById("myModal").style.display = "block";
+  console.log(document.getElementById("myModal").style);
   courseInfo(id);
 }
 

@@ -1,21 +1,21 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900");
 body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  line-height: 1.5;
-  color: #113946;
-
   background: url("back3.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   position: relative;
+  width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  line-height: 1.5;
+  color: #113946;
+
   overflow-x: hidden;
 }
 .contain {
@@ -478,4 +478,140 @@ footer {
   display: flex;
   justify-content: space-evenly;
   align-items: baseline;
+}
+
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+  padding-top: 7%;
+  /* place-items: center; */
+}
+
+.modal-content {
+  background-color: #fefefebe;
+  margin: auto;
+
+  /* padding: 20px; */
+  border: 1px solid #888;
+  height: auto;
+  width: 50%;
+  border-radius: 25pt;
+  backdrop-filter: blur(10px);
+}
+
+.modal-header {
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  background-color: #113946a2;
+  border-radius: 25pt;
+  text-align: center;
+}
+
+.modal-title {
+  margin-bottom: 0;
+}
+
+.modal-body {
+  background-color: transparent;
+  text-align: center;
+  padding: 1rem;
+}
+
+.modal-footer {
+  /* backdrop-filter: blur(10px); */
+
+  padding: 1rem;
+  border-top: 1px solid transparent;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  border-radius: 0 0 25pt 25pt;
+}
+
+.btnn-primary {
+  background-color: #113946a2;
+  border: 1px solid #113946a2;
+  color: #fff2d8;
+}
+.btnn-secondary {
+  background-color: #bca37f96;
+  border: 1px solid #bca37f96;
+  color: #113946;
+}
+.btnn-primary,
+.btnn-secondary {
+  border-radius: 15pt;
+  transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+  width: 25%;
+}
+
+.btnn-primary:focus,
+.btnn-primary.focus {
+  box-shadow: none !important;
+  background-color: #bca37f;
+  color: #113946;
+}
+.btn-close:hover,
+.btn-savee:hover {
+  cursor: pointer;
+}
+
+/* ELEMENTI U MODALU */
+.rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.star {
+  font-size: 2em;
+  color: #ccc;
+}
+
+.star.filled {
+  color: #f39c12;
+}
+
+.category {
+  color: #113946;
+}
+.price {
+  color: #1139468a;
+}
+.markk {
+  color: #f39c12;
+}
+.modalbodytop {
+  border-bottom: 1px dotted #113946;
+}
+.modalbodybottom {
+  margin-top: 5pt;
+  border-radius: 15pt;
+  padding: 7px;
+  border: 1px solid #113946;
+}
+.modalbodybody {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+  align-items: center;
+  margin: 7pt;
 }

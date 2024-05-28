@@ -80,6 +80,21 @@
       </div>
       <button id="scrollBtn" class="hidden">&#129121;</button>
 
+      <div
+        class="modal-dialog modal-dialog-centered modal"
+        id="myModal"
+        style="display: none"
+      >
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalTitle">TITLE</h1>
+            <p id="modalSubtitle">SUBTITLE</p>
+          </div>
+          <div class="modal-body" id="modalBody">TIJELO MODALA</div>
+          <div class="modal-footer" id="modalFooterButtons">FOOTER DUGMAD</div>
+        </div>
+      </div>
+
       <div id="myModal1" class="modal1">
         <!-- Modal content -->
         <div class="modal-content1">
@@ -96,6 +111,7 @@
         </div>
       </div>
       <div id="myModal1" class="modal1 modal2"></div>
+
       <script>
         const params = new URLSearchParams(location.search);
         const parametar = params.get("parametar");
@@ -112,6 +128,7 @@
       <script src="script1.js"></script>
       <script src="script.js"></script>
     </div>
+
     <footer>intellecta &copy;</footer>
   </body>
 </html>
