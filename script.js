@@ -108,6 +108,9 @@ function saveChanges(event) {
       filesMap.set(fileOrder, input.files[0].name); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
       weekMap.set(fileOrder, weekNumber);
     }
+
+    console.log(filesMap);
+    console.log(weekMap);
   });
 
   //console.log(filesMap);
@@ -202,26 +205,14 @@ const formData = new FormData();
 function saveFile() {
   filesToUpload = [];
   filesToUpload.push(...files);
-
+  console.log(filesToUpload);
   filesToUpload.forEach((file) => {
     // console.log(file);
 
     formData.append("files[]", file); // Dodajemo sve fajlove iz niza u FormData objekat
   });
-  //console.log([...formData.entries()]);
-  // fetch("/material/uploadAll", {
-  //   // Endpoint za čuvanje svih fajlova
-  //   method: "POST",
-  //   body: formData,
-  // })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     console.log(data); // Možete prikazati poruku o uspešnom čuvanju fajlova ili drugu povratnu informaciju
-  //     filesToUpload = []; // Resetujemo niz nakon što su fajlovi sačuvani
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error:", error);
-  //   });
+
+  // console.log(formData);
 }
 
 let userCurrentId;
@@ -349,6 +340,8 @@ function sendMaterial(courseIdd) {
       fileOrder: i,
     };
 
+    console.log(filesMap.get(i));
+
     // console.log(materialData);
     fetch("/api/material/uploadMaterial", {
       method: "POST",
@@ -387,7 +380,7 @@ function sendM() {
       if (brojac == 0) {
         brojac++;
         var odgovor = confirm("Course sent for authorization!");
-        if (odgovor) window.location = "newCourse.html";
+        // if (odgovor) window.location = "newCourse.html";
       }
     });
   // .catch((error) => {
@@ -900,6 +893,17 @@ function loadVideoPage() {
         })
         .then((data) => {
           //  console.log(data);
+          // PROBA
+          // ascending = true;
+          // data.sort((a, b) => {
+          //   if (a[fileOrder] < b[fileOrder]) {
+          //     return ascending ? -1 : 1;
+          //   }
+          //   if (a[fileOrder] > b[fileOrder]) {
+          //     return ascending ? 1 : -1;
+          //   }
+          //   return 0;
+          // });
           const divWeeks = document.getElementById("course-weeks");
           for (var i = 1; i <= durationInWeeks; i++) {
             divWeeks.innerHTML += `  <div class="week" id="week-course">
