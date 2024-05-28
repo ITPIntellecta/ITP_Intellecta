@@ -1239,18 +1239,48 @@ function enrollCourseMail(id) {
 }
 
 function deleteCourse(id) {
-  fetch(`/api/course/delete/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
+  fetch(`/api/course/GetCourseById/${id}`, {
+    method: "GET",
   })
     .then((response) => {
-      // console.log(response);
-      // return response.json;
+      //  console.log(response);
+      return response.json();
     })
     .then((data) => {
-      // console.log(data);
+      //  console.log(data);
+      creatorId = data.data.creatorId;
+      //  console.log(formData);
+      fetch(`/api/course/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          // console.log(response);
+          // return response.json;
+        })
+        .then((data) => {
+          // console.log(data);
+
+          fetch(
+            `/api/email/send-email/${creatorId}/Sorry, your course has been rejected! Try submitting again.`,
+            {
+              method: "POST",
+            }
+          )
+            .then((response) => {
+              //  console.log(response);
+              //return response.json;
+            })
+            .then((data) => {
+              //console.log(data);
+            })
+            .catch((error) => {
+              console.error("Error updating course:", error);
+            });
+        });
+
       alert("Course has been successfully deleted!");
       location.reload();
     })

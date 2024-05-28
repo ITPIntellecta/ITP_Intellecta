@@ -17,5 +17,7 @@ namespace ITP_Intellecta.Data
         Task<ServiceResponse<List<GetUserDto>>> GetAllUsers();
         Task<ServiceResponse<GetUserDto>> GetUserById(int id);
         Task<ServiceResponse<GetUserDto>> UpdateUser(UpdateUserDto updatedUser);
+        Task<ServiceResponse<List<GetUserDto>>> DeleteUser(int id);
+
     }
 }

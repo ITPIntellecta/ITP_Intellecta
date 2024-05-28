@@ -229,6 +229,33 @@ namespace ITP_Intellecta.Data
 
             return serviceResponse;
         }
-        
+
+       public async Task<ServiceResponse<List<GetUserDto>>> DeleteUser(int id)
+        {
+           var serviceResponse = new ServiceResponse<List<GetUserDto>>();
+
+            try
+            {
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(c => c.Id == id);
+                if (user is null)
+                    throw new Exception($"User with Id '{id}' not found.");
+
+                _context.Users.Remove(user);
+
+                await _context.SaveChangesAsync();
+
+                serviceResponse.Data =
+                    await _context.Users
+                        .Select(c => _mapper.Map<GetUserDto>(c)).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }   
     }
 }

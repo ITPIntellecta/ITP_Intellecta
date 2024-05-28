@@ -75,6 +75,16 @@ namespace ITP_Intellecta.Controllers
             return Ok(await _authRepo.UpdateUser(updatedUser));
         }  
 
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult<ServiceResponse<GetUserDto>>> DeleteUser(int id)
+        {
+            var response = await _authRepo.DeleteUser(id);
+            if (response.Data is null)
+            {
+                return NotFound(response);
+            } 
+            return Ok(response);
+        }
     }
 }
 

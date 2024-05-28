@@ -317,8 +317,11 @@ function loadUsers() {
                   <p class="card-text">
                   ${email}
                   </p>
-                  <button class="popularCourse" onclick="authorizeAdmin(${userId})">Authorize</button>
-                
+                  <div class="authButtons">
+
+                  <button class="popularCourse authButton" onclick="authorizeAdmin(${userId})">Authorize</button>
+                  <button  class="popularCourse authButton" onclick="deleteUser(${userId})">Delete</button>
+                </div>
               </div>
             </div>`;
         }
@@ -626,4 +629,41 @@ function submitReview() {
         );
       });
   }
+}
+
+function deleteUser(id) {
+  fetch(
+    `/api/email/send-email/${id}/Sorry, your request has been rejected! Try again or register as user.`,
+    {
+      method: "POST",
+    }
+  )
+    .then((response) => {
+      //  console.log(response);
+      //return response.json;
+    })
+    .then((data) => {
+      fetch(`/api/auth/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          // console.log(response);
+          // return response.json;
+        })
+        .then((data) => {
+          // console.log(data);
+          //console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error deleting user:", error);
+        });
+      alert("User has been successfully deleted!");
+      location.reload();
+    })
+    .catch((error) => {
+      console.error("Error (delete):", error);
+    });
 }

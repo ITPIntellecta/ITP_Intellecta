@@ -19,5 +19,6 @@ namespace ITP_Intellecta.Models
         public bool Approved {get; set;}
         public float Price { get; set; }
         public List<User>? Users{get; set;}
+    
     }
 }
