@@ -11,7 +11,8 @@ namespace ITP_Intellecta.Models
     {
          [Key]
         public int ContentId {get;set;}
-        public int CourseId { get; set; }
+        public Course? Course { get; set; }
+        public int CourseId {get;set;}
         public string VideoFile { get; set; }=string.Empty;
         public string TxtFile { get; set; }=string.Empty;
         public int WeekNumber {get;set;}

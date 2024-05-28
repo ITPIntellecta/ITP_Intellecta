@@ -20,6 +20,8 @@ namespace ITP_Intellecta.Models
         public bool Approved {get; set;}
 
         public List<Course>? Courses{get;set;}
+        public List<Course>? CreatedCourses{get;set;}
+        public List<Review>? Reviews{get;set;}
 
     }
 }

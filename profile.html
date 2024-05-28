@@ -42,15 +42,21 @@
     <div class="contain">
       <img src="logo.png" alt="Logo" class="logo" />
 
-      <div class="right-menu show-menu profileMenu" id="right-menu">
+      <div class="right-menu show-menu" id="right-menu">
+        <p onclick="changeToCourses('Everything')">&#9733; All courses</p>
+
         <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
-        <br />
+
         <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
+
         <div class="admin-menu">
-          <br />
-          <p>&#9733; Courses authorization</p>
-          <br />
-          <p>&#9733; Admin authorization</p>
+          <p id="adminEl1" onclick="showCoursesForAuthorization()">
+            &#9733; Courses authorization
+          </p>
+
+          <p id="adminEl2" onclick="showUsersForAuthorization()">
+            &#9733; Admin authorization
+          </p>
         </div>
       </div>
 

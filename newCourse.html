@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add Course</title>
-        <link
+    <link
       rel="stylesheet"
       href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css"
     />
@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@1,200&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ojuju:wght@200..800&display=swap"
       rel="stylesheet"
     />
-    <link href="style1.css" rel="stylesheet"  />
+    <link href="style1.css" rel="stylesheet" />
     <link href="style.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,9 +26,9 @@
     />
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
-</head>
-<body onload="displayName(); checkLocalStorage();">
-  <div class="menu">
+  </head>
+  <body onload="displayName(); checkLocalStorage();">
+    <div class="menu">
       <nav class="nav">
         <img
           class="logo logo-hover"
@@ -46,81 +46,119 @@
         </div>
       </nav>
     </div>
-          <div class="right-menu show-menu" id="right-menu">
-        <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
-        <br />
-        <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
-        <div class="admin-menu">
-          <br />
-          <p id="adminEl1" onclick="showCoursesForAuthorization()">&#9733; Courses authorization</p>
-          <br />
-          <p id="adminEl2">&#9733; Admin authorization</p>
-        </div>
+    <div class="right-menu show-menu" id="right-menu">
+      <p onclick="changeToCourses('Everything')">&#9733; All courses</p>
+
+      <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
+
+      <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
+
+      <div class="admin-menu">
+        <p id="adminEl1" onclick="showCoursesForAuthorization()">
+          &#9733; Courses authorization
+        </p>
+
+        <p id="adminEl2" onclick="showUsersForAuthorization()">
+          &#9733; Admin authorization
+        </p>
       </div>
     </div>
 
-
-    <div class="new-course" style="width: 35%;">
-      
-        <h2>Add a new course: </h2>
-        <form onsubmit="submitCourse(event)" class="formAddCourse">
-        <div class=" form-group">
-            <input class="form-style" id="courseTitle" type="text" placeholder="Course title"> 
-        </div>
-        <div class=" form-group">
-            <input class="form-style" id="courseSubtitle" type="text" placeholder="Subtitle"> 
-        </div>
-        <div class=" form-group">
-            <select class="form-style" id="courseCategory"> 
-                <option selected>- Choose category -</option>
-                 <option>Engineering</option>
-                  <option>Business Development</option>
-                  <option>IT and Technology</option>
-                  <option>Health & Fitness</option>
-                  <option>Languages</option>
-                  <option>Science</option>
-                  <option>Personal Development</option>
-                  <option>Data Science</option>
-                  <option>Education and Teaching</option>
-                  <option>Legal Studies and Law</option>
-                  <option>Psychology and Counseling</option>
-                  <option>Healthcare and Medicine</option>
-                  <option>Other</option>
-            </select>
-        </div>
-          <div class=" form-group">
-            <input class="form-style" id="weeklyWorkload" type="number" min="0" placeholder="Weekly workload"> 
-        </div>
-                  <div class=" form-group">
-            <input class="form-style" id="price" type="number" min="0" step="0.01" placeholder="Price (USD)"> 
+    <div class="new-course" style="width: 35%">
+      <h2>Add a new course:</h2>
+      <form onsubmit="submitCourse(event)" class="formAddCourse">
+        <div class="form-group">
+          <input
+            class="form-style"
+            id="courseTitle"
+            type="text"
+            placeholder="Course title"
+          />
         </div>
         <div class="form-group">
-              <textarea class="form-style" cols="150" id="highlights" placeholder="Highlights" maxlength="100" wrap="soft"></textarea>
+          <input
+            class="form-style"
+            id="courseSubtitle"
+            type="text"
+            placeholder="Subtitle"
+          />
+        </div>
+        <div class="form-group">
+          <select class="form-style" id="courseCategory">
+            <option selected>- Choose category -</option>
+            <option>Engineering</option>
+            <option>Business Development</option>
+            <option>IT and Technology</option>
+            <option>Health & Fitness</option>
+            <option>Languages</option>
+            <option>Science</option>
+            <option>Personal Development</option>
+            <option>Data Science</option>
+            <option>Education and Teaching</option>
+            <option>Legal Studies and Law</option>
+            <option>Psychology and Counseling</option>
+            <option>Healthcare and Medicine</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input
+            class="form-style"
+            id="weeklyWorkload"
+            type="number"
+            min="0"
+            placeholder="Weekly workload"
+          />
+        </div>
+        <div class="form-group">
+          <input
+            class="form-style"
+            id="price"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="Price (USD)"
+          />
+        </div>
+        <div class="form-group">
+          <textarea
+            class="form-style"
+            cols="150"
+            id="highlights"
+            placeholder="Highlights"
+            maxlength="100"
+            wrap="soft"
+          ></textarea>
         </div>
 
-      <div class="form-group" style="display: block;">
-        <button class="form-group-btn week-material-btn" id="prva" onclick="showNextWeek(event)" style="width: 100%;">
-          Add course content
-        </button>
-        <div id="weekCourse" style="display: block;"></div>
-      </div>
-      <br>
-        <div class=" form-group">
-            <input class="form-style sendAuth" type="submit" value="Send for authorization"> 
+        <div class="form-group" style="display: block">
+          <button
+            class="form-group-btn week-material-btn"
+            id="prva"
+            onclick="showNextWeek(event)"
+            style="width: 100%"
+          >
+            Add course content
+          </button>
+          <div id="weekCourse" style="display: block"></div>
         </div>
-
-
-
-        </form>
+        <br />
+        <div class="form-group">
+          <input
+            class="form-style sendAuth"
+            type="submit"
+            value="Send for authorization"
+          />
+        </div>
+      </form>
     </div>
 
-    
- <!--   <footer>intellecta &copy;</footer>-->
+    <!--   <footer>intellecta &copy;</footer>-->
     <script src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
-</body>
+  </body>
 </html>

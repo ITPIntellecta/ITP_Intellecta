@@ -81,6 +81,8 @@ namespace ITPIntellecta.Migrations
 
                     b.HasKey("CourseId");
 
+                    b.HasIndex("CreatorId");
+
                     b.ToTable("Courses");
                 });
 
@@ -111,6 +113,8 @@ namespace ITPIntellecta.Migrations
 
                     b.HasKey("ContentId");
 
+                    b.HasIndex("CourseId");
+
                     b.ToTable("Materials");
                 });
 
@@ -136,6 +140,10 @@ namespace ITPIntellecta.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reviews");
                 });
@@ -198,8 +206,62 @@ namespace ITPIntellecta.Migrations
                     b.HasOne("ITP_Intellecta.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ITP_Intellecta.Models.Course", b =>
+                {
+                    b.HasOne("ITP_Intellecta.Models.User", "Creator")
+                        .WithMany("CreatedCourses")
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Creator");
+                });
+
+            modelBuilder.Entity("ITP_Intellecta.Models.CourseContent", b =>
+                {
+                    b.HasOne("ITP_Intellecta.Models.Course", "Course")
+                        .WithMany("CourseContents")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("ITP_Intellecta.Models.Review", b =>
+                {
+                    b.HasOne("ITP_Intellecta.Models.Course", "Course")
+                        .WithMany("Reviews")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ITP_Intellecta.Models.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ITP_Intellecta.Models.Course", b =>
+                {
+                    b.Navigation("CourseContents");
+
+                    b.Navigation("Reviews");
+                });
+
+            modelBuilder.Entity("ITP_Intellecta.Models.User", b =>
+                {
+                    b.Navigation("CreatedCourses");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

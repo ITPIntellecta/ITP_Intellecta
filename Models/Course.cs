@@ -8,7 +8,10 @@ namespace ITP_Intellecta.Models
     public class Course
     {
         public int CourseId { get; set; }
-       public int? CreatorId {get;set;}
+
+        public User? Creator {get;set;}
+        public int? CreatorId { get; set; }
+
         public string Title { get; set; }=string.Empty;
         public string Subtitle { get; set; }=string.Empty;
         public int DurationInWeeks { get; set; }
@@ -19,6 +22,7 @@ namespace ITP_Intellecta.Models
         public bool Approved {get; set;}
         public float Price { get; set; }
         public List<User>? Users{get; set;}
-    
+        public List<CourseContent>? CourseContents {get;set;}
+        public List<Review> Reviews {get;set;}
     }
 }
