@@ -6,6 +6,7 @@ using AutoMapper;
 using System.Security.Claims;
 using ITP_Intellecta.Dtos.User;
 using ITP_Intellecta.Dtos.Review;
+using ITP_Intellecta.Dtos.Statistics;
 
 
 namespace Services
@@ -224,6 +225,22 @@ namespace Services
                 serviceResponse.Message = ex.Message;
             }
 
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetCourseStatisticsDto>> AddStatistics(AddCourseStatisticsDto newStat)
+        {
+            var serviceResponse = new ServiceResponse<GetCourseStatisticsDto>();
+            var stat=_mapper.Map<CourseStatistics>(newStat);
+
+            _context.Statistics.Add(stat);
+            await _context.SaveChangesAsync();
+
+            var statistic=await _context.Statistics
+                    .Where(c => c.Id==stat.Id)
+                    .Select(c => _mapper.Map<GetCourseStatisticsDto>(c))
+                    .ToListAsync();
+            serviceResponse.Data=statistic.FirstOrDefault(); 
             return serviceResponse;
         }
     }

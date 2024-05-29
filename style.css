@@ -631,12 +631,67 @@ footer {
 
 .lesson {
   padding: 2%;
-  width: 100%;
+
   background-color: #bca37f96;
   color: #113946;
   margin-top: 1%;
   border: 1px solid transparent;
   border-radius: 10pt;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  vertical-align: middle;
+}
+
+.btnLesson {
+  background-color: transparent;
+  border: 1px solid #a38d6e;
+  border-radius: 10pt;
+  color: #113946;
+  padding: 3px 10px;
+}
+
+.btnLesson:hover {
+  cursor: pointer;
+  background-color: #ead7bbb1;
+}
+
+/*CHECKBOX*/
+.checkbox-wrapper-39 *,
+.checkbox-wrapper-39 *::before,
+.checkbox-wrapper-39 *::after {
+  box-sizing: border-box;
+}
+
+.checkbox-wrapper-39 label {
+  /* display: block; */
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.checkbox-wrapper-39 input {
+  visibility: hidden;
+  display: none;
+}
+
+.checkbox-wrapper-39 input:checked ~ .checkbox {
+  transform: rotate(45deg);
+  width: 14px;
+  margin-left: 12px;
+  border-color: #113946;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  border-radius: 0;
+}
+
+.checkbox-wrapper-39 .checkbox {
+  display: block;
+  width: inherit;
+  height: inherit;
+  border: 3px solid #434343;
+  border-radius: 6px;
+  transition: all 0.375s;
 }
 
 .btnX {

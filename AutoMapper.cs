@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ITP_Intellecta.Dtos.Review;
+using ITP_Intellecta.Dtos.Statistics;
 using ITP_Intellecta.Dtos.User;
 
 namespace back
@@ -23,6 +24,8 @@ namespace back
             CreateMap<User, GetUserDto>();
             CreateMap<User, UpdateUserDto>();
 
+           CreateMap<AddCourseStatisticsDto, CourseStatistics>();
+            CreateMap<CourseStatistics, GetCourseStatisticsDto>();
 
         
         }

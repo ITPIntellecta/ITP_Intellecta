@@ -26,10 +26,10 @@ function redirectToPage(url) {
 //MODALI
 
 // Prikazivanje moda
-function showModal(id) {
+function showModal(id, userId) {
   document.getElementById("myModal").style.display = "block";
   console.log(document.getElementById("myModal").style);
-  courseInfo(id);
+  courseInfo(id, userId);
 }
 
 // Sakrivanje moda
@@ -406,7 +406,7 @@ function approveAdminMail(id) {
     });
 }
 
-function courseInfo(courseId) {
+function courseInfo(courseId, userId) {
   fetch(`/api/course/GetCourseById/${courseId}`, {
     method: "GET",
   })
@@ -426,7 +426,7 @@ function courseInfo(courseId) {
       let subtitleEl = document.getElementById("modalSubtitle");
       let bodyEl = document.getElementById("modalBody");
       let footEl = document.getElementById("modalFooterButtons");
-
+      let creator = data.data.creatorId;
       titleEl.innerHTML = title;
       subtitleEl.innerHTML = subtitle;
       bodyEl.innerHTML = `<div class="modalbodytop">
@@ -459,9 +459,65 @@ function courseInfo(courseId) {
           >
             Close
           </button>
-          <button type="button" class="btnn-primary btn-savee" id="enroll" onclick="joinCourse(${data.data.courseId})">
-            Enroll
-          </button>`;
+       `;
+      console.log("prolazaj");
+      fetch(`/api/course/getmylearning/${userId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          // let filteredCourses = filteredCategory(data.data, category);
+          // console.log(filteredCourses);
+          console.log(data);
+          data.data.forEach((course) => {
+            // console.log(course);
+            if (course.courseId == courseId && creator != userId)
+              footEl.innerHTML = `<button
+            type="button"
+            class="btnn-secondary btn-close"
+            data-bs-dismiss="modal"
+            id="modalhide"
+            onclick="hideModal()"
+          >
+            Close
+          </button>
+                  <button class="btnn-primary btn-savee" onclick="loadVideo(${courseId})">View Course</button>`;
+          });
+        })
+
+        .catch((error) => {
+          console.error("There was an error:", error);
+        });
+
+      if (creator == userId) {
+        footEl.innerHTML = `
+        <button
+            type="button"
+            class="btnn-secondary btn-close"
+            data-bs-dismiss="modal"
+            id="modalhide"
+            onclick="hideModal()"
+          >
+            Close
+          </button>
+                  <button class=" btnn-primary btn-savee" onclick="loadVideo(${courseId})">View Course</button>`;
+      } else {
+        footEl.innerHTML = `
+        <button
+            type="button"
+            class="btnn-secondary btn-close"
+            data-bs-dismiss="modal"
+            id="modalhide"
+            onclick="hideModal()"
+          >
+            Close
+          </button><button
+        type="button"
+        class="btnn-primary btn-savee"
+        id="enroll"
+        onclick="joinCourse(${courseId})"
+      >
+        Enroll
+      </button>`;
+      }
 
       // console.log(data.data.courseMark);
       console.log(data.data.courseId);

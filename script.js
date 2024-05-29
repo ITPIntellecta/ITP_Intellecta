@@ -207,12 +207,15 @@ function saveFile() {
   filesToUpload.push(...files);
   console.log(filesToUpload);
   filesToUpload.forEach((file) => {
-    // console.log(file);
+    console.log(file);
 
     formData.append("files[]", file); // Dodajemo sve fajlove iz niza u FormData objekat
   });
 
-  // console.log(formData);
+  console.log(formData);
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ": " + pair[1].name); // Ispisuje ključeve i imena fajlova
+  }
 }
 
 let userCurrentId;
@@ -330,7 +333,7 @@ function submitCourse(event) {
 }
 var brojac = 0;
 
-function sendMaterial(courseIdd) {
+async function sendMaterial(courseIdd) {
   for (let i = 1; i <= fileOrder; i++) {
     const materialData = {
       courseId: courseIdd,
@@ -342,8 +345,8 @@ function sendMaterial(courseIdd) {
 
     console.log(filesMap.get(i));
 
-    // console.log(materialData);
-    fetch("/api/material/uploadMaterial", {
+    console.log(materialData);
+    await fetch("/api/material/uploadMaterial", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -367,6 +370,9 @@ function sendMaterial(courseIdd) {
 }
 
 function sendM() {
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ": " + pair[1].name); // Ispisuje ključeve i imena fajlova
+  }
   fetch("/api/material/allFiles", {
     // Endpoint za čuvanje svih fajlova
     method: "POST",
@@ -382,10 +388,10 @@ function sendM() {
         var odgovor = confirm("Course sent for authorization!");
         // if (odgovor) window.location = "newCourse.html";
       }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
     });
-  // .catch((error) => {
-  //   console.error("Error:", error);
-  // })
 }
 
 function filteredCategory(courses, category) {
@@ -523,7 +529,7 @@ function loadCourses() {
                   ${highlights}
                   </p>
                   <div class="authButtons" id="authBtns${id}">
-                  <button id="enrollBtn" class="popularCourse authButton" onclick="showModal('${id}')">View</button> 
+                  <button id="enrollBtn" class="popularCourse authButton" onclick="showModal('${id}', '${userCurrentId}')">View</button> 
                  </div>
               </div>
             </div>`;
@@ -892,7 +898,7 @@ function loadVideoPage() {
           return response.json();
         })
         .then((data) => {
-          //  console.log(data);
+          console.log(data);
           // PROBA
           // ascending = true;
           // data.sort((a, b) => {
@@ -914,15 +920,25 @@ function loadVideoPage() {
               //   console.log(material);
               const video = material.videoFile;
               if (material.weekNumber == i) {
-                divWeeks.innerHTML += `<button class="lesson" onclick="showFile('${video}')"> 
-                Lesson ${material.fileOrder}</button><br>`;
-              }
+                divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
+<label>
+<input type="checkbox" id="courseComplete" onchange="completeLesson('${material.fileOrder}', '${i}')"/>
+<span class="checkbox"></span>
+</label>
+</div><button class="btnLesson"  onclick="showFile('${video}')"> 
+                Lesson ${material.fileOrder}</button></div>`;
 
-              divWeeks.innerHTML += `</div></div>`;
+                divWeeks.innerHTML += `</div></div>`;
+              }
             });
           }
         });
     });
+}
+
+function completeLesson(fileOrder, week) {
+  console.log(fileOrder);
+  console.log(week);
 }
 
 function loadVideo(id) {
@@ -972,36 +988,58 @@ function showFile(name) {
 
 function loadPopularCourses() {
   const container = document.getElementById("scroll");
-  fetch("/api/course/getall")
-    .then((response) => response.json())
-    .then((data) => {
-      data.data.forEach((course) => {
-        if (course.approved == 1) {
-          console.log(course);
-          let title = course.title;
-          let highlights = course.highlights;
-          let subtitle = course.subtitle;
-          let mark = course.courseMark;
-          let id = course.courseId;
-          let price = course.Price;
-          container.innerHTML += `<div class="item mmmm">
-          <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button class="popularCourse">View course</button>
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        fetch("/api/course/getall")
+          .then((response) => response.json())
+          .then((data) => {
+            data.data.forEach((course) => {
+              if (course.approved == 1) {
+                console.log(course);
+                let title = course.title;
+                let highlights = course.highlights;
+                let subtitle = course.subtitle;
+                let mark = course.courseMark;
+                let id = course.courseId;
+                let price = course.Price;
+                container.innerHTML += `<div class="item mmmm">
+          <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">View course</button>
           </div>`;
 
-          let elements = document.getElementsByClassName("popularCourse");
-          Array.from(elements).forEach((element, index) => {
-            element.addEventListener("click", (event) => {
-              let courseId = data.data[index].courseId;
-              showModal(courseId); // Proslediti event i tačan id
+                let elements = document.getElementsByClassName("popularCourse");
+                // Array.from(elements).forEach((element, index) => {
+                //   element.addEventListener("click", (event) => {
+                //     let courseId = data.data[index].courseId;
+                //       showModal(courseId, userCurrentId); // Proslediti event i tačan id
+                //   });
+                // });
+              }
             });
+          })
+          .catch((error) => {
+            console.error("There was an error:", error);
           });
-        }
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
       });
-    })
-    .catch((error) => {
-      console.error("There was an error:", error);
-    });
-
+  }
   // let elements1 = document.getElementsByClassName("btn-close");
   // Array.from(elements1).forEach((element, index) => {
   //   element.addEventListener("click", hideModal);
@@ -1352,5 +1390,3 @@ function deleteCourse(id) {
       console.error("Error (enroll):", error);
     });
 }
-
-function addDeleteButton() {}

@@ -17,6 +17,8 @@ namespace ITP_Intellecta.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseContent> Materials { get; set; }
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<CourseStatistics> Statistics { get; set; }
+
 
  protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ITP_Intellecta.Dtos.Review;
+using ITP_Intellecta.Dtos.Statistics;
 using ITP_Intellecta.Dtos.User;
 
 
@@ -23,6 +24,7 @@ namespace Services
         Task<ServiceResponse<User>> GetCreator(int creatorId);
 
         Task<ServiceResponse<List<GetCourseDto>>> DeleteCourse(int id);
+        Task<ServiceResponse<GetCourseStatisticsDto>> AddStatistics(AddCourseStatisticsDto newStat);
 
     } 
 }
