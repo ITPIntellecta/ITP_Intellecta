@@ -20,11 +20,13 @@ namespace ITP_Intellecta.Controllers
         }
 
         [HttpPost("send-email/{userId}/{message}")]
-public async Task<IActionResult> Index(int userId, string message)
-{
-    await _service.SendEmail(userId, message);
-    return Ok(); // Vratiti odgovor ako je slanje mejla uspešno
-       
+        public async Task<IActionResult> Index(int userId, string message)
+        {
+            await _service.SendEmail(userId, message);
+            return Ok(); // Vratiti odgovor ako je slanje mejla uspešno
+            
         }
+
+
     }
 }        

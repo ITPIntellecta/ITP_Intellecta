@@ -9,5 +9,6 @@ namespace ITP_Intellecta.Services
     {
     //Task<ServiceResponse<string>> SendEmailAsync(int userId, string message);
         Task<ServiceResponse<string>> SendEmail(int userId, string message);
+        Task SendEmailToAllUsers();
     }
 }

@@ -20,6 +20,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Hangfire;
 
 
 
@@ -88,6 +89,8 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<ICourseMaterialService, CourseMaterialService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+builder.Services.AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHangfireServer();
 
 
 
@@ -138,7 +141,11 @@ app.UseStaticFiles(new StaticFileOptions
     //RequestPath = "//"
 });
 
-
+app.UseHangfireDashboard();
+RecurringJob.AddOrUpdate<IEmailService>(
+    "send-weekly-email",
+    service => service.SendEmailToAllUsers(),
+    Cron.Minutely);
 
 
 app.UseCors("AllowAllOrigins");
