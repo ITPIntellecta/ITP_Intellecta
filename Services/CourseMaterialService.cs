@@ -33,6 +33,35 @@ namespace ITP_Intellecta.Services
             return serviceResponse;
         }
 
+        public async Task<ServiceResponse<GetCourseStatisticsDto>> ChangeLessonComplete(AddCourseStatisticsDto stat)
+        {
+             var serviceResponse = new ServiceResponse<GetCourseStatisticsDto>();
+
+            try
+            {
+
+                var statistic=await _context.Statistics.Where(c=>c.UserId==stat.UserId).Where(c=>c.CourseId==stat.CourseId).Where(c=>c.MaterialId==stat.MaterialId).FirstOrDefaultAsync();
+
+
+                
+                if (statistic is null )
+                    throw new Exception($"Statistic not found.");
+
+                statistic.Completed=stat.Completed;
+
+                
+                await _context.SaveChangesAsync();
+                serviceResponse.Data = _mapper.Map<GetCourseStatisticsDto>(statistic);
+            }
+            catch (Exception ex)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = ex.Message;
+            }
+
+            return serviceResponse;
+        }
+
         public async Task<ServiceResponse<GetCourseStatisticsDto>> ChangeLessonStatus(AddCourseStatisticsDto stat)
         {
             var serviceResponse = new ServiceResponse<GetCourseStatisticsDto>();

@@ -17,5 +17,6 @@ namespace ITP_Intellecta.Models
         
         public int? MaterialId {get;set;}
         public bool Completed {get;set;}
+        public int Week {get;set;}
     }
 }

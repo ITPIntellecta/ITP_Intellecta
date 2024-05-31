@@ -195,3 +195,22 @@ C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\sv\Hangfire.
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\tr-TR\Hangfire.Core.resources.dll
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\zh-TW\Hangfire.Core.resources.dll
 C:\Users\AB\Desktop\intellecta NOVO\ITP_Intellecta\bin\Debug\net7.0\zh\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Hangfire.AspNetCore.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Hangfire.Core.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Hangfire.NetCore.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Hangfire.SqlServer.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\ca\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\de\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\es\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\fa\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\fr\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\nb\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\nl\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\pt-BR\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\pt-PT\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\pt\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\sv\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\tr-TR\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\zh-TW\Hangfire.Core.resources.dll
+C:\Users\PCX\Desktop\ITP_Intellecta\bin\Debug\net7.0\zh\Hangfire.Core.resources.dll

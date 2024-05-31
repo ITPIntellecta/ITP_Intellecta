@@ -922,7 +922,7 @@ function loadVideoPage() {
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
 <label>
-<input id="input${material.fileOrder}" type="checkbox" id="courseComplete" onchange="completeLesson('${material.fileOrder}', '${i}', ${material.courseId})"/>
+<input id="input${material.contentId}" type="checkbox" id="courseComplete" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId})"/>
 <span class="checkbox"></span>
 </label>
 </div><button class="btnLesson"  onclick="showFile('${video}')"> 
@@ -936,11 +936,11 @@ function loadVideoPage() {
     });
 }
 
-function completeLesson(fileOrder, week, courseId) {
-  console.log(fileOrder);
+function completeLesson(contentId, week, courseId) {
+  console.log(contentId);
   console.log(week);
 
-  let inputEl = document.getElementById(`input${fileOrder}`);
+  let inputEl = document.getElementById(`input${contentId}`);
   //console.log(inputEl.checked);
   let checked = inputEl.checked;
 
@@ -964,35 +964,38 @@ function completeLesson(fileOrder, week, courseId) {
         const updateData = {
           UserId: userCurrentId,
           CourseId: courseId,
-          MaterialId: fileOrder,
+          MaterialId: contentId,
           Completed: checked,
+          Week: week,
         };
 
-        // fetch("/api/Material/UpdateMaterialStatus", {
-        //   method: "POST",
-        //   headers: {
-        //     Accept: "application/json",
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(updateData),
-        // })
-        //   .then((response) => {
-        //     if (!response.ok) {
-        //       console.log(response);
-        //       throw new Error("Network response was not ok");
-        //     }
-        //     return response.json();
-        //   })
-        //   .then((data) => {
-        //     // Uzmite ime korisnika iz podataka koje ste dobili
-        //     console.log(data);
-        //   })
-        //   .catch((error) => {
-        //     console.error(
-        //       "There has been a problem with your update operation:",
-        //       error
-        //     );
-        //   });
+        console.log(updateData);
+
+        fetch("/api/Material/ChangeCompletedStatus", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updateData),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              console.log(response);
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            // Uzmite ime korisnika iz podataka koje ste dobili
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your update operation:",
+              error
+            );
+          });
       })
       .catch((error) => {
         console.error(
@@ -1344,6 +1347,7 @@ function confirmEnroll() {
                     CourseId: id,
                     MaterialId: material.contentId,
                     Completed: false,
+                    Week: material.weekNumber,
                   };
                   console.log(updateData);
                   fetch("/api/Material/UpdateMaterialStatus", {

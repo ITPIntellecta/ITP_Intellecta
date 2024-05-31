@@ -13,5 +13,7 @@ namespace ITP_Intellecta.Services
 
         Task<ServiceResponse<GetCourseStatisticsDto>> ChangeLessonStatus (AddCourseStatisticsDto stat);
 
+        Task<ServiceResponse<GetCourseStatisticsDto>> ChangeLessonComplete (AddCourseStatisticsDto stat);
+
     }
 }

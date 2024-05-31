@@ -63,5 +63,12 @@ namespace ITP_Intellecta.Controllers
         {
             return Ok(await _materialService.ChangeLessonStatus(stat));
         }
+
+
+        [HttpPost("ChangeCompletedStatus")]
+        public async Task<ActionResult<ServiceResponse<GetCourseStatisticsDto>>> ChangeLessonComplete(AddCourseStatisticsDto stat)
+        {
+            return Ok(await _materialService.ChangeLessonComplete(stat));
+        }
         }
     }

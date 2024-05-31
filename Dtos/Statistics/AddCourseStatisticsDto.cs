@@ -13,5 +13,6 @@ namespace ITP_Intellecta.Dtos.Statistics
 
         public int? MaterialId {get;set;}
         public bool Completed {get;set;}
+        public int Week {get;set;}
     }
 }
