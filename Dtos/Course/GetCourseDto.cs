@@ -18,6 +18,8 @@ namespace ITP_Intellecta.Dtos.Course
         public float CourseMark {get; set;}
         public bool Approved {get; set;}
         public float Price { get; set; }
+        public List<CourseContent>? CourseContents {get;set;}
+
 
     }
 }

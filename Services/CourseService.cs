@@ -128,6 +128,9 @@ namespace Services
             var serviceResponse = new ServiceResponse<GetCourseDto>();
             var course = await _context.Courses
                 .FirstOrDefaultAsync(c => c.CourseId == id);
+               var material=await _context.Materials.Where(c=>c.CourseId==id).ToListAsync();
+               if(course!=null && material!=null)
+            course.CourseContents=material;
                 
                 if (course is null )
                     throw new Exception($"Course with Id '{id}' not found.");

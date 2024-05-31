@@ -53,26 +53,62 @@ namespace ITP_Intellecta.Services
                  return response;
         }
 
-        public async Task SendEmailToAllUsers()
+             public ServiceResponse<string> SendEmailSync(int userId, string message)
         {
-            var usersS= _context.Users.ToListAsync();
-            var users=await usersS;
-int i=0;
-for ( i = 0; i < users.Count; i++)
-    {
-        string message = "";
-        var courses = await _context.Users.Include(c => c.Courses).Where(c => c.Id == users[i].Id).FirstOrDefaultAsync();
-        if (courses != null && courses.Courses.Count != 0)
-        {
-            message = "Dear " + users[i].FirstName + ", \nWe hope this message finds you well. If you haven't completed the courses you started, now is the perfect time to continue your learning journey. You are currently enrolled in these courses:\n";
-            foreach (var course in courses.Courses)
+            var response=new ServiceResponse<string>();
+            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+            smtpClient.Credentials = new NetworkCredential("intellecta18@gmail.com", "gwrs uliy lync pwxw");
+            var user=  _context.Users.FirstOrDefault(c => c.Id == userId);
+                // Potrebno je omogućiti SSL
+            smtpClient.EnableSsl = true;
+
+            if(user!=null)
             {
-                message += "- " + course.Title + "\n";
+                // Email poruka
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("intellecta18@gmail.com");
+                mailMessage.To.Add(user.Email);
+                mailMessage.Subject = "Intellecta - Reminder";
+                mailMessage.Body = message;
+
+                try
+                {
+                    // Slanje emaila
+                  //  smtpClient.Send(mailMessage);
+                    smtpClient.SendMailAsync(mailMessage);
+
+                    Console.WriteLine("Email je uspješno poslan.");
+                    response.Success=true;
+                    response.Message="Success";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Greška prilikom slanja emaila: " + ex.Message);
+                }
             }
-            message += "\nBest regards,\nThe Intellecta Team";
-            await SendEmail(users[i].Id, message);
+                 return response;
         }
-    }
+
+        public void SendEmailToAllUsers()
+        {
+            var users= _context.Users.Include(c => c.Courses).ToList();
+        //    var users=await usersS;
+
+        foreach(var user in users)
+            {
+                string message = "";
+                if (user.Courses.Count != 0)
+                {
+                    message = "Dear " + user.FirstName + ", \nWe hope this message finds you well. If you haven't completed the courses you started, now is the perfect time to continue your learning journey. You are currently enrolled in these courses:\n";
+                    foreach (var course in user.Courses)
+                    {
+                        message += "- " + course.Title + "\n";
+                    }
+                    message += "\nBest regards,\nThe Intellecta Team";
+                    SendEmailSync(user.Id, message);
+                    
+                }
+            }
         }
    
     }

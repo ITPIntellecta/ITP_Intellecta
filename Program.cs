@@ -145,7 +145,7 @@ app.UseHangfireDashboard();
 RecurringJob.AddOrUpdate<IEmailService>(
     "send-weekly-email",
     service => service.SendEmailToAllUsers(),
-    Cron.Minutely);
+    Cron.Weekly);
 
 
 app.UseCors("AllowAllOrigins");

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ITP_Intellecta.Models
@@ -22,6 +23,8 @@ namespace ITP_Intellecta.Models
         public bool Approved {get; set;}
         public float Price { get; set; }
         public List<User>? Users{get; set;}
+
+        [JsonIgnore]
         public List<CourseContent>? CourseContents {get;set;}
         public List<Review> Reviews {get;set;}
     }

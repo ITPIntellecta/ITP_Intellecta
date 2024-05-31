@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITP_Intellecta.Dtos.Statistics;
 using ITP_Intellecta.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -56,5 +57,11 @@ namespace ITP_Intellecta.Controllers
             return Ok(await _materialService.GetMaterialById(id));
         }
                     
+
+        [HttpPost("UpdateMaterialStatus")]
+        public async Task<ActionResult<ServiceResponse<GetCourseStatisticsDto>>> UpdateMaterialStatus(AddCourseStatisticsDto stat)
+        {
+            return Ok(await _materialService.ChangeLessonStatus(stat));
+        }
         }
     }

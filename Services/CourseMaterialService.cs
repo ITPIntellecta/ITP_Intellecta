@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ITP_Intellecta.Dtos.Statistics;
 
 namespace ITP_Intellecta.Services
 {
@@ -27,6 +28,37 @@ namespace ITP_Intellecta.Services
                 await _context.Materials
                     .Where(c => c.ContentId==courseMaterial.ContentId)
                     .Select(c => _mapper.Map<GetCourseMaterialDto>(c))
+                    .ToListAsync()).FirstOrDefault();
+
+            return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<GetCourseStatisticsDto>> ChangeLessonStatus(AddCourseStatisticsDto stat)
+        {
+            var serviceResponse = new ServiceResponse<GetCourseStatisticsDto>();
+            var courseStatistics=_mapper.Map<CourseStatistics>(stat);
+
+            var user = await _context.Users.FindAsync(stat.UserId);
+            var course = await _context.Courses.FindAsync(stat.CourseId);
+            var material=await _context.Materials.Where(c=>c.ContentId==stat.MaterialId).FirstOrDefaultAsync();
+
+            if (user == null || course == null || material==null)
+            {
+                throw new Exception("User or Course not found");
+            }
+
+            // Popunite povezane entitete
+            courseStatistics.User = user;
+            courseStatistics.Course = course;
+            courseStatistics.Material=material;
+
+            _context.Statistics.Add(courseStatistics);
+            await _context.SaveChangesAsync();
+
+            serviceResponse.Data =(
+                await _context.Statistics
+                    .Where(c => c.CourseId==courseStatistics.CourseId).Where(c=>c.MaterialId==stat.MaterialId)
+                    .Select(c => _mapper.Map<GetCourseStatisticsDto>(c))
                     .ToListAsync()).FirstOrDefault();
 
             return serviceResponse;

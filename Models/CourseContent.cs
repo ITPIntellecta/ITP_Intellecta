@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 
 namespace ITP_Intellecta.Models
@@ -11,6 +12,8 @@ namespace ITP_Intellecta.Models
     {
          [Key]
         public int ContentId {get;set;}
+
+        [JsonIgnore]
         public Course? Course { get; set; }
         public int CourseId {get;set;}
         public string VideoFile { get; set; }=string.Empty;

@@ -922,7 +922,7 @@ function loadVideoPage() {
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
 <label>
-<input type="checkbox" id="courseComplete" onchange="completeLesson('${material.fileOrder}', '${i}')"/>
+<input id="input${material.fileOrder}" type="checkbox" id="courseComplete" onchange="completeLesson('${material.fileOrder}', '${i}', ${material.courseId})"/>
 <span class="checkbox"></span>
 </label>
 </div><button class="btnLesson"  onclick="showFile('${video}')"> 
@@ -936,9 +936,71 @@ function loadVideoPage() {
     });
 }
 
-function completeLesson(fileOrder, week) {
+function completeLesson(fileOrder, week, courseId) {
   console.log(fileOrder);
   console.log(week);
+
+  let inputEl = document.getElementById(`input${fileOrder}`);
+  //console.log(inputEl.checked);
+  let checked = inputEl.checked;
+
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          //  console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        // console.log(userCurrentId);
+
+        const updateData = {
+          UserId: userCurrentId,
+          CourseId: courseId,
+          MaterialId: fileOrder,
+          Completed: checked,
+        };
+
+        // fetch("/api/Material/UpdateMaterialStatus", {
+        //   method: "POST",
+        //   headers: {
+        //     Accept: "application/json",
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(updateData),
+        // })
+        //   .then((response) => {
+        //     if (!response.ok) {
+        //       console.log(response);
+        //       throw new Error("Network response was not ok");
+        //     }
+        //     return response.json();
+        //   })
+        //   .then((data) => {
+        //     // Uzmite ime korisnika iz podataka koje ste dobili
+        //     console.log(data);
+        //   })
+        //   .catch((error) => {
+        //     console.error(
+        //       "There has been a problem with your update operation:",
+        //       error
+        //     );
+        //   });
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
+  }
 }
 
 function loadVideo(id) {
@@ -1263,6 +1325,57 @@ function confirmEnroll() {
           .then((data) => {
             console.log(data);
             enrollCourseMail(userCurrentId);
+            //FETCH ZA PRAVLJENJE REDOVA U TABELI STATISTICS
+
+            fetch(`/api/course/GetCourseById/${id}`, {
+              method: "GET",
+            })
+              .then((response) => {
+                //  console.log(response);
+                return response.json();
+              })
+              .then((data) => {
+                console.log(data.data);
+
+                data.data.courseContents.forEach((material) => {
+                  console.log(material);
+                  const updateData = {
+                    UserId: userCurrentId,
+                    CourseId: id,
+                    MaterialId: material.contentId,
+                    Completed: false,
+                  };
+                  console.log(updateData);
+                  fetch("/api/Material/UpdateMaterialStatus", {
+                    method: "POST",
+                    headers: {
+                      Accept: "application/json",
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(updateData),
+                  })
+                    .then((response) => {
+                      if (!response.ok) {
+                        console.log(response);
+                        throw new Error("Network response was not ok");
+                      }
+                      return response.json();
+                    })
+                    .then((data) => {
+                      // Uzmite ime korisnika iz podataka koje ste dobili
+                      console.log(data);
+                    })
+                    .catch((error) => {
+                      console.error(
+                        "There has been a problem with your update operation:",
+                        error
+                      );
+                    });
+                });
+              })
+              .catch((error) => {
+                console.error("Error (enroll):", error);
+              });
           })
           .catch((error) => {
             console.error("Nash Error", error);
