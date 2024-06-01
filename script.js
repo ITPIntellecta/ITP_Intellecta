@@ -813,7 +813,9 @@ function loadVideoPage() {
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("parametar");
+  let cccourse;
 
+  cccourse = id;
   let creatorId;
   let title;
   let subtitle;
@@ -917,23 +919,91 @@ function loadVideoPage() {
              <div class="week-lessons show-lesson">`;
             // console.log(i);
             data.data.forEach((material) => {
-              //   console.log(material);
+              console.log(material);
               const video = material.videoFile;
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
-<label>
-<input id="input${material.contentId}" type="checkbox" id="courseComplete" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId})"/>
-<span class="checkbox"></span>
-</label>
-</div><button class="btnLesson"  onclick="showFile('${video}')"> 
+                <label>
+                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId})"/>
+                <span class="checkbox"></span>
+                </label>
+                </div><button class="btnLesson"  onclick="showFile('${video}')"> 
                 Lesson ${material.fileOrder}</button></div>`;
 
                 divWeeks.innerHTML += `</div></div>`;
               }
+
+              fetch("/api/course/user", {
+                method: "GET",
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    console.log(response);
+                    throw new Error("Network response was not ok");
+                  }
+                  return response.json();
+                })
+                .then((data) => {
+                  userCurrentId = data.data.id;
+                  console.log(userCurrentId);
+
+                  fetch(
+                    `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
+                  )
+                    .then((response) => response.json())
+                    .then((data) => {
+                      console.log(data);
+                      var elem = document.getElementById(
+                        `input${data.data.materialId}`
+                      );
+
+                      console.log(elem);
+                      console.log(data.data.completed);
+                      elem.checked = data.data.completed;
+
+                      // checkAllWeeks(material.courseId, durationInWeeks);
+                    })
+
+                    .catch((error) => {
+                      console.error("There was an error:", error);
+                    });
+                })
+                .catch((error) => {
+                  console.error(
+                    "There has been a problem with your fetch operation:",
+                    error
+                  );
+                });
             });
           }
+          checkAllWeeks(cccourse, durationInWeeks);
         });
     });
+}
+
+async function checkAllCompleted(week) {
+  try {
+    const response = await fetch(`api/material/checkAllCompleted?week=${week}`);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const data = await response.json();
+    // const checkbox = document.getElementById("allCompletedCheckbox");
+    // checkbox.checked = data.allCompleted;
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching completion status:", error);
+  }
+}
+async function checkAllWeeks(courseId, duration) {
+  let a = 1;
+  for (let i = 1; i <= duration; i++) {
+    checkAllCompleted(i);
+    console.log(`week ${i}`);
+    var el = document.getElementById("course-weeks");
+    // el.style.backgroundColor = "blue";
+    //STAVITI DA SE ISPITA AKO SU SVE ZAVRSENE DA SE TO NEGDJE ZAPISE U NEKI DIV, KAO NEKI POSTOTAK IL SLICNO
+  }
 }
 
 function completeLesson(contentId, week, courseId) {
@@ -956,7 +1026,6 @@ function completeLesson(contentId, week, courseId) {
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
         //console.log(data);
         userCurrentId = data.data.id;
         // console.log(userCurrentId);
@@ -987,8 +1056,10 @@ function completeLesson(contentId, week, courseId) {
             return response.json();
           })
           .then((data) => {
-            // Uzmite ime korisnika iz podataka koje ste dobili
             console.log(data);
+
+            //ROVJERA DA LI JE SEDMICA ZAVRSENA
+            checkAllCompleted(week);
           })
           .catch((error) => {
             console.error(

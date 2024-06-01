@@ -92,7 +92,16 @@ namespace ITP_Intellecta.Services
 
             return serviceResponse;
         }
+        public async Task<ServiceResponse<GetCourseStatisticsDto>> GetLessonStatus(int userId, int courseId, int materialId)
+        {
+            var serviceResponse=new ServiceResponse<GetCourseStatisticsDto>();
 
+            var stat=await _context.Statistics.Where(c=>c.UserId==userId).Where(c=>c.CourseId==courseId).Where(c=>c.MaterialId==materialId).FirstOrDefaultAsync();
+
+            serviceResponse.Data=_mapper.Map<GetCourseStatisticsDto>(stat);
+
+            return serviceResponse;
+        }
         public async Task<ServiceResponse<List<GetCourseMaterialDto>>> GetMaterialById(int id)
         {
             var serviceResponse = new ServiceResponse<List<GetCourseMaterialDto>>();
@@ -103,6 +112,17 @@ namespace ITP_Intellecta.Services
                     throw new Exception($"Course with Id '{id}' not found.");
             serviceResponse.Data = materials.Select(c => _mapper.Map<GetCourseMaterialDto>(c)).ToList();;
             return serviceResponse;
+        }
+
+        public async Task<ServiceResponse<bool>> CheckAllCompleted(int week){
+            var servresp=new ServiceResponse<bool>();
+        var allCompleted = await _context.Statistics
+                .Where(s => s.Week == week)
+                .AllAsync(s => s.Completed);
+
+                servresp.Data=allCompleted;
+
+                return servresp;
         }
     }
 }
