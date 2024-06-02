@@ -15,7 +15,9 @@
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-  <body onload="displayName(); checkLocalStorage(); loadPopularCourses()">
+  <body
+    onload="displayName(); checkLocalStorage(); loadPopularCourses(); loadReviews()"
+  >
     <div class="menu">
       <nav class="nav">
         <img
@@ -208,38 +210,7 @@
 
     <div class="student-reviews">
       <h2 style="margin-bottom: 4%">Our students said about us:</h2>
-      <div class="review">
-        <div class="card">
-          <div class="card-header">John Doe</div>
-          <div class="card-body">
-            <h5 class="card-title">&#9733;&#9733;&#9733;&#9733;&#9733;</h5>
-            <span class="quote">&#10077;</span><br />
-            <p class="card-text">This is my review.</p>
-            <br />
-            <span class="quote">&#10078;</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">John Doe</div>
-          <div class="card-body">
-            <h5 class="card-title">&#9733;&#9733;&#9733;&#9733;&#9733;</h5>
-            <span class="quote">&#10077;</span><br />
-            <p class="card-text">This is my review.</p>
-            <br />
-            <span class="quote">&#10078;</span>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header">John Doe</div>
-          <div class="card-body">
-            <h5 class="card-title">&#9733;&#9733;&#9733;&#9733;&#9733;</h5>
-            <span class="quote">&#10077;</span><br />
-            <p class="card-text">This is my review.</p>
-            <br />
-            <span class="quote">&#10078;</span>
-          </div>
-        </div>
-      </div>
+      <div class="review"></div>
     </div>
     <button id="scrollBtn" class="hidden">&#129121;</button>
 

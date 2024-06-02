@@ -77,12 +77,12 @@ namespace ITP_Intellecta.Controllers
                 return Ok(await _materialService.GetLessonStatus(userId, courseId, materialId));
             }
 
-            [HttpGet("checkAllCompleted")]
-            public async Task<ActionResult<ServiceResponse<bool>>> CheckAllCompleted(int week)
+            [HttpGet("checkAllCompleted/{week}/{courseId}/{userId}")]
+            public async Task<ActionResult<ServiceResponse<bool>>> CheckAllCompleted(int week, int courseId, int userId)
             {
                 
 
-                return Ok(await _materialService.CheckAllCompleted(week));
+                return Ok(await _materialService.CheckAllCompleted(week, courseId, userId));
             }
     }
 }

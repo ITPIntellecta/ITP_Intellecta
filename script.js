@@ -439,11 +439,12 @@ function filteredPrice(courses, min, max) {
 
 function filteredSubTitle(courses, subTitle) {
   return courses.filter((course) => {
-    if (subTitle != "") {
+    if (subTitle !== "") {
       console.log(course.title);
+      const lowerSubTitle = subTitle.toLowerCase();
       return (
-        course.title.toLowerCase() === subTitle.toLowerCase() ||
-        course.subtitle.toLowerCase() === subTitle.toLowerCase()
+        course.title.toLowerCase().includes(lowerSubTitle) ||
+        course.subtitle.toLowerCase().includes(lowerSubTitle)
       );
     } else {
       return true;
@@ -915,7 +916,7 @@ function loadVideoPage() {
           const divWeeks = document.getElementById("course-weeks");
           for (var i = 1; i <= durationInWeeks; i++) {
             divWeeks.innerHTML += `  <div class="week" id="week-course">
-            <button class="button-week" >Week ${i}</button>
+            <button class="button-week" id="week${i}">Week ${i}</button>
              <div class="week-lessons show-lesson">`;
             // console.log(i);
             data.data.forEach((material) => {
@@ -924,7 +925,7 @@ function loadVideoPage() {
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
                 <label>
-                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId})"/>
+                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId}, ${durationInWeeks})"/>
                 <span class="checkbox"></span>
                 </label>
                 </div><button class="btnLesson"  onclick="showFile('${video}')"> 
@@ -981,9 +982,11 @@ function loadVideoPage() {
     });
 }
 
-async function checkAllCompleted(week) {
+async function checkAllCompleted(week, courseId, userId) {
   try {
-    const response = await fetch(`api/material/checkAllCompleted?week=${week}`);
+    const response = await fetch(
+      `api/material/checkAllCompleted/${week}/${courseId}/${userId}`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -991,22 +994,110 @@ async function checkAllCompleted(week) {
     // const checkbox = document.getElementById("allCompletedCheckbox");
     // checkbox.checked = data.allCompleted;
     console.log(data);
+    var weekDiv = document.getElementById(`week${week}`);
+
+    if (data.data == true) {
+      console.log(weekDiv);
+      weekDiv.innerHTML = `Week ${week} - Completed!`;
+      return true;
+    } else {
+      weekDiv.innerHTML = `Week ${week}`;
+      return false;
+    }
   } catch (error) {
     console.error("Error fetching completion status:", error);
   }
 }
 async function checkAllWeeks(courseId, duration) {
-  let a = 1;
-  for (let i = 1; i <= duration; i++) {
-    checkAllCompleted(i);
-    console.log(`week ${i}`);
-    var el = document.getElementById("course-weeks");
-    // el.style.backgroundColor = "blue";
-    //STAVITI DA SE ISPITA AKO SU SVE ZAVRSENE DA SE TO NEGDJE ZAPISE U NEKI DIV, KAO NEKI POSTOTAK IL SLICNO
+  let completedWeeks = 0;
+  const promises = [];
+  if (localStorage.getItem("jwtToken") != null) {
+    fetch("/api/course/user", {
+      method: "GET",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          console.log(response);
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Uzmite ime korisnika iz podataka koje ste dobili
+        //console.log(data);
+        userCurrentId = data.data.id;
+        // console.log(userCurrentId);
+
+        for (let i = 1; i <= duration; i++) {
+          console.log(courseId);
+          console.log(userCurrentId);
+          const promise = checkAllCompleted(i, courseId, userCurrentId).then(
+            (result) => {
+              console.log(result);
+              if (result == true) {
+                completedWeeks++;
+                console.log(completedWeeks);
+              }
+            }
+          );
+          promises.push(promise); // Dodato: Dodavanje obećanja u niz
+        }
+
+        return Promise.all(promises).then(() => completedWeeks); // Dodato: Vraćanje Promise.all
+      })
+      .then((completedWeeks) => {
+        const percentage = parseFloat(
+          ((completedWeeks * 100) / duration).toFixed(2)
+        );
+        console.log(percentage);
+        console.log(completedWeeks);
+        console.log(duration);
+        let divCourse = document.getElementsByClassName("coursePercentage")[0];
+
+        if (completedWeeks == duration) {
+          console.log("Course completed!");
+          fetch(
+            `/api/email/send-email/${userCurrentId}/Your course has been approved!`,
+            {
+              method: "POST",
+            }
+          )
+            .then((response) => {
+              //  console.log(response);
+              //return response.json;
+            })
+            .then((data) => {
+              //console.log(data);
+            })
+            .catch((error) => {
+              console.error("Error updating course:", error);
+            });
+          divCourse.innerHTML = `You have completed this course! Congratulations!<br>
+          
+          <div class="progress-bar__wrapper">
+  <label class="progress-bar__value" htmlFor="progress-bar"> ${percentage}% </label>
+  <progress id="progress-bar" value="${percentage}" max="100"></progress>
+</div>
+            `;
+        } else {
+          console.log("Course not completed");
+          divCourse.innerHTML = `You have finished  ${completedWeeks} out of ${duration} weeks! Keep going!<br>
+         <div class="progress-bar__wrapper">
+  <label class="progress-bar__value" htmlFor="progress-bar"> ${percentage}% </label>
+  <progress id="progress-bar" value="${percentage}" max="100"></progress>
+</div>          `;
+        }
+      })
+      .catch((error) => {
+        console.error(
+          "There has been a problem with your fetch operation:",
+          error
+        );
+      });
   }
 }
 
-function completeLesson(contentId, week, courseId) {
+function completeLesson(contentId, week, courseId, durationInWeeks) {
   console.log(contentId);
   console.log(week);
 
@@ -1059,7 +1150,8 @@ function completeLesson(contentId, week, courseId) {
             console.log(data);
 
             //ROVJERA DA LI JE SEDMICA ZAVRSENA
-            checkAllCompleted(week);
+            checkAllCompleted(week, courseId, userCurrentId);
+            checkAllWeeks(courseId, durationInWeeks);
           })
           .catch((error) => {
             console.error(
@@ -1576,5 +1668,46 @@ function deleteCourse(id) {
     })
     .catch((error) => {
       console.error("Error (enroll):", error);
+    });
+}
+
+function loadReviews() {
+  fetch("/api/course/topReviews")
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      let div = document.getElementsByClassName("review")[0];
+      div.innerHTML = "";
+      data.data.forEach((review) => {
+        console.log(review);
+        div.innerHTML += `
+                <div class="card">
+          <div class="card-header">${review.user.firstName} &nbsp; ${review.user.lastName}</div>
+          <div class="card-body">
+            <h5 class="card-title ct"><div>
+                <span class="star star${review.id}">&#9733;</span>
+                <span class="star star${review.id}">&#9733;</span>
+                <span class="star star${review.id}">&#9733;</span>
+                <span class="star star${review.id}">&#9733;</span>
+                <span class="star star${review.id}">&#9733;</span>
+              </div></h5>
+            <span class="quote">&#10077;</span><br />
+            <p class="card-text">About <i>${review.course.title}:<br> </i>
+            ${review.reviewText}</p>
+            <br />
+            <span class="quote">&#10078;</span>
+          </div>
+        </div>
+        `;
+        let stars = document.querySelectorAll(`.star${review.id}`);
+        console.log(stars);
+        for (let i = 0; i < review.mark; i++) {
+          stars[i].classList.add("filled");
+        }
+      });
+    })
+    .catch((error) => {
+      console.error("There was an error:", error);
     });
 }

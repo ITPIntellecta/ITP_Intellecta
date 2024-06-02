@@ -114,9 +114,10 @@ namespace ITP_Intellecta.Services
             return serviceResponse;
         }
 
-        public async Task<ServiceResponse<bool>> CheckAllCompleted(int week){
+        public async Task<ServiceResponse<bool>> CheckAllCompleted(int week, int courseId, int userId){
             var servresp=new ServiceResponse<bool>();
-        var allCompleted = await _context.Statistics
+        var allCompleted = await _context.Statistics.Where(s=>s.UserId==userId)
+                .Where(s=>s.CourseId==courseId)
                 .Where(s => s.Week == week)
                 .AllAsync(s => s.Completed);
 

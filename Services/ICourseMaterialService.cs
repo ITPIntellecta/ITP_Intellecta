@@ -16,7 +16,7 @@ namespace ITP_Intellecta.Services
         Task<ServiceResponse<GetCourseStatisticsDto>> ChangeLessonComplete (AddCourseStatisticsDto stat);
 
         Task<ServiceResponse<GetCourseStatisticsDto>> GetLessonStatus(int userId, int courseId, int materialId);
-        Task<ServiceResponse<bool>> CheckAllCompleted(int week);
+        Task<ServiceResponse<bool>> CheckAllCompleted(int week, int courseId, int userId);
 
     }
 }

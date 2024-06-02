@@ -545,11 +545,11 @@ function openReview() {
   var elementToHide = document.getElementById("idOverview");
   elementToHide.style.display = "none";
   element.style.display = "block";
-  element.innerHTML = `<div class="gridreviews"><div class="leftreview"><h2 id="title-course">Naslov kursa</h2>  
-        <h3 id="subtitle-course">Podnaslov kursa</h3> 
-        <p id="highlights-course">Highlights</p> 
-        <p id="courseCreator">Creator33333</p>
-        <p id=""></p> 
+  element.innerHTML = `<div class="gridreviews"><div class="leftreview"><h2 class="title11" id="title-course">Naslov kursa</h2>  
+        <h3 id="subtitle-course" class="subtitle11">Podnaslov kursa</h3> 
+        <p id="highlights-course" class="highlights11">Highlights</p> 
+        
+        
         </div>
         <div class="rightreview">
         <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
@@ -557,6 +557,49 @@ function openReview() {
         </div>
         </div>
         `;
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const id = urlParams.get("parametar");
+  let cccourse;
+  cccourse = id;
+  let creatorId;
+  let title;
+  let subtitle;
+  let durationInWeeks;
+  let weeklyHours;
+  let highlights;
+  let category;
+  let courseMark;
+  let approved;
+  let price;
+  fetch(`/api/course/GetCourseById/${id}`, {
+    method: "GET",
+  })
+    .then((response) => {
+      //  console.log(response);
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data);
+      creatorId = data.data.creatorId;
+      title = data.data.title;
+      subtitle = data.data.subtitle;
+      durationInWeeks = data.data.durationInWeeks;
+      weeklyHours = data.data.weeklyHours;
+      highlights = data.data.highlights;
+      category = data.data.category;
+      courseMark = data.data.courseMark;
+      approved = data.data.approved;
+      price = data.data.price;
+      const titleH = document.getElementsByClassName("title11")[0];
+      // console.log(titleH);
+      titleH.innerHTML = title;
+      const subtitleH = document.getElementsByClassName("subtitle11")[0];
+      subtitleH.innerHTML = subtitle;
+
+      const highlightsH = document.getElementsByClassName("highlights11")[0];
+      highlightsH.innerHTML = highlights;
+    });
 }
 function showReviewInput() {
   let element = document.getElementById("typereview");
@@ -570,7 +613,7 @@ function showReviewInput() {
         <span class="starR" data-value="2">&#9733;</span>
         <span class="starR" data-value="1">&#9733;</span>
     </div>
-    <div id="rating-value" value="">Ocena: 0</div>
+    <div id="rating-value" value="">Mark: 0</div>
     <button class="addReview" onclick="submitReview()" id="submitreview">Submit Review</button>
     </div>`;
 
@@ -674,6 +717,7 @@ function submitReview() {
           .then((data) => {
             console.log(data);
             // window.location.href = oldLoc; //NE VALJA
+            location.reload();
           })
           .catch((error) => {
             console.error("Unable to add review.", error);

@@ -86,5 +86,11 @@ namespace Controllers
             } 
             return Ok(response);
         }
-    }
+
+        [HttpGet("topReviews")]
+        public async Task<ActionResult<ServiceResponse<List<GetReviewDto>>>>  GetTopReviews()
+        {
+            return Ok(await _courseService.GetTopReviews());
+        }
+        }
 }

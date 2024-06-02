@@ -246,5 +246,19 @@ namespace Services
             serviceResponse.Data=statistic.FirstOrDefault(); 
             return serviceResponse;
         }
+
+        public async Task<ServiceResponse<List<GetReviewDto>>> GetTopReviews()
+        {
+            var serviceResponse = new ServiceResponse<List<GetReviewDto>>();
+ 
+        var topReviews = await _context.Reviews.Include(c=>c.Course).Include(c=>c.User)
+            .OrderByDescending(r => r.Mark)
+            .Take(3)
+            .ToListAsync();
+        serviceResponse.Data=topReviews.Select(c => _mapper.Map<GetReviewDto>(c)).ToList();;
+            return serviceResponse;
+        }
+
+        
     }
     }
