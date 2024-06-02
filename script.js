@@ -925,7 +925,7 @@ function loadVideoPage() {
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
                 <label>
-                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId}, ${durationInWeeks})"/>
+                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId}, ${durationInWeeks}, ${title})"/>
                 <span class="checkbox"></span>
                 </label>
                 </div><button class="btnLesson"  onclick="showFile('${video}')"> 
@@ -977,7 +977,7 @@ function loadVideoPage() {
                 });
             });
           }
-          checkAllWeeks(cccourse, durationInWeeks);
+          checkAllWeeks(cccourse, durationInWeeks, title);
         });
     });
 }
@@ -1008,7 +1008,7 @@ async function checkAllCompleted(week, courseId, userId) {
     console.error("Error fetching completion status:", error);
   }
 }
-async function checkAllWeeks(courseId, duration) {
+async function checkAllWeeks(courseId, duration, title) {
   let completedWeeks = 0;
   const promises = [];
   if (localStorage.getItem("jwtToken") != null) {
@@ -1057,7 +1057,7 @@ async function checkAllWeeks(courseId, duration) {
         if (completedWeeks == duration) {
           console.log("Course completed!");
           fetch(
-            `/api/email/send-email/${userCurrentId}/Your course has been approved!`,
+            `/api/email/send-email/${userCurrentId}/You have completed this course: ${title}! Congratulations!!`,
             {
               method: "POST",
             }
@@ -1097,7 +1097,7 @@ async function checkAllWeeks(courseId, duration) {
   }
 }
 
-function completeLesson(contentId, week, courseId, durationInWeeks) {
+function completeLesson(contentId, week, courseId, durationInWeeks, title) {
   console.log(contentId);
   console.log(week);
 
@@ -1151,7 +1151,7 @@ function completeLesson(contentId, week, courseId, durationInWeeks) {
 
             //ROVJERA DA LI JE SEDMICA ZAVRSENA
             checkAllCompleted(week, courseId, userCurrentId);
-            checkAllWeeks(courseId, durationInWeeks);
+            checkAllWeeks(courseId, durationInWeeks, title);
           })
           .catch((error) => {
             console.error(
