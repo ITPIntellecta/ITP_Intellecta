@@ -9,7 +9,7 @@ namespace ITP_Intellecta.Models
     public class Course
     {
         public int CourseId { get; set; }
-
+        [JsonIgnore]
         public User? Creator {get;set;}
         public int? CreatorId { get; set; }
 
@@ -26,6 +26,7 @@ namespace ITP_Intellecta.Models
 
         [JsonIgnore]
         public List<CourseContent>? CourseContents {get;set;}
+        [JsonIgnore]
         public List<Review> Reviews {get;set;}
     }
 }

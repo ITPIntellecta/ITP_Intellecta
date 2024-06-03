@@ -7,6 +7,7 @@ using System.Security.Claims;
 using ITP_Intellecta.Dtos.User;
 using ITP_Intellecta.Dtos.Review;
 using ITP_Intellecta.Dtos.Statistics;
+using Org.BouncyCastle.Bcpg;
 
 
 namespace Services
@@ -191,6 +192,7 @@ namespace Services
             var response=new ServiceResponse<GetReviewDto>();
             var review=_mapper.Map<Review>(newReview);
 
+
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
@@ -200,6 +202,21 @@ namespace Services
                     .Where(c => c.Id==review.Id)
                     .Select(c => _mapper.Map<GetReviewDto>(c)).ToListAsync();
             response.Data=reviewresp.FirstOrDefault();
+
+
+            //racunamo ocjenu za kurs
+            var course=await _context.Courses.Where(c=>c.CourseId==newReview.CourseId).FirstOrDefaultAsync();
+            var markList=await _context.Reviews.Where(c=>c.CourseId==newReview.CourseId).ToListAsync();
+
+            double sum=0;
+            foreach(var mark in markList){
+                sum+=mark.Mark;
+            }
+
+            float courseMark=(float)sum/markList.Count;
+            course!.CourseMark=courseMark;
+            await _context.SaveChangesAsync();
+
             return response;        
         }
 

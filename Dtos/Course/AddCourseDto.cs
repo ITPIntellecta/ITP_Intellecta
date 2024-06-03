@@ -14,7 +14,7 @@ namespace ITP_Intellecta.Dtos.Course
         public int WeeklyHours { get; set; }
         public string Highlights { get; set; }=string.Empty;
         public string Category { get; set; }=string.Empty;
-        public float CourseMark {get; set;}
+        // public float CourseMark {get; set;}
         public float Price { get; set; }
 
     }

@@ -432,7 +432,7 @@ function courseInfo(courseId, userId) {
       bodyEl.innerHTML = `<div class="modalbodytop">
                 <div class="category">Category: ${data.data.category}</div>
                 <div class="price">Price: ${data.data.price} $</div>
-                <div class="markk">Mark: ${data.data.courseMark}
+                <div class="markDiv"> <p classs="markk">Mark: ${data.data.courseMark}</p>
                 <div class="rating">
                   <span class="starr">&#9733;</span>
                   <span class="starr">&#9733;</span>
@@ -548,11 +548,16 @@ function openReview() {
   elementToHide.style.display = "none";
   element.style.display = "block";
   // OVDJE DODATI UCITAVANJE RECENZIJA
-  element.innerHTML = `<div class="gridreviews"><div class="leftreview"><h2 class="title11" id="title-course">Naslov kursa</h2>  
-        <h3 id="subtitle-course" class="subtitle11">Podnaslov kursa</h3> 
-        <p id="highlights-course" class="highlights11">Highlights</p> 
-        
-        
+  element.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
+  <div id="carouselExample" class="carousel slide">  <div class="carousel-inner">    <div class="carousel-item active">      
+  <img src="..." class="d-block w-100" alt="...">    </div>    <div class="carousel-item">   
+     <img src="..." class="d-block w-100" alt="...">    </div>    <div class="carousel-item"> 
+          <img src="..." class="d-block w-100" alt="...">    </div>  </div> 
+           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span> 
+               </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>   
+  
+
         </div>
         <div class="rightreview">
         <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
@@ -594,14 +599,14 @@ function openReview() {
       courseMark = data.data.courseMark;
       approved = data.data.approved;
       price = data.data.price;
-      const titleH = document.getElementsByClassName("title11")[0];
-      // console.log(titleH);
-      titleH.innerHTML = title;
-      const subtitleH = document.getElementsByClassName("subtitle11")[0];
-      subtitleH.innerHTML = subtitle;
+      // const titleH = document.getElementsByClassName("title11")[0];
+      // // console.log(titleH);
+      // titleH.innerHTML = title;
+      // const subtitleH = document.getElementsByClassName("subtitle11")[0];
+      // subtitleH.innerHTML = subtitle;
 
-      const highlightsH = document.getElementsByClassName("highlights11")[0];
-      highlightsH.innerHTML = highlights;
+      // const highlightsH = document.getElementsByClassName("highlights11")[0];
+      // highlightsH.innerHTML = highlights;
 
       fetch("/api/course/user", {
         method: "GET",

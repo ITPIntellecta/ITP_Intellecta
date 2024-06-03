@@ -294,7 +294,6 @@ function submitCourse(event) {
           DurationInWeeks: weekNumber,
           WeeklyHours: weeklyWorkload,
           Highlights: courseHighlights,
-          courseMark: 5,
           Price: price,
         };
 
