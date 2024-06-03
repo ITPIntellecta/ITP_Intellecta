@@ -150,7 +150,7 @@ p.name {
 
 .dropdown-list,
 .search-bar {
-  background-color: #ead7bb;
+  background-color: #ead7bbb8;
 
   border-radius: 23px;
   text-align: center;
@@ -230,7 +230,7 @@ p.name {
   position: absolute;
   right: 0;
   padding: 0 1%;
-  transition: all 500ms;
+  /* transition: all 500ms; */
 }
 
 /*------------MOST POPULAR---------------*/

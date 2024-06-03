@@ -902,17 +902,7 @@ function loadVideoPage() {
         })
         .then((data) => {
           console.log(data);
-          // PROBA
-          // ascending = true;
-          // data.sort((a, b) => {
-          //   if (a[fileOrder] < b[fileOrder]) {
-          //     return ascending ? -1 : 1;
-          //   }
-          //   if (a[fileOrder] > b[fileOrder]) {
-          //     return ascending ? 1 : -1;
-          //   }
-          //   return 0;
-          // });
+
           const divWeeks = document.getElementById("course-weeks");
           for (var i = 1; i <= durationInWeeks; i++) {
             divWeeks.innerHTML += `  <div class="week" id="week-course">
@@ -924,8 +914,8 @@ function loadVideoPage() {
               const video = material.videoFile;
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
-                <label>
-                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId}, ${durationInWeeks}, ${title})"/>
+                <label class='labelCheckbox'>
+                <input id="input${material.contentId}" type="checkbox" onchange="completeLesson('${material.contentId}', '${i}', ${material.courseId}, ${durationInWeeks}, '${title}', ${creatorId})"/>
                 <span class="checkbox"></span>
                 </label>
                 </div><button class="btnLesson"  onclick="showFile('${video}')"> 
@@ -947,27 +937,55 @@ function loadVideoPage() {
                 .then((data) => {
                   userCurrentId = data.data.id;
                   console.log(userCurrentId);
+                  console.log(id);
+                  console.log(material.contentId);
 
-                  fetch(
-                    `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
-                  )
-                    .then((response) => response.json())
-                    .then((data) => {
-                      console.log(data);
-                      var elem = document.getElementById(
-                        `input${data.data.materialId}`
-                      );
+                  if (userCurrentId != creatorId) {
+                    console.log(userCurrentId);
+                    console.log(creatorId);
 
-                      console.log(elem);
-                      console.log(data.data.completed);
-                      elem.checked = data.data.completed;
+                    fetch(
+                      `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        console.log(data);
+                        var elem = document.getElementById(
+                          `input${data.data.materialId}`
+                        );
 
-                      // checkAllWeeks(material.courseId, durationInWeeks);
-                    })
+                        console.log(elem);
+                        console.log(data.data.completed);
+                        elem.checked = data.data.completed;
 
-                    .catch((error) => {
-                      console.error("There was an error:", error);
+                        // checkAllWeeks(material.courseId, durationInWeeks);
+                      })
+
+                      .catch((error) => {
+                        console.error("There was an error:", error);
+                      });
+                  } else {
+                    console.log(userCurrentId);
+                    console.log(creatorId);
+                    var elements = document.querySelectorAll(".labelCheckbox");
+                    Array.from(elements).forEach((element) => {
+                      element.style.display = "none";
                     });
+                    var elementsDivs = document.querySelectorAll(".lesson");
+                    Array.from(elementsDivs).forEach((element1) => {
+                      element1.style.gridTemplateColumns = "100%";
+                    });
+                  }
+                  console.log(userCurrentId);
+                  console.log(creatorId);
+
+                  checkAllWeeks(
+                    cccourse,
+                    durationInWeeks,
+                    title,
+                    userCurrentId,
+                    creatorId
+                  );
                 })
                 .catch((error) => {
                   console.error(
@@ -977,7 +995,7 @@ function loadVideoPage() {
                 });
             });
           }
-          checkAllWeeks(cccourse, durationInWeeks, title);
+          // console.log(userCurrentId);
         });
     });
 }
@@ -1008,30 +1026,37 @@ async function checkAllCompleted(week, courseId, userId) {
     console.error("Error fetching completion status:", error);
   }
 }
-async function checkAllWeeks(courseId, duration, title) {
+async function checkAllWeeks(
+  courseId,
+  duration,
+  title,
+  userCurrentIdd,
+  creatorIdd
+) {
   let completedWeeks = 0;
   const promises = [];
-  if (localStorage.getItem("jwtToken") != null) {
+
+  if (userCurrentIdd != creatorIdd) {
     fetch("/api/course/user", {
       method: "GET",
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
-          throw new Error("Network response was not ok");
+          // console.log(response);
+          // throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
         // Uzmite ime korisnika iz podataka koje ste dobili
         //console.log(data);
-        userCurrentId = data.data.id;
+        // let iddd;
         // console.log(userCurrentId);
 
         for (let i = 1; i <= duration; i++) {
           console.log(courseId);
-          console.log(userCurrentId);
-          const promise = checkAllCompleted(i, courseId, userCurrentId).then(
+          console.log(userCurrentIdd);
+          const promise = checkAllCompleted(i, courseId, userCurrentIdd).then(
             (result) => {
               console.log(result);
               if (result == true) {
@@ -1097,7 +1122,14 @@ async function checkAllWeeks(courseId, duration, title) {
   }
 }
 
-function completeLesson(contentId, week, courseId, durationInWeeks, title) {
+function completeLesson(
+  contentId,
+  week,
+  courseId,
+  durationInWeeks,
+  title,
+  creator
+) {
   console.log(contentId);
   console.log(week);
 
@@ -1149,9 +1181,15 @@ function completeLesson(contentId, week, courseId, durationInWeeks, title) {
           .then((data) => {
             console.log(data);
 
-            //ROVJERA DA LI JE SEDMICA ZAVRSENA
+            //PROVJERA DA LI JE SEDMICA ZAVRSENA
             checkAllCompleted(week, courseId, userCurrentId);
-            checkAllWeeks(courseId, durationInWeeks, title);
+            checkAllWeeks(
+              courseId,
+              durationInWeeks,
+              title,
+              userCurrentId,
+              creator
+            );
           })
           .catch((error) => {
             console.error(

@@ -434,11 +434,11 @@ function courseInfo(courseId, userId) {
                 <div class="price">Price: ${data.data.price} $</div>
                 <div class="markk">Mark: ${data.data.courseMark}
                 <div class="rating">
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
+                  <span class="starr">&#9733;</span>
+                  <span class="starr">&#9733;</span>
+                  <span class="starr">&#9733;</span>
+                  <span class="starr">&#9733;</span>
+                  <span class="starr">&#9733;</span>
                 </div>
                 </div>
               </div>
@@ -526,10 +526,12 @@ function courseInfo(courseId, userId) {
       //   .addEventListener("click", joinCourse(`${data.data.courseId}`));
       // console.log(document.getElementById("enroll"));
 
-      let stars = document.querySelectorAll(".star");
+      let stars = document.querySelectorAll(".starr");
+      console.log(data.data.courseMark);
       for (let i = 0; i < data.data.courseMark; i++) {
         // Pretpostavimo da je ocjena 4
         stars[i].classList.add("filled");
+        console.log(stars[i].classList);
       }
     })
     .catch((error) => {
@@ -545,6 +547,7 @@ function openReview() {
   var elementToHide = document.getElementById("idOverview");
   elementToHide.style.display = "none";
   element.style.display = "block";
+  // OVDJE DODATI UCITAVANJE RECENZIJA
   element.innerHTML = `<div class="gridreviews"><div class="leftreview"><h2 class="title11" id="title-course">Naslov kursa</h2>  
         <h3 id="subtitle-course" class="subtitle11">Podnaslov kursa</h3> 
         <p id="highlights-course" class="highlights11">Highlights</p> 
@@ -599,6 +602,32 @@ function openReview() {
 
       const highlightsH = document.getElementsByClassName("highlights11")[0];
       highlightsH.innerHTML = highlights;
+
+      fetch("/api/course/user", {
+        method: "GET",
+      })
+        .then((response) => {
+          if (!response.ok) {
+            console.log(response);
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Uzmite ime korisnika iz podataka koje ste dobili
+          //console.log(data);
+          userCurrentId = data.data.id;
+          if (userCurrentId == creatorId) {
+            var el = document.getElementById("addreviewbutton");
+            el.style.display = "none";
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+        });
     });
 }
 function showReviewInput() {

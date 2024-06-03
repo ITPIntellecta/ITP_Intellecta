@@ -70,7 +70,36 @@ body {
 }
 .form-group > input {
   text-align: left;
+  padding-left: 30pt;
 }
+.formAddCourse > .form-group > .form-style {
+  /* color: green; */
+  /* padding: auto; */
+  text-align: left;
+  padding-left: 15pt;
+}
+/*OVO NISTA NIJE URADILO */
+.formAddCourse > .form-group-btn {
+  padding: 0;
+  text-align: left;
+  border: 0;
+  color: red;
+}
+
+#sacuvaj,
+#addNew,
+#addMore {
+  border: 0;
+  padding: 0;
+  /* padding-left: 15pt; */
+  /* text-align: center; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+/* #weekCourse {
+  display: flex;
+} */
 .name {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -141,7 +170,13 @@ body {
   transition: background-color 0.8s ease-out;
   margin-top: 25px;
 }
-
+.nnn {
+  padding-left: 15pt;
+  color: red;
+  border: 0;
+  /* text-align: center; */
+  /* display: flex; */
+}
 .btn {
   font-size: 13px;
   height: 40px;
@@ -338,6 +373,15 @@ input[type="radio"] {
   flex-direction: column;
   justify-content: center;
 }
+.signuplink {
+  font-weight: 500;
+  text-decoration: none;
+  color: #113946;
+}
+.signuplink:hover {
+  cursor: pointer;
+  color: #113946af;
+}
 
 /* dodavanje kursa */
 
@@ -372,29 +416,51 @@ select option:hover {
 
   /* padding-left: 55px; */
 }
-#weekCourse {
+.formAddCourse .week-material-btn {
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* #weekCourse {
   display: flex;
   flex-direction: column;
   align-content: center;
   align-items: center;
   flex-wrap: nowrap;
+} */
+#weekCourse {
+  width: 100%;
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+#weekCourse > button {
+  margin-bottom: 10pt;
 }
 
 #highlights ::placeholder {
   /* padding-left: 55px; */
   vertical-align: middle;
+  display: flex;
 }
 
 #highlights {
   display: block;
   margin: 0;
-  padding: 0;
+  padding-left: 15pt;
   resize: none;
   height: 100%;
+  /* vertical-align: middle; */
   /* padding-left: 0.3em; */
   /* margin-left: 1em; */
 }
 
+#highlights.form-style {
+  padding: 0;
+  padding: 10pt 15pt;
+}
 .fileDiv {
   background-color: transparent;
   color: #113946;
@@ -416,9 +482,9 @@ select option:hover {
 }
 
 .material-added-notification {
-  border: 1px solid #113946;
+  border: 1px solid transparent;
   color: #113946;
-  background-color: #ead7bb;
+  background-color: #ead7bb94;
   margin: 3% 0;
   border-radius: 4px;
   width: 100%;
@@ -429,9 +495,15 @@ select option:hover {
 .sendAuth {
   /* width: fit-content; */
   width: 100%;
-  padding: 1% 2%;
+  /* padding: 1% 2%; */
+  padding: 0;
+  padding-left: 15pt;
   margin: 0;
   display: block;
   box-sizing: border-box;
   text-align: center;
+}
+#prva {
+  padding: 0;
+  padding-left: 15pt;
 }
