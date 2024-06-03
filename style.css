@@ -455,6 +455,75 @@ p.name {
   vertical-align: middle;
 }
 
+/*-------------------review cards for one course-------------------*/
+.carousel {
+  width: 100%;
+  /* box-sizing: border-box; */
+}
+.cardReview {
+  border: 1px solid #113946;
+  width: 100%;
+  /* margin: 3%; */
+  display: inline-block;
+  /* box-shadow: 2px 2px 10px 2px #113946; */
+  height: 100%;
+  box-sizing: border-box;
+  border-radius: 15pt;
+}
+.cardReview-body {
+  position: relative;
+  background-color: #ead7bb92;
+  border: 2px solid #113946aa;
+  border-radius: 0 0 15pt 15pt;
+}
+
+.cardReview-title {
+  margin: 0;
+}
+
+.cardReview-header {
+  background-color: #113946aa;
+  color: rgb(224, 202, 195);
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+  font-weight: bold;
+  border-radius: 15pt 15pt 0 0;
+  text-align: center;
+}
+
+.quoteR {
+  position: absolute;
+  font-size: 30pt;
+  font-weight: bold;
+}
+
+.quoteR:not(:last-child) {
+  left: 4%;
+  /* top: 25%; */
+}
+
+.quoteR:last-child {
+  right: 4%;
+  bottom: -12%;
+}
+
+.cardReview-title {
+  border-bottom: 2px solid #0b2932;
+  padding: 10px 0;
+  color: gray;
+  font-size: larger;
+  text-align: center;
+}
+
+.cardReview-text {
+  margin: 5% 0;
+  height: 70px;
+  vertical-align: middle;
+  padding: 0 10%;
+  text-align: center;
+}
+
 /*---------------PROFILE-----------------*/
 
 .user,
@@ -1060,12 +1129,14 @@ input[type="range"] {
   color: #f39c12;
 }
 
-.starr {
+.starr,
+.staar {
   font-size: 2em;
   color: #ccc;
 }
 
-.starr.filled {
+.starr.filled,
+.staar.filled {
   color: #f39c12;
 }
 

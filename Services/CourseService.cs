@@ -276,6 +276,14 @@ namespace Services
             return serviceResponse;
         }
 
-        
+        public async Task<ServiceResponse<List<GetReviewDto>>> GetReviewsByCourseId(int courseId)
+        {
+            var serviceResponse = new ServiceResponse<List<GetReviewDto>>();
+
+            var reviews=await _context.Reviews.Where(c=>c.CourseId==courseId).ToListAsync();
+
+            serviceResponse.Data=reviews.Select(c => _mapper.Map<GetReviewDto>(c)).ToList();;
+            return serviceResponse;
+        }
     }
     }

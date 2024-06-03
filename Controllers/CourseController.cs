@@ -92,5 +92,11 @@ namespace Controllers
         {
             return Ok(await _courseService.GetTopReviews());
         }
+
+         [HttpGet("GetReviewsByCourseId/{courseId}")]
+        public async Task<ActionResult<ServiceResponse<List<GetReviewDto>>>>  GetReviewsByCourseId(int courseId)
+        {
+            return Ok(await _courseService.GetReviewsByCourseId(courseId));
+        }
         }
 }

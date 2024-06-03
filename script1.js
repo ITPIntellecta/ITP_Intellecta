@@ -549,22 +549,76 @@ function openReview() {
   element.style.display = "block";
   // OVDJE DODATI UCITAVANJE RECENZIJA
   element.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
-  <div id="carouselExample" class="carousel slide">  <div class="carousel-inner">    <div class="carousel-item active">      
-  <img src="..." class="d-block w-100" alt="...">    </div>    <div class="carousel-item">   
-     <img src="..." class="d-block w-100" alt="...">    </div>    <div class="carousel-item"> 
-          <img src="..." class="d-block w-100" alt="...">    </div>  </div> 
-           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span> 
-               </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>   
-  
+  <div id="carouselExample" class="carousel slide">  
+  <div class="carousel-inner" id="carInnerReview"> 
+     
+    <div class="carousel-item active" id="carousel-item">      
+        <img src="back.jpg" class="d-block w-100" alt="...">    
+    </div>    
+    <div class="carousel-item">   
+        <img src="back.jpg" class="d-block w-100" alt="...">    
+    </div>    
+    <div class="carousel-item"> 
+        <img src="back.jpg" class="d-block w-100" alt="...">    
+    </div>  
+          
+  </div>
+         
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span> 
+  </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>   
 
-        </div>
-        <div class="rightreview">
-        <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
-        <div id="typereview"></div>
-        </div>
-        </div>
-        `;
+
+  </div>
+  <div class="rightreview">
+  <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
+  <div id="typereview"></div>
+  </div>
+  </div>
+  `;
+
+  //var bigEl = document.getElementById("carInnerReview");
+  //bigEl.innerHTML = ``;
+  //var oneReviewElement = document.getElementById("carousel-item");
+  // oneReviewElement.innerHTML = `<div class="cardReview d-block w-100">
+  //         <div class="cardReview-header">IVANA &nbsp; JUGOVIC</div>
+  //         <div class="cardReview-body">
+  //           <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //             </div></h5>
+  //           <span class="quoteR">&#10077;</span><br />
+  //           <p class="cardReview-text">About <i>:<br> </i>
+  //           </p>
+  //           <br />
+  //           <span class="quoteR">&#10078;</span>
+  //         </div>
+  //       </div>`;
+  // oneReviewElement.style.color = "yellow";
+
+  var carEl = document.getElementById("carInnerReview");
+  carEl.innerHTML = `<div class="carousel-item active" id="carousel-item">      
+        <div class="cardReview d-block w-100">
+          <div class="cardReview-header">IVANA &nbsp; JUGOVIC</div>
+          <div class="cardReview-body">
+            <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
+                <span class="staar">&#9733;</span>
+                <span class="staar">&#9733;</span>
+                <span class="staar">&#9733;</span>
+                <span class="staar">&#9733;</span>
+                <span class="staar">&#9733;</span>
+              </div></h5>
+            <span class="quoteR">&#10077;</span><br />
+            <p class="cardReview-text">About <i id="reviewCardTitle">:<br> </i>
+            </p>
+            <br />
+            <span class="quoteR">&#10078;</span>
+          </div>
+        </div>    
+    </div>    `;
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("parametar");
@@ -599,14 +653,8 @@ function openReview() {
       courseMark = data.data.courseMark;
       approved = data.data.approved;
       price = data.data.price;
-      // const titleH = document.getElementsByClassName("title11")[0];
-      // // console.log(titleH);
-      // titleH.innerHTML = title;
-      // const subtitleH = document.getElementsByClassName("subtitle11")[0];
-      // subtitleH.innerHTML = subtitle;
-
-      // const highlightsH = document.getElementsByClassName("highlights11")[0];
-      // highlightsH.innerHTML = highlights;
+      var e1 = document.getElementById("reviewCardTitle");
+      e1.innerHTML = title;
 
       fetch("/api/course/user", {
         method: "GET",
@@ -626,6 +674,35 @@ function openReview() {
             var el = document.getElementById("addreviewbutton");
             el.style.display = "none";
           }
+          console.log(id);
+          //FETCH ZA DOBIJANJE RECENZIJA ZA KURS SA ID id
+          fetch(`/api/course/GetReviewsByCourseId/${id}`, {
+            method: "GET",
+          })
+            .then((response) => {
+              if (!response.ok) {
+                console.log(response);
+                throw new Error("Network response was not ok");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data.data);
+            })
+            .catch((error) => {
+              console.error(
+                "There has been a problem with your fetch operation:",
+                error
+              );
+            });
+
+          //OVO NE IDE OVDJE ALI SE TREBA ISKORISTITI!!!!!!!
+          //------------------------------------------------
+          // let stars = document.querySelectorAll(".staar");
+          // console.log(stars);
+          // for (let i = 0; i < courseMark; i++) {
+          //   stars[i].classList.add("filled");
+          // }
         })
         .catch((error) => {
           console.error(

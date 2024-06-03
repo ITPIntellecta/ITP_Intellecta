@@ -977,13 +977,14 @@ function loadVideoPage() {
                   }
                   console.log(userCurrentId);
                   console.log(creatorId);
-
+                  let sendEmailBool = false;
                   checkAllWeeks(
                     cccourse,
                     durationInWeeks,
                     title,
                     userCurrentId,
-                    creatorId
+                    creatorId,
+                    sendEmailBool
                   );
                 })
                 .catch((error) => {
@@ -1030,7 +1031,8 @@ async function checkAllWeeks(
   duration,
   title,
   userCurrentIdd,
-  creatorIdd
+  creatorIdd,
+  sendEmailBool
 ) {
   let completedWeeks = 0;
   const promises = [];
@@ -1080,22 +1082,24 @@ async function checkAllWeeks(
 
         if (completedWeeks == duration) {
           console.log("Course completed!");
-          fetch(
-            `/api/email/send-email/${userCurrentId}/You have completed this course: ${title}! Congratulations!!`,
-            {
-              method: "POST",
-            }
-          )
-            .then((response) => {
-              //  console.log(response);
-              //return response.json;
-            })
-            .then((data) => {
-              //console.log(data);
-            })
-            .catch((error) => {
-              console.error("Error updating course:", error);
-            });
+          if (sendEmailBool) {
+            fetch(
+              `/api/email/send-email/${userCurrentId}/You have completed this course: ${title}! Congratulations!!`,
+              {
+                method: "POST",
+              }
+            )
+              .then((response) => {
+                //  console.log(response);
+                //return response.json;
+              })
+              .then((data) => {
+                //console.log(data);
+              })
+              .catch((error) => {
+                console.error("Error updating course:", error);
+              });
+          }
           divCourse.innerHTML = `You have completed this course! Congratulations!<br>
           
           <div class="progress-bar__wrapper">
@@ -1179,7 +1183,7 @@ function completeLesson(
           })
           .then((data) => {
             console.log(data);
-
+            let sendEmailBool = true;
             //PROVJERA DA LI JE SEDMICA ZAVRSENA
             checkAllCompleted(week, courseId, userCurrentId);
             checkAllWeeks(
@@ -1187,7 +1191,8 @@ function completeLesson(
               durationInWeeks,
               title,
               userCurrentId,
-              creator
+              creator,
+              sendEmailBool
             );
           })
           .catch((error) => {

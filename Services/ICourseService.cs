@@ -26,6 +26,7 @@ namespace Services
         Task<ServiceResponse<List<GetCourseDto>>> DeleteCourse(int id);
         Task<ServiceResponse<GetCourseStatisticsDto>> AddStatistics(AddCourseStatisticsDto newStat);
         Task<ServiceResponse<List<GetReviewDto>>> GetTopReviews();
+        Task<ServiceResponse<List<GetReviewDto>>> GetReviewsByCourseId(int courseId);
 
     } 
 }
