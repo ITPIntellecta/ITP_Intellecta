@@ -588,6 +588,16 @@ footer {
 .star.filled {
   color: #f39c12;
 }
+.starr,
+.staar {
+  font-size: 2em;
+  color: #ccc;
+}
+
+.starr.filled,
+.staar.filled {
+  color: #f39c12;
+}
 
 .category {
   color: #113946;
