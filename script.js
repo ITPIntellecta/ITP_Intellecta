@@ -1719,6 +1719,7 @@ function loadReviews() {
       return response.json();
     })
     .then((data) => {
+      console.log(data);
       let div = document.getElementsByClassName("review")[0];
       div.innerHTML = "";
       data.data.forEach((review) => {

@@ -548,34 +548,34 @@ function openReview() {
   elementToHide.style.display = "none";
   element.style.display = "block";
   // OVDJE DODATI UCITAVANJE RECENZIJA
-  element.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
-  <div id="carouselExample" class="carousel slide">  
-  <div class="carousel-inner" id="carInnerReview"> 
-     
-    <div class="carousel-item active" id="carousel-item">      
-        <img src="back.jpg" class="d-block w-100" alt="...">    
-    </div>    
-    <div class="carousel-item">   
-        <img src="back.jpg" class="d-block w-100" alt="...">    
-    </div>    
-    <div class="carousel-item"> 
-        <img src="back.jpg" class="d-block w-100" alt="...">    
-    </div>  
-          
-  </div>
-         
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
-  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span> 
-  </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>   
 
+  // element.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
+  // <div id="carouselExample" class="carousel slide">
+  // <div class="carousel-inner" id="carInnerReview">
 
-  </div>
-  <div class="rightreview">
-  <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
-  <div id="typereview"></div>
-  </div>
-  </div>
-  `;
+  //   <div class="carousel-item active" id="carousel-item">
+  //       <img src="back.jpg" class="d-block w-100" alt="...">
+  //   </div>
+  //   <div class="carousel-item">
+  //       <img src="back.jpg" class="d-block w-100" alt="...">
+  //   </div>
+  //   <div class="carousel-item">
+  //       <img src="back.jpg" class="d-block w-100" alt="...">
+  //   </div>
+
+  // </div>
+
+  // <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+  // <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span>
+  // </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>
+
+  // </div>
+  // <div class="rightreview">
+  // <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
+  // <div id="typereview"></div>
+  // </div>
+  // </div>
+  // `;
 
   //var bigEl = document.getElementById("carInnerReview");
   //bigEl.innerHTML = ``;
@@ -599,26 +599,26 @@ function openReview() {
   //       </div>`;
   // oneReviewElement.style.color = "yellow";
 
-  var carEl = document.getElementById("carInnerReview");
-  carEl.innerHTML = `<div class="carousel-item active" id="carousel-item">      
-        <div class="cardReview d-block w-100">
-          <div class="cardReview-header">IVANA &nbsp; JUGOVIC</div>
-          <div class="cardReview-body">
-            <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
-                <span class="staar">&#9733;</span>
-                <span class="staar">&#9733;</span>
-                <span class="staar">&#9733;</span>
-                <span class="staar">&#9733;</span>
-                <span class="staar">&#9733;</span>
-              </div></h5>
-            <span class="quoteR">&#10077;</span><br />
-            <p class="cardReview-text">About <i id="reviewCardTitle">:<br> </i>
-            </p>
-            <br />
-            <span class="quoteR">&#10078;</span>
-          </div>
-        </div>    
-    </div>    `;
+  //var carEl = document.getElementById("carInnerReview");
+  // carEl.innerHTML = `<div class="carousel-item active" id="carousel-item">
+  //       <div class="cardReview d-block w-100">
+  //         <div class="cardReview-header">IVANA &nbsp; JUGOVIC</div>
+  //         <div class="cardReview-body">
+  //           <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //               <span class="staar">&#9733;</span>
+  //             </div></h5>
+  //           <span class="quoteR">&#10077;</span><br />
+  //           <p class="cardReview-text">About <i id="reviewCardTitle">:<br> </i>
+  //           </p>
+  //           <br />
+  //           <span class="quoteR">&#10078;</span>
+  //         </div>
+  //       </div>
+  //   </div>    `;
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("parametar");
@@ -653,8 +653,8 @@ function openReview() {
       courseMark = data.data.courseMark;
       approved = data.data.approved;
       price = data.data.price;
-      var e1 = document.getElementById("reviewCardTitle");
-      e1.innerHTML = title;
+      // var e1 = document.getElementById("reviewCardTitle");
+      // e1.innerHTML = title;
 
       fetch("/api/course/user", {
         method: "GET",
@@ -667,6 +667,37 @@ function openReview() {
           return response.json();
         })
         .then((data) => {
+          //AKO ZATREBA
+          //       <div class="carousel-item active" id="carousel-item">
+          //     <img src="back.jpg" class="d-block w-100" alt="...">
+          // </div>
+          // <div class="carousel-item">
+          //     <img src="back.jpg" class="d-block w-100" alt="...">
+          // </div>
+          // <div class="carousel-item">
+          //     <img src="back.jpg" class="d-block w-100" alt="...">
+          // </div>
+          var elementIdReview = document.getElementById("idReview");
+          elementIdReview.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
+  <div id="carouselExample" class="carousel slide">  
+  <div class="carousel-inner" id="carInnerReview"> 
+     
+    
+          
+  </div>
+         
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span> 
+  </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>   
+
+
+  </div>
+  <div class="rightreview">
+  <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
+  <div id="typereview"></div>
+  </div>
+  </div>
+  `;
           // Uzmite ime korisnika iz podataka koje ste dobili
           //console.log(data);
           userCurrentId = data.data.id;
@@ -680,14 +711,52 @@ function openReview() {
             method: "GET",
           })
             .then((response) => {
-              if (!response.ok) {
-                console.log(response);
-                throw new Error("Network response was not ok");
-              }
               return response.json();
             })
             .then((data) => {
               console.log(data.data);
+
+              data.data.forEach((review) => {
+                console.log(review);
+                var ee = document.getElementById("carInnerReview");
+                ee.innerHTML += `<div class="carousel-item" id="carousel-item${review.id}">      
+        <div class="cardReview d-block w-100">
+          <div class="cardReview-header">${review.user.firstName} &nbsp; ${review.user.lastName}</div>
+          <div class="cardReview-body">
+            <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
+                <span class="staar staar${review.id}">&#9733;</span>
+                <span class="staar staar${review.id}">&#9733;</span>
+                <span class="staar staar${review.id}">&#9733;</span>
+                <span class="staar staar${review.id}">&#9733;</span>
+                <span class="staar staar${review.id}">&#9733;</span>
+              </div></h5>
+            <span class="quoteR">&#10077;</span><br />
+            <p class="cardReview-text">About<i id="reviewCardTitle">:${review.course.title}<br> </i>
+            ${review.reviewText}
+            </p>
+            <br />
+            <span class="quoteR">&#10078;</span>
+          </div>
+        </div>    
+    </div>    `;
+
+                //OVO NE IDE OVDJE ALI SE TREBA ISKORISTITI!!!!!!!
+                //------------------------------------------------
+
+                let stars = document.querySelectorAll(`.staar${review.id}`);
+                // Array.from(stars).forEach((star) => {
+                //   star.classList.add("filled");
+                // });
+
+                for (let i = 0; i < review.mark; i++) {
+                  if (i < stars.length) {
+                    stars[i].classList.add("filled");
+                  }
+                }
+              });
+
+              var prva = document.getElementsByClassName("carousel-item")[0];
+              prva.classList.add("active");
             })
             .catch((error) => {
               console.error(
