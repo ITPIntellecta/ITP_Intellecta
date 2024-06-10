@@ -331,10 +331,12 @@ footer {
   display: inline-block;
   /* background-color: #ead7bb; */
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
   align-items: center;
   background-image: url("brightbl.jpg");
-  background-size: cover;
+  background-size: 100% 150%;
+  background-position: center;
   /* height: 200pt; */
   /* width: 300pt; */
   width: 100%;
@@ -402,12 +404,13 @@ footer {
 
 .col-sm-6 {
   position: relative;
-  width: 100%;
+  width: 85%;
   padding: 10px;
   text-align: center;
   display: flex;
   justify-content: center;
   align-content: center;
+  height: 300px;
 }
 
 /*MODAL ZA POTVRDU UPISA*/
@@ -624,4 +627,9 @@ footer {
   align-content: center;
   align-items: center;
   margin: 7pt;
+}
+
+#modalHeader {
+  background-size: 100% 250%;
+  background-position: center;
 }

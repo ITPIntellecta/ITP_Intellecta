@@ -521,9 +521,53 @@ function loadCourses() {
                   let title = course.title;
                   let highlights = course.highlights;
                   let id = course.courseId;
+
+                  let category = course.category;
+                  let background;
+
+                  switch (category) {
+                    case "Engineering":
+                      background = "science-eng.jpg";
+                      break;
+                    case "Business Development":
+                      background = "business.jpg";
+                      break;
+                    case "IT and Technology":
+                      background = "it.jpg";
+                      break;
+                    case "Health & Fitness":
+                      background = "fitness.jpg";
+                      break;
+                    case "Languages":
+                      background = "lang.jpg";
+                      break;
+                    case "Science":
+                      background = "science-eng.jpg";
+                      break;
+                    case "Personal Development":
+                      background = "fitness.jpg";
+                      break;
+                    case "Data Science":
+                      background = "data1jpg.jpg";
+                      break;
+                    case "Legal Studies and Law":
+                      background = "law.webp";
+                      break;
+                    case "Psychology and Counseling":
+                      background = "medicine.jpg";
+                      break;
+                    case "Healthcare and Medicine":
+                      background = "medicine.jpg";
+                      break;
+                    default:
+                      background = "other.jpg";
+                      break;
+                  }
+
                   const div = document.getElementsByClassName("row")[0];
                   div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="item mmm" style="margin-bottom:2rem";>
+              <div class="item mmm" id='${id}' style="margin-bottom:2rem";>
+                  <p class="categoryCard">${category}</p>
                   <h5 class="courseCardTitle loadVideo" >${title}</h5>
                   <p class="card-text">
                   ${highlights}
@@ -533,6 +577,9 @@ function loadCourses() {
                  </div>
               </div>
             </div>`;
+
+                  let e = document.getElementById(`${id}`);
+                  e.style.backgroundImage = "url(" + background + ")";
 
                   //  <button
                   //    id="enrollBtn"
@@ -572,6 +619,7 @@ function loadCourses() {
 }
 
 function loadMyLearning() {
+  document.getElementsByClassName("addcourse1")[0].style.display = "none";
   if (localStorage.getItem("jwtToken") != null) {
     fetch("/api/course/user", {
       method: "GET",
@@ -600,9 +648,52 @@ function loadMyLearning() {
               let title = course.title;
               let highlights = course.highlights;
               let id = course.courseId;
+
+              let category = course.category;
+              let background;
+
+              switch (category) {
+                case "Engineering":
+                  background = "science-eng.jpg";
+                  break;
+                case "Business Development":
+                  background = "business.jpg";
+                  break;
+                case "IT and Technology":
+                  background = "it.jpg";
+                  break;
+                case "Health & Fitness":
+                  background = "fitness.jpg";
+                  break;
+                case "Languages":
+                  background = "lang.jpg";
+                  break;
+                case "Science":
+                  background = "science-eng.jpg";
+                  break;
+                case "Personal Development":
+                  background = "fitness.jpg";
+                  break;
+                case "Data Science":
+                  background = "data1jpg.jpg";
+                  break;
+                case "Legal Studies and Law":
+                  background = "law.webp";
+                  break;
+                case "Psychology and Counseling":
+                  background = "medicine.jpg";
+                  break;
+                case "Healthcare and Medicine":
+                  background = "medicine.jpg";
+                  break;
+                default:
+                  background = "other.jpg";
+                  break;
+              }
+
               const div = document.getElementsByClassName("row")[0];
               div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="item mmm" style="margin-bottom:2rem";>
+              <div class="item mmm" id='${id}' style="margin-bottom:2rem";>
                 
                   <h5 class="courseCardTitle loadVideo">${title}</h5>
                   <p class="card-text">
@@ -612,6 +703,10 @@ function loadMyLearning() {
                
               </div>
             </div>`;
+
+              let e = document.getElementById(`${id}`);
+              e.style.backgroundImage = "url(" + background + ")";
+              let elements = document.getElementsByClassName("popularCourse");
             });
           })
 
@@ -661,9 +756,52 @@ function loadMyCourses() {
                 let title = course.title;
                 let highlights = course.highlights;
                 let id = course.courseId;
+
+                let category = course.category;
+                let background;
+
+                switch (category) {
+                  case "Engineering":
+                    background = "science-eng.jpg";
+                    break;
+                  case "Business Development":
+                    background = "business.jpg";
+                    break;
+                  case "IT and Technology":
+                    background = "it.jpg";
+                    break;
+                  case "Health & Fitness":
+                    background = "fitness.jpg";
+                    break;
+                  case "Languages":
+                    background = "lang.jpg";
+                    break;
+                  case "Science":
+                    background = "science-eng.jpg";
+                    break;
+                  case "Personal Development":
+                    background = "fitness.jpg";
+                    break;
+                  case "Data Science":
+                    background = "data1jpg.jpg";
+                    break;
+                  case "Legal Studies and Law":
+                    background = "law.webp";
+                    break;
+                  case "Psychology and Counseling":
+                    background = "medicine.jpg";
+                    break;
+                  case "Healthcare and Medicine":
+                    background = "medicine.jpg";
+                    break;
+                  default:
+                    background = "other.jpg";
+                    break;
+                }
+
                 const div = document.getElementsByClassName("row")[0];
                 div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="item mmm" style="margin-bottom:2rem" id="cccourse${id}">
+              <div class="item mmm" id='${id}' style="margin-bottom:2rem" id="cccourse${id}">
               
 
                   <h5 class="courseCardTitle loadVideo">${title}</h5>
@@ -677,6 +815,10 @@ function loadMyCourses() {
                  </div>
               </div>
             </div>`;
+
+                let e = document.getElementById(`${id}`);
+                e.style.backgroundImage = "url(" + background + ")";
+
                 if (course.approved == false) {
                   console.log("USAO U IF ZA APPROVED");
                   document
@@ -1286,20 +1428,54 @@ function loadPopularCourses() {
                 let id = course.courseId;
                 let price = course.Price;
                 let category = course.category;
-                let background = "./card-background/science-eng.avif";
+                let background;
 
                 switch (category) {
                   case "Engineering":
-                    background = "card-background/science-eng.avif";
+                    background = "science-eng.jpg";
+                    break;
+                  case "Business Development":
+                    background = "business.jpg";
+                    break;
+                  case "IT and Technology":
+                    background = "it.jpg";
+                    break;
+                  case "Health & Fitness":
+                    background = "fitness.jpg";
+                    break;
+                  case "Languages":
+                    background = "lang.jpg";
+                    break;
+                  case "Science":
+                    background = "science-eng.jpg";
+                    break;
+                  case "Personal Development":
+                    background = "fitness.jpg";
+                    break;
+                  case "Data Science":
+                    background = "data1jpg.jpg";
+                    break;
+                  case "Legal Studies and Law":
+                    background = "law.webp";
+                    break;
+                  case "Psychology and Counseling":
+                    background = "medicine.jpg";
+                    break;
+                  case "Healthcare and Medicine":
+                    background = "medicine.jpg";
+                    break;
+                  default:
+                    background = "other.jpg";
+                    break;
                 }
 
-                container.innerHTML += `<div class="item mmmm" id='${id}'>
+                container.innerHTML += `<div class="item1 mmmm" id='${id}'>
           <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">View course</button>
           </div>`;
 
                 let e = document.getElementById(`${id}`);
-                // e.style.backgroundImage = "url(" + background + ")";
-                let elements = document.getElementsByClassName("popularCourse");
+                e.style.backgroundImage = "url(" + background + ")";
+                // let elements = document.getElementsByClassName("popularCourse");
                 // Array.from(elements).forEach((element, index) => {
                 //   element.addEventListener("click", (event) => {
                 //     let courseId = data.data[index].courseId;

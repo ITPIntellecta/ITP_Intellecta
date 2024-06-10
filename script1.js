@@ -426,6 +426,52 @@ function courseInfo(courseId, userId) {
       let subtitleEl = document.getElementById("modalSubtitle");
       let bodyEl = document.getElementById("modalBody");
       let footEl = document.getElementById("modalFooterButtons");
+
+      let headerEl = document.getElementById("modalHeader");
+
+      let category = data.data.category;
+      let background;
+
+      switch (category) {
+        case "Engineering":
+          background = "science-eng.jpg";
+          break;
+        case "Business Development":
+          background = "business.jpg";
+          break;
+        case "IT and Technology":
+          background = "it.jpg";
+          break;
+        case "Health & Fitness":
+          background = "fitness.jpg";
+          break;
+        case "Languages":
+          background = "lang.jpg";
+          break;
+        case "Science":
+          background = "science-eng.jpg";
+          break;
+        case "Personal Development":
+          background = "fitness.jpg";
+          break;
+        case "Data Science":
+          background = "data1jpg.jpg";
+          break;
+        case "Legal Studies and Law":
+          background = "law.webp";
+          break;
+        case "Psychology and Counseling":
+          background = "medicine.jpg";
+          break;
+        case "Healthcare and Medicine":
+          background = "medicine.jpg";
+          break;
+        default:
+          background = "other.jpg";
+          break;
+      }
+      if (headerEl != null)
+        headerEl.style.backgroundImage = "url(" + background + ")";
       let creator = data.data.creatorId;
       titleEl.innerHTML = title;
       subtitleEl.innerHTML = subtitle;
