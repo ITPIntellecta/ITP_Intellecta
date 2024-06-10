@@ -1285,10 +1285,20 @@ function loadPopularCourses() {
                 let mark = course.courseMark;
                 let id = course.courseId;
                 let price = course.Price;
-                container.innerHTML += `<div class="item mmmm">
+                let category = course.category;
+                let background = "./card-background/science-eng.avif";
+
+                switch (category) {
+                  case "Engineering":
+                    background = "card-background/science-eng.avif";
+                }
+
+                container.innerHTML += `<div class="item mmmm" id='${id}'>
           <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">View course</button>
           </div>`;
 
+                let e = document.getElementById(`${id}`);
+                // e.style.backgroundImage = "url(" + background + ")";
                 let elements = document.getElementsByClassName("popularCourse");
                 // Array.from(elements).forEach((element, index) => {
                 //   element.addEventListener("click", (event) => {
