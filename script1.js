@@ -23,22 +23,14 @@ function redirectToPage(url) {
   window.location.href = url;
 }
 
-//MODALI
-
-// Prikazivanje moda
 function showModal(id, userId) {
   document.getElementById("myModal").style.display = "block";
-  console.log(document.getElementById("myModal").style);
   courseInfo(id, userId);
 }
 
-// Sakrivanje moda
 function hideModal() {
   document.getElementById("myModal").style.display = "none";
 }
-
-// Dodeljivanje funkcija prikazivanja i sakrivanja modala dugmadima
-// document.getElementById("mmmm").addEventListener("click", showModal);
 
 setTimeout(function () {
   localStorage.removeItem("jwtToken");
@@ -63,7 +55,6 @@ function logUser(event) {
     body: JSON.stringify(user),
   })
     .then((response) => {
-      console.log(response);
       if (!response.ok) {
         throw new Error("Login failed");
       }
@@ -71,14 +62,10 @@ function logUser(event) {
       return response.json();
     })
     .then((data) => {
-      if (data.message == "User not approved") alert("Admin not approved!");
+      if (data.message == "User not approved")
+        alert("Nalog još uvijek nije odobren!");
       else {
-        // Čuvanje JWT tokena u lokalnom skladištu (LocalStorage)
-        //localStorage.setItem("jwtToken", data.data);
-        //alert("Uspjesno");
-        localStorage.setItem("jwtToken", data.data); //ISPRAVNO JE OVO
-        console.log(data);
-        console.log(data.data);
+        localStorage.setItem("jwtToken", data.data);
 
         if (localStorage.getItem("jwtToken") != null)
           window.location = "index.html";
@@ -99,7 +86,6 @@ function regUser(event) {
   const firstname = document.getElementById("firstname").value;
   const lastname = document.getElementById("lastname").value;
   const title = document.getElementById("title").value;
-  // const type = document.querySelector('input[type="radio"]:checked').value;
   const date = document.getElementById("dateofbirth").value;
 
   const radioButtons = document.querySelectorAll(
@@ -115,18 +101,14 @@ function regUser(event) {
     }
   });
   let type = "";
-  console.log(selectedType);
-  console.log(type);
 
   if (selectedType == 1) {
     type = "Admin";
     approved = false;
   } else if (selectedType == 0) {
-    type = "User";
+    type = "Korisnik";
     approved = true;
   }
-
-  console.log(type);
 
   const user = {
     email: email,
@@ -148,28 +130,30 @@ function regUser(event) {
     dateofbirth !== "" &&
     title !== ""
   ) {
-    fetch("/api/auth/register", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
+    if (password.length < 4) {
+      alert("Lozinka mora biti dužine minimalno 4 karaktera!");
+    } else {
+      fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
       })
-      .then((data) => {
-        console.log("Success:", data);
-        // Pređi na log.html samo ako je registracija uspješna
-        window.location = "log.html";
-      })
-      .catch((error) => console.error("Unable to register user.", error));
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          window.location = "log.html";
+        })
+        .catch((error) => console.error("Unable to register user.", error));
+    }
   } else {
-    alert("Popuni sva polja");
+    alert("Popunite sva polja");
     event.preventDefault();
   }
 }
@@ -181,17 +165,12 @@ function checkUserRole() {
   })
     .then((response) => {
       if (!response.ok) {
-        console.log(response);
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
     .then((data) => {
-      // Uzmite ime korisnika iz podataka koje ste dobili
-      //console.log(data);
       userRole = data.data.userType;
-      // Prikazivanje imena korisnika u HTML elementu
-      // console.log(userRole);
       if (userRole != "Admin") {
         const el1 = document.getElementById("adminEl1");
         const el2 = document.getElementById("adminEl2");
@@ -216,22 +195,17 @@ function displayName() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //  console.log(data);
         const userName = data.data.firstName;
-        // Prikazivanje imena korisnika u HTML elementu
         let usernameElement = document.getElementById("logUserName");
-        usernameElement.innerHTML = "Welcome, " + userName + "!  |";
+        usernameElement.innerHTML = "Dobro došli, " + userName + "!  |";
 
         let logoutElement = document.getElementById("logout");
-        logoutElement.innerHTML = "Logout  |";
-        //  console.log(logoutElement.innerHTML);
+        logoutElement.innerHTML = "Odjava  |";
       })
       .catch((error) => {
         console.error(
@@ -244,7 +218,6 @@ function displayName() {
 
 function logout() {
   localStorage.removeItem("jwtToken");
-  // window.location.href = "index.html";
   let el = document.getElementById("navright");
   el.style.display = "none";
   location.reload();
@@ -256,13 +229,11 @@ function inputInfo() {
   })
     .then((response) => {
       if (!response.ok) {
-        console.log(response);
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       const fname = data.data.firstName;
       const lname = data.data.lastName;
       const type = data.data.userType;
@@ -305,7 +276,6 @@ function loadUsers() {
     .then((data) => {
       data.data.forEach((user) => {
         if (!user.approved) {
-          console.log(user);
           let name = user.firstName;
           let email = user.email;
           let userId = user.id;
@@ -319,9 +289,8 @@ function loadUsers() {
                   ${email}
                   </p>
                   <div class="authButtons">
-
-                  <button class="popularCourse authButton" onclick="authorizeAdmin(${userId})">Authorize</button>
-                  <button  class="popularCourse authButton" onclick="deleteUser(${userId})">Delete</button>
+                  <button class="popularCourse authButton" onclick="authorizeAdmin(${userId})">Odobri admina</button>
+                  <button  class="popularCourse authButton" onclick="deleteUser(${userId})">Obriši admina</button>
                 </div>
               </div>
             </div>`;
@@ -338,17 +307,13 @@ function showUsersForAuthorization() {
 }
 
 function authorizeAdmin(userid) {
-  console.log(userid);
-
   fetch(`/api/auth/GetUserById/${userid}`, {
     method: "GET",
   })
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       const formData = {
         email: data.data.email,
         userType: data.data.userType,
@@ -359,7 +324,6 @@ function authorizeAdmin(userid) {
         approved: true,
         id: data.data.id,
       };
-      console.log(formData);
 
       fetch("api/auth", {
         method: "PUT",
@@ -370,9 +334,7 @@ function authorizeAdmin(userid) {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log("User updated successfully:", data);
           approveAdminMail(formData.id);
-
           showUsersForAuthorization();
         })
         .catch((error) => {
@@ -385,7 +347,6 @@ function authorizeAdmin(userid) {
 }
 function checkLocalStorage() {
   if (localStorage.getItem("jwtToken") == null) {
-    // Ako postoji token, preusmeri na index.html
     window.location.href = "log.html";
   }
 }
@@ -394,13 +355,8 @@ function approveAdminMail(id) {
   fetch(`/api/email/send-email/${id}/Your account has been approved!`, {
     method: "POST",
   })
-    .then((response) => {
-      //  console.log(response);
-      //return response.json;
-    })
-    .then((data) => {
-      //console.log(data);
-    })
+    .then((response) => {})
+    .then((data) => {})
     .catch((error) => {
       console.error("Error updating admin:", error);
     });
@@ -412,13 +368,11 @@ function courseInfo(courseId, userId) {
   })
     .then((response) => {
       if (!response.ok) {
-        console.log(response);
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       const title = data.data.title;
       const subtitle = data.data.subtitle;
 
@@ -433,37 +387,37 @@ function courseInfo(courseId, userId) {
       let background;
 
       switch (category) {
-        case "Engineering":
+        case "Inženjerstvo":
           background = "science-eng.jpg";
           break;
-        case "Business Development":
+        case "Poslovni razvoj":
           background = "business.jpg";
           break;
-        case "IT and Technology":
+        case "IT i tehnologije":
           background = "it.jpg";
           break;
-        case "Health & Fitness":
+        case "Zdravlje i fitnes":
           background = "fitness.jpg";
           break;
-        case "Languages":
+        case "Jezici":
           background = "lang.jpg";
           break;
-        case "Science":
+        case "Nauka":
           background = "science-eng.jpg";
           break;
-        case "Personal Development":
+        case "Lični razvoj":
           background = "fitness.jpg";
           break;
-        case "Data Science":
+        case "Nauka o podacima":
           background = "data1jpg.jpg";
           break;
-        case "Legal Studies and Law":
+        case "Pravne studije i pravo":
           background = "law.webp";
           break;
-        case "Psychology and Counseling":
+        case "Psihologija i savjetovanje":
           background = "medicine.jpg";
           break;
-        case "Healthcare and Medicine":
+        case "Zdravstvo i medicina":
           background = "medicine.jpg";
           break;
         default:
@@ -476,9 +430,9 @@ function courseInfo(courseId, userId) {
       titleEl.innerHTML = title;
       subtitleEl.innerHTML = subtitle;
       bodyEl.innerHTML = `<div class="modalbodytop">
-                <div class="category">Category: ${data.data.category}</div>
-                <div class="price">Price: ${data.data.price} $</div>
-                <div class="markDiv"> <p classs="markk">Mark: ${data.data.courseMark}</p>
+                <div class="category">Kategorija: ${data.data.category}</div>
+                <div class="price">Cijena: ${data.data.price} KM</div>
+                <div class="markDiv"> <p classs="markk">Ocjena: ${data.data.courseMark}</p>
                 <div class="rating">
                   <span class="starr">&#9733;</span>
                   <span class="starr">&#9733;</span>
@@ -489,11 +443,11 @@ function courseInfo(courseId, userId) {
                 </div>
               </div>
               <div class="modalbodybody">
-                <div class="duration">Duration in weeks:  ${data.data.durationInWeeks}</div>
-                <div class="weekly"> Weekly hours:  ${data.data.weeklyHours}</div>
+                <div class="duration">Trajanje u sedmicama:  ${data.data.durationInWeeks}</div>
+                <div class="weekly"> Sedmično opterećenje:  ${data.data.weeklyHours}</div>
               </div>
               <div class="modalbodybottom">
-                <div class="highlights">Highlights: ${data.data.highlights}</div>
+                <div class="highlights">Najvažnije o kursu: <br>${data.data.highlights}</div>
               </div>`;
 
       footEl.innerHTML = `<button
@@ -503,18 +457,13 @@ function courseInfo(courseId, userId) {
             id="modalhide"
             onclick="hideModal()"
           >
-            Close
+            Zatvori
           </button>
        `;
-      console.log("prolazaj");
       fetch(`/api/course/getmylearning/${userId}`)
         .then((response) => response.json())
         .then((data) => {
-          // let filteredCourses = filteredCategory(data.data, category);
-          // console.log(filteredCourses);
-          console.log(data);
           data.data.forEach((course) => {
-            // console.log(course);
             if (course.courseId == courseId && creator != userId)
               footEl.innerHTML = `<button
             type="button"
@@ -523,9 +472,9 @@ function courseInfo(courseId, userId) {
             id="modalhide"
             onclick="hideModal()"
           >
-            Close
+            Zatvori
           </button>
-                  <button class="btnn-primary btn-savee" onclick="loadVideo(${courseId})">View Course</button>`;
+                  <button class="btnn-primary btn-savee" onclick="loadVideo(${courseId})">Pogledaj kurs</button>`;
           });
         })
 
@@ -542,9 +491,9 @@ function courseInfo(courseId, userId) {
             id="modalhide"
             onclick="hideModal()"
           >
-            Close
+            Zatvori
           </button>
-                  <button class=" btnn-primary btn-savee" onclick="loadVideo(${courseId})">View Course</button>`;
+                  <button class=" btnn-primary btn-savee" onclick="loadVideo(${courseId})">Pogledaj kurs</button>`;
       } else {
         footEl.innerHTML = `
         <button
@@ -554,30 +503,20 @@ function courseInfo(courseId, userId) {
             id="modalhide"
             onclick="hideModal()"
           >
-            Close
+            Zatvori
           </button><button
         type="button"
         class="btnn-primary btn-savee"
         id="enroll"
         onclick="joinCourse(${courseId})"
       >
-        Enroll
+        Upiši se
       </button>`;
       }
 
-      // console.log(data.data.courseMark);
-      console.log(data.data.courseId);
-      // document
-      //   .getElementById("enroll")
-      //   .addEventListener("click", joinCourse(`${data.data.courseId}`));
-      // console.log(document.getElementById("enroll"));
-
       let stars = document.querySelectorAll(".starr");
-      console.log(data.data.courseMark);
       for (let i = 0; i < data.data.courseMark; i++) {
-        // Pretpostavimo da je ocjena 4
         stars[i].classList.add("filled");
-        console.log(stars[i].classList);
       }
     })
     .catch((error) => {
@@ -593,78 +532,7 @@ function openReview() {
   var elementToHide = document.getElementById("idOverview");
   elementToHide.style.display = "none";
   element.style.display = "block";
-  // OVDJE DODATI UCITAVANJE RECENZIJA
 
-  // element.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
-  // <div id="carouselExample" class="carousel slide">
-  // <div class="carousel-inner" id="carInnerReview">
-
-  //   <div class="carousel-item active" id="carousel-item">
-  //       <img src="back.jpg" class="d-block w-100" alt="...">
-  //   </div>
-  //   <div class="carousel-item">
-  //       <img src="back.jpg" class="d-block w-100" alt="...">
-  //   </div>
-  //   <div class="carousel-item">
-  //       <img src="back.jpg" class="d-block w-100" alt="...">
-  //   </div>
-
-  // </div>
-
-  // <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-  // <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span>
-  // </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>
-
-  // </div>
-  // <div class="rightreview">
-  // <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
-  // <div id="typereview"></div>
-  // </div>
-  // </div>
-  // `;
-
-  //var bigEl = document.getElementById("carInnerReview");
-  //bigEl.innerHTML = ``;
-  //var oneReviewElement = document.getElementById("carousel-item");
-  // oneReviewElement.innerHTML = `<div class="cardReview d-block w-100">
-  //         <div class="cardReview-header">IVANA &nbsp; JUGOVIC</div>
-  //         <div class="cardReview-body">
-  //           <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //             </div></h5>
-  //           <span class="quoteR">&#10077;</span><br />
-  //           <p class="cardReview-text">About <i>:<br> </i>
-  //           </p>
-  //           <br />
-  //           <span class="quoteR">&#10078;</span>
-  //         </div>
-  //       </div>`;
-  // oneReviewElement.style.color = "yellow";
-
-  //var carEl = document.getElementById("carInnerReview");
-  // carEl.innerHTML = `<div class="carousel-item active" id="carousel-item">
-  //       <div class="cardReview d-block w-100">
-  //         <div class="cardReview-header">IVANA &nbsp; JUGOVIC</div>
-  //         <div class="cardReview-body">
-  //           <h5 class="cardReview-title ct"><div class="ratingMarksDiv">
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //               <span class="staar">&#9733;</span>
-  //             </div></h5>
-  //           <span class="quoteR">&#10077;</span><br />
-  //           <p class="cardReview-text">About <i id="reviewCardTitle">:<br> </i>
-  //           </p>
-  //           <br />
-  //           <span class="quoteR">&#10078;</span>
-  //         </div>
-  //       </div>
-  //   </div>    `;
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("parametar");
@@ -684,11 +552,9 @@ function openReview() {
     method: "GET",
   })
     .then((response) => {
-      //  console.log(response);
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       creatorId = data.data.creatorId;
       title = data.data.title;
       subtitle = data.data.subtitle;
@@ -699,60 +565,41 @@ function openReview() {
       courseMark = data.data.courseMark;
       approved = data.data.approved;
       price = data.data.price;
-      // var e1 = document.getElementById("reviewCardTitle");
-      // e1.innerHTML = title;
 
       fetch("/api/course/user", {
         method: "GET",
       })
         .then((response) => {
           if (!response.ok) {
-            console.log(response);
             throw new Error("Network response was not ok");
           }
           return response.json();
         })
         .then((data) => {
-          //AKO ZATREBA
-          //       <div class="carousel-item active" id="carousel-item">
-          //     <img src="back.jpg" class="d-block w-100" alt="...">
-          // </div>
-          // <div class="carousel-item">
-          //     <img src="back.jpg" class="d-block w-100" alt="...">
-          // </div>
-          // <div class="carousel-item">
-          //     <img src="back.jpg" class="d-block w-100" alt="...">
-          // </div>
           var elementIdReview = document.getElementById("idReview");
           elementIdReview.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
   <div id="carouselExample" class="carousel slide">  
   <div class="carousel-inner" id="carInnerReview"> 
-     
-    
-          
+       
   </div>
          
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
-  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Previous</span> 
-  </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Next</span>  </button></div>   
-
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Prethodno</span> 
+  </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Sljedeće</span>  </button></div>   
 
   </div>
   <div class="rightreview">
-  <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Add Your Review</button>
+  <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Dodaj svoju recenziju</button>
   <div id="typereview"></div>
   </div>
   </div>
   `;
-          // Uzmite ime korisnika iz podataka koje ste dobili
-          //console.log(data);
+
           userCurrentId = data.data.id;
           if (userCurrentId == creatorId) {
             var el = document.getElementById("addreviewbutton");
             el.style.display = "none";
           }
-          console.log(id);
-          //FETCH ZA DOBIJANJE RECENZIJA ZA KURS SA ID id
           fetch(`/api/course/GetReviewsByCourseId/${id}`, {
             method: "GET",
           })
@@ -760,10 +607,7 @@ function openReview() {
               return response.json();
             })
             .then((data) => {
-              console.log(data.data);
-
               data.data.forEach((review) => {
-                console.log(review);
                 var ee = document.getElementById("carInnerReview");
                 ee.innerHTML += `<div class="carousel-item" id="carousel-item${review.id}">      
         <div class="cardReview d-block w-100">
@@ -777,7 +621,7 @@ function openReview() {
                 <span class="staar staar${review.id}">&#9733;</span>
               </div></h5>
             <span class="quoteR">&#10077;</span><br />
-            <p class="cardReview-text">About<i id="reviewCardTitle">:${review.course.title}<br> </i>
+            <p class="cardReview-text">O <i id="reviewCardTitle">:${review.course.title}<br> </i>
             ${review.reviewText}
             </p>
             <br />
@@ -786,14 +630,7 @@ function openReview() {
         </div>    
     </div>    `;
 
-                //OVO NE IDE OVDJE ALI SE TREBA ISKORISTITI!!!!!!!
-                //------------------------------------------------
-
                 let stars = document.querySelectorAll(`.staar${review.id}`);
-                // Array.from(stars).forEach((star) => {
-                //   star.classList.add("filled");
-                // });
-
                 for (let i = 0; i < review.mark; i++) {
                   if (i < stars.length) {
                     stars[i].classList.add("filled");
@@ -810,14 +647,6 @@ function openReview() {
                 error
               );
             });
-
-          //OVO NE IDE OVDJE ALI SE TREBA ISKORISTITI!!!!!!!
-          //------------------------------------------------
-          // let stars = document.querySelectorAll(".staar");
-          // console.log(stars);
-          // for (let i = 0; i < courseMark; i++) {
-          //   stars[i].classList.add("filled");
-          // }
         })
         .catch((error) => {
           console.error(
@@ -839,26 +668,9 @@ function showReviewInput() {
         <span class="starR" data-value="2">&#9733;</span>
         <span class="starR" data-value="1">&#9733;</span>
     </div>
-    <div id="rating-value" value="">Mark: 0</div>
-    <button class="addReview" onclick="submitReview()" id="submitreview">Submit Review</button>
+    <div id="rating-value" value="">Ocjena: 0</div>
+    <button class="addReview" onclick="submitReview()" id="submitreview">Potvrdi recenziju</button>
     </div>`;
-
-  // const stars = document.querySelectorAll(".starR");
-  // const ratingValue = document.getElementById("rating-value");
-
-  // stars.forEach((star) => {
-  //   star.addEventListener("click", () => {
-  //     const value = star.getAttribute("data-value");
-  //     stars.forEach((s) => s.classList.remove("active"));
-  //     star.classList.add("active");
-  //     let nextStar = star.previousElementSibling; // Postavi na prethodni element
-  //     while (nextStar) {
-  //       nextStar.classList.add("active");
-  //       nextStar = nextStar.previousElementSibling; // Pomeri se na sledeći prethodni element
-  //     }
-  //     ratingValue.innerText = `Ocena: ${value}`;
-  //   });
-  // });
 
   const stars = document.querySelectorAll(".starR");
   const ratingValue = document.getElementById("rating-value");
@@ -868,12 +680,11 @@ function showReviewInput() {
       const value = star.getAttribute("data-value");
       stars.forEach((s) => s.classList.remove("active"));
       star.classList.add("active");
-      let previousStar = star.previousElementSibling; // Postavi na prethodni element
+      let previousStar = star.previousElementSibling;
 
       while (previousStar) {
-        console.log(previousStar);
         previousStar.classList.remove("active");
-        previousStar = previousStar.previousElementSibling; // Pomeri se na sledeći prethodni element
+        previousStar = previousStar.previousElementSibling;
       }
       ratingValue.innerText = `${value}`;
     });
@@ -891,8 +702,6 @@ function submitReview() {
   const urlParams = new URLSearchParams(window.location.search);
 
   const courseId = urlParams.get("parametar");
-  console.log(courseId);
-  console.log(window.location.href);
   let oldLoc = window.location.href;
 
   if (localStorage.getItem("jwtToken") != null) {
@@ -901,23 +710,16 @@ function submitReview() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
         userCurrentId = data.data.id;
-        console.log(userCurrentId);
 
-        // NOVI FETCH
         let reviewText = document.getElementById("textareaid").value;
-        // let markel = document.getElementById("textareaid").value;
         let ratingValue = document.getElementById("rating-value").innerHTML;
 
-        // console.log(ratingValue);
         const review = {
           UserId: userCurrentId,
           CourseId: courseId,
@@ -933,7 +735,6 @@ function submitReview() {
           body: JSON.stringify(review),
         })
           .then((response) => {
-            console.log(response);
             if (!response.ok) {
               throw new Error("Adding review failed");
             }
@@ -941,8 +742,6 @@ function submitReview() {
             return response.json();
           })
           .then((data) => {
-            console.log(data);
-            // window.location.href = oldLoc; //NE VALJA
             location.reload();
           })
           .catch((error) => {
@@ -960,15 +759,12 @@ function submitReview() {
 
 function deleteUser(id) {
   fetch(
-    `/api/email/send-email/${id}/Sorry, your request has been rejected! Try again or register as user.`,
+    `/api/email/send-email/${id}/Izvinjavamo se, Vaš zahtjev za kreiranje naloga za admina je odbijen! Pokušajte ponovo ili se registrujte kao korisnik.`,
     {
       method: "POST",
     }
   )
-    .then((response) => {
-      //  console.log(response);
-      //return response.json;
-    })
+    .then((response) => {})
     .then((data) => {
       fetch(`/api/auth/delete/${id}`, {
         method: "DELETE",
@@ -976,18 +772,12 @@ function deleteUser(id) {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => {
-          // console.log(response);
-          // return response.json;
-        })
-        .then((data) => {
-          // console.log(data);
-          //console.log(data);
-        })
+        .then((response) => {})
+        .then((data) => {})
         .catch((error) => {
           console.error("Error deleting user:", error);
         });
-      alert("User has been successfully deleted!");
+      alert("Korisnik je uspješno obrisan!");
       location.reload();
     })
     .catch((error) => {

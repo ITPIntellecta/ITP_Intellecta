@@ -32,12 +32,8 @@ document.addEventListener("click", function (event) {
     if (event.target != header && event.target != categoryList) {
       targetEvr.classList.remove("show-list");
       arrowDown.classList.remove("rotate-up");
-      console.log("Van menija");
-      console.log(event.target);
     } else {
       targetEvr.classList.toggle("show-list");
-      console.log("U meniju");
-      console.log(event.target);
 
       const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
       arrowDown.classList.toggle("rotate-up");
@@ -104,22 +100,17 @@ function saveChanges(event) {
 
   fileInputs.forEach(function (input) {
     if (input.files.length > 0) {
-      // Provjeravamo da li je odabrana datoteka
-      filesMap.set(fileOrder, input.files[0].name); // Dodajemo prvu odabrana datoteka iz svakog input polja u niz
+      filesMap.set(fileOrder, input.files[0].name);
       weekMap.set(fileOrder, weekNumber);
     }
-
-    console.log(filesMap);
-    console.log(weekMap);
   });
 
-  //console.log(filesMap);
   input.style.display = "none";
   const week = document.getElementById("weekCourse");
 
-  week.innerHTML = `<div class="material-added-notification">Week ${weekNumber} materials saved!</div>
-  <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
-  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
+  week.innerHTML = `<div class="material-added-notification">Materijal u sedmici ${weekNumber} sačuvan!</div>
+  <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Dodaj još materijala</button>
+  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Dodaj novu sedmicu</button>
   `;
 
   const btnAddMore = document.getElementById("addMore");
@@ -133,17 +124,14 @@ function closeWeek(event) {
   let posljednjiKljuc = Array.from(weekMap.keys()).pop();
 
   let posljednjaVrijednost = weekMap.get(posljednjiKljuc);
-  // console.log(posljednjaVrijednost);
 
   if (posljednjaVrijednost != weekNumber) weekNumber--;
-  // console.log(weekNumber, fileOrder);
   if (weekNumber == 0 && fileOrder == 0) {
     const btnAdd = document.getElementById("prva");
-    btnAdd.style.display = "block";
+    btnAdd.style.display = "flex";
   }
 
   const week = document.querySelectorAll(".weekCourse1");
-  // console.log(week);
   week.forEach((div) => (div.style.display = "none"));
 
   const btnNew = document.getElementById("addNew");
@@ -152,27 +140,25 @@ function closeWeek(event) {
   if (btnAddMore != null) btnAddMore.disabled = false;
 
   const weekAll = document.getElementById("weekCourse");
-  // console.log(weekAll);
   if (weekNumber >= 1)
-    weekAll.innerHTML = `<div class="material-added-notification"> Week ${weekNumber} materials saved!</div>
-  <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Add more material</button>
-  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Add new week</button>
+    weekAll.innerHTML = `<div class="material-added-notification"> Materijal u sedmici ${weekNumber} sačuvan!</div>
+  <button onclick="showInput(event)" id="addMore" class="form-group-btn week-material-btn">Dodaj još materijala</button>
+  <button onclick="showNextWeek(event)" id="addNew" class="form-group-btn week-material-btn">Dodaj novu sedmicu</button>
   `;
 }
 
 function showInput(event) {
   event.preventDefault();
-  //  fileOrder++;
   const week = document.getElementById("weekCourse");
   week.style.display = "block";
-  week.innerHTML = `<div class="weekCourse1" id="weekCourse1"> <br><h2>Week ${weekNumber}</h2> 
+  week.innerHTML = `<div class="weekCourse1" id="weekCourse1"> <br><h2>Sedmica ${weekNumber}</h2> 
     <div class="fileDiv1">
      <input onchange="checkInput(event)" class="fileDiv" id="contentFile" type="file" accept=".txt,video/*,.doc,.docx,.pdf"/>
      <br><br>
      <button class="btnX" onclick="closeWeek(event)" value="x"> ✖ </button>
   </div> 
 
-  <button disabled class="form-group-btn week-material-btn" id='sacuvaj' onclick='saveChanges(event)'>Save changes</button>
+  <button disabled class="form-group-btn week-material-btn" id='sacuvaj' onclick='saveChanges(event)'>Sačuvaj promjene</button>
 
   <br>
   </div>
@@ -199,44 +185,30 @@ var files;
 let filesToUpload = [];
 function handleFileInputChange(event) {
   files = event.target.files;
-  //filesToUpload.push(...files); // Dodajemo izabrane fajlove u niz
 }
 const formData = new FormData();
 function saveFile() {
   filesToUpload = [];
   filesToUpload.push(...files);
-  console.log(filesToUpload);
   filesToUpload.forEach((file) => {
-    console.log(file);
-
-    formData.append("files[]", file); // Dodajemo sve fajlove iz niza u FormData objekat
+    formData.append("files[]", file);
   });
-
-  console.log(formData);
-  for (let pair of formData.entries()) {
-    console.log(pair[0] + ": " + pair[1].name); // Ispisuje ključeve i imena fajlova
-  }
 }
 
 let userCurrentId;
 function getCurrentUserId() {
-  // checkUserRole();
   if (localStorage.getItem("jwtToken") != null) {
     fetch("/api/course/user", {
       method: "GET",
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
         userCurrentId = data.data.id;
-        console.log(userCurrentId);
       })
       .catch((error) => {
         console.error(
@@ -255,17 +227,12 @@ function submitCourse(event) {
   })
     .then((response) => {
       if (!response.ok) {
-        //  console.log(response);
         throw new Error("Network response was not ok");
       }
       return response.json();
     })
     .then((data) => {
-      // Uzmite ime korisnika iz podataka koje ste dobili
-      //console.log(data);
       userId = data.data.id;
-      // Prikazivanje imena korisnika u HTML elementu
-      // console.log(userId);
 
       const courseTitle = document.getElementById("courseTitle").value;
       const courseSubtitle = document.getElementById("courseSubtitle").value;
@@ -277,12 +244,11 @@ function submitCourse(event) {
       const selectedText = selectedOption.value;
       const weeklyWorkload = document.getElementById("weeklyWorkload").value;
       const price = document.getElementById("price").value;
-      // console.log(courseTitle, courseSubtitle, courseHighlights, selectedText);
       if (
         courseTitle.trim() != "" &&
         courseSubtitle.trim() != "" &&
         courseHighlights.trim() != "" &&
-        selectedText != "- Choose category -" &&
+        selectedText != "- Izaberite kategoriju -" &&
         weeklyWorkload != 0 &&
         price != 0
       ) {
@@ -297,7 +263,6 @@ function submitCourse(event) {
           Price: price,
         };
 
-        //  console.log(formData);
         let courseId;
         fetch("/api/course/AddCourse", {
           method: "POST",
@@ -311,16 +276,13 @@ function submitCourse(event) {
           })
           .then((data) => {
             courseId = data.data.courseId;
-
-            //  console.log(courseId);
             sendMaterial(courseId);
-            console.log("Success:", data);
           })
           .catch((error) => {
             console.error("Error:", error);
           });
       } else {
-        alert("Please ensure all fields are filled in.");
+        alert("Uvjerite se da su sva polja popunjena!");
       }
     })
     .catch((error) => {
@@ -342,9 +304,6 @@ async function sendMaterial(courseIdd) {
       fileOrder: i,
     };
 
-    console.log(filesMap.get(i));
-
-    console.log(materialData);
     await fetch("/api/material/uploadMaterial", {
       method: "POST",
       headers: {
@@ -356,7 +315,6 @@ async function sendMaterial(courseIdd) {
         return response.json();
       })
       .then((data) => {
-        console.log("Success:", data);
         sendM();
       })
       .catch((error) => {
@@ -369,23 +327,21 @@ async function sendMaterial(courseIdd) {
 }
 
 function sendM() {
-  for (let pair of formData.entries()) {
-    console.log(pair[0] + ": " + pair[1].name); // Ispisuje ključeve i imena fajlova
-  }
+  // for (let pair of formData.entries()) {
+  //   console.log(pair[0] + ": " + pair[1].name);
+  // }
   fetch("/api/material/allFiles", {
-    // Endpoint za čuvanje svih fajlova
     method: "POST",
     body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
-      // console.log(data); // Možete prikazati poruku o uspešnom čuvanju fajlova ili drugu povratnu informaciju
-      filesToUpload = []; // Resetujemo niz nakon što su fajlovi sačuvani
+      filesToUpload = [];
 
       if (brojac == 0) {
         brojac++;
-        var odgovor = confirm("Course sent for authorization!");
-        // if (odgovor) window.location = "newCourse.html";
+        var odgovor = confirm("Kurs poslat na autorizaciju!");
+        if (odgovor) window.location = "newCourse.html";
       }
     })
     .catch((error) => {
@@ -395,14 +351,11 @@ function sendM() {
 
 function filteredCategory(courses, category) {
   return courses.filter((course) => {
-    console.log(category);
-
     if (
       category != "Everything" &&
       category != "myLearning" &&
       category != null
     ) {
-      // console.log(category);
       return course.category === category;
     } else {
       return true;
@@ -412,10 +365,7 @@ function filteredCategory(courses, category) {
 
 function filteredDuration(courses, duration) {
   return courses.filter((course) => {
-    //  console.log(duration);
-
     if (duration != undefined && duration != null && duration != 0) {
-      // console.log(course.durationInWeeks + " " + duration);
       return course.durationInWeeks == duration;
     } else {
       return true;
@@ -425,10 +375,7 @@ function filteredDuration(courses, duration) {
 
 function filteredPrice(courses, min, max) {
   return courses.filter((course) => {
-    //   console.log(duration);
-
     if (min != undefined && min != null && max != undefined && max != null) {
-      console.log(course.price + " " + min + " " + max);
       return course.price >= min && course.price <= max;
     } else {
       return true;
@@ -439,7 +386,6 @@ function filteredPrice(courses, min, max) {
 function filteredSubTitle(courses, subTitle) {
   return courses.filter((course) => {
     if (subTitle !== "") {
-      console.log(course.title);
       const lowerSubTitle = subTitle.toLowerCase();
       return (
         course.title.toLowerCase().includes(lowerSubTitle) ||
@@ -460,16 +406,12 @@ function loadCourses() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        console.log(data);
         userCurrentId = data.data.id;
-        console.log(userCurrentId);
         let userType = data.data.userType;
         const urlParams = new URLSearchParams(window.location.search);
 
@@ -479,32 +421,24 @@ function loadCourses() {
         const max = urlParams.get("max");
         const duration = urlParams.get("duration");
 
-        console.log(category);
-        //console.log(window.location);
         if (window.location.href.includes("myLearning")) {
-          console.log("String sadrži 'myLearning'");
           loadMyLearning();
         } else if (window.location.href.includes("myCourses")) {
-          console.log("MY COURSES");
           loadMyCourses();
         } else {
           fetch("/api/course/getall")
             .then((response) => response.json())
             .then((data) => {
               let filteredCourses = filteredCategory(data.data, category);
-              console.log(filteredCourses);
 
               if (text != null) {
                 filteredCourses = filteredSubTitle(filteredCourses, text);
-                console.log(filteredCourses);
               }
               if (duration != null) {
                 filteredCourses = filteredDuration(filteredCourses, duration);
-                console.log(filteredCourses);
               }
               if (min != null && max != null) {
                 filteredCourses = filteredPrice(filteredCourses, min, max);
-                console.log(filteredCourses);
               }
 
               filteredCourses.forEach((course) => {
@@ -514,10 +448,8 @@ function loadCourses() {
                     userType == "Admin" ||
                     userCurrentId == course.creatorId
                   ) {
-                    console.log(data.data.userType);
                     isAdmin = true;
                   }
-                  //  console.log(course);
                   let title = course.title;
                   let highlights = course.highlights;
                   let id = course.courseId;
@@ -526,37 +458,40 @@ function loadCourses() {
                   let background;
 
                   switch (category) {
-                    case "Engineering":
-                      background = "science-eng.jpg";
+                    case "Inženjerstvo":
+                      background = "eng.png";
                       break;
-                    case "Business Development":
+                    case "Poslovni razvoj":
                       background = "business.jpg";
                       break;
-                    case "IT and Technology":
+                    case "IT i tehnologije":
                       background = "it.jpg";
                       break;
-                    case "Health & Fitness":
+                    case "Zdravlje i fitnes":
                       background = "fitness.jpg";
                       break;
-                    case "Languages":
+                    case "Jezici":
                       background = "lang.jpg";
                       break;
-                    case "Science":
+                    case "Nauka":
                       background = "science-eng.jpg";
                       break;
-                    case "Personal Development":
+                    case "Lični razvoj":
                       background = "fitness.jpg";
                       break;
-                    case "Data Science":
+                    case "Nauka o podacima":
                       background = "data1jpg.jpg";
                       break;
-                    case "Legal Studies and Law":
+                    case "Edukacija i podučavanje":
+                      background = "lang.jpg";
+                      break;
+                    case "Pravne studije i pravo":
                       background = "law.webp";
                       break;
-                    case "Psychology and Counseling":
+                    case "Psihologija i savjetovanje":
                       background = "medicine.jpg";
                       break;
-                    case "Healthcare and Medicine":
+                    case "Zdravstvo i medicina":
                       background = "medicine.jpg";
                       break;
                     default:
@@ -573,21 +508,13 @@ function loadCourses() {
                   ${highlights}
                   </p>
                   <div class="authButtons" id="authBtns${id}">
-                  <button id="enrollBtn" class="popularCourse authButton" onclick="showModal('${id}', '${userCurrentId}')">View</button> 
+                  <button id="enrollBtn" class="popularCourse authButton" onclick="showModal('${id}', '${userCurrentId}')">Pogledaj kurs</button> 
                  </div>
               </div>
             </div>`;
 
                   let e = document.getElementById(`${id}`);
                   e.style.backgroundImage = "url(" + background + ")";
-
-                  //  <button
-                  //    id="enrollBtn"
-                  //    class="popularCourse authButton"
-                  //    onclick="joinCourse(${id})"
-                  //  >
-                  //    Enroll
-                  //  </button>;
 
                   if (isAdmin) {
                     document.getElementById(
@@ -597,7 +524,7 @@ function loadCourses() {
                     class="popularCourse authButton"
                     onclick="deleteCourse(${id})"
                   >
-                    Delete Course
+                    Obriši kurs
                   </button>`;
                   }
                 }
@@ -626,25 +553,17 @@ function loadMyLearning() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
         userCurrentId = data.data.id;
-        console.log(userCurrentId);
 
         fetch(`/api/course/getmylearning/${userCurrentId}`)
           .then((response) => response.json())
           .then((data) => {
-            // let filteredCourses = filteredCategory(data.data, category);
-            // console.log(filteredCourses);
-            console.log(data);
             data.data.forEach((course) => {
-              console.log(course);
               let title = course.title;
               let highlights = course.highlights;
               let id = course.courseId;
@@ -653,37 +572,40 @@ function loadMyLearning() {
               let background;
 
               switch (category) {
-                case "Engineering":
-                  background = "science-eng.jpg";
+                case "Inženjerstvo":
+                  background = "eng.png";
                   break;
-                case "Business Development":
+                case "Poslovni razvoj":
                   background = "business.jpg";
                   break;
-                case "IT and Technology":
+                case "IT i tehnologije":
                   background = "it.jpg";
                   break;
-                case "Health & Fitness":
+                case "Zdravlje i fitnes":
                   background = "fitness.jpg";
                   break;
-                case "Languages":
+                case "Jezici":
                   background = "lang.jpg";
                   break;
-                case "Science":
+                case "Nauka":
                   background = "science-eng.jpg";
                   break;
-                case "Personal Development":
+                case "Lični razvoj":
                   background = "fitness.jpg";
                   break;
-                case "Data Science":
+                case "Nauka o podacima":
                   background = "data1jpg.jpg";
                   break;
-                case "Legal Studies and Law":
+                case "Edukacija i podučavanje":
+                  background = "lang.jpg";
+                  break;
+                case "Pravne studije i pravo":
                   background = "law.webp";
                   break;
-                case "Psychology and Counseling":
+                case "Psihologija i savjetovanje":
                   background = "medicine.jpg";
                   break;
-                case "Healthcare and Medicine":
+                case "Zdravstvo i medicina":
                   background = "medicine.jpg";
                   break;
                 default:
@@ -699,7 +621,7 @@ function loadMyLearning() {
                   <p class="card-text">
                   ${highlights}
                   </p>
-                  <button class="popularCourse" onclick="loadVideo(${id})">View Course</button>
+                  <button class="popularCourse" onclick="loadVideo(${id})">Pogledaj kurs</button>
                
               </div>
             </div>`;
@@ -732,27 +654,18 @@ function loadMyCourses() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
         userCurrentId = data.data.id;
-        console.log(userCurrentId);
 
         fetch("/api/course/getall")
           .then((response) => response.json())
           .then((data) => {
             data.data.forEach((course) => {
-              console.log(course.creatorId);
-              // console.log(course.creatorId);
-              console.log(course.approved);
-              console.log(course);
               if (course.creatorId == userCurrentId) {
-                console.log("USAO U IF");
                 let title = course.title;
                 let highlights = course.highlights;
                 let id = course.courseId;
@@ -761,37 +674,40 @@ function loadMyCourses() {
                 let background;
 
                 switch (category) {
-                  case "Engineering":
-                    background = "science-eng.jpg";
+                  case "Inženjerstvo":
+                    background = "eng.png";
                     break;
-                  case "Business Development":
+                  case "Poslovni razvoj":
                     background = "business.jpg";
                     break;
-                  case "IT and Technology":
+                  case "IT i tehnologije":
                     background = "it.jpg";
                     break;
-                  case "Health & Fitness":
+                  case "Zdravlje i fitnes":
                     background = "fitness.jpg";
                     break;
-                  case "Languages":
+                  case "Jezici":
                     background = "lang.jpg";
                     break;
-                  case "Science":
+                  case "Nauka":
                     background = "science-eng.jpg";
                     break;
-                  case "Personal Development":
+                  case "Lični razvoj":
                     background = "fitness.jpg";
                     break;
-                  case "Data Science":
+                  case "Nauka o podacima":
                     background = "data1jpg.jpg";
                     break;
-                  case "Legal Studies and Law":
+                  case "Edukacija i podučavanje":
+                    background = "lang.jpg";
+                    break;
+                  case "Pravne studije i pravo":
                     background = "law.webp";
                     break;
-                  case "Psychology and Counseling":
+                  case "Psihologija i savjetovanje":
                     background = "medicine.jpg";
                     break;
-                  case "Healthcare and Medicine":
+                  case "Zdravstvo i medicina":
                     background = "medicine.jpg";
                     break;
                   default:
@@ -801,7 +717,7 @@ function loadMyCourses() {
 
                 const div = document.getElementsByClassName("row")[0];
                 div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="item mmm" id='${id}' style="margin-bottom:2rem" id="cccourse${id}">
+              <div class="item mmm" id='${id}' style="margin-bottom:2rem">
               
 
                   <h5 class="courseCardTitle loadVideo">${title}</h5>
@@ -809,8 +725,8 @@ function loadMyCourses() {
                   ${highlights}
                   </p>
                   <div class="authButtons">
-                  <button class="popularCourse authButton" onclick="loadVideo(${id})">View Course</button>  
-                 <button  class="popularCourse authButton" onclick="deleteCourse(${id})">Delete Course</button>
+                  <button class="popularCourse authButton" onclick="loadVideo(${id})">Pogledaj kurs</button>  
+                 <button  class="popularCourse authButton" onclick="deleteCourse(${id})">Obriši kurs</button>
 
                  </div>
               </div>
@@ -820,18 +736,12 @@ function loadMyCourses() {
                 e.style.backgroundImage = "url(" + background + ")";
 
                 if (course.approved == false) {
-                  console.log("USAO U IF ZA APPROVED");
-                  document
-                    .getElementById(`cccourse${id}`)
-                    .classList.add("notapproved");
+                  document.getElementById(`${id}`).style.backgroundImage =
+                    "url('notyetapproved.jpg')";
 
                   document.getElementById(`pId${id}`).innerHTML =
-                    "COURSE NOT YET APPROVED";
+                    "Kurs na odobravanju, budite strpljivi!";
                   document.getElementById(`pId${id}`).style.color = "black";
-                } else {
-                  document
-                    .getElementById(`cccourse${id}`)
-                    .classList.remove("notapproved");
                 }
               }
             });
@@ -859,7 +769,6 @@ function loadCoursesForAuth() {
     .then((data) => {
       data.data.forEach((course) => {
         if (course.approved == 0) {
-          // console.log(course);
           let title = course.title;
           let highlights = course.highlights;
           let id = course.courseId;
@@ -872,8 +781,8 @@ function loadCoursesForAuth() {
                   ${highlights}
                   </p>
                   <div class="authButtons">
-                  <button  class="popularCourse authButton"  onclick="confirmCourse(${id})">Authorize</button>
-                 <button  class="popularCourse authButton" onclick="deleteCourse(${id})">Delete</button>
+                  <button  class="popularCourse authButton"  onclick="confirmCourse(${id})">Odobri kurs</button>
+                 <button  class="popularCourse authButton" onclick="deleteCourse(${id})">Obriši kurs</button>
                   </div>
               </div>
             </div>`;
@@ -885,19 +794,14 @@ function loadCoursesForAuth() {
     });
 }
 
-// let creatorId;
 function confirmCourse(courseId) {
-  // console.log(courseId);
-
   fetch(`/api/course/GetCourseById/${courseId}`, {
     method: "GET",
   })
     .then((response) => {
-      //  console.log(response);
       return response.json();
     })
     .then((data) => {
-      //  console.log(data);
       creatorId = data.data.creatorId;
       const formData = {
         CreatorId: data.data.creatorId,
@@ -912,7 +816,6 @@ function confirmCourse(courseId) {
         approved: true,
         Price: data.data.Price,
       };
-      //  console.log(formData);
 
       fetch("api/course", {
         method: "PUT",
@@ -925,7 +828,6 @@ function confirmCourse(courseId) {
           return response.json();
         })
         .then((data) => {
-          console.log("Course updated successfully:", data);
           approveCourseMail(formData.CreatorId);
           showCoursesForAuthorization();
         })
@@ -936,16 +838,11 @@ function confirmCourse(courseId) {
 }
 
 function approveCourseMail(id) {
-  fetch(`/api/email/send-email/${id}/Your course has been approved!`, {
+  fetch(`/api/email/send-email/${id}/Vaš kurs je odobren!`, {
     method: "POST",
   })
-    .then((response) => {
-      //  console.log(response);
-      //return response.json;
-    })
-    .then((data) => {
-      //console.log(data);
-    })
+    .then((response) => {})
+    .then((data) => {})
     .catch((error) => {
       console.error("Error updating course:", error);
     });
@@ -968,16 +865,13 @@ function loadVideoPage() {
   let courseMark;
   let approved;
   let price;
-  // console.log(id);
   fetch(`/api/course/GetCourseById/${id}`, {
     method: "GET",
   })
     .then((response) => {
-      //  console.log(response);
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       creatorId = data.data.creatorId;
       title = data.data.title;
       subtitle = data.data.subtitle;
@@ -998,11 +892,11 @@ function loadVideoPage() {
 
       const priceEl = document.getElementById("price-course");
       const categoryEl = document.getElementById("category-course");
-      categoryEl.innerHTML = "Category: " + category;
+      categoryEl.innerHTML = "Kategorija: " + category;
       priceEl.style.display = "none";
 
       markEl = document.getElementById("mark-course");
-      markEl.innerHTML = "Mark";
+      markEl.innerHTML = "Ocjena";
       let stars = document.querySelectorAll(".star");
       for (let i = 0; i < courseMark; i++) {
         stars[i].classList.add("filled");
@@ -1013,19 +907,16 @@ function loadVideoPage() {
       })
         .then((response) => {
           if (!response.ok) {
-            console.log(response);
             throw new Error("Network response was not ok");
           }
           return response.json();
         })
         .then((data) => {
-          console.log(data);
           const fname = data.data.firstName;
           const lname = data.data.lastName;
 
           const creator = document.getElementById("creator-course");
-          console.log(creator);
-          creator.innerHTML = "Creator: " + fname + " " + lname;
+          creator.innerHTML = "Kreator: " + fname + " " + lname;
         })
         .catch((error) => {
           console.error(
@@ -1038,20 +929,16 @@ function loadVideoPage() {
         method: "GET",
       })
         .then((response) => {
-          // console.log(response);
           return response.json();
         })
         .then((data) => {
-          console.log(data);
-
           const divWeeks = document.getElementById("course-weeks");
           for (var i = 1; i <= durationInWeeks; i++) {
             divWeeks.innerHTML += `  <div class="week" id="week-course">
-            <button class="button-week" id="week${i}">Week ${i}</button>
+            <button class="button-week" id="week${i}">Sedmica ${i}</button>
              <div class="week-lessons show-lesson">`;
-            // console.log(i);
+
             data.data.forEach((material) => {
-              console.log(material);
               const video = material.videoFile;
               if (material.weekNumber == i) {
                 divWeeks.innerHTML += `<div class="lesson"><div class="checkbox-wrapper-39">
@@ -1060,7 +947,7 @@ function loadVideoPage() {
                 <span class="checkbox"></span>
                 </label>
                 </div><button class="btnLesson"  onclick="showFile('${video}')"> 
-                Lesson ${material.fileOrder}</button></div>`;
+                Lekcija ${material.fileOrder}</button></div>`;
 
                 divWeeks.innerHTML += `</div></div>`;
               }
@@ -1070,44 +957,28 @@ function loadVideoPage() {
               })
                 .then((response) => {
                   if (!response.ok) {
-                    console.log(response);
                     throw new Error("Network response was not ok");
                   }
                   return response.json();
                 })
                 .then((data) => {
                   userCurrentId = data.data.id;
-                  console.log(userCurrentId);
-                  console.log(id);
-                  console.log(material.contentId);
-
                   if (userCurrentId != creatorId) {
-                    console.log(userCurrentId);
-                    console.log(creatorId);
-
                     fetch(
                       `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
                     )
                       .then((response) => response.json())
                       .then((data) => {
-                        console.log(data);
                         var elem = document.getElementById(
                           `input${data.data.materialId}`
                         );
-
-                        console.log(elem);
-                        console.log(data.data.completed);
                         elem.checked = data.data.completed;
-
-                        // checkAllWeeks(material.courseId, durationInWeeks);
                       })
 
                       .catch((error) => {
                         console.error("There was an error:", error);
                       });
                   } else {
-                    console.log(userCurrentId);
-                    console.log(creatorId);
                     var elements = document.querySelectorAll(".labelCheckbox");
                     Array.from(elements).forEach((element) => {
                       element.style.display = "none";
@@ -1117,8 +988,6 @@ function loadVideoPage() {
                       element1.style.gridTemplateColumns = "100%";
                     });
                   }
-                  console.log(userCurrentId);
-                  console.log(creatorId);
                   let sendEmailBool = false;
                   checkAllWeeks(
                     cccourse,
@@ -1137,7 +1006,6 @@ function loadVideoPage() {
                 });
             });
           }
-          // console.log(userCurrentId);
         });
     });
 }
@@ -1151,17 +1019,14 @@ async function checkAllCompleted(week, courseId, userId) {
       throw new Error("Network response was not ok");
     }
     const data = await response.json();
-    // const checkbox = document.getElementById("allCompletedCheckbox");
-    // checkbox.checked = data.allCompleted;
-    console.log(data);
     var weekDiv = document.getElementById(`week${week}`);
 
     if (data.data == true) {
       console.log(weekDiv);
-      weekDiv.innerHTML = `Week ${week} - Completed!`;
+      weekDiv.innerHTML = `Sedmica ${week} - Završena!`;
       return true;
     } else {
-      weekDiv.innerHTML = `Week ${week}`;
+      weekDiv.innerHTML = `Sedmica ${week}`;
       return false;
     }
   } catch (error) {
@@ -1185,64 +1050,44 @@ async function checkAllWeeks(
     })
       .then((response) => {
         if (!response.ok) {
-          // console.log(response);
-          // throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
-        // let iddd;
-        // console.log(userCurrentId);
-
         for (let i = 1; i <= duration; i++) {
-          console.log(courseId);
-          console.log(userCurrentIdd);
           const promise = checkAllCompleted(i, courseId, userCurrentIdd).then(
             (result) => {
-              console.log(result);
               if (result == true) {
                 completedWeeks++;
-                console.log(completedWeeks);
               }
             }
           );
-          promises.push(promise); // Dodato: Dodavanje obećanja u niz
+          promises.push(promise);
         }
 
-        return Promise.all(promises).then(() => completedWeeks); // Dodato: Vraćanje Promise.all
+        return Promise.all(promises).then(() => completedWeeks);
       })
       .then((completedWeeks) => {
         const percentage = parseFloat(
           ((completedWeeks * 100) / duration).toFixed(2)
         );
-        console.log(percentage);
-        console.log(completedWeeks);
-        console.log(duration);
         let divCourse = document.getElementsByClassName("coursePercentage")[0];
 
         if (completedWeeks == duration) {
-          console.log("Course completed!");
           if (sendEmailBool) {
             fetch(
-              `/api/email/send-email/${userCurrentId}/You have completed this course: ${title}! Congratulations!!`,
+              `/api/email/send-email/${userCurrentId}/Uspješno ste završili kurs: ${title}! Čestitamo!!`,
               {
                 method: "POST",
               }
             )
-              .then((response) => {
-                //  console.log(response);
-                //return response.json;
-              })
-              .then((data) => {
-                //console.log(data);
-              })
+              .then((response) => {})
+              .then((data) => {})
               .catch((error) => {
                 console.error("Error updating course:", error);
               });
           }
-          divCourse.innerHTML = `You have completed this course! Congratulations!<br>
+          divCourse.innerHTML = `Uspješno ste završili kurs! Čestitamo!<br>
           
           <div class="progress-bar__wrapper">
   <label class="progress-bar__value" htmlFor="progress-bar"> ${percentage}% </label>
@@ -1250,8 +1095,7 @@ async function checkAllWeeks(
 </div>
             `;
         } else {
-          console.log("Course not completed");
-          divCourse.innerHTML = `You have finished  ${completedWeeks} out of ${duration} weeks! Keep going!<br>
+          divCourse.innerHTML = `Završili ste  ${completedWeeks} od ukupno ${duration} sedmica! Samo naprijed!<br>
          <div class="progress-bar__wrapper">
   <label class="progress-bar__value" htmlFor="progress-bar"> ${percentage}% </label>
   <progress id="progress-bar" value="${percentage}" max="100"></progress>
@@ -1275,11 +1119,7 @@ function completeLesson(
   title,
   creator
 ) {
-  console.log(contentId);
-  console.log(week);
-
   let inputEl = document.getElementById(`input${contentId}`);
-  //console.log(inputEl.checked);
   let checked = inputEl.checked;
 
   if (localStorage.getItem("jwtToken") != null) {
@@ -1288,16 +1128,12 @@ function completeLesson(
     })
       .then((response) => {
         if (!response.ok) {
-          //  console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        //console.log(data);
         userCurrentId = data.data.id;
-        // console.log(userCurrentId);
-
         const updateData = {
           UserId: userCurrentId,
           CourseId: courseId,
@@ -1305,8 +1141,6 @@ function completeLesson(
           Completed: checked,
           Week: week,
         };
-
-        console.log(updateData);
 
         fetch("/api/Material/ChangeCompletedStatus", {
           method: "POST",
@@ -1318,15 +1152,13 @@ function completeLesson(
         })
           .then((response) => {
             if (!response.ok) {
-              console.log(response);
               throw new Error("Network response was not ok");
             }
             return response.json();
           })
           .then((data) => {
-            console.log(data);
             let sendEmailBool = true;
-            //PROVJERA DA LI JE SEDMICA ZAVRSENA
+
             checkAllCompleted(week, courseId, userCurrentId);
             checkAllWeeks(
               courseId,
@@ -1360,40 +1192,32 @@ function loadVideo(id) {
 function showFile(name) {
   var fileExtension = name.split(".").pop().toLowerCase();
   var divFile = document.getElementsByClassName("course-content")[0];
-  console.log(fileExtension);
 
   switch (fileExtension) {
     case "txt":
-      console.log("Tip fajla je tekstualni (.txt) fajl.");
       divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="100%"></iframe>
 `;
       break;
     case "pdf":
-      console.log("Tip fajla je tekstualni (.pdf) fajl.");
       divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="100%"></iframe>
 `;
       break;
     case "doc":
-      console.log("Tip fajla je tekstualni (.doc) fajl.");
       divFile.innerHTML = `<iframe src="folder/${name}" width="0" height="0"></iframe>
 `;
-      // divFile.innerHTML = `<p class="materialText">File downloaded</p>`;
       break;
     case "docx":
-      console.log("Tip fajla je tekstualni (.docx) fajl.");
-      divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="10%"> <p class="materialText">File downloaded</p></iframe>
+      divFile.innerHTML = `<iframe src="folder/${name}" width="100%" height="10%"> <p class="materialText">Fajl preuzet</p></iframe>
 `;
-      divFile.innerHTML += `<p class="materialText">File downloaded</p>`;
+      divFile.innerHTML += `<p class="materialText">Fajl preuzet</p>`;
       break;
     case "mp4":
-      console.log("Tip fajla je video fajl (.mp4).");
       divFile.innerHTML = `<video id="myVideo" controls>
   <source src="folder/${name}" type="video/mp4">
   Vaš pregledač ne podržava video sadržaj.
 </video>`;
       break;
     default:
-      console.log("Tip fajla nije podrzan.");
       break;
   }
 }
@@ -1406,21 +1230,17 @@ function loadPopularCourses() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
         userCurrentId = data.data.id;
         fetch("/api/course/getall")
           .then((response) => response.json())
           .then((data) => {
             data.data.forEach((course) => {
               if (course.approved == 1) {
-                console.log(course);
                 let title = course.title;
                 let highlights = course.highlights;
                 let subtitle = course.subtitle;
@@ -1431,37 +1251,40 @@ function loadPopularCourses() {
                 let background;
 
                 switch (category) {
-                  case "Engineering":
-                    background = "science-eng.jpg";
+                  case "Inženjerstvo":
+                    background = "eng.png";
                     break;
-                  case "Business Development":
+                  case "Poslovni razvoj":
                     background = "business.jpg";
                     break;
-                  case "IT and Technology":
+                  case "IT i tehnologije":
                     background = "it.jpg";
                     break;
-                  case "Health & Fitness":
+                  case "Zdravlje i fitnes":
                     background = "fitness.jpg";
                     break;
-                  case "Languages":
+                  case "Jezici":
                     background = "lang.jpg";
                     break;
-                  case "Science":
+                  case "Nauka":
                     background = "science-eng.jpg";
                     break;
-                  case "Personal Development":
+                  case "Lični razvoj":
                     background = "fitness.jpg";
                     break;
-                  case "Data Science":
+                  case "Nauka o podacima":
                     background = "data1jpg.jpg";
                     break;
-                  case "Legal Studies and Law":
+                  case "Edukacija i podučavanje":
+                    background = "lang.jpg";
+                    break;
+                  case "Pravne studije i pravo":
                     background = "law.webp";
                     break;
-                  case "Psychology and Counseling":
+                  case "Psihologija i savjetovanje":
                     background = "medicine.jpg";
                     break;
-                  case "Healthcare and Medicine":
+                  case "Zdravstvo i medicina":
                     background = "medicine.jpg";
                     break;
                   default:
@@ -1470,18 +1293,12 @@ function loadPopularCourses() {
                 }
 
                 container.innerHTML += `<div class="item1 mmmm" id='${id}'>
-          <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">View course</button>
+                <p class="categoryCard">${category}</p>
+          <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">Pogledaj kurs</button>
           </div>`;
 
                 let e = document.getElementById(`${id}`);
                 e.style.backgroundImage = "url(" + background + ")";
-                // let elements = document.getElementsByClassName("popularCourse");
-                // Array.from(elements).forEach((element, index) => {
-                //   element.addEventListener("click", (event) => {
-                //     let courseId = data.data[index].courseId;
-                //       showModal(courseId, userCurrentId); // Proslediti event i tačan id
-                //   });
-                // });
               }
             });
           })
@@ -1496,24 +1313,6 @@ function loadPopularCourses() {
         );
       });
   }
-  // let elements1 = document.getElementsByClassName("btn-close");
-  // Array.from(elements1).forEach((element, index) => {
-  //   element.addEventListener("click", hideModal);
-  // });
-
-  // console.log(elements1);
-
-  // let elements2 = document.getElementsByClassName("btn-savee");
-  // Array.from(elements2).forEach((element, index) => {
-  //   element.addEventListener("click", alert("ivana"));
-  // });
-  // document
-  //   .getElementsByClassName("btn-close")
-  //   .addEventListener("click", hideModal);
-
-  // document
-  //   .getElementsByClassName("btn-savee")
-  //   .addEventListener("click", hideModal);
 }
 
 function displayCategory(category) {
@@ -1527,8 +1326,6 @@ function searchCourses() {
   const priceMin = fromInput.value;
   const priceMax = toInput.value;
   const durationInWeeks = durationWeek.value;
-  console.log(searchWord);
-  console.log(category);
   window.location =
     "courses.html?parametar=" +
     category +
@@ -1546,7 +1343,6 @@ function searchCourses() {
   priceMax = 300;
 }
 
-//INPUT
 function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
   const [from, to] = getParsed(fromInput, toInput);
   fillSlider(fromInput, toInput, "#C6C6C6", "#113946", controlSlider);
@@ -1637,27 +1433,15 @@ fromInput.oninput = () =>
   controlFromInput(fromSlider, fromInput, toInput, toSlider);
 toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
 
-// Prikazivanje moda
 function showFilter() {
   document.getElementById("more-filter").style.display = "flex";
 }
 
-// Sakrivanje moda
 function hideFilter() {
   document.getElementById("more-filter").style.display = "none";
   fromInput = document.querySelector("#fromInput");
   toInput = document.querySelector("#toInput");
   durationWeek = document.getElementById("durationWeek");
-  console.log(
-    "BROJEVI: " +
-      fromInput.value +
-      " " +
-      toInput.value +
-      " " +
-      durationWeek.value
-  );
-
-  // searchCourses();
 }
 
 function cancelFilter() {
@@ -1665,41 +1449,28 @@ function cancelFilter() {
 
   fromInput = "";
   toInput = "";
-  console.log(
-    "BROJEVI: " +
-      fromInput.value +
-      " " +
-      toInput.value +
-      " " +
-      durationWeek.value
-  );
 }
 
 var enrollCourseId = -1;
 function confirmEnroll() {
   answer = true;
   let id = enrollCourseId;
-  console.log(id);
   if (localStorage.getItem("jwtToken") != null) {
     fetch("/api/course/user", {
       method: "GET",
     })
       .then((response) => {
         if (!response.ok) {
-          console.log(response);
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
-        // Uzmite ime korisnika iz podataka koje ste dobili
-        //console.log(data);
         userCurrentId = data.data.id;
         const enroll = {
           UserId: userCurrentId,
           CourseId: id,
         };
-        console.log(userCurrentId);
 
         fetch("/api/course/Course", {
           method: "POST",
@@ -1710,29 +1481,22 @@ function confirmEnroll() {
           body: JSON.stringify(enroll),
         })
           .then((response) => {
-            console.log(response);
             if (!response.ok) {
               throw new Error("Nash Fail");
             }
             return response.json();
           })
           .then((data) => {
-            console.log(data);
             enrollCourseMail(userCurrentId);
-            //FETCH ZA PRAVLJENJE REDOVA U TABELI STATISTICS
 
             fetch(`/api/course/GetCourseById/${id}`, {
               method: "GET",
             })
               .then((response) => {
-                //  console.log(response);
                 return response.json();
               })
               .then((data) => {
-                console.log(data.data);
-
                 data.data.courseContents.forEach((material) => {
-                  console.log(material);
                   const updateData = {
                     UserId: userCurrentId,
                     CourseId: id,
@@ -1740,7 +1504,6 @@ function confirmEnroll() {
                     Completed: false,
                     Week: material.weekNumber,
                   };
-                  console.log(updateData);
                   fetch("/api/Material/UpdateMaterialStatus", {
                     method: "POST",
                     headers: {
@@ -1751,15 +1514,11 @@ function confirmEnroll() {
                   })
                     .then((response) => {
                       if (!response.ok) {
-                        console.log(response);
                         throw new Error("Network response was not ok");
                       }
                       return response.json();
                     })
-                    .then((data) => {
-                      // Uzmite ime korisnika iz podataka koje ste dobili
-                      console.log(data);
-                    })
+                    .then((data) => {})
                     .catch((error) => {
                       console.error(
                         "There has been a problem with your update operation:",
@@ -1793,9 +1552,9 @@ function confirmEnroll() {
         <div class="modal-content1">
         <span class="close1" onclick="closeModal()">&times;</span><br />
         <div class="innerbox">
-        <div onclick="closeModal()">
+        <div>
           
-          <p style="font-size:15pt; font-weight:bold; margin:auto;">You are enrolled in the course!</p>
+          <p style="font-size:15pt; font-weight:bold; margin:auto;">Upisali ste se na kurs!</p>
           
         </div>
         </div>
@@ -1803,7 +1562,6 @@ function confirmEnroll() {
       `;
 }
 function closeModal() {
-  console.log("k");
   var modal1 = document.getElementById("myModal1");
   var modal2 = document.getElementsByClassName("modal2")[0];
   if (modal2 != null) modal2.style.display = "none";
@@ -1812,37 +1570,23 @@ function closeModal() {
   mainmodal.style.display = "none";
 }
 function joinCourse(id) {
-  // getCurrentUserId();
-  // console.log(userCurrentId);
   var modal1 = document.getElementById("myModal1");
 
-  // Get the <span> element that closes the modal
   var span1 = document.getElementsByClassName("close1")[0];
 
-  // When the user clicks on <span> (x), close the modal
   span1.onclick = function () {
     modal1.style.display = "none";
   };
-  console.log(modal1);
   modal1.style.display = "block";
   enrollCourseId = id;
-  console.log(enrollCourseId);
 }
 
 function enrollCourseMail(id) {
-  fetch(
-    `/api/email/send-email/${id}/You have been successfully enrolled in the course!`,
-    {
-      method: "POST",
-    }
-  )
-    .then((response) => {
-      // console.log(response);
-      // return response.json;
-    })
-    .then((data) => {
-      // console.log(data);
-    })
+  fetch(`/api/email/send-email/${id}/Uspješno ste se upisali na kurs!`, {
+    method: "POST",
+  })
+    .then((response) => {})
+    .then((data) => {})
     .catch((error) => {
       console.error("Error (enroll):", error);
     });
@@ -1853,45 +1597,32 @@ function deleteCourse(id) {
     method: "GET",
   })
     .then((response) => {
-      //  console.log(response);
       return response.json();
     })
     .then((data) => {
-      //  console.log(data);
       creatorId = data.data.creatorId;
-      //  console.log(formData);
       fetch(`/api/course/delete/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       })
-        .then((response) => {
-          // console.log(response);
-          // return response.json;
-        })
+        .then((response) => {})
         .then((data) => {
-          // console.log(data);
-
           fetch(
-            `/api/email/send-email/${creatorId}/Sorry, your course has been rejected! Try submitting again.`,
+            `/api/email/send-email/${creatorId}/Izvinjavamo se, nažalost Vaš kurs je odbijen. Pokušajte ponovo!`,
             {
               method: "POST",
             }
           )
-            .then((response) => {
-              //  console.log(response);
-              //return response.json;
-            })
-            .then((data) => {
-              //console.log(data);
-            })
+            .then((response) => {})
+            .then((data) => {})
             .catch((error) => {
               console.error("Error updating course:", error);
             });
         });
 
-      alert("Course has been successfully deleted!");
+      alert("Kurs je uspješno obrisan!");
       location.reload();
     })
     .catch((error) => {
@@ -1905,11 +1636,9 @@ function loadReviews() {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
       let div = document.getElementsByClassName("review")[0];
       div.innerHTML = "";
       data.data.forEach((review) => {
-        console.log(review);
         div.innerHTML += `
                 <div class="card">
           <div class="card-header">${review.user.firstName} &nbsp; ${review.user.lastName}</div>
@@ -1922,7 +1651,7 @@ function loadReviews() {
                 <span class="star star${review.id}">&#9733;</span>
               </div></h5>
             <span class="quote">&#10077;</span><br />
-            <p class="card-text">About <i>${review.course.title}:<br> </i>
+            <p class="card-text">O <i>${review.course.title}:<br> </i>
             ${review.reviewText}</p>
             <br />
             <span class="quote">&#10078;</span>
@@ -1930,7 +1659,6 @@ function loadReviews() {
         </div>
         `;
         let stars = document.querySelectorAll(`.star${review.id}`);
-        console.log(stars);
         for (let i = 0; i < review.mark; i++) {
           stars[i].classList.add("filled");
         }

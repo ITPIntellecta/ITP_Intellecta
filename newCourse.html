@@ -47,32 +47,32 @@
       </nav>
     </div>
     <div class="right-menu show-menu" id="right-menu">
-      <p onclick="changeToCourses('Everything')">&#9733; All courses</p>
+      <p onclick="changeToCourses('Everything')">&#9733; Svi kursevi</p>
 
-      <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
+      <p onclick="changeToCourses('myLearning')">&#9733; Kursevi koje slušam</p>
 
-      <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
+      <p onclick="changeToCourses('myCourses')">&#9733; Moji kursevi</p>
 
       <div class="admin-menu">
         <p id="adminEl1" onclick="showCoursesForAuthorization()">
-          &#9733; Courses authorization
+          &#9733; Autorizacija kurseva
         </p>
 
         <p id="adminEl2" onclick="showUsersForAuthorization()">
-          &#9733; Admin authorization
+          &#9733; Autorizacija admina
         </p>
       </div>
     </div>
 
     <div class="new-course" style="width: 35%">
-      <h2>Add a new course:</h2>
+      <h2>Dodaj novi kurs:</h2>
       <form onsubmit="submitCourse(event)" class="formAddCourse">
         <div class="form-group">
           <input
             class="form-style"
             id="courseTitle"
             type="text"
-            placeholder="Course title"
+            placeholder="Naslov kursa"
           />
         </div>
         <div class="form-group">
@@ -80,25 +80,25 @@
             class="form-style"
             id="courseSubtitle"
             type="text"
-            placeholder="Subtitle"
+            placeholder="Podnaslov kursa"
           />
         </div>
         <div class="form-group">
           <select class="form-style" id="courseCategory">
-            <option selected>Choose category</option>
-            <option>Engineering</option>
-            <option>Business Development</option>
-            <option>IT and Technology</option>
-            <option>Health & Fitness</option>
-            <option>Languages</option>
-            <option>Science</option>
-            <option>Personal Development</option>
-            <option>Data Science</option>
-            <option>Education and Teaching</option>
-            <option>Legal Studies and Law</option>
-            <option>Psychology and Counseling</option>
-            <option>Healthcare and Medicine</option>
-            <option>Other</option>
+            <option selected>Izaberite kategoriju</option>
+            <option>Inženjerstvo</option>
+            <option>Poslovni razvoj</option>
+            <option>IT i tehnologije</option>
+            <option>Zdravlje i fitnes</option>
+            <option>Jezici</option>
+            <option>Nauka</option>
+            <option>Lični razvoj</option>
+            <option>Nauka o podacima</option>
+            <option>Edukacija i podučavanje</option>
+            <option>Pravne studije i pravo</option>
+            <option>Psihologija i savjetovanje</option>
+            <option>Zdravstvo i medicina</option>
+            <option>Ostalo</option>
           </select>
         </div>
         <div class="form-group">
@@ -107,7 +107,7 @@
             id="weeklyWorkload"
             type="number"
             min="0"
-            placeholder="Weekly workload"
+            placeholder="Sedmično opterećenje"
           />
         </div>
         <div class="form-group">
@@ -118,7 +118,7 @@
             min="0"
             step="0.01"
             max="300"
-            placeholder="Price (USD)"
+            placeholder="Cijena (BAM)"
           />
         </div>
         <div class="form-group">
@@ -126,7 +126,7 @@
             class="form-style"
             cols="150"
             id="highlights"
-            placeholder="Highlights"
+            placeholder="Najvažnije o kursu"
             maxlength="100"
             wrap="soft"
           ></textarea>
@@ -139,22 +139,22 @@
             onclick="showNextWeek(event)"
             style="width: 100%; text-align: left"
           >
-            Add course content
+            Dodaj sadržaj kursa
           </button>
           <div id="weekCourse" style="display: block"></div>
         </div>
         <br />
         <div class="form-group">
           <input
-            class="form-style sendAuth"
+            class="form-style form-group-btn nnn sendAuth"
             type="submit"
-            value="Send for authorization"
+            value="Pošalji na autorizaciju"
+            style="padding: 0"
           />
         </div>
       </form>
     </div>
 
-    <!--   <footer>intellecta &copy;</footer>-->
     <script src="script.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

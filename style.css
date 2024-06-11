@@ -276,10 +276,11 @@ p.name {
   /* grid-template-columns: 1fr 1fr 1fr; */
   grid-template-rows: 1fr;
   gap: 50px; /* Postavljanje željenog razmaka između elemenata */
-  justify-content: start;
+  /* justify-content: start; */
   box-sizing: border-box;
   padding: 10px;
   place-items: center;
+  justify-content: center;
 }
 .buttons {
   padding: 0;

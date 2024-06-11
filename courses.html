@@ -47,25 +47,27 @@
         <img src="logo.png" alt="Logo" class="logo" />
 
         <button class="btn btnn-primary addcourse1" onclick="goToNewCourse()">
-          &#xFF0B; Add new course
+          &#xFF0B; Dodaj novi kurs
         </button>
       </div>
 
       <!-- MENI -->
       <div class="right-menu show-menu" id="right-menu">
-        <p onclick="changeToCourses('Everything')">&#9733; All courses</p>
+        <p onclick="changeToCourses('Everything')">&#9733; Svi kursevi</p>
 
-        <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
+        <p onclick="changeToCourses('myLearning')">
+          &#9733; Kursevi koje slušam
+        </p>
 
-        <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
+        <p onclick="changeToCourses('myCourses')">&#9733; Moji kursevi</p>
 
         <div class="admin-menu">
           <p id="adminEl1" onclick="showCoursesForAuthorization()">
-            &#9733; Courses authorization
+            &#9733; Autorizacija kurseva
           </p>
 
           <p id="adminEl2" onclick="showUsersForAuthorization()">
-            &#9733; Admin authorization
+            &#9733; Autorizacija admina
           </p>
         </div>
       </div>
@@ -83,11 +85,11 @@
       <div class="modal" id="myModal" style="display: none">
         <div class="modal-content">
           <div class="modal-header1" id="modalHeader">
-            <h1 class="modal-title fs-5" id="modalTitle">TITLE</h1>
-            <p id="modalSubtitle">SUBTITLE</p>
+            <h1 class="modal-title fs-5" id="modalTitle"></h1>
+            <p id="modalSubtitle"></p>
           </div>
-          <div class="modal-body" id="modalBody">TIJELO MODALA</div>
-          <div class="modal-footer" id="modalFooterButtons">FOOTER DUGMAD</div>
+          <div class="modal-body" id="modalBody"></div>
+          <div class="modal-footer" id="modalFooterButtons"></div>
         </div>
       </div>
 
@@ -95,14 +97,14 @@
         <!-- Modal content -->
         <div class="modal-content1">
           <span class="close1">&times;</span><br />
-          <p>Are you sure you want to enroll in the course?</p>
+          <p>Jeste li sigurni da želite da se upišete na ovaj kurs?</p>
           <br />
           <button
             id="enrollBtn"
             class="popularCourse1"
             onclick="confirmEnroll()"
           >
-            Enroll
+            Upiši se
           </button>
         </div>
       </div>

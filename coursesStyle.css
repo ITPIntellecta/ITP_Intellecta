@@ -337,21 +337,13 @@ footer {
   background-image: url("brightbl.jpg");
   background-size: 100% 150%;
   background-position: center;
-  /* height: 200pt; */
-  /* width: 300pt; */
   width: 100%;
   height: 100%;
-  /* margin-right: 5%; */
-  /* margin-top: 3%; */
-  /* margin-bottom: 3%; */
   margin: 0;
   position: relative;
-  /* display: flex;
-  flex-direction: column;
-  */
+
   grid-row: 1;
   border-radius: 15pt;
-  /* z-index: 500; */
   box-sizing: border-box;
 
   padding: 10px;
@@ -361,8 +353,7 @@ footer {
 }
 
 .notapproved {
-  background-image: url(brightblgrayscale.png);
-  /* background-color: #638c8f89; */
+  filter: hue-rotate(45deg);
   border: 2px solid black;
 }
 
@@ -495,14 +486,11 @@ footer {
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.4);
   padding-top: 7%;
-  /* place-items: center; */
 }
 
 .modal-content {
   background-color: #fefefebe;
   margin: auto;
-
-  /* padding: 20px; */
   border: 1px solid #888;
   height: auto;
   width: 50%;
@@ -529,8 +517,6 @@ footer {
 }
 
 .modal-footer {
-  /* backdrop-filter: blur(10px); */
-
   padding: 1rem;
   border-top: 1px solid transparent;
   background-color: transparent;

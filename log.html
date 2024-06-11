@@ -17,13 +17,11 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style1.css" />
-    <!-- <link rel="stylesheet" href="style.css" /> -->
 
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js" asp-append-version="true"></script>
     <script>
       if (localStorage.getItem("jwtToken")) {
-        // Ako postoji token, preusmeri na index.html
         window.location.href = "index.html";
       }
     </script>
@@ -38,7 +36,7 @@
       </div>
       <img src="logo.png" alt="Logo" class="logo" />
       <div class="content">
-        <h3 class="h3">Log In</h3>
+        <h3 class="h3">Prijavite se</h3>
         <div class="card">
           <form onsubmit="logUser(event)">
             <div class="form-group">
@@ -54,27 +52,26 @@
               <input
                 type="password"
                 class="form-style"
-                placeholder="Password"
+                placeholder="Lozinka"
                 id="password"
               />
               <i class="bi bi-eye-slash input-icon"></i>
             </div>
             <div class="form-group-btn">
-              <input type="submit" class="btn" value="Log In" id="login" />
-              <i class="bi bi-box-arrow-in-left input-icon"></i>
-            </div>
-            <div class="form-group-btn" style="display: none" id="signup">
               <input
-                type="button"
+                type="submit"
                 class="btn"
-                value="Go to Registration"
-                onclick="redirectToPage('reg.html')"
+                value="Prijavite se"
+                id="login"
               />
               <i class="bi bi-box-arrow-in-left input-icon"></i>
             </div>
+            <div class="form-group" style="display: none" id="signup">
+              Ne postoji nalog kreiran sa datom email adresom!
+            </div>
             <div class="form-group">
-              Don't have an account? &nbsp;
-              <a href="reg.html" class="signuplink">Sign up!</a>
+              Nemate nalog? &nbsp;
+              <a href="reg.html" class="signuplink">Registrujte se!</a>
             </div>
           </form>
         </div>
