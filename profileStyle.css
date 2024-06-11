@@ -122,20 +122,23 @@ aside.left {
   width: 250px;
   height: 250px;
 }
-aside.rright {
+
+/*aside.rright { */
+.rright {
   width: 45%;
   height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fff2d837;
-  backdrop-filter: blur(5px);
-  border-radius: 16px;
-  border: 1px solid #113946;
+  background-color: #f4e7d91f;
+  backdrop-filter: blur(1px);
+  border-radius: 16pt;
+  border: 1px solid #11394661;
   /* margin-left: 10px; */
   box-sizing: border-box;
   color: #113946;
+  position: relative;
 }
 
 .user,
@@ -162,7 +165,7 @@ aside.rright {
   background-color: #11394695;
   backdrop-filter: blur(7px);
   height: 100vh;
-  width: 15%;
+  width: 20%;
   top: 0%;
   padding: 5% 3%;
   color: #ead7bb;
@@ -211,6 +214,9 @@ aside.rright {
     width: 100%; /* Promeniti širinu bočnog menija za telefone */
     padding: 10% 5%; /* Povećati padding bočnog menija za telefone */
   }
+  .show-menu {
+    display: none;
+  }
 }
 
 /* Dodati media query za veličinu ekrana između 768px i 1200px (za laptop) */
@@ -236,4 +242,45 @@ aside.rright {
     width: 15%; /* Vratiti širinu bočnog menija za laptop */
     padding: 5% 3%; /* Vratiti padding bočnog menija za laptop */
   }
+}
+
+/* novo */
+.circle {
+  width: 4rem; /* širina kruga */
+  height: 4rem; /* visina kruga */
+  border-radius: 50%; /* zaobljenost ivica da formira krug */
+  overflow: hidden; /* sakrivanje delova slike koji prelaze granice kruga */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #11394660;
+}
+
+.circle img {
+  width: 100%; /* slika će se prilagoditi širini kruga */
+  height: 100%; /* slika će se prilagoditi visini kruga */
+  object-fit: cover; /* osigurava da slika pokrije ceo krug */
+}
+
+.status-circle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: 10px;
+}
+
+.user-data {
+  background-image: url(profil.jpg);
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(5px);
+  border-radius: 0 0 16pt 16pt;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }

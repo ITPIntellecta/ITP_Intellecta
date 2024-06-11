@@ -245,6 +245,8 @@ function inputInfo() {
       let emailElement = document.getElementById("email");
       let lnameElement = document.getElementById("lastname");
       let usertypeElement = document.getElementById("usertype");
+      let usertypeImg = document.getElementById("profile-img");
+
       let titleElement = document.getElementById("title");
       let dateElement = document.getElementById("birth");
 
@@ -254,6 +256,9 @@ function inputInfo() {
       let month = date.getMonth() + 1;
       let day = date.getDate();
       let formattedDate = `${day}-${month}-${year}`;
+
+      if (type == "Admin") usertypeImg.src = "admin.png";
+      else usertypeImg.src = "user1.png";
 
       fnameElement.innerHTML = fname;
       lnameElement.innerHTML = lname;

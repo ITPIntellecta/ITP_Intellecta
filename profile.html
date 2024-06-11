@@ -43,35 +43,60 @@
       <img src="logo.png" alt="Logo" class="logo" />
 
       <div class="right-menu show-menu" id="right-menu">
-        <p onclick="changeToCourses('Everything')">&#9733; All courses</p>
+        <p onclick="changeToCourses('Everything')">Svi kursevi</p>
 
-        <p onclick="changeToCourses('myLearning')">&#9733; My learning</p>
+        <p onclick="changeToCourses('myLearning')">Kursevi koje slušam</p>
 
-        <p onclick="changeToCourses('myCourses')">&#9733; My courses</p>
+        <p onclick="changeToCourses('myCourses')">Moji kursevi</p>
 
         <div class="admin-menu">
           <p id="adminEl1" onclick="showCoursesForAuthorization()">
-            &#9733; Courses authorization
+            Autorizacija kurseva
           </p>
 
           <p id="adminEl2" onclick="showUsersForAuthorization()">
-            &#9733; Admin authorization
+            Autorizacija admina
           </p>
         </div>
       </div>
 
       <div class="user-content">
-        <aside class="left">
+        <!-- <aside class="left">
           <img src="user.png" alt="user" class="user-photo" />
-        </aside>
-        <aside class="rright">
-          <p class="info" id="usertype">User - type</p>
+          </aside>
+          <aside class="rright">
+          <p class="info" id="usertype">User - type</p>     
           <p class="info" id="firstname">First Name</p>
           <p class="info" id="lastname">Last Name</p>
           <p class="info" id="birth">Date of birth</p>
           <p class="info" id="title">Title</p>
-          <p class="info" id="email">Email</p>
-        </aside>
+          <p class="info" id="email">Email</p>        
+        </aside>-->
+        <div class="rright">
+          <div class="status-circle">
+            <div
+              class="circle"
+              style="display: inline-block; margin-right: 10px"
+            >
+              <img alt="tip-slika" id="profile-img" />
+            </div>
+            <p
+              class="info"
+              id="usertype"
+              style="display: inline-block; margin: 0"
+            >
+              User - type
+            </p>
+          </div>
+
+          <div class="user-data">
+            <p class="info" id="firstname">First Name</p>
+            <p class="info" id="lastname">Last Name</p>
+            <p class="info" id="birth">Date of birth</p>
+            <p class="info" id="title">Title</p>
+            <p class="info" id="email">Email</p>
+          </div>
+        </div>
       </div>
     </div>
     <script src="script.js"></script>

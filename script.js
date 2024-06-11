@@ -2,14 +2,60 @@ function goToProfile() {
   location = "profile.html";
 }
 
+// function scrollR() {
+//   const el = document.getElementById("scroll");
+//   el.scrollBy({ left: 100, behavior: "smooth" });
+// }
+
+// function scrollL() {
+//   const el = document.getElementById("scroll");
+//   el.scrollBy({ left: -100, behavior: "smooth" });
+// }
+
+function smoothScroll(element, target, duration) {
+  const start = element.scrollLeft;
+  const change = target - start;
+  const increment = 20;
+
+  function animate(elapsedTime) {
+    elapsedTime += increment;
+    const position = easeInOut(elapsedTime, start, change, duration);
+    element.scrollLeft = position;
+    if (elapsedTime < duration) {
+      setTimeout(function () {
+        animate(elapsedTime);
+      }, increment);
+    }
+  }
+
+  animate(0);
+}
+
+function easeInOut(t, b, c, d) {
+  t /= d / 2;
+  if (t < 1) return (c / 2) * t * t + b;
+  t--;
+  return (-c / 2) * (t * (t - 2) - 1) + b;
+}
+
 function scrollR() {
   const el = document.getElementById("scroll");
-  el.scrollBy({ left: 100, behavior: "smooth" });
+  const newScrollLeft = el.scrollLeft + 100;
+  if (newScrollLeft + el.clientWidth >= el.scrollWidth) {
+    smoothScroll(el, 0, 500);
+  } else {
+    smoothScroll(el, newScrollLeft, 500);
+  }
 }
 
 function scrollL() {
   const el = document.getElementById("scroll");
-  el.scrollBy({ left: -100, behavior: "smooth" });
+  const newScrollLeft = el.scrollLeft - 100;
+  if (newScrollLeft <= 0) {
+    smoothScroll(el, el.scrollWidth - el.clientWidth, 500);
+  } else {
+    smoothScroll(el, newScrollLeft, 500);
+  }
 }
 
 document.addEventListener("click", function (event) {
@@ -1294,7 +1340,7 @@ function loadPopularCourses() {
 
                 container.innerHTML += `<div class="item1 mmmm" id='${id}'>
                 <p class="categoryCard">${category}</p>
-          <h4 class="courseCardTitle">${title}</h4><h5>${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">Pogledaj kurs</button>
+          <h4 class="courseCardTitle">${title}</h4><h5 class="courseCardSubtitle">${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">Pogledaj kurs</button>
           </div>`;
 
                 let e = document.getElementById(`${id}`);

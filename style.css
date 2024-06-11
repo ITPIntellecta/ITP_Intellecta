@@ -280,7 +280,7 @@ p.name {
   box-sizing: border-box;
   padding: 10px;
   place-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 .buttons {
   padding: 0;
@@ -579,7 +579,7 @@ p.name {
   background-color: #11394695;
   backdrop-filter: blur(7px);
   height: 100vh;
-  width: 15%;
+  width: 20%;
   top: 0%;
   /* padding-top: 5%; */
   color: #ead7bb;
@@ -1457,4 +1457,70 @@ progress[value]::-webkit-progress-value {
 #modalHeader {
   background-size: 100% 250%;
   background-position: center;
+}
+
+.courseCardTitle,
+.courseCardSubtitle {
+  text-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  /* .right {
+    position: static;
+    margin-top: 10px;
+  } */
+
+  .nav-menu {
+    font-size: initial;
+    padding: 5px 10px;
+  }
+  .show-menu {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .app-name {
+    font-size: 16pt;
+  }
+
+  .logo {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+  }
+
+  .right-menu {
+    width: 50%;
+    padding: 10%;
+    height: 100vh;
+    z-index: 41;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+  }
+
+  .right-menu p {
+    font-size: 16px;
+  }
+
+  .courses-list {
+    padding: 2%;
+    margin-bottom: 7%;
+  }
+
+  .card {
+    margin-bottom: 20px;
+  }
+
+  ::selection {
+    background-color: #bca37f;
+    color: #113946;
+  }
 }
