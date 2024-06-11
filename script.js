@@ -667,7 +667,7 @@ function loadMyLearning() {
                   <p class="card-text">
                   ${highlights}
                   </p>
-                  <button class="popularCourse" onclick="loadVideo(${id})">Pogledaj kurs</button>
+                  <button class="popularCourse" onclick="loadVideo(${id}, false)">Pogledaj kurs</button>
                
               </div>
             </div>`;
@@ -771,7 +771,7 @@ function loadMyCourses() {
                   ${highlights}
                   </p>
                   <div class="authButtons">
-                  <button class="popularCourse authButton" onclick="loadVideo(${id})">Pogledaj kurs</button>  
+                  <button class="popularCourse authButton" onclick="loadVideo(${id}, false)">Pogledaj kurs</button>  
                  <button  class="popularCourse authButton" onclick="deleteCourse(${id})">Obriši kurs</button>
 
                  </div>
@@ -819,10 +819,11 @@ function loadCoursesForAuth() {
           let highlights = course.highlights;
           let id = course.courseId;
           const div = document.getElementsByClassName("row")[0];
+          const boolAdmin = true;
 
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" style="margin-bottom:2rem";>
-                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo(${id})">${title}</h5>
+                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo('${id}', '${boolAdmin}')">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
@@ -898,6 +899,8 @@ function loadVideoPage() {
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("parametar");
+  const admin = urlParams.get("admin");
+
   let cccourse;
 
   cccourse = id;
@@ -1009,7 +1012,9 @@ function loadVideoPage() {
                 })
                 .then((data) => {
                   userCurrentId = data.data.id;
-                  if (userCurrentId != creatorId) {
+                  // console.log(admin);
+
+                  if (userCurrentId !== creatorId && admin !== true) {
                     fetch(
                       `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
                     )
@@ -1024,7 +1029,17 @@ function loadVideoPage() {
                       .catch((error) => {
                         console.error("There was an error:", error);
                       });
-                  } else {
+                  } else if (userCurrentId === creatorId) {
+                    var elements = document.querySelectorAll(".labelCheckbox");
+                    Array.from(elements).forEach((element) => {
+                      element.style.display = "none";
+                    });
+                    var elementsDivs = document.querySelectorAll(".lesson");
+                    Array.from(elementsDivs).forEach((element1) => {
+                      element1.style.gridTemplateColumns = "100%";
+                    });
+                  } else if (admin === true) {
+                    console.log(admin);
                     var elements = document.querySelectorAll(".labelCheckbox");
                     Array.from(elements).forEach((element) => {
                       element.style.display = "none";
@@ -1090,7 +1105,11 @@ async function checkAllWeeks(
   let completedWeeks = 0;
   const promises = [];
 
-  if (userCurrentIdd != creatorIdd) {
+  const urlParams = new URLSearchParams(window.location.search);
+
+  const admin = urlParams.get("admin");
+
+  if (userCurrentIdd !== creatorIdd && admin !== true) {
     fetch("/api/course/user", {
       method: "GET",
     })
@@ -1231,8 +1250,8 @@ function completeLesson(
   }
 }
 
-function loadVideo(id) {
-  location.href = "course.html?parametar=" + id;
+function loadVideo(id, admin) {
+  location.href = "course.html?parametar=" + id + "&admin=" + admin;
 }
 
 function showFile(name) {

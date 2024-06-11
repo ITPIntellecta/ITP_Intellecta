@@ -541,6 +541,8 @@ function openReview() {
   const urlParams = new URLSearchParams(window.location.search);
 
   const id = urlParams.get("parametar");
+
+  const admin = urlParams.get("admin");
   let cccourse;
   cccourse = id;
   let creatorId;
@@ -601,7 +603,11 @@ function openReview() {
   `;
 
           userCurrentId = data.data.id;
-          if (userCurrentId == creatorId) {
+          if (userCurrentId === creatorId || admin === true) {
+            console.log(userCurrentId);
+            console.log(creatorId);
+            console.log(admin);
+
             var el = document.getElementById("addreviewbutton");
             el.style.display = "none";
           }
