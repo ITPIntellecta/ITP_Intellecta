@@ -399,7 +399,7 @@ function courseInfo(courseId, userId) {
 
       switch (category) {
         case "Inženjerstvo":
-          background = "science-eng.jpg";
+          background = "eng.png";
           break;
         case "Poslovni razvoj":
           background = "business.jpg";
@@ -411,16 +411,22 @@ function courseInfo(courseId, userId) {
           background = "fitness.jpg";
           break;
         case "Jezici":
-          background = "lang.jpg";
+          background = "lang.png";
           break;
-        case "Nauka":
+        case "Prirodne nauke":
           background = "science-eng.jpg";
           break;
+        case "Društvene nauke":
+          background = "soc2.jpg";
+          break;
         case "Lični razvoj":
-          background = "fitness.jpg";
+          background = "person.png";
           break;
         case "Nauka o podacima":
           background = "data1jpg.jpg";
+          break;
+        case "Edukacija i podučavanje":
+          background = "lang.png";
           break;
         case "Pravne studije i pravo":
           background = "law.webp";
@@ -428,8 +434,17 @@ function courseInfo(courseId, userId) {
         case "Psihologija i savjetovanje":
           background = "medicine.jpg";
           break;
+        case "Umjetnost":
+          background = "art.jpg";
+          break;
+        case "Sport":
+          background = "sport.jpg";
+          break;
         case "Zdravstvo i medicina":
           background = "medicine.jpg";
+          break;
+        case "Modni dizajn":
+          background = "moda.jpg";
           break;
         default:
           background = "other.jpg";
