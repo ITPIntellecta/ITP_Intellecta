@@ -29,7 +29,7 @@ namespace Services
         {
         
                 var tokenHandler = new JwtSecurityTokenHandler();
-                var token = tokenHandler.ReadJwtToken(_httpContextAccessor.HttpContext!.Request.Cookies["Token"]);
+                var token = tokenHandler.ReadJwtToken(_httpContextAccessor!.HttpContext!.Request.Cookies["Token"]);
 
                 var userIdClaim = token.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
                 var userId=-1;

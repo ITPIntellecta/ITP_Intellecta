@@ -552,8 +552,17 @@ function loadCourses() {
                     case "Psihologija i savjetovanje":
                       background = "medicine.jpg";
                       break;
+                    case "Umjetnost":
+                      background = "art.jpg";
+                      break;
+                    case "Sport":
+                      background = "sport.jpg";
+                      break;
                     case "Zdravstvo i medicina":
                       background = "medicine.jpg";
+                      break;
+                    case "Modni dizajn":
+                      background = "moda.jpg";
                       break;
                     default:
                       background = "other.jpg";
@@ -669,14 +678,22 @@ function loadMyLearning() {
                 case "Psihologija i savjetovanje":
                   background = "medicine.jpg";
                   break;
+                case "Umjetnost":
+                  background = "art.jpg";
+                  break;
+                case "Sport":
+                  background = "sport.jpg";
+                  break;
                 case "Zdravstvo i medicina":
                   background = "medicine.jpg";
+                  break;
+                case "Modni dizajn":
+                  background = "moda.jpg";
                   break;
                 default:
                   background = "other.jpg";
                   break;
               }
-
               const div = document.getElementsByClassName("row")[0];
               div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" id='${id}' style="margin-bottom:2rem";>
@@ -775,14 +792,22 @@ function loadMyCourses() {
                   case "Psihologija i savjetovanje":
                     background = "medicine.jpg";
                     break;
+                  case "Umjetnost":
+                    background = "art.jpg";
+                    break;
+                  case "Sport":
+                    background = "sport.jpg";
+                    break;
                   case "Zdravstvo i medicina":
                     background = "medicine.jpg";
+                    break;
+                  case "Modni dizajn":
+                    background = "moda.jpg";
                     break;
                   default:
                     background = "other.jpg";
                     break;
                 }
-
                 const div = document.getElementsByClassName("row")[0];
                 div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" id='${id}' style="margin-bottom:2rem">
@@ -1325,7 +1350,6 @@ function loadPopularCourses() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         userCurrentId = data.data.id;
         fetch("/api/course/getall")
           .then((response) => response.json())
@@ -1378,14 +1402,22 @@ function loadPopularCourses() {
                   case "Psihologija i savjetovanje":
                     background = "medicine.jpg";
                     break;
+                  case "Umjetnost":
+                    background = "art.jpg";
+                    break;
+                  case "Sport":
+                    background = "sport.jpg";
+                    break;
                   case "Zdravstvo i medicina":
                     background = "medicine.jpg";
+                    break;
+                  case "Modni dizajn":
+                    background = "moda.jpg";
                     break;
                   default:
                     background = "other.jpg";
                     break;
                 }
-
                 container.innerHTML += `<div class="item1 mmmm" id='${id}'>
                 <p class="categoryCard">${category}</p>
           <h4 class="courseCardTitle">${title}</h4><h5 class="courseCardSubtitle">${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">Pogledaj kurs</button>
@@ -1459,8 +1491,17 @@ function loadPopularCourses() {
               case "Psihologija i savjetovanje":
                 background = "medicine.jpg";
                 break;
+              case "Umjetnost":
+                background = "art.jpg";
+                break;
+              case "Sport":
+                background = "sport.jpg";
+                break;
               case "Zdravstvo i medicina":
                 background = "medicine.jpg";
+                break;
+              case "Modni dizajn":
+                background = "moda.jpg";
                 break;
               default:
                 background = "other.jpg";

@@ -437,7 +437,10 @@ p.name {
 
 .card-body {
   position: relative;
-  background-color: #ead7bb92;
+  /* background-color: #ead7bb92;
+   */
+  background-image: url(notes.jpg);
+  background-size: contain;
   border: 2px solid #113946;
   border-radius: 0 0 15pt 15pt;
 }
@@ -482,6 +485,13 @@ p.name {
 .card-text {
   height: 70px;
   vertical-align: middle;
+  /* font-weight: 500; */
+  background-color: #ead7bb92;
+  backdrop-filter: blur(1px);
+  border-radius: 15pt;
+  /* line-height: 150%; */
+  /* padding: 5px 10px; */
+  text-wrap: wrap;
 }
 
 /*-------------------review cards for one course-------------------*/
@@ -501,7 +511,9 @@ p.name {
 }
 .cardReview-body {
   position: relative;
-  background-color: #ead7bb92;
+  /* background-color: #ead7bb92; */
+  background-image: url(notes.jpg);
+  background-size: contain;
   border: 2px solid #113946aa;
   border-radius: 0 0 15pt 15pt;
 }
@@ -551,6 +563,10 @@ p.name {
   vertical-align: middle;
   padding: 0 10%;
   text-align: center;
+  background-color: #ead7bb92;
+  backdrop-filter: blur(1px);
+  border-radius: 15pt;
+  line-height: 150%;
 }
 
 /*---------------PROFILE-----------------*/
