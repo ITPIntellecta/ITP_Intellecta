@@ -117,7 +117,7 @@ body {
   color: #113946;
 }
 .card-text {
-  color: #bca37f;
+  color: #564732;
 }
 .btn {
   background-color: #113946;
@@ -624,4 +624,8 @@ footer {
 #modalHeader {
   background-size: 100% 250%;
   background-position: center;
+}
+
+#authCourseTitle:hover {
+  cursor: pointer;
 }

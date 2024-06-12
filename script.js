@@ -59,31 +59,35 @@ function scrollL() {
 }
 
 document.addEventListener("click", function (event) {
-  const targetElement = document.getElementById("right-menu");
-  const tag = document.getElementById("nav-menu");
+  if (localStorage.getItem("jwtToken") != null) {
+    const targetElement = document.getElementById("right-menu");
+    const tag = document.getElementById("nav-menu");
 
-  // Provera da li je kliknuti element različit od ciljnog elementa
-  if (event.target == targetElement) {
-    targetElement.classList.remove("show-menu");
-  } else if (event.target == tag) {
-    targetElement.classList.toggle("show-menu");
-  } else targetElement.classList.add("show-menu");
+    // Provera da li je kliknuti element različit od ciljnog elementa
+    if (event.target == targetElement) {
+      targetElement.classList.remove("show-menu");
+    } else if (event.target == tag) {
+      targetElement.classList.toggle("show-menu");
+    } else targetElement.classList.add("show-menu");
 
-  const targetEvr = document.getElementById("dropdown-list");
-  const header = document.getElementById("dropdown-header");
-  const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
-  const categoryList = document.getElementById("categoryName");
+    const targetEvr = document.getElementById("dropdown-list");
+    const header = document.getElementById("dropdown-header");
+    const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
+    const categoryList = document.getElementById("categoryName");
 
-  if (targetEvr != null) {
-    if (event.target != header && event.target != categoryList) {
-      targetEvr.classList.remove("show-list");
-      arrowDown.classList.remove("rotate-up");
-    } else {
-      targetEvr.classList.toggle("show-list");
+    if (targetEvr != null) {
+      if (event.target != header && event.target != categoryList) {
+        targetEvr.classList.remove("show-list");
+        arrowDown.classList.remove("rotate-up");
+      } else {
+        targetEvr.classList.toggle("show-list");
 
-      const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
-      arrowDown.classList.toggle("rotate-up");
+        const arrowDown = document.getElementsByClassName("span-arrow-down")[0];
+        arrowDown.classList.toggle("rotate-up");
+      }
     }
+  } else {
+    window.location = "log.html";
   }
 });
 
@@ -519,8 +523,11 @@ function loadCourses() {
                     case "Jezici":
                       background = "lang.jpg";
                       break;
-                    case "Nauka":
+                    case "Prirodne nauke":
                       background = "science-eng.jpg";
+                      break;
+                    case "Društvene nauke":
+                      background = "soc2.jpg";
                       break;
                     case "Lični razvoj":
                       background = "fitness.jpg";
@@ -633,8 +640,11 @@ function loadMyLearning() {
                 case "Jezici":
                   background = "lang.jpg";
                   break;
-                case "Nauka":
+                case "Prirodne nauke":
                   background = "science-eng.jpg";
+                  break;
+                case "Društvene nauke":
+                  background = "soc2.jpg";
                   break;
                 case "Lični razvoj":
                   background = "fitness.jpg";
@@ -735,8 +745,11 @@ function loadMyCourses() {
                   case "Jezici":
                     background = "lang.jpg";
                     break;
-                  case "Nauka":
+                  case "Prirodne nauke":
                     background = "science-eng.jpg";
+                    break;
+                  case "Društvene nauke":
+                    background = "soc2.jpg";
                     break;
                   case "Lični razvoj":
                     background = "fitness.jpg";
@@ -822,8 +835,8 @@ function loadCoursesForAuth() {
           const boolAdmin = true;
 
           div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
-              <div class="item mmm" style="margin-bottom:2rem";>
-                  <h5 class="courseCardTitle loadVideo" onclick="loadVideo('${id}', '${boolAdmin}')">${title}</h5>
+              <div class="item mmm" id='${id}' style="margin-bottom:2rem; background-image:url('notyetapproved.jpg')";>
+                  <h5 class="courseCardTitle loadVideo" id="authCourseTitle" onclick="loadVideo('${id}', '${boolAdmin}')">${title}</h5>
                   <p class="card-text">
                   ${highlights}
                   </p>
@@ -1012,9 +1025,11 @@ function loadVideoPage() {
                 })
                 .then((data) => {
                   userCurrentId = data.data.id;
-                  // console.log(admin);
-
-                  if (userCurrentId !== creatorId && admin !== true) {
+                  console.log(admin);
+                  console.log(5 > 4);
+                  console.log("true");
+                  if (userCurrentId != creatorId && admin != "true") {
+                    console.log("tu");
                     fetch(
                       `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
                     )
@@ -1029,7 +1044,16 @@ function loadVideoPage() {
                       .catch((error) => {
                         console.error("There was an error:", error);
                       });
-                  } else if (userCurrentId === creatorId) {
+                    let sendEmailBool = false;
+                    checkAllWeeks(
+                      cccourse,
+                      durationInWeeks,
+                      title,
+                      userCurrentId,
+                      creatorId,
+                      sendEmailBool
+                    );
+                  } else if (userCurrentId == creatorId) {
                     var elements = document.querySelectorAll(".labelCheckbox");
                     Array.from(elements).forEach((element) => {
                       element.style.display = "none";
@@ -1038,7 +1062,7 @@ function loadVideoPage() {
                     Array.from(elementsDivs).forEach((element1) => {
                       element1.style.gridTemplateColumns = "100%";
                     });
-                  } else if (admin === true) {
+                  } else if (admin == "true") {
                     console.log(admin);
                     var elements = document.querySelectorAll(".labelCheckbox");
                     Array.from(elements).forEach((element) => {
@@ -1049,15 +1073,6 @@ function loadVideoPage() {
                       element1.style.gridTemplateColumns = "100%";
                     });
                   }
-                  let sendEmailBool = false;
-                  checkAllWeeks(
-                    cccourse,
-                    durationInWeeks,
-                    title,
-                    userCurrentId,
-                    creatorId,
-                    sendEmailBool
-                  );
                 })
                 .catch((error) => {
                   console.error(
@@ -1109,7 +1124,7 @@ async function checkAllWeeks(
 
   const admin = urlParams.get("admin");
 
-  if (userCurrentIdd !== creatorIdd && admin !== true) {
+  if (userCurrentIdd != creatorIdd && admin != "true") {
     fetch("/api/course/user", {
       method: "GET",
     })
@@ -1295,11 +1310,12 @@ function loadPopularCourses() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          // throw new Error("Network response was not ok");
         }
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         userCurrentId = data.data.id;
         fetch("/api/course/getall")
           .then((response) => response.json())
@@ -1331,8 +1347,11 @@ function loadPopularCourses() {
                   case "Jezici":
                     background = "lang.jpg";
                     break;
-                  case "Nauka":
+                  case "Prirodne nauke":
                     background = "science-eng.jpg";
+                    break;
+                  case "Društvene nauke":
+                    background = "soc2.jpg";
                     break;
                   case "Lični razvoj":
                     background = "fitness.jpg";
@@ -1376,6 +1395,80 @@ function loadPopularCourses() {
           "There has been a problem with your fetch operation:",
           error
         );
+      });
+  } else {
+    userCurrentId = 0;
+    fetch("/api/course/getall")
+      .then((response) => response.json())
+      .then((data) => {
+        data.data.forEach((course) => {
+          if (course.approved == 1) {
+            let title = course.title;
+            let highlights = course.highlights;
+            let subtitle = course.subtitle;
+            let mark = course.courseMark;
+            let id = course.courseId;
+            let price = course.Price;
+            let category = course.category;
+            let background;
+
+            switch (category) {
+              case "Inženjerstvo":
+                background = "eng.png";
+                break;
+              case "Poslovni razvoj":
+                background = "business.jpg";
+                break;
+              case "IT i tehnologije":
+                background = "it.jpg";
+                break;
+              case "Zdravlje i fitnes":
+                background = "fitness.jpg";
+                break;
+              case "Jezici":
+                background = "lang.jpg";
+                break;
+              case "Prirodne nauke":
+                background = "science-eng.jpg";
+                break;
+              case "Društvene nauke":
+                background = "soc2.jpg";
+                break;
+              case "Lični razvoj":
+                background = "fitness.jpg";
+                break;
+              case "Nauka o podacima":
+                background = "data1jpg.jpg";
+                break;
+              case "Edukacija i podučavanje":
+                background = "lang.jpg";
+                break;
+              case "Pravne studije i pravo":
+                background = "law.webp";
+                break;
+              case "Psihologija i savjetovanje":
+                background = "medicine.jpg";
+                break;
+              case "Zdravstvo i medicina":
+                background = "medicine.jpg";
+                break;
+              default:
+                background = "other.jpg";
+                break;
+            }
+
+            container.innerHTML += `<div class="item1 mmmm" id='${id}'>
+                <p class="categoryCard">${category}</p>
+          <h4 class="courseCardTitle">${title}</h4><h5 class="courseCardSubtitle">${subtitle}</h5> <button onclick="showModal('${id}', '${userCurrentId}'); " class="popularCourse">Pogledaj kurs</button>
+          </div>`;
+
+            let e = document.getElementById(`${id}`);
+            e.style.backgroundImage = "url(" + background + ")";
+          }
+        });
+      })
+      .catch((error) => {
+        console.error("There was an error:", error);
       });
   }
 }

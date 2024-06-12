@@ -287,7 +287,7 @@ function loadUsers() {
 
           const div = document.getElementsByClassName("row")[0];
           div.innerHTML += `<div class="col-sm-6 mb-4">
-              <div class="item mmm" style="margin-bottom:2rem";>
+              <div class="item mmm" style="margin-bottom:2rem; background-image:url('authAdmin.png')";>
                 
                   <h5 class="courseCardTitle loadVideo">${name}</h5>
                   <p class="card-text">
@@ -351,9 +351,9 @@ function authorizeAdmin(userid) {
     });
 }
 function checkLocalStorage() {
-  if (localStorage.getItem("jwtToken") == null) {
-    window.location.href = "log.html";
-  }
+  // if (localStorage.getItem("jwtToken") == null) {
+  //   window.location.href = "log.html";
+  // }
 }
 
 function approveAdminMail(id) {
@@ -603,7 +603,7 @@ function openReview() {
   `;
 
           userCurrentId = data.data.id;
-          if (userCurrentId === creatorId || admin === true) {
+          if (userCurrentId === creatorId || admin === "true") {
             console.log(userCurrentId);
             console.log(creatorId);
             console.log(admin);
