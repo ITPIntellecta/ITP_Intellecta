@@ -370,6 +370,7 @@ footer {
   line-height: 150%;
   padding: 5px 10px;
   font-size: larger;
+  font-weight: 700;
 }
 .popularCourse {
   border-radius: 15pt;
@@ -628,4 +629,31 @@ footer {
 
 #authCourseTitle:hover {
   cursor: pointer;
+}
+
+.courseCardHighlight {
+  background-color: #ead7bb44;
+  backdrop-filter: blur(2px);
+  border-radius: 15pt;
+  line-height: 150%;
+  padding: 5px 10px;
+  color: #5e454b;
+  font-weight: 500;
+}
+
+.filterAdded {
+  padding: 10px;
+  font-size: 9pt;
+  font-style: italic;
+  background-color: #ead7bb44;
+  backdrop-filter: blur(10px);
+  border-radius: 15pt;
+  width: fit-content;
+  margin: auto;
+  margin-top: 1%;
+  text-align: left;
+}
+
+.filterAddedHidden {
+  display: none;
 }

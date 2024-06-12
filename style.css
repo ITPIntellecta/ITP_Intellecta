@@ -982,6 +982,12 @@ footer {
   cursor: pointer;
 }
 
+.durationInWeaks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #more-filter {
   width: 100%;
   background-color: #ead7bbaa;
@@ -997,10 +1003,29 @@ footer {
   align-items: center;
 }
 
+.filterAdded {
+  padding: 10px;
+  font-size: 9pt;
+  font-style: italic;
+  background-color: #ead7bb44;
+  backdrop-filter: blur(10px);
+  border-radius: 15pt;
+  width: fit-content;
+  margin: auto;
+  margin-top: 1%;
+  text-align: left;
+}
+
+.filterAddedHidden {
+  display: none;
+}
 .more-inp {
   padding: 0;
   margin: 0;
   text-align: center;
+  width: 50%;
+  border-radius: 10pt;
+  background-color: #ead7bb;
 }
 
 .modal-filter {
@@ -1462,6 +1487,11 @@ progress[value]::-webkit-progress-value {
 .courseCardTitle,
 .courseCardSubtitle {
   text-wrap: wrap;
+  background-color: #c0dbea63;
+  backdrop-filter: blur(2px);
+  border-radius: 15pt;
+  line-height: 150%;
+  padding: 5px 10px;
 }
 
 @media (max-width: 768px) {

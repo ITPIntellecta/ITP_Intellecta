@@ -290,7 +290,13 @@ function loadUsers() {
               <div class="item mmm" style="margin-bottom:2rem; background-image:url('authAdmin.png')";>
                 
                   <h5 class="courseCardTitle loadVideo">${name}</h5>
-                  <p class="card-text">
+                  <p class="card-text" style="background-color: #c0dbea63;
+                    backdrop-filter: blur(2px);
+                    border-radius: 15pt;
+                    line-height: 150%;
+                    padding: 5px 10px;
+                    font-weight:700;
+                    color:#113946 ">
                   ${email}
                   </p>
                   <div class="authButtons">

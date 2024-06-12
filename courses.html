@@ -20,9 +20,7 @@
     <link rel="icon" href="logo-icon.png" type="image/jpeg" />
     <script src="script1.js"></script>
   </head>
-  <body
-    onload="displayName(); loadCourses(); checkLocalStorage(); addDeleteButton()"
-  >
+  <body onload="displayName(); loadCourses(); checkLocalStorage();">
     <div class="menu">
       <nav class="nav">
         <img
@@ -69,6 +67,8 @@
           </p>
         </div>
       </div>
+
+      <div class="filterAdded filterAddedHidden"></div>
 
       <!-- KURSEVI -->
       <div class="courses-list">

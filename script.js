@@ -402,9 +402,10 @@ function sendM() {
 function filteredCategory(courses, category) {
   return courses.filter((course) => {
     if (
-      category != "Everything" &&
+      category != "Sve" &&
       category != "myLearning" &&
-      category != null
+      category != null &&
+      category != "Everything"
     ) {
       return course.category === category;
     } else {
@@ -484,13 +485,20 @@ function loadCourses() {
               if (text != null) {
                 filteredCourses = filteredSubTitle(filteredCourses, text);
               }
-              if (duration != null) {
+              if (duration != null && duration != 0) {
                 filteredCourses = filteredDuration(filteredCourses, duration);
               }
               if (min != null && max != null) {
                 filteredCourses = filteredPrice(filteredCourses, min, max);
               }
-
+              if (min != null) {
+                document
+                  .getElementsByClassName("filterAdded")[0]
+                  .classList.remove("filterAddedHidden");
+                document.getElementsByClassName(
+                  "filterAdded"
+                )[0].innerHTML = `Kategorija: ${category}; Tekst pretrage: ${text}; Trajanje u sedmicama: ${duration}; Cijena: ${min}-${max}`;
+              }
               filteredCourses.forEach((course) => {
                 isAdmin = false;
                 if (course.approved == 1) {
@@ -521,7 +529,7 @@ function loadCourses() {
                       background = "fitness.jpg";
                       break;
                     case "Jezici":
-                      background = "lang.jpg";
+                      background = "lang.png";
                       break;
                     case "Prirodne nauke":
                       background = "science-eng.jpg";
@@ -530,13 +538,13 @@ function loadCourses() {
                       background = "soc2.jpg";
                       break;
                     case "Lični razvoj":
-                      background = "fitness.jpg";
+                      background = "person.png";
                       break;
                     case "Nauka o podacima":
                       background = "data1jpg.jpg";
                       break;
                     case "Edukacija i podučavanje":
-                      background = "lang.jpg";
+                      background = "lang.png";
                       break;
                     case "Pravne studije i pravo":
                       background = "law.webp";
@@ -557,7 +565,7 @@ function loadCourses() {
               <div class="item mmm" id='${id}' style="margin-bottom:2rem";>
                   <p class="categoryCard">${category}</p>
                   <h5 class="courseCardTitle loadVideo" >${title}</h5>
-                  <p class="card-text">
+                  <p class="card-text courseCardHighlight">
                   ${highlights}
                   </p>
                   <div class="authButtons" id="authBtns${id}">
@@ -638,7 +646,7 @@ function loadMyLearning() {
                   background = "fitness.jpg";
                   break;
                 case "Jezici":
-                  background = "lang.jpg";
+                  background = "lang.png";
                   break;
                 case "Prirodne nauke":
                   background = "science-eng.jpg";
@@ -647,13 +655,13 @@ function loadMyLearning() {
                   background = "soc2.jpg";
                   break;
                 case "Lični razvoj":
-                  background = "fitness.jpg";
+                  background = "person.png";
                   break;
                 case "Nauka o podacima":
                   background = "data1jpg.jpg";
                   break;
                 case "Edukacija i podučavanje":
-                  background = "lang.jpg";
+                  background = "lang.png";
                   break;
                 case "Pravne studije i pravo":
                   background = "law.webp";
@@ -672,12 +680,15 @@ function loadMyLearning() {
               const div = document.getElementsByClassName("row")[0];
               div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" id='${id}' style="margin-bottom:2rem";>
+                  <p class="categoryCard">${category}</p>
                 
                   <h5 class="courseCardTitle loadVideo">${title}</h5>
-                  <p class="card-text">
+                  <p class="card-text courseCardHighlight">
                   ${highlights}
                   </p>
+                  <div class="authButtons" >
                   <button class="popularCourse" onclick="loadVideo(${id}, false)">Pogledaj kurs</button>
+                 </div>
                
               </div>
             </div>`;
@@ -703,8 +714,6 @@ function loadMyLearning() {
 
 function loadMyCourses() {
   if (localStorage.getItem("jwtToken") != null) {
-    console.log("ISPIS ISPIS");
-
     fetch("/api/course/user", {
       method: "GET",
     })
@@ -743,7 +752,7 @@ function loadMyCourses() {
                     background = "fitness.jpg";
                     break;
                   case "Jezici":
-                    background = "lang.jpg";
+                    background = "lang.png";
                     break;
                   case "Prirodne nauke":
                     background = "science-eng.jpg";
@@ -752,13 +761,13 @@ function loadMyCourses() {
                     background = "soc2.jpg";
                     break;
                   case "Lični razvoj":
-                    background = "fitness.jpg";
+                    background = "person.png";
                     break;
                   case "Nauka o podacima":
                     background = "data1jpg.jpg";
                     break;
                   case "Edukacija i podučavanje":
-                    background = "lang.jpg";
+                    background = "lang.png";
                     break;
                   case "Pravne studije i pravo":
                     background = "law.webp";
@@ -778,9 +787,10 @@ function loadMyCourses() {
                 div.innerHTML += `<div class="col-sm-6 mb-3 mb-sm-0">
               <div class="item mmm" id='${id}' style="margin-bottom:2rem">
               
+                  <p class="categoryCard">${category}</p>
 
                   <h5 class="courseCardTitle loadVideo">${title}</h5>
-                  <p class="card-text" id="pId${id}">
+                  <p class="card-text courseCardHighlight" id="pId${id}">
                   ${highlights}
                   </p>
                   <div class="authButtons">
@@ -1345,7 +1355,7 @@ function loadPopularCourses() {
                     background = "fitness.jpg";
                     break;
                   case "Jezici":
-                    background = "lang.jpg";
+                    background = "lang.png";
                     break;
                   case "Prirodne nauke":
                     background = "science-eng.jpg";
@@ -1354,13 +1364,13 @@ function loadPopularCourses() {
                     background = "soc2.jpg";
                     break;
                   case "Lični razvoj":
-                    background = "fitness.jpg";
+                    background = "person.png";
                     break;
                   case "Nauka o podacima":
                     background = "data1jpg.jpg";
                     break;
                   case "Edukacija i podučavanje":
-                    background = "lang.jpg";
+                    background = "lang.png";
                     break;
                   case "Pravne studije i pravo":
                     background = "law.webp";
@@ -1426,7 +1436,7 @@ function loadPopularCourses() {
                 background = "fitness.jpg";
                 break;
               case "Jezici":
-                background = "lang.jpg";
+                background = "lang.png";
                 break;
               case "Prirodne nauke":
                 background = "science-eng.jpg";
@@ -1435,13 +1445,13 @@ function loadPopularCourses() {
                 background = "soc2.jpg";
                 break;
               case "Lični razvoj":
-                background = "fitness.jpg";
+                background = "person.png";
                 break;
               case "Nauka o podacima":
                 background = "data1jpg.jpg";
                 break;
               case "Edukacija i podučavanje":
-                background = "lang.jpg";
+                background = "lang.png";
                 break;
               case "Pravne studije i pravo":
                 background = "law.webp";
@@ -1555,10 +1565,11 @@ function getParsed(currentFrom, currentTo) {
 }
 
 function fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
-  const rangeDistance = to.max - to.min;
-  const fromPosition = from.value - to.min;
-  const toPosition = to.value - to.min;
-  controlSlider.style.background = `linear-gradient(
+  if (to != null) {
+    const rangeDistance = to.max - to.min;
+    const fromPosition = from.value - to.min;
+    const toPosition = to.value - to.min;
+    controlSlider.style.background = `linear-gradient(
       to right,
       ${sliderColor} 0%,
       ${sliderColor} ${(fromPosition / rangeDistance) * 100}%,
@@ -1566,14 +1577,17 @@ function fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
       ${rangeColor} ${(toPosition / rangeDistance) * 100}%, 
       ${sliderColor} ${(toPosition / rangeDistance) * 100}%, 
       ${sliderColor} 100%)`;
+  }
 }
 
 function setToggleAccessible(currentTarget) {
   const toSlider = document.querySelector("#toSlider");
-  if (Number(currentTarget.value) <= 0) {
-    toSlider.style.zIndex = 2;
-  } else {
-    toSlider.style.zIndex = 0;
+  if (toSlider != null) {
+    if (Number(currentTarget.value) <= 0) {
+      toSlider.style.zIndex = 2;
+    } else {
+      toSlider.style.zIndex = 0;
+    }
   }
 }
 
@@ -1584,13 +1598,19 @@ let toInput = document.querySelector("#toInput");
 let durationWeek = document.getElementById("durationWeek");
 fillSlider(fromSlider, toSlider, "#C6C6C6", "#113946", toSlider);
 setToggleAccessible(toSlider);
-
-fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput);
-toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
-fromInput.oninput = () =>
-  controlFromInput(fromSlider, fromInput, toInput, toSlider);
-toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
-
+if (
+  fromInput != null &&
+  fromSlider != null &&
+  toInput != null &&
+  toSlider != null
+) {
+  fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput);
+  toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
+  fromInput.oninput = () =>
+    controlFromInput(fromSlider, fromInput, toInput, toSlider);
+  toInput.oninput = () =>
+    controlToInput(toSlider, fromInput, toInput, toSlider);
+}
 function showFilter() {
   document.getElementById("more-filter").style.display = "flex";
 }
@@ -1600,13 +1620,30 @@ function hideFilter() {
   fromInput = document.querySelector("#fromInput");
   toInput = document.querySelector("#toInput");
   durationWeek = document.getElementById("durationWeek");
+  document
+    .getElementsByClassName("filterAdded")[0]
+    .classList.remove("filterAddedHidden");
+  document.getElementsByClassName(
+    "filterAdded"
+  )[0].innerHTML = `Uneseni filteri: Trajanje u sedmicama(${durationWeek.value}); Cijena(${fromInput.value}-${toInput.value})`;
 }
 
 function cancelFilter() {
   document.getElementById("more-filter").style.display = "none";
+  fromInput = document.querySelector("#fromInput");
+  toInput = document.querySelector("#toInput");
+  fromInput.value = 0;
+  toInput.value = 300;
+  var fromSlider1 = document.querySelector("#fromSlider");
+  var toSlider1 = document.querySelector("#toSlider");
+  fromSlider1.value = 0;
+  toSlider1.value = 300;
+  document.getElementById("durationWeek").value = 0;
+  fillSlider(fromSlider1, toSlider1, "#C6C6C6", "#113946", toSlider1);
 
-  fromInput = "";
-  toInput = "";
+  document
+    .getElementsByClassName("filterAdded")[0]
+    .classList.add("filterAddedHidden");
 }
 
 var enrollCourseId = -1;

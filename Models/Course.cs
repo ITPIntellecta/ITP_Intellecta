@@ -27,6 +27,6 @@ namespace ITP_Intellecta.Models
         [JsonIgnore]
         public List<CourseContent>? CourseContents {get;set;}
         [JsonIgnore]
-        public List<Review> Reviews {get;set;}
+        public List<Review>? Reviews {get;set;}
     }
 }
