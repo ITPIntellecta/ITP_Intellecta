@@ -97,7 +97,7 @@ namespace ITP_Intellecta.Services
         foreach(var user in users)
             {
                 string message = "";
-                if (user.Courses.Count != 0)
+                if (user.Courses!.Count != 0)
                 {
                     message = "Dear " + user.FirstName + ", \nWe hope this message finds you well. If you haven't completed the courses you started, now is the perfect time to continue your learning journey. You are currently enrolled in these courses:\n";
                     foreach (var course in user.Courses)
