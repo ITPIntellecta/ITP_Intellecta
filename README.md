@@ -11,13 +11,21 @@ Korisnik će pri svakom upisu na kurs, svakom odobrenom kreiranom kursu i pri ko
 ## Korišteni jezici i biblioteke 
 
 Potrebno je imati *Windows 10* kao operativni sistem.
+
 Koristi se *HTML*, *CSS* i *JavaScript* za frontend.
+
 Backend je napravljen u *.NET 7*.
+
 Koristi se *Hangfire* biblioteka za automatsko slanje mejlova.
+
 *Entity Framework* se koristi za pristup bazi podataka.
+
 *AutoMapper* biblioteka se koristi za mapiranje objekata.
+
 *JWT Bearer* se koristi za autentikaciju i autorizaciju korisnika.
+
 *OpenAPI* se koristi za dokumentovanje i testiranje API-ja.
+
 *MailKit* se koristi za slanje i prijem email poruka.
 
 ## Pokretanje aplikacije
