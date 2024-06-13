@@ -298,10 +298,11 @@ function submitCourse(event) {
         courseTitle.trim() != "" &&
         courseSubtitle.trim() != "" &&
         courseHighlights.trim() != "" &&
-        selectedText != "- Izaberite kategoriju -" &&
+        selectedText != "Izaberite kategoriju" &&
         weeklyWorkload != 0 &&
         price != 0
       ) {
+        console.log(selectedText);
         const formData = {
           CreatorId: userId,
           title: courseTitle,
@@ -544,13 +545,13 @@ function loadCourses() {
                       background = "data1jpg.jpg";
                       break;
                     case "Edukacija i podučavanje":
-                      background = "lang.png";
+                      background = "edu.jpg";
                       break;
                     case "Pravne studije i pravo":
                       background = "law.webp";
                       break;
                     case "Psihologija i savjetovanje":
-                      background = "medicine.jpg";
+                      background = "psih.png";
                       break;
                     case "Umjetnost":
                       background = "art.jpg";
@@ -670,13 +671,13 @@ function loadMyLearning() {
                   background = "data1jpg.jpg";
                   break;
                 case "Edukacija i podučavanje":
-                  background = "lang.png";
+                  background = "edu.jpg";
                   break;
                 case "Pravne studije i pravo":
                   background = "law.webp";
                   break;
                 case "Psihologija i savjetovanje":
-                  background = "medicine.jpg";
+                  background = "psih.png";
                   break;
                 case "Umjetnost":
                   background = "art.jpg";
@@ -784,13 +785,13 @@ function loadMyCourses() {
                     background = "data1jpg.jpg";
                     break;
                   case "Edukacija i podučavanje":
-                    background = "lang.png";
+                    background = "edu.jpg";
                     break;
                   case "Pravne studije i pravo":
                     background = "law.webp";
                     break;
                   case "Psihologija i savjetovanje":
-                    background = "medicine.jpg";
+                    background = "psih.png";
                     break;
                   case "Umjetnost":
                     background = "art.jpg";
@@ -898,6 +899,7 @@ function confirmCourse(courseId) {
     })
     .then((data) => {
       creatorId = data.data.creatorId;
+      let name = data.data.title;
       const formData = {
         CreatorId: data.data.creatorId,
         Title: data.data.title,
@@ -923,7 +925,7 @@ function confirmCourse(courseId) {
           return response.json();
         })
         .then((data) => {
-          approveCourseMail(formData.CreatorId);
+          approveCourseMail(formData.CreatorId, formData.Title);
           showCoursesForAuthorization();
         })
         .catch((error) => {
@@ -932,8 +934,8 @@ function confirmCourse(courseId) {
     });
 }
 
-function approveCourseMail(id) {
-  fetch(`/api/email/send-email/${id}/Vaš kurs je odobren!`, {
+function approveCourseMail(id, nameCourse) {
+  fetch(`/api/email/send-email/${id}/Vaš kurs "${nameCourse}" je odobren!`, {
     method: "POST",
   })
     .then((response) => {})
@@ -1191,7 +1193,7 @@ async function checkAllWeeks(
         if (completedWeeks == duration) {
           if (sendEmailBool) {
             fetch(
-              `/api/email/send-email/${userCurrentId}/Uspješno ste završili kurs: ${title}! Čestitamo!!`,
+              `/api/email/send-email/${userCurrentId}/Uspješno ste završili kurs: "${title}"! Čestitamo!!`,
               {
                 method: "POST",
               }
@@ -1394,13 +1396,13 @@ function loadPopularCourses() {
                     background = "data1jpg.jpg";
                     break;
                   case "Edukacija i podučavanje":
-                    background = "lang.png";
+                    background = "edu.jpg";
                     break;
                   case "Pravne studije i pravo":
                     background = "law.webp";
                     break;
                   case "Psihologija i savjetovanje":
-                    background = "medicine.jpg";
+                    background = "psih.png";
                     break;
                   case "Umjetnost":
                     background = "art.jpg";
@@ -1483,13 +1485,13 @@ function loadPopularCourses() {
                 background = "data1jpg.jpg";
                 break;
               case "Edukacija i podučavanje":
-                background = "lang.png";
+                background = "edu.jpg";
                 break;
               case "Pravne studije i pravo":
                 background = "law.webp";
                 break;
               case "Psihologija i savjetovanje":
-                background = "medicine.jpg";
+                background = "psih.png";
                 break;
               case "Umjetnost":
                 background = "art.jpg";
@@ -1723,7 +1725,7 @@ function confirmEnroll() {
             return response.json();
           })
           .then((data) => {
-            enrollCourseMail(userCurrentId);
+            // enrollCourseMail(userCurrentId);
 
             fetch(`/api/course/GetCourseById/${id}`, {
               method: "GET",
@@ -1732,6 +1734,7 @@ function confirmEnroll() {
                 return response.json();
               })
               .then((data) => {
+                enrollCourseMail(userCurrentId, data.data.title);
                 data.data.courseContents.forEach((material) => {
                   const updateData = {
                     UserId: userCurrentId,
@@ -1817,10 +1820,13 @@ function joinCourse(id) {
   enrollCourseId = id;
 }
 
-function enrollCourseMail(id) {
-  fetch(`/api/email/send-email/${id}/Uspješno ste se upisali na kurs!`, {
-    method: "POST",
-  })
+function enrollCourseMail(id, courseName) {
+  fetch(
+    `/api/email/send-email/${id}/Uspješno ste se upisali na kurs "${courseName}"!`,
+    {
+      method: "POST",
+    }
+  )
     .then((response) => {})
     .then((data) => {})
     .catch((error) => {
@@ -1837,6 +1843,7 @@ function deleteCourse(id) {
     })
     .then((data) => {
       creatorId = data.data.creatorId;
+      let courseName = data.data.title;
       fetch(`/api/course/delete/${id}`, {
         method: "DELETE",
         headers: {
@@ -1846,7 +1853,7 @@ function deleteCourse(id) {
         .then((response) => {})
         .then((data) => {
           fetch(
-            `/api/email/send-email/${creatorId}/Izvinjavamo se, nažalost Vaš kurs je odbijen. Pokušajte ponovo!`,
+            `/api/email/send-email/${creatorId}/Izvinjavamo se, nažalost Vaš kurs "${courseName}" je odbijen. Pokušajte ponovo!`,
             {
               method: "POST",
             }

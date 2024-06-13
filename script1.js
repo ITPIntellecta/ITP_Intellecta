@@ -282,14 +282,17 @@ function loadUsers() {
       data.data.forEach((user) => {
         if (!user.approved) {
           let name = user.firstName;
+          let lastname = user.lastName;
+
           let email = user.email;
           let userId = user.id;
+          let title = user.title;
 
           const div = document.getElementsByClassName("row")[0];
           div.innerHTML += `<div class="col-sm-6 mb-4">
               <div class="item mmm" style="margin-bottom:2rem; background-image:url('authAdmin.png')";>
                 
-                  <h5 class="courseCardTitle loadVideo">${name}</h5>
+                  <h5 class="courseCardTitle loadVideo">${name} &nbsp; ${lastname}</h5>
                   <p class="card-text" style="background-color: #c0dbea63;
                     backdrop-filter: blur(2px);
                     border-radius: 15pt;
@@ -298,6 +301,8 @@ function loadUsers() {
                     font-weight:700;
                     color:#113946 ">
                   ${email}
+                  <br>
+                  Zvanje: ${title}
                   </p>
                   <div class="authButtons">
                   <button class="popularCourse authButton" onclick="authorizeAdmin(${userId})">Odobri admina</button>
@@ -363,9 +368,12 @@ function checkLocalStorage() {
 }
 
 function approveAdminMail(id) {
-  fetch(`/api/email/send-email/${id}/Your account has been approved!`, {
-    method: "POST",
-  })
+  fetch(
+    `/api/email/send-email/${id}/Vaš nalog je odobren, sada možete da se prijavite kao admin!`,
+    {
+      method: "POST",
+    }
+  )
     .then((response) => {})
     .then((data) => {})
     .catch((error) => {
@@ -426,13 +434,13 @@ function courseInfo(courseId, userId) {
           background = "data1jpg.jpg";
           break;
         case "Edukacija i podučavanje":
-          background = "lang.png";
+          background = "edu.jpg";
           break;
         case "Pravne studije i pravo":
           background = "law.webp";
           break;
         case "Psihologija i savjetovanje":
-          background = "medicine.jpg";
+          background = "psih.png";
           break;
         case "Umjetnost":
           background = "art.jpg";
@@ -605,22 +613,23 @@ function openReview() {
         })
         .then((data) => {
           var elementIdReview = document.getElementById("idReview");
-          elementIdReview.innerHTML = `<div class="gridreviews"><div class="leftreview" id="idleftreview">
-  <div id="carouselExample" class="carousel slide">  
-  <div class="carousel-inner" id="carInnerReview"> 
-       
-  </div>
-         
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
-  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    <span class="visually-hidden">Prethodno</span> 
-  </button>  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    <span class="carousel-control-next-icon" aria-hidden="true"></span>    <span class="visually-hidden">Sljedeće</span>  </button></div>   
+          elementIdReview.innerHTML = `<div class="gridreviews">
+          <div class="leftreview" id="idleftreview">
+            <div class="addReview" onclick="showReviewInput()" id="addreviewbutton">Dodaj svoju recenziju</div>
+            <div id="typereview"></div>
+          </div>
 
-  </div>
-  <div class="rightreview">
-  <button class="addReview" onclick="showReviewInput()" id="addreviewbutton">Dodaj svoju recenziju</button>
-  <div id="typereview"></div>
-  </div>
-  </div>
+          <div class="rightreview">
+            <div id="carouselExample" class="carousel slide">  
+              <div class="carousel-inner" id="carInnerReview"> 
+                
+              </div>
+                  
+               
+              </div>   
+
+          </div>
+        </div>
   `;
 
           userCurrentId = data.data.id;
@@ -652,15 +661,23 @@ function openReview() {
                 <span class="staar staar${review.id}">&#9733;</span>
                 <span class="staar staar${review.id}">&#9733;</span>
               </div></h5>
-            <span class="quoteR">&#10077;</span><br />
-            <p class="cardReview-text">O <i id="reviewCardTitle">:${review.course.title}<br> </i>
+            <p class="cardReview-text">O<i id="reviewCardTitle"> ${review.course.title}<br> </i>
             ${review.reviewText}
             </p>
             <br />
-            <span class="quoteR">&#10078;</span>
           </div>
         </div>    
     </div>    `;
+                document.getElementById(
+                  "carouselExample"
+                ).innerHTML += ` <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev"> 
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>    
+                  <span class="visually-hidden">Prethodno</span> 
+                </button>  
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">    
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>    
+                  <span class="visually-hidden">Sljedeće</span>  
+                </button>`;
 
                 let stars = document.querySelectorAll(`.staar${review.id}`);
                 for (let i = 0; i < review.mark; i++) {
@@ -671,7 +688,7 @@ function openReview() {
               });
 
               var prva = document.getElementsByClassName("carousel-item")[0];
-              prva.classList.add("active");
+              if (prva != null) prva.classList.add("active");
             })
             .catch((error) => {
               console.error(
@@ -701,7 +718,7 @@ function showReviewInput() {
         <span class="starR" data-value="1">&#9733;</span>
     </div>
     <div id="rating-value" value="">Ocjena: 0</div>
-    <button class="addReview" onclick="submitReview()" id="submitreview">Potvrdi recenziju</button>
+    <button class="addReviewBtn" onclick="submitReview()" id="submitreview">Potvrdi recenziju</button>
     </div>`;
 
   const stars = document.querySelectorAll(".starR");

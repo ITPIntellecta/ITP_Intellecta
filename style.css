@@ -499,6 +499,11 @@ p.name {
   width: 100%;
   /* box-sizing: border-box; */
 }
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: burlywood;
+  border-radius: 5pt;
+}
 .cardReview {
   border: 1px solid #113946;
   width: 100%;
@@ -520,6 +525,11 @@ p.name {
 
 .cardReview-title {
   margin: 0;
+}
+
+#reviewCardTitle {
+  font-weight: 600;
+  color: #113946aa;
 }
 
 .cardReview-header {
@@ -567,6 +577,7 @@ p.name {
   backdrop-filter: blur(1px);
   border-radius: 15pt;
   line-height: 150%;
+  height: fit-content;
 }
 
 /*---------------PROFILE-----------------*/
@@ -871,7 +882,7 @@ footer {
 
 ::selection {
   background-color: #bca37f;
-  color: #113946;
+  color: #ffffff;
 }
 
 .popularCourse {
@@ -1315,11 +1326,11 @@ input[type="range"] {
   cursor: pointer;
   background-color: #19495973;
 }
-
+/* 
 ::selection {
   background-color: #bca37f;
   color: #113946;
-}
+} */
 
 .descLinks {
   display: flex;
@@ -1381,17 +1392,18 @@ input[type="range"] {
 } */
 
 .addReview {
-  border-radius: 15pt;
-  width: 25%;
-  background-color: #113946a2;
-  border: 1px solid #113946a2;
-  color: #fff2d8;
-  padding: 5px 0;
-  bottom: 10pt;
+  /* border-radius: 15pt; */
+  /* width: 25%; */
+  /* background-color: #113946a2; */
+  /* border: 1px solid #113946a2; */
+  color: #113946df;
+  font-weight: 500;
+  /* padding: 5px 0; */
+  /* bottom: 10pt; */
 }
 .addReview:hover {
   cursor: pointer;
-  background-color: #19495973;
+  /* background-color: #19495973; */
 }
 
 .course-reviews {
@@ -1403,7 +1415,7 @@ input[type="range"] {
   grid-template-columns: 1fr 1fr;
   gap: 20pt;
 }
-.leftreview,
+
 .rightreview {
   display: flex;
   flex-direction: column;
@@ -1411,9 +1423,6 @@ input[type="range"] {
   align-items: center;
 }
 
-.rightreview {
-  justify-content: space-evenly;
-}
 /* RATING */
 .rating-container {
   direction: rtl; /* Postavljanje zvezdica s desna na levo */
@@ -1452,7 +1461,12 @@ input[type="range"] {
 }
 #submitreview {
   margin-top: 5%;
-  width: 90%;
+  width: 50%;
+  color: #113946;
+  border: 2px dotted #113946;
+  border-radius: 5pt;
+  background-color: #11394674;
+  padding: 5pt 0;
 }
 
 /*PROGRESS BAR*/
@@ -1567,6 +1581,6 @@ progress[value]::-webkit-progress-value {
 
   ::selection {
     background-color: #bca37f;
-    color: #113946;
+    color: #fdfdfe;
   }
 }
