@@ -634,10 +634,6 @@ function openReview() {
 
           userCurrentId = data.data.id;
           if (userCurrentId === creatorId || admin === "true") {
-            console.log(userCurrentId);
-            console.log(creatorId);
-            console.log(admin);
-
             var el = document.getElementById("addreviewbutton");
             el.style.display = "none";
           }

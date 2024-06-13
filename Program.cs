@@ -9,14 +9,12 @@ global using ITP_Intellecta.Data;
 global using Services;
 global using AutoMapper;
 global using ITP_Intellecta.Services;
-// global using ITP_Intellecta.Models;
 global using Microsoft.AspNetCore.Identity;
 global using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 global using System.Net.Mail;
 global using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Filters;
-
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Authentication.Cookies;

@@ -302,7 +302,6 @@ function submitCourse(event) {
         weeklyWorkload != 0 &&
         price != 0
       ) {
-        console.log(selectedText);
         const formData = {
           CreatorId: userId,
           title: courseTitle,
@@ -378,9 +377,6 @@ async function sendMaterial(courseIdd) {
 }
 
 function sendM() {
-  // for (let pair of formData.entries()) {
-  //   console.log(pair[0] + ": " + pair[1].name);
-  // }
   fetch("/api/material/allFiles", {
     method: "POST",
     body: formData,
@@ -1062,11 +1058,7 @@ function loadVideoPage() {
                 })
                 .then((data) => {
                   userCurrentId = data.data.id;
-                  console.log(admin);
-                  console.log(5 > 4);
-                  console.log("true");
                   if (userCurrentId != creatorId && admin != "true") {
-                    console.log("tu");
                     fetch(
                       `/api/material/getLessonStatus/${userCurrentId}/${id}/${material.contentId}`
                     )
@@ -1100,7 +1092,6 @@ function loadVideoPage() {
                       element1.style.gridTemplateColumns = "100%";
                     });
                   } else if (admin == "true") {
-                    console.log(admin);
                     var elements = document.querySelectorAll(".labelCheckbox");
                     Array.from(elements).forEach((element) => {
                       element.style.display = "none";
@@ -1135,7 +1126,6 @@ async function checkAllCompleted(week, courseId, userId) {
     var weekDiv = document.getElementById(`week${week}`);
 
     if (data.data == true) {
-      console.log(weekDiv);
       weekDiv.innerHTML = `Sedmica ${week} - Završena!`;
       return true;
     } else {
