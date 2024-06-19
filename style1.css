@@ -260,7 +260,7 @@ input[type="radio"] {
 
 ::selection {
   background-color: #bca37f;
-  color: #113946;
+  color: #ffffff;
 }
 
 @keyframes scaling {
@@ -574,6 +574,6 @@ select option:hover {
 
   ::selection {
     background-color: #bca37f;
-    color: #113946;
+    color: #ffffff;
   }
 }
