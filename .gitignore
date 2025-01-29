@@ -482,9 +482,9 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+obj/Debug/net7.0/ITP_Intellecta.AssemblyInfo.cs
+obj/Debug/net7.0/ITP_Intellecta.AssemblyInfoInputs.cache
+appsettings.json
 
-/obj/
-/bin/
+obj/
 
-**/obj/
-**/bin/
